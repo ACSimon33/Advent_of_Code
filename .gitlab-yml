@@ -1,0 +1,10 @@
+# Use cargo to test the project
+test:cargo:
+  tags:
+    - rust
+  script:
+    - export PATH="$PATH:/root/.cargo/bin"
+    - env
+    - cd 2021
+    - rustc --version && cargo --version  # Print version info for debugging
+    - cargo test --workspace --verbose
