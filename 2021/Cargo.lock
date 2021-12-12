@@ -115,6 +115,10 @@ name = "smoke_basin"
 version = "0.1.0"
 
 [[package]]
+name = "sonar_sweep"
+version = "0.1.0"
+
+[[package]]
 name = "syntax_scoring"
 version = "0.1.0"
 

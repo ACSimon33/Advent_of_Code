@@ -2,6 +2,7 @@
 
 members = [
   "00/rust_template",
+  "01/sonar_sweep",
   "02/dive",
   "03/binary_diagnostic",
   "04/giant_squid",
