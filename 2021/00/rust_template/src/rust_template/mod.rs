@@ -31,6 +31,6 @@ mod tests {
 
   #[test]
   fn task_2() {
-    assert_eq!(solution_2(&INPUT_FILENAME_1.to_string()), 1);
+    assert_eq!(solution_2(&INPUT_FILENAME_1.to_string()), 0);
   }
 }
