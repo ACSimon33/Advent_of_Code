@@ -11,7 +11,7 @@ fn main() {
   }
   let filename: &String = &args[1];
   if args.len() < 3 {
-    panic!("Error: Amount of maximal vsisits is missing.");
+    panic!("Error: Amount of maximal visits is missing.");
   }
   let max_visits: usize = args[2].parse().unwrap();
 
