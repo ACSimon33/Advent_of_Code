@@ -1,14 +1,15 @@
 [workspace]
 
 members = [
-  "2/dive",
-  "3/binary_diagnostic",
-  "4/giant_squid",
-  "5/hydrothermal_venture",
-  "6/lanternfish",
-  "7/treachery_of_whales",
-  "8/seven_segment_search",
-  "9/smoke_basin",
+  "00/rust_template",
+  "02/dive",
+  "03/binary_diagnostic",
+  "04/giant_squid",
+  "05/hydrothermal_venture",
+  "06/lanternfish",
+  "07/treachery_of_whales",
+  "08/seven_segment_search",
+  "09/smoke_basin",
   "10/syntax_scoring",
   "11/dumbo_octopus",
   "12/passage_pathing"
