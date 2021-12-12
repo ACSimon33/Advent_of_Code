@@ -1,7 +1,7 @@
 extern crate clap;
 use clap::Parser;
 
-/// Day 11: Dumbo Octopus
+/// Day 12: Passage Pathing
 #[derive(Parser, Debug)]
 #[clap(about, version, author)]
 struct Args {
