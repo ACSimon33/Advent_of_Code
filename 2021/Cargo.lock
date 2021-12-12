@@ -103,6 +103,10 @@ name = "passage_pathing"
 version = "0.1.0"
 
 [[package]]
+name = "rust_template"
+version = "0.1.0"
+
+[[package]]
 name = "seven_segment_search"
 version = "0.1.0"
 
@@ -112,10 +116,6 @@ version = "0.1.0"
 
 [[package]]
 name = "syntax_scoring"
-version = "0.1.0"
-
-[[package]]
-name = "template"
 version = "0.1.0"
 
 [[package]]
