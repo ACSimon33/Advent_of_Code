@@ -8,3 +8,7 @@ edition = "2021"
 [dependencies.clap]
 git = "https://github.com/clap-rs/clap.git"
 features = ["derive"]
+
+[dependencies.phf]
+version = "0.10"
+features = ["macros"]

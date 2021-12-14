@@ -2,17 +2,26 @@
 
 ## Execute tests
 
-### All tests:
-> cargo test --release 
-
-### Single day:
-> cargo test --release -p *PACKAGE*
-
-*PACKAGE* is the corresponding package name, e.g. **dive**, **binary_diagnostic**, **giant_squid**, etc.
+You can either run all tests for the entire workspace via
+```
+$ cargo test --release 
+```
+or run the tests for a single day via
+```
+$ cargo test --release -p <PACKAGE>
+```
+where `<PACKAGE>` is the corresponding package name, e.g. **dive**, **binary_diagnostic**, **giant_squid**, etc.
 
 ## Execute puzzles
-> cd 04/giant_squid
 
-> cargo run --release input/puzzle_input.txt
+In order to execute the solutions with the puzzle input, `cd` into the package folder and run following `cargo` command there:
 
-Some puzzle require additional arguments.
+```
+$ cd 04/giant_squid
+$ cargo run --release -- -f input/puzzle_input.txt
+```
+
+All programs use `clap` to parse command line arguments. So you can display help information which might be useful since some puzzle require additional arguments:
+```
+$ cargo run -- --help
+```
