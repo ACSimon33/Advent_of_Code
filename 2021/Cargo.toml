@@ -14,5 +14,6 @@ members = [
   "10/syntax_scoring",
   "11/dumbo_octopus",
   "12/passage_pathing",
-  "13/transparent_origami"
+  "13/transparent_origami",
+  "14/extended_polymerization"
 ]

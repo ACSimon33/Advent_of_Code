@@ -75,6 +75,13 @@ dependencies = [
 ]
 
 [[package]]
+name = "extended_polymerization"
+version = "0.1.0"
+dependencies = [
+ "clap",
+]
+
+[[package]]
 name = "giant_squid"
 version = "0.1.0"
 dependencies = [
