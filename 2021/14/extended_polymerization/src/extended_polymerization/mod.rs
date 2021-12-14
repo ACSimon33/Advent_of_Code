@@ -1,100 +1,94 @@
 use std::fs;
 use std::collections::HashMap;
 
+mod polymer;
+use polymer::Pair;
+use polymer::Rule;
+
 // First task
-pub fn get_elements(filename: &String, steps: &usize) -> HashMap<char, usize> {
-  let (template, rules) = parse(filename);
+pub fn get_elements(filename: &String, steps: &usize) -> HashMap<char, i64> {
+  let (mut pairs, rules, boundaries) = parse(filename);
 
   // Simulate
-  let polymer = simulate(steps, &rules, &template);
+  simulate(steps, &rules, &mut pairs);
 
-  // Get all unique chars
-  let mut chars: Vec<char> = polymer.chars().collect();
-  chars.sort_unstable();
-  chars.dedup();
+  // Get all unique char counts
+  let mut char_count: HashMap<char, i64> = HashMap::new();
+  for (pair, count) in pairs {
+    *char_count.entry(pair.first).or_default() += count;
+    *char_count.entry(pair.second).or_default() += count;
+  }
 
-  return chars.iter().map(|c| (*c, polymer.matches(*c).count())).collect();
+  // Add first and last char
+  *char_count.entry(boundaries.first).or_default() += 1;
+  *char_count.entry(boundaries.second).or_default() += 1;
+
+  return char_count.iter().map(|(c, count)| (*c, count / 2)).collect();
 }
 
-pub fn parse(filename: &String) -> (String, HashMap<String, String>) {
+pub fn parse(filename: &String) -> (HashMap<Pair, i64>, Vec<Rule>, Pair) {
   let contents = fs::read_to_string(filename)
     .expect("Couldn't read input file.");
   let lines: Vec<&str> = contents.lines().collect();
 
   // Parse template
-  let template: String = lines.iter().nth(0).unwrap().to_string();
-
-  // Parse rules
-  let mut rules: HashMap<String, String> = lines.iter()
-    .filter(|line| line.split(" -> ").count() == 2)
-    .map(|line| line.split_once(" -> ").unwrap())
-    .map(|(rule, repl)| (rule.to_string(), repl.to_string()))
-    .collect();
-
-  for (rule, repl) in rules.iter_mut() {
-    let chars: Vec<char> = rule.chars().collect();
-    repl.insert(0, chars[0]);
-    repl.insert(repl.len(), chars[1]);
+  let template = lines.iter().nth(0).unwrap();
+  let mut pairs: HashMap<Pair, i64> = HashMap::new();
+  for (first, second) in template.chars().zip(template.chars().skip(1)) {
+    *pairs.entry(Pair::new(&first, &second)).or_default() += 1;
   }
 
-  return (template, rules);
+  // Get first / last pair
+  let boundaries = Pair::new(
+    &template.chars().next().unwrap(),
+    &template.chars().last().unwrap());
+
+  // Parse rules
+  let rules = lines.iter()
+    .filter(|line| line.contains(" -> "))
+    .map(|line| Rule::new(line))
+    .collect();
+    
+  return (pairs, rules, boundaries);
 }
 
 /// Simulates the growth of a polymer.
 fn simulate(
-  steps: &usize, rules: &HashMap<String, String>, template: &String
-) -> String {
+  steps: &usize, rules: &Vec<Rule>, pairs: &mut HashMap<Pair, i64>
+) {
 
-  let mut polymer: String = template.clone();
-  let mut extenced_rules: HashMap<String, String> = HashMap::new();
-
-  if *steps > 0 {
-    // Check which rule we need and simulate them recursively
-    for (rule, repl) in rules.iter() {
-      if template.contains(rule) {
-        extenced_rules.insert(
-          rule.clone(), simulate(&(steps-1), rules, &repl));
-      }
-    }
-
-    // Replace the simulated rules
-    let mut idx: usize = 0;
-    let mut found: bool;
-    while idx < polymer.len()-1 {
-      found = false;
-      for (rule, repl) in extenced_rules.iter() {
-        if rule.as_str() == &polymer[idx..idx+rule.len()] {
-          polymer.replace_range(idx..idx+rule.len(), repl);
-          idx += repl.len()-1;
-          found = true;
-          break;
+  for _ in 0..*steps {
+    let mut new_pairs = HashMap::new();
+    for rule in rules.iter() {
+      for (pair, count) in pairs.iter() {
+        if *pair == rule.pair {
+          for child in rule.get_new_pairs() {
+            *new_pairs.entry(child).or_default() += *count;
+          }
         }
       }
-      if !found {
-        idx += 1;
-      }
-    } 
+    }
+    *pairs = new_pairs;
   }
 
-  return polymer;
 }
 
 // Test example inputs against the reference solution
 #[cfg(test)]
 mod tests {
-  use super::{get_elements, solution_2};
+  use super::{get_elements};
   const INPUT_FILENAME_1: &str = "input/example_input.txt";
 
   #[test]
   fn task_1_step_5() {
     let occurences = get_elements(&INPUT_FILENAME_1.to_string(), &5);
-    assert_eq!(occurences.values().sum::<usize>(), 97);
+    assert_eq!(occurences.values().sum::<i64>(), 97);
   }
 
   #[test]
   fn task_1_step_10() {
     let occurences = get_elements(&INPUT_FILENAME_1.to_string(), &10);
-    assert_eq!(occurences.values().sum::<usize>(), 3073);
+    assert_eq!(occurences.values().sum::<i64>(), 3073);
     assert_eq!(occurences[&'B'], 1749);
     assert_eq!(occurences[&'C'], 298);
     assert_eq!(occurences[&'H'], 161);
@@ -102,7 +96,9 @@ mod tests {
   }
 
   #[test]
-  fn task_2() {
-    assert_eq!(solution_2(&INPUT_FILENAME_1.to_string()), 1);
+  fn task_1_step_40() {
+    let occurences = get_elements(&INPUT_FILENAME_1.to_string(), &40);
+    assert_eq!(occurences[&'B'], 2192039569602);
+    assert_eq!(occurences[&'H'], 3849876073);
   }
 }
