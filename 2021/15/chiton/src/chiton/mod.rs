@@ -39,15 +39,16 @@ fn parse(filename: &String) -> (usize, usize, Vec<u32>) {
 #[cfg(test)]
 mod tests {
   use super::{lowest_total_risk, lowest_total_risk_full};
-  const INPUT_FILENAME_1: &str = "input/example_input.txt";
+  use pretty_assertions::assert_eq;
+  const INPUT_FILENAME: &str = "input/example_input.txt";
 
   #[test]
   fn task_1() {
-    assert_eq!(lowest_total_risk(&INPUT_FILENAME_1.to_string()), 40);
+    assert_eq!(lowest_total_risk(&INPUT_FILENAME.to_string()), 40);
   }
 
   #[test]
   fn task_2() {
-    assert_eq!(lowest_total_risk_full(&INPUT_FILENAME_1.to_string()), 315);
+    assert_eq!(lowest_total_risk_full(&INPUT_FILENAME.to_string()), 315);
   }
 }

@@ -7,4 +7,4 @@ test:cargo:
     - env
     - cd 2021
     - rustc --version && cargo --version  # Print version info for debugging
-    - cargo test --workspace --verbose
+    - cargo test --workspace --no-fail-fast --verbose

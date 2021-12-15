@@ -8,3 +8,6 @@ edition = "2021"
 [dependencies.clap]
 git = "https://github.com/clap-rs/clap.git"
 features = ["derive"]
+
+[dependencies.pretty_assertions]
+git = "https://github.com/colin-kiegel/rust-pretty-assertions"
