@@ -5,7 +5,7 @@ mod polymer;
 use polymer::Pair;
 use polymer::Rule;
 
-// First task
+// Return a list of char counts after a given amount of steps
 pub fn get_elements(filename: &String, steps: &usize) -> HashMap<char, i64> {
   let (mut pairs, rules, boundaries) = parse(filename);
 
@@ -26,6 +26,7 @@ pub fn get_elements(filename: &String, steps: &usize) -> HashMap<char, i64> {
   return char_count.iter().map(|(c, count)| (*c, count / 2)).collect();
 }
 
+/// Parse the input file.
 pub fn parse(filename: &String) -> (HashMap<Pair, i64>, Vec<Rule>, Pair) {
   let contents = fs::read_to_string(filename)
     .expect("Couldn't read input file.");
@@ -96,7 +97,7 @@ mod tests {
   }
 
   #[test]
-  fn task_1_step_40() {
+  fn task_2_step_40() {
     let occurences = get_elements(&INPUT_FILENAME_1.to_string(), &40);
     assert_eq!(occurences[&'B'], 2192039569602);
     assert_eq!(occurences[&'H'], 3849876073);

@@ -84,7 +84,7 @@ fn simulate(
 // Test example inputs against the reference solution
 #[cfg(test)]
 mod tests {
-  use super::{get_elements, solution_2};
+  use super::{get_elements};
   const INPUT_FILENAME_1: &str = "input/example_input.txt";
 
   #[test]
@@ -101,10 +101,5 @@ mod tests {
     assert_eq!(occurences[&'C'], 298);
     assert_eq!(occurences[&'H'], 161);
     assert_eq!(occurences[&'N'], 865);
-  }
-
-  #[test]
-  fn task_2() {
-    assert_eq!(solution_2(&INPUT_FILENAME_1.to_string()), 1);
   }
 }
