@@ -20,6 +20,6 @@ fn main() {
   let ver = packet_decoder::version_numbers(&args.filename);
   println!("1. Sum of version numbers: {}", ver);
 
-  // let val_2 = rust_template::solution_2(&args.filename);
-  // println!("2. Solution: {}", val_2);
+  let result = packet_decoder::evaluate(&args.filename);
+  println!("2. Result: {}", result);
 }
