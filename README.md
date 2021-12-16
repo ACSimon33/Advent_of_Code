@@ -1,4 +1,4 @@
-![Gitlab pipeline status](https://img.shields.io/gitlab/pipeline-status/ACSimon33/Advent_of_Code?branch=main)
+[![pipeline status](https://gitlab.com/ACSimon33/Advent_of_Code/badges/main/pipeline.svg)](https://gitlab.com/ACSimon33/Advent_of_Code/-/commits/main)
 
 # Advent of Code
 My Advent of Code solutions starting 2021.
