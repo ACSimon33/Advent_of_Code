@@ -81,6 +81,8 @@ aoc-2021:bench:
   after_script:
     - cd Advent_of_Code
     - mv $BUILD_DIR/criterion/* .
+    - rm -rf docs
+    - mv report docs
     - git add .
     - git commit -m "Updated benchmark results."
     - git push
