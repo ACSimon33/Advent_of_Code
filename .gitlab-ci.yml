@@ -78,7 +78,7 @@ aoc-2021:bench:
     - git clean -dfx .
     - git clone git@github.com:ACSimon33/Advent_of_Code.git -b gh-pages
     - mkdir $BUILD_DIR/criterion
-    - mv Advent_of_Code/* $BUILD_DIR/criterion/*
+    - mv Advent_of_Code/* $BUILD_DIR/criterion/
     - cargo bench --workspace --no-fail-fast --verbose
   after_script:
     - cd Advent_of_Code
