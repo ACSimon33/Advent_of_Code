@@ -51,8 +51,7 @@ aoc-2021:build:
     - .git-template
     - .rust-template
   script:
-    - echo Building
-    #- cargo build --workspace --verbose -j1
+    cargo build --workspace --verbose -j2
     #- cargo build --release --workspace --verbose -j1
 
 # 2021 Rust test (debug)
