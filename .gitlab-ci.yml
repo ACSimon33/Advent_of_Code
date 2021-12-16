@@ -74,15 +74,16 @@ aoc-2021:bench:
   needs:
     - aoc-2021:test
   script:
+    - git clean -dfx .
+    - git clone git@github.com:ACSimon33/Advent_of_Code.git -b gh_pages
+    - mv Advent_of_Code/* $BUILD_DIR/criterion/*
     - cargo bench --workspace --no-fail-fast --verbose
   after_script:
-    - git clean -dfx .
-    - mv $BUILD_DIR/criterion benchmark_aoc_2021
-  artifacts:
-    when: always
-    expire_in: 1 week
-    paths:
-      - benchmark_aoc_2021
+    - cd Advent_of_Code
+    - mv $BUILD_DIR/criterion/* .
+    - git add .
+    - git commit -m "Updated benchmark results."
+    - git push
 
 # Linux clean stage
 clean:
