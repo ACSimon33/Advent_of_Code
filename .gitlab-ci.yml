@@ -3,6 +3,11 @@ stages:
   - test
   - bench
 
+# **************************************************************************** #
+#                            Advent of Code 2021                               #
+# **************************************************************************** #
+
+# 2021 Rust template
 .rust-template:
   tags:
     - rust
@@ -12,13 +17,15 @@ stages:
     - cd 2021
     - rustc --version && cargo --version  # Print version info for debugging
 
+# 2021 Rust build
 aoc-2021:build:
   stage: "build"
   extends:
     - .rust-template
   script:
-    - cargo build --workspace --no-fail-fast --verbose
+    - cargo build --workspace --verbose
 
+# 2021 Rust test
 aoc-2021:test:
   stage: "test"
   extends:
@@ -28,6 +35,7 @@ aoc-2021:test:
   script:
     - cargo test --workspace --no-fail-fast --verbose
 
+# 2021 Rust benchmark
 aoc-2021:bench:
   stage: "bench"
   extends:
@@ -36,3 +44,8 @@ aoc-2021:bench:
     - aoc-2021:test
   script:
     - cargo test --workspace --no-fail-fast --verbose
+  artifacts:
+    when: always
+    expire_in: 1 week
+    paths:
+      - target/criterion
