@@ -34,7 +34,7 @@ git = "https://github.com/clap-rs/clap.git"
 features = ["derive"]
 
 [dependencies.priority-queue]
-git = "https://github.com/garro95/priority-queue"
+version = "1.2.1"
 
 [dependencies.pretty_assertions]
-git = "https://github.com/colin-kiegel/rust-pretty-assertions"
+version = "1.0.0"

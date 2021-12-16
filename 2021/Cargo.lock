@@ -600,7 +600,8 @@ checksum = "ed0cfbc8191465bed66e1718596ee0b0b35d5ee1f41c5df2189d0fe8bde535ba"
 [[package]]
 name = "pretty_assertions"
 version = "1.0.0"
-source = "git+https://github.com/colin-kiegel/rust-pretty-assertions#d063c7770f61d1f818b26d70388c728a359d5aee"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "ec0cfe1b2403f172ba0f234e500906ee0a3e493fb81092dac23ebefe129301cc"
 dependencies = [
  "ansi_term",
  "ctor",
@@ -611,7 +612,8 @@ dependencies = [
 [[package]]
 name = "priority-queue"
 version = "1.2.1"
-source = "git+https://github.com/garro95/priority-queue#5453a2b4cbbdcc0e452c67ac6af278cefd9f5244"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "00ba480ac08d3cfc40dea10fd466fd2c14dee3ea6fc7873bc4079eda2727caf0"
 dependencies = [
  "autocfg",
  "indexmap",
