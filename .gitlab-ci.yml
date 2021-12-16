@@ -3,6 +3,16 @@ stages:
   - test
   - bench
 
+# Disables git clone/fetch
+.no-git-template:
+  variables:
+    GIT_STRATEGY: none
+
+# Git update strategy
+.git-template:
+  variables:
+    GIT_STRATEGY: fetch
+
 # **************************************************************************** #
 #                            Advent of Code 2021                               #
 # **************************************************************************** #
@@ -11,6 +21,10 @@ stages:
 .rust-template:
   tags:
     - rust
+  only:
+    - pushes
+    - web
+    - schedules
   before_script:
     - export PATH="$PATH:/root/.cargo/bin"
     - env
@@ -21,6 +35,7 @@ stages:
 aoc-2021:build:
   stage: "build"
   extends:
+    - .git-template
     - .rust-template
   script:
     - cargo build --workspace --verbose
@@ -29,6 +44,7 @@ aoc-2021:build:
 aoc-2021:test:
   stage: "test"
   extends:
+    - .no-git-template
     - .rust-template
   needs:
     - aoc-2021:build
@@ -39,11 +55,12 @@ aoc-2021:test:
 aoc-2021:bench:
   stage: "bench"
   extends:
+    - .no-git-template
     - .rust-template
   needs:
     - aoc-2021:test
   script:
-    - cargo test --workspace --no-fail-fast --verbose
+    - cargo bench --workspace --no-fail-fast --verbose
   artifacts:
     when: always
     expire_in: 1 week
