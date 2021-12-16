@@ -1,10 +1,38 @@
-# Use cargo to test the project
-test:cargo:
+stages:
+  - build
+  - test
+  - bench
+
+.rust-template:
   tags:
     - rust
-  script:
+  before_script:
     - export PATH="$PATH:/root/.cargo/bin"
     - env
     - cd 2021
     - rustc --version && cargo --version  # Print version info for debugging
+
+aoc-2021:build:
+  stage: "build"
+  extends:
+    - .rust-template
+  script:
+    - cargo build --workspace --no-fail-fast --verbose
+
+aoc-2021:test:
+  stage: "test"
+  extends:
+    - .rust-template
+  needs:
+    - aoc-2021:build
+  script:
+    - cargo test --workspace --no-fail-fast --verbose
+
+aoc-2021:bench:
+  stage: "bench"
+  extends:
+    - .rust-template
+  needs:
+    - aoc-2021:test
+  script:
     - cargo test --workspace --no-fail-fast --verbose
