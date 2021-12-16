@@ -18,7 +18,7 @@ fn task_1(c: &mut Criterion) {
 /// Benchmark of part 2
 fn task_2(c: &mut Criterion) {
   c.bench_function(
-    "Day 16, Task 1: Expression tree evaluation", 
+    "Day 16, Task 2: Expression tree evaluation", 
     |b| b.iter(|| packet_decoder::evaluate(
       black_box(&INPUT_FILENAME.to_string())
   )));
