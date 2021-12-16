@@ -287,6 +287,14 @@ dependencies = [
 ]
 
 [[package]]
+name = "packet_decoder"
+version = "0.1.0"
+dependencies = [
+ "clap",
+ "pretty_assertions",
+]
+
+[[package]]
 name = "passage_pathing"
 version = "0.1.0"
 dependencies = [

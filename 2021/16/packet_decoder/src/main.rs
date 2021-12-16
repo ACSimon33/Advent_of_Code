@@ -1,0 +1,25 @@
+extern crate clap;
+use clap::Parser;
+
+/// Day 16: Packet Decoder
+#[derive(Parser, Debug)]
+#[clap(about, version, author)]
+struct Args {
+  /// Input file (e.g. input/puzzle_input.txt)
+  #[clap(short, long)]
+  filename: String
+}
+
+// Import puzzle solutions module
+mod packet_decoder;
+
+// Main entry point
+fn main() {
+  let args = Args::parse();
+
+  let ver = packet_decoder::version_numbers(&args.filename);
+  println!("1. Sum of version numbers: {}", ver);
+
+  // let val_2 = rust_template::solution_2(&args.filename);
+  // println!("2. Solution: {}", val_2);
+}
