@@ -2,6 +2,7 @@ stages:
   - build
   - test
   - bench
+  - clean
 
 # Disables git clone/fetch
 .no-git-template:
@@ -12,6 +13,12 @@ stages:
 .git-template:
   variables:
     GIT_STRATEGY: fetch
+
+# Freebsd machine template
+.bsd-machine-template:
+  variables:
+    PIPELINE_BASE_DIR: /home/gitlab-runner/aoc-builds
+    PIPELINE_DIR: ${PIPELINE_BASE_DIR}/pipe-$CI_PIPELINE_ID
 
 # **************************************************************************** #
 #                            Advent of Code 2021                               #
@@ -25,13 +32,19 @@ stages:
     - pushes
     - web
     - schedules
+  timeout: 10m
+  extends:
+    - .bsd-machine-template
+  variables:
+    BUILD_DIR: ${PIPELINE_BASE_DIR}/pipe-$CI_PIPELINE_ID/2021
   before_script:
     - export PATH="$PATH:/root/.cargo/bin"
+    - export CARGO_TARGET_DIR=${BUILD_DIR}
     - env
     - cd 2021
     - rustc --version && cargo --version  # Print version info for debugging
 
-# 2021 Rust build
+# 2021 Rust build (debug and release)
 aoc-2021:build:
   stage: "build"
   extends:
@@ -39,8 +52,9 @@ aoc-2021:build:
     - .rust-template
   script:
     - cargo build --workspace --verbose
+    - cargo build --release --workspace --verbose
 
-# 2021 Rust test
+# 2021 Rust test (debug)
 aoc-2021:test:
   stage: "test"
   extends:
@@ -51,7 +65,7 @@ aoc-2021:test:
   script:
     - cargo test --workspace --no-fail-fast --verbose
 
-# 2021 Rust benchmark
+# 2021 Rust benchmark (release)
 aoc-2021:bench:
   stage: "bench"
   extends:
@@ -61,8 +75,32 @@ aoc-2021:bench:
     - aoc-2021:test
   script:
     - cargo bench --workspace --no-fail-fast --verbose
+  after_script:
+    - git clean -dfx .
+    - mv $BUILD_DIR/criterion benchmark_aoc_2021
   artifacts:
     when: always
     expire_in: 1 week
     paths:
-      - target/criterion
+      - benchmark_aoc_2021
+
+# Linux clean stage
+clean:
+  stage: "clean"
+  tags:
+    - rust
+  only:
+    - pushes
+    - web
+    - schedules
+  timeout: 10m
+  extends:
+    - .bsd-machine-template
+  dependencies: []
+  needs:
+    - aoc-2021:bench
+  when: always
+  script:
+    - echo $PIPELINE_DIR
+  after_script:
+    - rm -rf $PIPELINE_DIR
