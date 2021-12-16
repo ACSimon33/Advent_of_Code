@@ -1,5 +1,8 @@
 use std::fs;
 
+mod decoder;
+use decoder::Decoder;
+
 // First task
 pub fn version_numbers(filename: &String) -> i32 {
   let contents = fs::read_to_string(filename)
