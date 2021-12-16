@@ -15,7 +15,7 @@ struct Args {
 }
 
 // Import puzzle solutions module
-mod dumbo_octopus;
+use dumbo_octopus;
 
 // Main entry point
 fn main() {

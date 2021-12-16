@@ -5,6 +5,20 @@ edition = "2021"
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
+[lib]
+name = "sonar_sweep"
+path = "src/sonar_sweep/lib.rs"
+test = true
+doctest = false
+bench = false
+
+[[bin]]
+name = "sonar_sweep"
+path = "src/main.rs"
+test = false
+doctest = false
+bench = false
+
 [dependencies.clap]
 git = "https://github.com/clap-rs/clap.git"
 features = ["derive"]

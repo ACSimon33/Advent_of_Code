@@ -15,7 +15,7 @@ struct Args {
 }
 
 // Import puzzle solutions module
-mod passage_pathing;
+use passage_pathing;
 
 // Main entry point
 fn main() {

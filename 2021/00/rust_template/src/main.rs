@@ -11,7 +11,7 @@ struct Args {
 }
 
 // Import puzzle solutions module
-mod rust_template;
+use rust_template;
 
 // Main entry point
 fn main() {

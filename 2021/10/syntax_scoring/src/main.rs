@@ -11,7 +11,7 @@ struct Args {
 }
 
 // Import puzzle solutions module
-mod syntax_scoring;
+use syntax_scoring;
 
 // Main entry point
 fn main() {

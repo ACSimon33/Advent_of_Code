@@ -5,6 +5,23 @@ edition = "2021"
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
+[lib]
+name = "packet_decoder"
+path = "src/packet_decoder/lib.rs"
+test = true
+doctest = false
+bench = false
+
+[[bin]]
+name = "packet_decoder"
+path = "src/main.rs"
+test = false
+doctest = false
+bench = false
+
+[dependencies.criterion]
+version = "0.3.5"
+
 [dependencies.clap]
 git = "https://github.com/clap-rs/clap.git"
 features = ["derive"]

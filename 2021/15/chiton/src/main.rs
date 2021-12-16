@@ -11,7 +11,7 @@ struct Args {
 }
 
 // Import puzzle solutions module
-mod chiton;
+use chiton;
 
 // Main entry point
 fn main() {

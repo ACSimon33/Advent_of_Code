@@ -5,6 +5,20 @@ edition = "2021"
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
+#[lib]
+#name = "hydrothermal_venture"
+#path = "src/hydrothermal_venture/lib.rs"
+#test = true
+#doctest = false
+#bench = false
+
+[[bin]]
+name = "hydrothermal_venture"
+path = "src/main.rs"
+test = false
+doctest = false
+bench = false
+
 [dependencies.num]
 version = "0.4"
 default-features = false

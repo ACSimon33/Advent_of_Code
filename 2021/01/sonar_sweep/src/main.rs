@@ -15,7 +15,7 @@ struct Args {
 }
 
 // Import puzzle solutions module
-mod sonar_sweep;
+use sonar_sweep;
 
 /// Main entry point for the Sonar Sweep executable
 fn main() {

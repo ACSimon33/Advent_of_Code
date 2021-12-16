@@ -5,6 +5,20 @@ edition = "2021"
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
+#[lib]
+#name = "giant_squid"
+#path = "src/giant_squid/lib.rs"
+#test = true
+#doctest = false
+#bench = false
+
+[[bin]]
+name = "giant_squid"
+path = "src/main.rs"
+test = false
+doctest = false
+bench = false
+
 [dependencies.clap]
 git = "https://github.com/clap-rs/clap.git"
 features = ["derive"]

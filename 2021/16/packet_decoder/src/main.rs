@@ -11,7 +11,7 @@ struct Args {
 }
 
 // Import puzzle solutions module
-mod packet_decoder;
+use packet_decoder;
 
 // Main entry point
 fn main() {

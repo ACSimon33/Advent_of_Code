@@ -15,7 +15,7 @@ struct Args {
 }
 
 // Import puzzle solutions module
-mod extended_polymerization;
+use extended_polymerization;
 
 // Main entry point
 fn main() {

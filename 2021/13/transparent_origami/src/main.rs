@@ -11,7 +11,7 @@ struct Args {
 }
 
 // Import puzzle solutions module
-mod transparent_origami;
+use transparent_origami;
 
 // Main entry point
 fn main() {

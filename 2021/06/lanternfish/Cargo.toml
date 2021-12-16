@@ -5,6 +5,20 @@ edition = "2021"
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
+#[lib]
+#name = "lanternfish"
+#path = "src/lanternfish/lib.rs"
+#test = true
+#doctest = false
+#bench = false
+
+[[bin]]
+name = "lanternfish"
+path = "src/main.rs"
+test = true
+doctest = false
+bench = false
+
 [dependencies.clap]
 git = "https://github.com/clap-rs/clap.git"
 features = ["derive"]
