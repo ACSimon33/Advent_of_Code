@@ -44,16 +44,17 @@ stages:
     - cd 2021
     - rustc --version && cargo --version  # Print version info for debugging
 
-# 2021 Rust build (release)
+# 2021 Rust build (debug + release)
 aoc-2021:build:
   stage: "build"
   extends:
     - .git-template
     - .rust-template
   script:
+    - cargo build --workspace --verbose -j1
     - cargo build --release --workspace --verbose -j1
 
-# 2021 Rust test (release)
+# 2021 Rust test (debug)
 aoc-2021:test:
   stage: "test"
   extends:
@@ -62,12 +63,17 @@ aoc-2021:test:
   needs:
     - aoc-2021:build
   script:
-    - cargo test --release --workspace --no-fail-fast --verbose -j1 -- -Z unstable-options --report-time
+    - >-
+      cargo test --workspace --no-fail-fast --verbose -j1 --
+      -Z unstable-options --report-time
   after_script:
     - export PATH="$PATH:/root/.cargo/bin:$HOME/.cargo/bin"
     - export CARGO_TARGET_DIR=${BUILD_DIR}
     - cd 2021
-    - cargo test --release --workspace --no-fail-fast --verbose -j1 -- -Z unstable-options --format json --report-time | cargo2junit > JUnitReports.xml
+    - >-
+      cargo test --workspace --no-fail-fast --verbose -j1 --
+      -Z unstable-options --format json --report-time
+      | cargo2junit > JUnitReports.xml
   artifacts:
     paths:
       - JUnitReports.xml

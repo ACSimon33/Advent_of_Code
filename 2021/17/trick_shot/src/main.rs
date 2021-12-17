@@ -17,6 +17,9 @@ use trick_shot;
 fn main() {
   let args = Args::parse();
 
-  let val_1 = rust_template::solution_1(&args.filename);
-  println!("1. Solution: {}", val_1);
+  let y = trick_shot::heighest_shot(&args.filename);
+  println!("1. Maximum height: {}", y);
+
+  let n = trick_shot::distinct_velocities(&args.filename);
+  println!("2. Distinct velocity values: {}", n);
 }

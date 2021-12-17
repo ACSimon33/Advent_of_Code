@@ -1,12 +1,35 @@
 use std::fs;
 
-// First task
-pub fn solution_1(filename: &String) -> i32 {
-  let (x0, x1, y0, y1) = parse(filename);
+/// Calculate the heighest possible shot.
+pub fn heighest_shot(filename: &String) -> i32 {
+  let (_, _, y0, y1) = parse(filename);
+  let (y_speeds, _) = get_possible_y_speeds(&y0, &y1);
 
-  return 0;
+  return gauss(*y_speeds.iter().max().unwrap());
 }
 
+/// Calculate the amount of distinct velocity values.
+pub fn distinct_velocities(filename: &String) -> usize {
+  let (x0, x1, y0, y1) = parse(filename);
+  let (x_speeds, x_steps) = get_possible_x_speeds(&x0, &x1);
+  let (y_speeds, y_steps) = get_possible_y_speeds(&y0, &y1);
+
+  let mut velocities: Vec<(i32, i32)> = Vec::new();
+  for (x_speed, x_step) in x_speeds.iter().zip(x_steps.iter()) {
+    for (y_speed, y_step) in y_speeds.iter().zip(y_steps.iter()) {
+      if x_step == y_step || (x_speed == x_step && x_step <= y_step) {
+        if !velocities.contains(&(*x_speed, *y_speed)) {
+          velocities.push((*x_speed, *y_speed));
+          // println!("{} {}", x_speed, y_speed); 
+        }
+      }
+    }
+  }
+
+  return velocities.len();
+}
+
+/// Parse the input.
 fn parse(filename: &String) -> (i32, i32, i32, i32) {
   let mut contents = fs::read_to_string(filename)
     .expect("Couldn't read input file.");
@@ -20,21 +43,73 @@ fn parse(filename: &String) -> (i32, i32, i32, i32) {
   let x1: i32 = x1_str.parse().unwrap();
   let y0: i32 = y0_str.parse().unwrap();
   let y1: i32 = y1_str.parse().unwrap();
-  
+
   return (x0, x1, y0, y1);
 }
 
-fn 
+/// Calculate all possible speeds in x direction.
+fn get_possible_x_speeds(x0: &i32, x1: &i32) -> (Vec<i32>, Vec<i32>) {
+  let mut x_speeds: Vec<i32> = Vec::new();
+  let mut x_steps: Vec<i32> = Vec::new();
+  for speed in (1..).filter(|s| gauss(*s) >= *x0) {
+    if speed > *x1 {
+      break;
+    }
+
+    for steps in 1..speed+1 {
+      let distance = gauss(speed) - gauss(speed-steps);
+      if distance >= *x0 && distance <= *x1 {
+        x_speeds.push(speed);
+        x_steps.push(steps);
+      }
+    }
+  }
+
+  return (x_speeds, x_steps);
+}
+
+/// Calculate all possible speeds in y direction.
+fn get_possible_y_speeds(y0: &i32, y1: &i32) -> (Vec<i32>, Vec<i32>) {
+  let mut y_speeds: Vec<i32> = Vec::new();
+  let mut y_steps: Vec<i32> = Vec::new();
+  for speed in *y0.. {
+    if speed > gauss(y0.abs()) {
+      break;
+    }
+
+    for steps in 1.. {
+      let height = gauss(speed) - gauss(speed-steps);
+      if height >= *y0 && height <= *y1 {
+        y_speeds.push(speed);
+        y_steps.push(steps);
+      } else if height < *y0 {
+        break;
+      }
+    }
+  }
+
+  return (y_speeds, y_steps);
+}
+
+/// Gaussian sum.
+fn gauss(x: i32) -> i32 {
+  x * (x + 1) / 2
+}
 
 // Test example inputs against the reference solution
 #[cfg(test)]
-mod rust_template_tests {
-  use super::{solution_1};
+mod trick_shot_tests {
+  use super::{heighest_shot, distinct_velocities};
   use pretty_assertions::assert_eq;
   const INPUT_FILENAME_1: &str = "input/example_input.txt";
 
   #[test]
   fn task_1() {
-    assert_eq!(solution_1(&INPUT_FILENAME_1.to_string()), 0);
+    assert_eq!(heighest_shot(&INPUT_FILENAME_1.to_string()), 45);
+  }
+  
+  #[test]
+  fn task_2() {
+    assert_eq!(distinct_velocities(&INPUT_FILENAME_1.to_string()), 112);
   }
 }
