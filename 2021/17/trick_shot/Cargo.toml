@@ -1,0 +1,27 @@
+[package]
+name = "trick_shot"
+version = "0.1.0"
+edition = "2021"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[lib]
+name = "trick_shot"
+path = "src/trick_shot/lib.rs"
+test = true
+doctest = false
+bench = false
+
+[[bin]]
+name = "trick_shot"
+path = "src/main.rs"
+test = false
+doctest = false
+bench = false
+
+[dependencies.clap]
+git = "https://github.com/clap-rs/clap.git"
+features = ["derive"]
+
+[dependencies.pretty_assertions]
+version = "1.0.0"
