@@ -8,20 +8,24 @@ use passage_pathing;
 
 /// Benchmark of part 1
 fn task_1(c: &mut Criterion) {
-  c.bench_function(
-    "Day 12, Task 1: Amount of paths", 
+  let mut group = c.benchmark_group("Day 12");
+  group.bench_function(
+    "Task 1 - Amount of paths", 
     |b| b.iter(|| passage_pathing::get_paths(
       black_box(&INPUT_FILENAME.to_string()), black_box(1)
   )));
+  group.finish();
 }
 
 /// Benchmark of part 2
 fn task_2(c: &mut Criterion) {
-  c.bench_function(
-    "Day 12, Task 2: Amount of paths with repititions", 
+  let mut group = c.benchmark_group("Day 12");
+  group.bench_function(
+    "Task 2 - Amount of paths with repititions", 
     |b| b.iter(|| passage_pathing::get_paths(
       black_box(&INPUT_FILENAME.to_string()), black_box(2)
   )));
+  group.finish();
 }
 
 criterion_group!(benches, task_1, task_2);

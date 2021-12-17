@@ -8,20 +8,24 @@ use extended_polymerization;
 
 /// Benchmark of part 1
 fn task_1(c: &mut Criterion) {
-  c.bench_function(
-    "Day 14, Task 1: Element counts after 10 steps", 
+  let mut group = c.benchmark_group("Day 14");
+  group.bench_function(
+    "Task 1 - Element counts after 10 steps", 
     |b| b.iter(|| extended_polymerization::get_elements(
       black_box(&INPUT_FILENAME.to_string()), black_box(&10)
   )));
+  group.finish();
 }
 
 /// Benchmark of part 2
 fn task_2(c: &mut Criterion) {
-  c.bench_function(
-    "Day 14, Task 2: Element counts after 40 steps", 
+  let mut group = c.benchmark_group("Day 14");
+  group.bench_function(
+    "Task 2 - Element counts after 40 steps", 
     |b| b.iter(|| extended_polymerization::get_elements(
       black_box(&INPUT_FILENAME.to_string()), black_box(&40)
   )));
+  group.finish();
 }
 
 criterion_group!(benches, task_1, task_2);

@@ -11,6 +11,7 @@ pub fn vent_point_cloud(filename: &String, straight: bool) -> Vec<Point>  {
   
   let lines: Vec<&str> = contents.lines().collect();
   let sea_floor: SeaFloor = SeaFloor::new(&lines);
+  println!("JO");
 
   return sea_floor.create_point_cloud(straight);
 }
