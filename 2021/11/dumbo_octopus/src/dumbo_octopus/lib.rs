@@ -1,5 +1,6 @@
 use std::fs;
 
+/// Get the amount of flashes after a certain amount of steps.
 pub fn flashes(filename: &String, steps: &usize) -> usize {
   let contents = fs::read_to_string(filename)
     .expect("Couldn't read input file.");
@@ -25,6 +26,7 @@ pub fn flashes(filename: &String, steps: &usize) -> usize {
   return n_flashes;
 }
 
+/// Calculate the step when the flashes synchronize.
 pub fn all_flash(filename: &String) -> usize {
   let contents = fs::read_to_string(filename)
     .expect("Couldn't read input file.");
@@ -50,6 +52,7 @@ pub fn all_flash(filename: &String) -> usize {
   return steps;
 }
 
+/// Simulate one step.
 fn simulate_step(m: &usize, n: &usize, octopuses: &mut Vec<i32>) -> usize {
   // Increment all
   octopuses.iter_mut().for_each(|x| *x += 1);
@@ -60,6 +63,7 @@ fn simulate_step(m: &usize, n: &usize, octopuses: &mut Vec<i32>) -> usize {
   return flashed.len();
 }
 
+/// Simulate flashes.
 fn get_flashes(
   m: &usize, n: &usize, octopuses: &mut Vec<i32>,
   flashed: &mut Vec<usize>) -> bool {
@@ -82,6 +86,7 @@ fn get_flashes(
   return has_flashed;
 }
 
+/// Return a list of neighbouring octopus (9-stencil)
 fn get_stencil(m: &usize, n: &usize, idx: &usize) -> Vec<usize> {
   let mut stencil: Vec<usize> = Vec::new();
   // left
@@ -115,6 +120,7 @@ fn get_stencil(m: &usize, n: &usize, idx: &usize) -> Vec<usize> {
   return stencil;
 }
 
+// Test example inputs against the reference solution
 #[cfg(test)]
 mod dumbo_octopus_tests {
   use super::{flashes, all_flash};

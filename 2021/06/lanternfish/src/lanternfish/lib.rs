@@ -1,15 +1,12 @@
 use std::fs;
 
+/// Calculate the amount of lanternfish after a certain number of days.
 pub fn lanternfish(filename: &String, days: &i128) -> i128 {
   let contents = fs::read_to_string(filename)
     .expect("Couldn't read input file.");
   let fish: Vec<i128> = contents.split(",")
     .map(|x| x.parse().unwrap()).collect();
 
-  return calculate_amount_of_fish(&fish, &days);
-}
-
-fn calculate_amount_of_fish(fish: &Vec<i128>, days: &i128) -> i128 {
   let mut population: i128 = 0;
   for fish_age in 0..6 {
     let mut single_populations: Vec<i128> = vec![-1; *days as usize];
@@ -20,6 +17,7 @@ fn calculate_amount_of_fish(fish: &Vec<i128>, days: &i128) -> i128 {
   return population;
 }
 
+/// Calculate the population originating from a single fish.
 fn get_single_fish_population(
   fish: &i128, days: &i128, single_populations: &mut Vec<i128>) -> i128 {
   let mut population: i128 = 1;
@@ -37,6 +35,7 @@ fn get_single_fish_population(
   return population;
 }
 
+// Test example inputs against the reference solution
 #[cfg(test)]
 mod lanternfish_tests {
   use super::lanternfish;

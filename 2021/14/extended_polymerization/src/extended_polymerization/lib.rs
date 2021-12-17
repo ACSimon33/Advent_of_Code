@@ -5,7 +5,7 @@ mod polymer;
 use polymer::Pair;
 use polymer::Rule;
 
-// Return a list of char counts after a given amount of steps
+/// Return a list of char counts after a given amount of steps
 pub fn get_elements(filename: &String, steps: &usize) -> HashMap<char, i64> {
   let (mut pairs, rules, boundaries) = parse(filename);
 

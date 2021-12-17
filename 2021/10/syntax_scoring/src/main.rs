@@ -1,6 +1,6 @@
 use clap::Parser;
 
-/// Day 0: Rust Template
+/// Day 10: Syntax Scoring
 #[derive(Parser, Debug)]
 #[clap(about, version, author)]
 struct Args {

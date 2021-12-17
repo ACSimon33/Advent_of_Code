@@ -1,17 +1,20 @@
 use std::collections::HashMap;
 
+/// A seven segment display with a custom wire mapping.
 #[derive(Clone, Debug)]
 pub struct SevenSegmentDisplay {
   pub mapping: HashMap<char, char>
 }
 
 impl SevenSegmentDisplay {
+  /// Create an epmty seven segment display.
   pub fn new() -> SevenSegmentDisplay {
     SevenSegmentDisplay {
       mapping: HashMap::new(),
     }
   }
 
+  /// Initialize the wire mapping.
   pub fn init(&mut self, line: &str) {
     let digits: Vec<&str> = line.split_whitespace().collect();
     let mut letter_count: std::collections::HashMap<char, i32> =
@@ -69,6 +72,7 @@ impl SevenSegmentDisplay {
     }
   }
 
+  /// Convert a number.
   pub fn convert_number(&self, num: &str) -> i32 {
     let mut segments: Vec<char> = num.chars()
       .map(|c| self.mapping[&c]).collect();

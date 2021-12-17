@@ -3,6 +3,7 @@ use std::fs;
 mod caves;
 use caves::CaveSystem;
 
+/// Calculate the number of possible paths through the cave system.
 pub fn get_paths(filename: &String, max_visits: usize) -> usize {
   let contents = fs::read_to_string(filename)
     .expect("Couldn't read input file.");
@@ -18,6 +19,7 @@ pub fn get_paths(filename: &String, max_visits: usize) -> usize {
   return cave_system.caves["end"].visited;
 }
 
+// Test example inputs against the reference solution
 #[cfg(test)]
 mod passage_pathing_tests {
   use super::get_paths;

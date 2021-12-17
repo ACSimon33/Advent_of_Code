@@ -1,5 +1,6 @@
 use std::fs;
 
+/// Calculate the risk level.
 pub fn risk_level(filename: &String) -> Vec<i32> {
   let contents = fs::read_to_string(filename)
     .expect("Couldn't read input file.");
@@ -28,6 +29,7 @@ pub fn risk_level(filename: &String) -> Vec<i32> {
   return risk_level;
 }
 
+/// Return the sizes of the largest basins.
 pub fn basins(filename: &String, amount: usize) -> Vec<usize> {
   let contents = fs::read_to_string(filename)
     .expect("Couldn't read input file.");
@@ -50,6 +52,7 @@ pub fn basins(filename: &String, amount: usize) -> Vec<usize> {
   return get_basins(&m, &n, &heights, &low_p, amount);
 }
 
+/// Find the low points (minima).
 fn low_points(m: &usize, n: &usize, heights: &Vec<i32>) -> Vec<usize> {
   let mut low_p: Vec<usize> = Vec::new();
   for i in 0..*m {
@@ -64,6 +67,7 @@ fn low_points(m: &usize, n: &usize, heights: &Vec<i32>) -> Vec<usize> {
   return low_p;
 }
 
+/// Get the n largest basins.
 fn get_basins(m: &usize, n: &usize,
               heights: &Vec<i32>, low_p: &Vec<usize>, b: usize) -> Vec<usize> {
   let mut basins: Vec<usize> = vec![0; b];
@@ -80,6 +84,7 @@ fn get_basins(m: &usize, n: &usize,
   return basins;
 }
 
+/// Get all cells of a basin.
 fn get_basin_cells(m: &usize, n: &usize, 
                    heights: &Vec<i32>, idx: &usize, basin: &mut Vec<usize>) {
   if basin.contains(idx) {
@@ -94,6 +99,7 @@ fn get_basin_cells(m: &usize, n: &usize,
   }
 }
 
+/// Return a list of neighbouring points (5 stencil).
 fn get_stencil(m: &usize, n: &usize, idx: &usize) -> Vec<usize> {
   let mut stencil: Vec<usize> = Vec::new();
   if (idx+1) % n != 1 {
@@ -111,6 +117,7 @@ fn get_stencil(m: &usize, n: &usize, idx: &usize) -> Vec<usize> {
   return stencil;
 }
 
+// Test example inputs against the reference solution
 #[cfg(test)]
 mod smoke_basin_tests {
   use super::{risk_level, basins};

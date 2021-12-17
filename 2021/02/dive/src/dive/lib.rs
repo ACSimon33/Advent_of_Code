@@ -1,5 +1,6 @@
 use std::fs;
 
+/// Calculate the distance and the depth.
 pub fn distance_depth(filename: &String) -> (i32, i32) {
   let contents = fs::read_to_string(filename)
     .expect("Couldn't read input file.");
@@ -14,6 +15,7 @@ pub fn distance_depth(filename: &String) -> (i32, i32) {
    directional_sum(&directions, &lengths, "up"))
 }
 
+/// Calculate the distance and the depth with aiming method.
 pub fn distance_depth_with_aim(filename: &String) -> (i32, i32) {
   let contents = fs::read_to_string(filename)
     .expect("Couldn't read input file.");
@@ -41,6 +43,7 @@ pub fn distance_depth_with_aim(filename: &String) -> (i32, i32) {
   (distance, depth)
 }
 
+/// Sum up the commands.
 fn directional_sum(
   directions: &Vec<&str>, lengths: &Vec<i32>, key: &str) -> i32 {
   directions.iter().zip(lengths.iter())
@@ -48,6 +51,7 @@ fn directional_sum(
     .map(|(_d, c)| c).sum::<i32>()
 }
 
+// Test example inputs against the reference solution
 #[cfg(test)]
 mod dive_tests {
   use super::{distance_depth, distance_depth_with_aim};

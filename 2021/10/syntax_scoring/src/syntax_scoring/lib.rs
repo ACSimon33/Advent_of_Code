@@ -38,6 +38,7 @@ pub fn completion_score(filename: &String) -> i64 {
   return scores[scores.len() / 2];
 }
 
+// Test example inputs against the reference solution
 #[cfg(test)]
 mod syntax_scoring_tests {
   use super::{error_score, completion_score};

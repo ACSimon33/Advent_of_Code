@@ -1,3 +1,4 @@
+/// Cave struct.
 #[derive(Clone, Debug)]
 pub struct Cave {
   pub is_big: bool,
@@ -5,6 +6,7 @@ pub struct Cave {
 }
 
 impl Cave {
+  /// Create a new big or small cave.
   pub fn new(big: bool) -> Cave {
     Cave {
       is_big: big,
@@ -12,6 +14,7 @@ impl Cave {
     }
   }
 
+  /// Visit cave.
   pub fn visit(
     &mut self, max_visits: &usize, looped: &mut bool, is_start: bool) -> bool {
     if self.is_big || self.visited == 0 {
@@ -30,6 +33,7 @@ impl Cave {
     return false;
   }
 
+  /// Leave cave.
   pub fn leave(&mut self, looped: &mut bool) {
     if self.is_big || self.visited == 1 {
       self.visited -= 1;
@@ -44,6 +48,7 @@ impl Cave {
   }
 }
 
+/// Cave system as a Graph of caves and connections between them.
 #[derive(Clone, Debug)]
 pub struct CaveSystem {
   pub caves: std::collections::HashMap<String, Cave>,
@@ -51,6 +56,7 @@ pub struct CaveSystem {
 }
 
 impl CaveSystem {
+  /// Create an emtpy cave system.
   pub fn new() -> CaveSystem {
     CaveSystem {
       caves: std::collections::HashMap::new(),
@@ -58,6 +64,7 @@ impl CaveSystem {
     }
   }
 
+  /// Add a new connection between caves.
   pub fn add_connection(&mut self, connection: &str) {
     let cvs: Vec<&str> = connection.split("-").collect();
     if cvs.len() != 2 {
@@ -82,6 +89,7 @@ impl CaveSystem {
     }
   }
 
+  /// Traverse the cave system.
   pub fn traverse(&mut self, id: &String, mv: &usize, looped: &mut bool) {
     if self.caves.get_mut(id).unwrap().visit(mv, looped, id == "start") {
       if id != "end" {

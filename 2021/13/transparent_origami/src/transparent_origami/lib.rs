@@ -5,7 +5,7 @@ use origami::Point;
 use origami::Fold;
 use origami::Sheet;
 
-// Perform first fold
+/// Perform first fold.
 pub fn first_fold(filename: &String) -> usize {
   let contents = fs::read_to_string(filename)
     .expect("Couldn't read input file.");
@@ -16,7 +16,7 @@ pub fn first_fold(filename: &String) -> usize {
   return sheet.count_points();
 }
 
-// Generate code
+/// Generate code.
 pub fn gen_code(filename: &String) -> String {
   let contents = fs::read_to_string(filename)
     .expect("Couldn't read input file.");
@@ -27,6 +27,7 @@ pub fn gen_code(filename: &String) -> String {
   return sheet.to_string();
 }
 
+/// Parse input.
 fn parse(lines: &Vec<&str>) -> (Sheet, Vec<Fold>) {
   // Parse points
   let points: Vec<Point> = lines.iter()

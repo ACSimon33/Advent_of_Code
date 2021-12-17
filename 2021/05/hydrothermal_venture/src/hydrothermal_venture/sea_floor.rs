@@ -4,6 +4,7 @@ use std::cmp::PartialEq;
 use num::range_step_inclusive;
 use num::range_inclusive;
 
+/// A point with a vent intensity parameter.
 #[derive(Clone, Copy, Debug)]
 pub struct Point {
   pub x: i32,
@@ -12,6 +13,7 @@ pub struct Point {
 }
 
 impl Point {
+  /// Create a new point from a string.
   fn new(s: &str) -> Point {
     let coords: Vec<i32> = s.split(",").map(|x| x.parse().unwrap()).collect();
     Point {
@@ -23,11 +25,13 @@ impl Point {
 }
 
 impl PartialEq<Point> for Point {
+  /// Equality if a point is at the same location.
   fn eq(&self, other: &Self) -> bool {
     self.x == other.x && self.y == other.y
   }
 }
 
+/// Line between two points.
 #[derive(Clone, Debug)]
 pub struct Line {
   pub start: Point,
@@ -35,6 +39,7 @@ pub struct Line {
 }
 
 impl Line {
+  /// Create line from a string.
   fn new(s: &str) -> Line {
     let points: Vec<Point> = s.split(" -> ").map(|x| Point::new(x)).collect();
     Line {
@@ -43,18 +48,22 @@ impl Line {
     }
   }
 
+  /// Check if line is horizontal.
   fn is_horizontal(&self) -> bool {
     self.start.y == self.end.y
   }
 
+  /// Check if line is horizontal.
   fn is_vertical(&self) -> bool {
     self.start.x == self.end.x
   }
 
+  /// Check if line is straight (vertical or horizontal).
   fn is_straight(&self) -> bool {
     self.is_horizontal() || self.is_vertical()
   }
 
+  /// Create a vector of all points on the line.
   fn fill_in_points(&self) -> Vec<Point> {
     let mut points: Vec<Point> = Vec::new();
     let x_step = (self.end.x - self.start.x).signum();
@@ -82,18 +91,21 @@ impl Line {
   }
 }
 
+/// The sea floor.
 #[derive(Clone, Debug)]
 pub struct SeaFloor {
   pub vents: Vec<Line>
 }
 
 impl SeaFloor {
+  /// Create sea floor from a string.
   pub fn new(lines: &Vec<&str>) -> SeaFloor {
     SeaFloor {
       vents: lines.iter().map(|x| Line::new(x)).collect()
     }
   }
 
+  /// Create a point cloud of all points with an intensity > 0.
   pub fn create_point_cloud(&self, straight: bool) -> Vec<Point> {
     let mut point_cloud: Vec<Point> = Vec::new();
     for line in self.vents.iter().filter(|x| !straight || x.is_straight()) {

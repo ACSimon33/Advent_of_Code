@@ -3,7 +3,7 @@
 use std::fs;
 use std::collections::HashMap;
 
-// First task
+/// First task.
 pub fn get_elements(filename: &String, steps: &usize) -> HashMap<char, usize> {
   let (template, rules) = parse(filename);
 
@@ -18,6 +18,7 @@ pub fn get_elements(filename: &String, steps: &usize) -> HashMap<char, usize> {
   return chars.iter().map(|c| (*c, polymer.matches(*c).count())).collect();
 }
 
+/// Parse input.
 pub fn parse(filename: &String) -> (String, HashMap<String, String>) {
   let contents = fs::read_to_string(filename)
     .expect("Couldn't read input file.");

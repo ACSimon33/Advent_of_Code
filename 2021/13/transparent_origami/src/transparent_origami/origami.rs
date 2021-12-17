@@ -1,5 +1,6 @@
 use std::cmp::Ordering;
 
+/// Point struct.
 #[derive(Clone, Debug, PartialEq, Eq)]
 pub struct Point {
   pub x: i32,
@@ -7,6 +8,7 @@ pub struct Point {
 }
 
 impl Point {
+  /// Create a new point.
   pub fn new(x_coord: i32, y_coord: i32) -> Point {
     Point {
       x: x_coord,
@@ -22,6 +24,7 @@ impl PartialOrd for Point {
 }
 
 impl Ord for Point {
+  /// Row major order for points.
   fn cmp(&self, other: &Self) -> Ordering {
     // Try y coordinates first
     let y_order = self.y.cmp(&other.y);
@@ -33,12 +36,14 @@ impl Ord for Point {
   }
 }
 
+/// The direction of a fold.
 #[derive(Clone, Debug, PartialEq)]
 pub enum FoldDirection {
   HORIZONTAL,
   VERTICAL
 }
 
+/// Fold with a fold position and direction.
 #[derive(Clone, Debug)]
 pub struct Fold {
   pub value: i32,
@@ -46,6 +51,7 @@ pub struct Fold {
 }
 
 impl Fold {
+  /// Create a new fold.
   pub fn new(fold_value: i32, fold_direction: &str) -> Fold {
     if fold_direction == "x" {
       return Fold {
@@ -61,6 +67,7 @@ impl Fold {
     panic!("Error: Unknown fold direction.");
   }
 
+  /// Apply the fold to a point.
   pub fn apply_to_point(&self, p: &mut Point) {
     if self.direction == FoldDirection::HORIZONTAL && p.x > self.value {
       p.x -= 2 * (p.x - self.value);
@@ -70,6 +77,7 @@ impl Fold {
   }
 }
 
+/// Sheet with a point cloud.
 #[derive(Clone, Debug)]
 pub struct Sheet {
   pub points: Vec<Point>,
@@ -78,6 +86,7 @@ pub struct Sheet {
 }
 
 impl Sheet {
+  /// Create a new sheet from a point cloud.
   pub fn new(points: Vec<Point>) -> Sheet{
     let mut sheet = Sheet {
       points: points,
@@ -88,6 +97,7 @@ impl Sheet {
     return sheet;
   }
 
+  /// Fold the sheet.
   pub fn fold(&mut self, f: &Fold) {
     // Apply single fold
     for point in self.points.iter_mut() {
@@ -100,13 +110,14 @@ impl Sheet {
     self.shrink_to_fit();
   }
 
+  /// Apply multiple folds.
   pub fn fold_all(&mut self, folds: &Vec<Fold>) {
-    // Apply all folds
     for f in folds.iter() {
       self.fold(f);
     }
   }
 
+  /// Shrink the bounds of the paper.
   pub fn shrink_to_fit(&mut self) {
     self.top_left = Point::new(
       self.points.iter().map(|p| p.x).min().unwrap(),
@@ -118,14 +129,17 @@ impl Sheet {
     );
   }
 
+  /// Return the amount of points.
   pub fn count_points(&self) -> usize {
     return self.points.len();
   }
 
+  /// Check if the sheet contains a certain point.
   pub fn check_coords(&self, x: i32, y: i32) -> bool {
     return self.points.contains(&Point::new(x, y));
   }
 
+  /// Print the sheet.
   pub fn to_string(&self) -> String {
     let mut s: String = String::new();
     for y in self.top_left.y .. self.bottom_right.y+1 {

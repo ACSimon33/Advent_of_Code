@@ -3,6 +3,7 @@ use std::fs;
 mod bingo_board;
 use bingo_board::BingoBoard;
 
+/// Return the score of the first winning board and the winning number.
 pub fn first_winning_board(filename: &String) -> (i32, i32)  {
   let contents = fs::read_to_string(filename)
     .expect("Couldn't read input file.");
@@ -28,6 +29,7 @@ pub fn first_winning_board(filename: &String) -> (i32, i32)  {
   return (board.unwrap().sum_of_unchecked(), last_num);
 }
 
+/// Return the first winning board and the winning number.
 fn first_to_win(
   boards: &mut Vec<BingoBoard>, nums: &Vec<i32>
 ) -> (Option<BingoBoard>, i32) {
@@ -42,6 +44,7 @@ fn first_to_win(
   return (None, -1);
 }
 
+/// Return the score of the last winning board and the winning number.
 pub fn last_winning_board(filename: &String) -> (i32, i32) {
   let contents = fs::read_to_string(filename)
     .expect("Couldn't read input file.");
@@ -67,6 +70,7 @@ pub fn last_winning_board(filename: &String) -> (i32, i32) {
   return (board.unwrap().sum_of_unchecked(), last_num);
 }
 
+/// Return the last winning board and the winning number.
 fn last_to_win(
   boards: &mut Vec<BingoBoard>, nums: &Vec<i32>
 ) -> (Option<BingoBoard>, i32) {
@@ -86,6 +90,7 @@ fn last_to_win(
   return (None, -1);
 }
 
+// Test example inputs against the reference solution
 #[cfg(test)]
 mod giant_squid_tests {
   use super::{first_winning_board, last_winning_board};

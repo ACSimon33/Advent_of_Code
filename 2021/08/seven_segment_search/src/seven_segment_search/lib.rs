@@ -3,6 +3,7 @@ use std::fs;
 mod seven_segment_display;
 use seven_segment_display::SevenSegmentDisplay;
 
+/// Calculate the occurances of 1, 4, 7 and 8.
 pub fn get_amount_of_1478(filename: &String) -> i32 {
   let contents = fs::read_to_string(filename)
     .expect("Couldn't read input file.");
@@ -25,6 +26,7 @@ pub fn get_amount_of_1478(filename: &String) -> i32 {
   return amount;
 }
 
+/// Calculate the sum of all output values.
 pub fn sum_all_outputs(filename: &String) -> i32 {
   let contents = fs::read_to_string(filename)
     .expect("Couldn't read input file.");
@@ -45,6 +47,7 @@ pub fn sum_all_outputs(filename: &String) -> i32 {
   return sum;
 }
 
+// Test example inputs against the reference solution
 #[cfg(test)]
 mod seven_segment_search_tests {
   use super::{get_amount_of_1478, sum_all_outputs};

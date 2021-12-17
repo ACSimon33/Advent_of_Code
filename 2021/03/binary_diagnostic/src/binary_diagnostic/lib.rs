@@ -1,5 +1,6 @@
 use std::fs;
 
+/// Calculate epsilon and gamma.
 pub fn gamma_and_epsilon(filename: &String) -> (i32, i32) {
   let contents = fs::read_to_string(filename)
     .expect("Couldn't read input file.");
@@ -27,6 +28,7 @@ pub fn gamma_and_epsilon(filename: &String) -> (i32, i32) {
   (gamma, epsilon)
 }
 
+/// Caluclatye oxygen and CO2 levels
 pub fn oxygen_and_co2(filename: &String) -> (i32, i32) {
   let contents = fs::read_to_string(filename)
     .expect("Couldn't read input file.");
@@ -65,6 +67,7 @@ pub fn oxygen_and_co2(filename: &String) -> (i32, i32) {
   (bin_to_decimal(&oxygen[0]), bin_to_decimal(&co2[0]))
 }
 
+/// Sum up the binary digits.
 fn binary_sum(binary_nums: &Vec<Vec<i32>>) -> Vec<i32> {
   let mut binary_sum: Vec<i32> = vec![0; binary_nums[0].len()];
   for num in binary_nums {
@@ -75,6 +78,7 @@ fn binary_sum(binary_nums: &Vec<Vec<i32>>) -> Vec<i32> {
   binary_sum
 }
 
+/// Convert binary to decimal.
 fn bin_to_decimal(bin: &Vec<i32>) -> i32 {
   let base: i32 = 2;
   let mut dec: i32 = 0;
@@ -84,6 +88,7 @@ fn bin_to_decimal(bin: &Vec<i32>) -> i32 {
   dec
 }
 
+// Test example inputs against the reference solution
 #[cfg(test)]
 mod binary_diagnostic_tests {
   use super::{gamma_and_epsilon, oxygen_and_co2};
