@@ -44,17 +44,16 @@ stages:
     - cd 2021
     - rustc --version && cargo --version  # Print version info for debugging
 
-# 2021 Rust build (debug and release)
+# 2021 Rust build (release)
 aoc-2021:build:
   stage: "build"
   extends:
     - .git-template
     - .rust-template
   script:
-    #cargo build --workspace --verbose -j2
     - cargo build --release --workspace --verbose -j1
 
-# 2021 Rust test (debug)
+# 2021 Rust test (release)
 aoc-2021:test:
   stage: "test"
   extends:
@@ -63,8 +62,7 @@ aoc-2021:test:
   needs:
     - aoc-2021:build
   script:
-    - echo Testing
-    #- cargo test --workspace --no-fail-fast --verbose
+    - cargo test --release --workspace --no-fail-fast --verbose -j1
 
 # 2021 Rust benchmark (release)
 aoc-2021:bench:
@@ -79,13 +77,9 @@ aoc-2021:bench:
     - git clone git@github.com:ACSimon33/Advent_of_Code.git -b gh-pages
     - mkdir $BUILD_DIR/criterion
     - mv Advent_of_Code/* $BUILD_DIR/criterion/
-    - cargo bench --workspace --no-fail-fast --verbose
+    - cargo bench --workspace --no-fail-fast --verbose -j1
     - cd Advent_of_Code
     - mv $BUILD_DIR/criterion/* .
-    - if [ -d "docs" ]; then
-    -   rm -rf docs
-    - fi
-    - mv report docs
     - git add .
     - git commit -m "Updated benchmark results."
     - git push
