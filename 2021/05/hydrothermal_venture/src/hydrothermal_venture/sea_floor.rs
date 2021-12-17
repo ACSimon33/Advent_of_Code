@@ -1,15 +1,13 @@
-extern crate num;
-
-use std::cmp::PartialEq;
+use std::cmp;
+use std::collections::HashMap;
 use num::range_step_inclusive;
 use num::range_inclusive;
 
-/// A point with a vent intensity parameter.
-#[derive(Clone, Copy, Debug)]
+/// A point.
+#[derive(Clone, Copy, Debug, PartialEq)]
 pub struct Point {
   pub x: i32,
-  pub y: i32,
-  pub intensity: i32
+  pub y: i32
 }
 
 impl Point {
@@ -18,16 +16,8 @@ impl Point {
     let coords: Vec<i32> = s.split(",").map(|x| x.parse().unwrap()).collect();
     Point {
       x: coords[0],
-      y: coords[1],
-      intensity: 1
+      y: coords[1]
     }
-  }
-}
-
-impl PartialEq<Point> for Point {
-  /// Equality if a point is at the same location.
-  fn eq(&self, other: &Self) -> bool {
-    self.x == other.x && self.y == other.y
   }
 }
 
@@ -46,6 +36,16 @@ impl Line {
       start: points[0],
       end: points[1]
     }
+  }
+
+  /// Get the maximum x coordinate.
+  fn max_x(&self) -> usize {
+    cmp::max(self.start.x, self.end.x) as usize
+  }
+
+  /// Get the maximum y coordinate.
+  fn max_y(&self) -> usize {
+    cmp::max(self.start.y, self.end.y) as usize
   }
 
   /// Check if line is horizontal.
@@ -71,18 +71,17 @@ impl Line {
 
     if self.is_horizontal() {
       for current_x in range_step_inclusive(self.start.x, self.end.x, x_step) {
-        points.push(Point {x: current_x, y: self.start.y, intensity: 1});
+        points.push(Point {x: current_x, y: self.start.y});
       }
     } else if self.is_vertical() {
       for current_y in range_step_inclusive(self.start.y, self.end.y, y_step) {
-        points.push(Point {x: self.start.x, y: current_y, intensity: 1});
+        points.push(Point {x: self.start.x, y: current_y});
       }
     } else {
       for i in range_inclusive(0, (self.end.x - self.start.x) / x_step) {
         points.push(Point {
           x: self.start.x + i*x_step,
-          y: self.start.y + i*y_step,
-          intensity: 1
+          y: self.start.y + i*y_step
         });
       }
     }
@@ -94,37 +93,36 @@ impl Line {
 /// The sea floor.
 #[derive(Clone, Debug)]
 pub struct SeaFloor {
-  pub vents: Vec<Line>
+  pub vents: Vec<Line>,
+  pub m: usize,
+  pub n: usize
 }
 
 impl SeaFloor {
   /// Create sea floor from a string.
   pub fn new(lines: &Vec<&str>) -> SeaFloor {
-    SeaFloor {
-      vents: lines.iter().map(|x| Line::new(x)).collect()
-    }
+    let mut seafloor = SeaFloor {
+      vents: lines.iter().map(|x| Line::new(x)).collect(),
+      m: 0,
+      n: 0
+    };
+
+    seafloor.m = seafloor.vents.iter().map(|l| l.max_y()).max().unwrap();
+    seafloor.n = seafloor.vents.iter().map(|l| l.max_x()).max().unwrap();
+    return seafloor;
   }
 
-  /// Create a point cloud of all points with an intensity > 0.
-  pub fn create_point_cloud(&self, straight: bool) -> Vec<Point> {
-    let mut point_cloud: Vec<Point> = Vec::new();
-    for line in self.vents.iter().filter(|x| !straight || x.is_straight()) {
-      for new_p in line.fill_in_points().iter() {
-        let mut duplicate: bool = false;
-        for i in 0 .. point_cloud.len() {
-          if point_cloud[i] == *new_p {
-            point_cloud[i].intensity += 1;
-            duplicate = true;
-            break;
-          }
-        }
+  /// Create an intensity map.
+  pub fn create_point_cloud(&self, straight: bool) -> HashMap<usize, i32> {
+    let mut intensity: HashMap<usize, i32> = HashMap::new();
 
-        if !duplicate {
-          point_cloud.push(*new_p);
-        }
+    for line in self.vents.iter().filter(|x| !straight || x.is_straight()) {
+      for p in line.fill_in_points().iter() {
+        let idx = (p.y as usize) * self.n + (p.x as usize);
+        *intensity.entry(idx).or_default() += 1;
       }
     }
 
-    return point_cloud;
+    return intensity;
   }
 }

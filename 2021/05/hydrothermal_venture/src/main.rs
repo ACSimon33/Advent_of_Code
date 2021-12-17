@@ -22,8 +22,8 @@ fn main() {
   let cloud = hydrothermal_venture::vent_point_cloud(
     &args.filename, args.straigth_lines_only);
   println!("1. Number of vents with intensity 1: {}", 
-    cloud.iter().filter(|p| p.intensity == 1).count());
+    cloud.iter().filter(|(_, &i)| i > 1).count());
   println!("1. Number of vents with intensity > 1: {}", 
-    cloud.iter().filter(|p| p.intensity > 1).count());
+    cloud.iter().filter(|(_, &i)| i > 1).count());
 }
 
