@@ -4,13 +4,13 @@ use criterion::{black_box, criterion_group, criterion_main, Criterion};
 const INPUT_FILENAME: &str = "input/puzzle_input.txt";
 
 // Import puzzle solutions module
-use rust_template;
+use binary_diagnostic;
 
 /// Benchmark of part 1
 fn task_1(c: &mut Criterion) {
   c.bench_function(
-    "Day 00, Task 1: Rust Template", 
-    |b| b.iter(|| rust_template::solution_1(
+    "Day 03, Task 1: Power consumption", 
+    |b| b.iter(|| binary_diagnostic::gamma_and_epsilon(
       black_box(&INPUT_FILENAME.to_string())
   )));
 }
@@ -18,8 +18,8 @@ fn task_1(c: &mut Criterion) {
 /// Benchmark of part 2
 fn task_2(c: &mut Criterion) {
   c.bench_function(
-    "Day 00, Task 2: Rust Template", 
-    |b| b.iter(|| rust_template::solution_2(
+    "Day 03, Task 2: Life support rating", 
+    |b| b.iter(|| binary_diagnostic::oxygen_and_co2(
       black_box(&INPUT_FILENAME.to_string())
   )));
 }

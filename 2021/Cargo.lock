@@ -33,6 +33,7 @@ name = "binary_diagnostic"
 version = "0.1.0"
 dependencies = [
  "clap 3.0.0-rc.4",
+ "criterion",
 ]
 
 [[package]]
@@ -246,6 +247,7 @@ name = "dive"
 version = "0.1.0"
 dependencies = [
  "clap 3.0.0-rc.4",
+ "criterion",
 ]
 
 [[package]]
@@ -253,6 +255,7 @@ name = "dumbo_octopus"
 version = "0.1.0"
 dependencies = [
  "clap 3.0.0-rc.4",
+ "criterion",
 ]
 
 [[package]]
@@ -266,6 +269,7 @@ name = "extended_polymerization"
 version = "0.1.0"
 dependencies = [
  "clap 3.0.0-rc.4",
+ "criterion",
 ]
 
 [[package]]
@@ -284,6 +288,7 @@ name = "giant_squid"
 version = "0.1.0"
 dependencies = [
  "clap 3.0.0-rc.4",
+ "criterion",
 ]
 
 [[package]]
@@ -321,6 +326,7 @@ name = "hydrothermal_venture"
 version = "0.1.0"
 dependencies = [
  "clap 3.0.0-rc.4",
+ "criterion",
  "num",
 ]
 
@@ -369,6 +375,7 @@ name = "lanternfish"
 version = "0.1.0"
 dependencies = [
  "clap 3.0.0-rc.4",
+ "criterion",
 ]
 
 [[package]]
@@ -518,6 +525,7 @@ name = "passage_pathing"
 version = "0.1.0"
 dependencies = [
  "clap 3.0.0-rc.4",
+ "criterion",
 ]
 
 [[package]]
@@ -842,6 +850,7 @@ name = "seven_segment_search"
 version = "0.1.0"
 dependencies = [
  "clap 3.0.0-rc.4",
+ "criterion",
 ]
 
 [[package]]
@@ -855,6 +864,7 @@ name = "smoke_basin"
 version = "0.1.0"
 dependencies = [
  "clap 3.0.0-rc.4",
+ "criterion",
 ]
 
 [[package]]
@@ -862,6 +872,7 @@ name = "sonar_sweep"
 version = "0.1.0"
 dependencies = [
  "clap 3.0.0-rc.4",
+ "criterion",
 ]
 
 [[package]]
@@ -886,6 +897,7 @@ name = "syntax_scoring"
 version = "0.1.0"
 dependencies = [
  "clap 3.0.0-rc.4",
+ "criterion",
  "phf",
 ]
 
@@ -928,6 +940,7 @@ name = "transparent_origami"
 version = "0.1.0"
 dependencies = [
  "clap 3.0.0-rc.4",
+ "criterion",
 ]
 
 [[package]]
@@ -935,6 +948,7 @@ name = "treachery_of_whales"
 version = "0.1.0"
 dependencies = [
  "clap 3.0.0-rc.4",
+ "criterion",
 ]
 
 [[package]]

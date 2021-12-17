@@ -4,13 +4,13 @@ use criterion::{black_box, criterion_group, criterion_main, Criterion};
 const INPUT_FILENAME: &str = "input/puzzle_input.txt";
 
 // Import puzzle solutions module
-use rust_template;
+use dive;
 
 /// Benchmark of part 1
 fn task_1(c: &mut Criterion) {
   c.bench_function(
-    "Day 00, Task 1: Rust Template", 
-    |b| b.iter(|| rust_template::solution_1(
+    "Day 02, Task 1: Distance and depth", 
+    |b| b.iter(|| dive::distance_depth(
       black_box(&INPUT_FILENAME.to_string())
   )));
 }
@@ -18,8 +18,8 @@ fn task_1(c: &mut Criterion) {
 /// Benchmark of part 2
 fn task_2(c: &mut Criterion) {
   c.bench_function(
-    "Day 00, Task 2: Rust Template", 
-    |b| b.iter(|| rust_template::solution_2(
+    "Day 02, Task 2: Distance and depth with aim", 
+    |b| b.iter(|| dive::distance_depth_with_aim(
       black_box(&INPUT_FILENAME.to_string())
   )));
 }

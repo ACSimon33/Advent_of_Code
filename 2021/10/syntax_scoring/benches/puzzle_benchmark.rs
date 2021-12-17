@@ -4,13 +4,13 @@ use criterion::{black_box, criterion_group, criterion_main, Criterion};
 const INPUT_FILENAME: &str = "input/puzzle_input.txt";
 
 // Import puzzle solutions module
-use rust_template;
+use syntax_scoring;
 
 /// Benchmark of part 1
 fn task_1(c: &mut Criterion) {
   c.bench_function(
-    "Day 00, Task 1: Rust Template", 
-    |b| b.iter(|| rust_template::solution_1(
+    "Day 10, Task 1: Error score", 
+    |b| b.iter(|| syntax_scoring::error_score(
       black_box(&INPUT_FILENAME.to_string())
   )));
 }
@@ -18,8 +18,8 @@ fn task_1(c: &mut Criterion) {
 /// Benchmark of part 2
 fn task_2(c: &mut Criterion) {
   c.bench_function(
-    "Day 00, Task 2: Rust Template", 
-    |b| b.iter(|| rust_template::solution_2(
+    "Day 10, Task 2: Completion score", 
+    |b| b.iter(|| syntax_scoring::completion_score(
       black_box(&INPUT_FILENAME.to_string())
   )));
 }
