@@ -21,7 +21,7 @@ fn task_1(c: &mut Criterion) {
 fn task_2(c: &mut Criterion) {
   let mut group = c.benchmark_group("Day 12");
   group.bench_function(
-    "Task 2 - Amount of paths with repititions", 
+    "Task 2 - Amount of paths with repetitions", 
     |b| b.iter(|| passage_pathing::get_paths(
       black_box(&INPUT_FILENAME.to_string()), black_box(2)
   )));
