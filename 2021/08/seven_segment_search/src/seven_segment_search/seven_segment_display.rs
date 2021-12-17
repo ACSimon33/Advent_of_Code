@@ -1,4 +1,3 @@
-
 use std::collections::HashMap;
 
 #[derive(Clone, Debug)]
@@ -7,6 +6,12 @@ pub struct SevenSegmentDisplay {
 }
 
 impl SevenSegmentDisplay {
+  pub fn new() -> SevenSegmentDisplay {
+    SevenSegmentDisplay {
+      mapping: HashMap::new(),
+    }
+  }
+
   pub fn init(&mut self, line: &str) {
     let digits: Vec<&str> = line.split_whitespace().collect();
     let mut letter_count: std::collections::HashMap<char, i32> =
@@ -93,10 +98,4 @@ impl SevenSegmentDisplay {
     }
   }
 
-}
-
-pub fn create_seven_segment_display() -> SevenSegmentDisplay {
-  SevenSegmentDisplay {
-    mapping: HashMap::new(),
-  }
 }

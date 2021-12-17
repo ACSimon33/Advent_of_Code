@@ -1,4 +1,3 @@
-extern crate clap;
 use clap::Parser;
 
 /// Day 16: Packet Decoder

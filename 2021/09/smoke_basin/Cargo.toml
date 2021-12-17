@@ -5,17 +5,17 @@ edition = "2021"
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
-#[lib]
-#name = "smoke_basin"
-#path = "src/smoke_basin/lib.rs"
-#test = true
-#doctest = false
-#bench = false
+[lib]
+name = "smoke_basin"
+path = "src/smoke_basin/lib.rs"
+test = true
+doctest = false
+bench = false
 
 [[bin]]
 name = "smoke_basin"
 path = "src/main.rs"
-test = true
+test = false
 doctest = false
 bench = false
 

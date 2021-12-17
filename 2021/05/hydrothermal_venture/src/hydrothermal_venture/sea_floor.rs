@@ -11,6 +11,17 @@ pub struct Point {
   pub intensity: i32
 }
 
+impl Point {
+  fn new(s: &str) -> Point {
+    let coords: Vec<i32> = s.split(",").map(|x| x.parse().unwrap()).collect();
+    Point {
+      x: coords[0],
+      y: coords[1],
+      intensity: 1
+    }
+  }
+}
+
 impl PartialEq<Point> for Point {
   fn eq(&self, other: &Self) -> bool {
     self.x == other.x && self.y == other.y
@@ -24,6 +35,14 @@ pub struct Line {
 }
 
 impl Line {
+  fn new(s: &str) -> Line {
+    let points: Vec<Point> = s.split(" -> ").map(|x| Point::new(x)).collect();
+    Line {
+      start: points[0],
+      end: points[1]
+    }
+  }
+
   fn is_horizontal(&self) -> bool {
     self.start.y == self.end.y
   }
@@ -69,6 +88,12 @@ pub struct SeaFloor {
 }
 
 impl SeaFloor {
+  pub fn new(lines: &Vec<&str>) -> SeaFloor {
+    SeaFloor {
+      vents: lines.iter().map(|x| Line::new(x)).collect()
+    }
+  }
+
   pub fn create_point_cloud(&self, straight: bool) -> Vec<Point> {
     let mut point_cloud: Vec<Point> = Vec::new();
     for line in self.vents.iter().filter(|x| !straight || x.is_straight()) {
@@ -89,28 +114,5 @@ impl SeaFloor {
     }
 
     return point_cloud;
-  }
-}
-
-fn create_point(s: &str) -> Point {
-  let coords: Vec<i32> = s.split(",").map(|x| x.parse().unwrap()).collect();
-  Point {
-    x: coords[0],
-    y: coords[1],
-    intensity: 1
-  }
-}
-
-fn create_line(s: &str) -> Line {
-  let points: Vec<Point> = s.split(" -> ").map(|x| create_point(x)).collect();
-  Line {
-    start: points[0],
-    end: points[1]
-  }
-}
-
-pub fn init_sea_floor(lines: &Vec<&str>) -> SeaFloor {
-  SeaFloor {
-    vents: lines.iter().map(|x| create_line(x)).collect()
   }
 }

@@ -320,6 +320,7 @@ dependencies = [
 name = "hydrothermal_venture"
 version = "0.1.0"
 dependencies = [
+ "clap 3.0.0-rc.4",
  "num",
 ]
 

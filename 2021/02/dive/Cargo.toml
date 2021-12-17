@@ -5,12 +5,12 @@ edition = "2021"
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
-#[lib]
-#name = "dive"
-#path = "src/dive/lib.rs"
-#test = true
-#doctest = false
-#bench = false
+[lib]
+name = "dive"
+path = "src/dive/lib.rs"
+test = true
+doctest = false
+bench = false
 
 [[bin]]
 name = "dive"

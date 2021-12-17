@@ -5,12 +5,12 @@ edition = "2021"
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
-#[lib]
-#name = "hydrothermal_venture"
-#path = "src/hydrothermal_venture/lib.rs"
-#test = true
-#doctest = false
-#bench = false
+[lib]
+name = "hydrothermal_venture"
+path = "src/hydrothermal_venture/lib.rs"
+test = true
+doctest = false
+bench = false
 
 [[bin]]
 name = "hydrothermal_venture"
@@ -18,6 +18,10 @@ path = "src/main.rs"
 test = false
 doctest = false
 bench = false
+
+[dependencies.clap]
+git = "https://github.com/clap-rs/clap.git"
+features = ["derive"]
 
 [dependencies.num]
 version = "0.4"

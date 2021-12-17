@@ -1,4 +1,3 @@
-
 #[derive(Clone, Debug)]
 pub struct BingoBoard {
   pub board: Vec<i32>,
@@ -6,6 +5,13 @@ pub struct BingoBoard {
 }
 
 impl BingoBoard {
+  pub fn new() -> BingoBoard {
+    BingoBoard {
+      board: Vec::new(),
+      checked: Vec::new()
+    }
+  }
+
   pub fn grow_board(&mut self, line: &str) {
     self.board.extend(
       line.split_whitespace().map(|x| x.parse::<i32>().unwrap()));
@@ -56,12 +62,5 @@ impl BingoBoard {
       .all(|(_, c)| *c);
 
     return column_full || row_full;
-  }
-}
-
-pub fn empty_bingo_board() -> BingoBoard {
-  BingoBoard {
-    board: Vec::new(),
-    checked: Vec::new()
   }
 }

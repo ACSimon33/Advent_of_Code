@@ -1,29 +1,29 @@
-use std::fs;
-use std::env;
+use clap::Parser;
 
-mod sea_floor;
-use sea_floor::SeaFloor;
-use sea_floor::init_sea_floor;
+/// Day 5: Hydrothermal Venture
+#[derive(Parser, Debug)]
+#[clap(about, version, author)]
+struct Args {
+  /// Input file (e.g. input/puzzle_input.txt)
+  #[clap(short, long)]
+  filename: String,
+
+  /// Consider only vertical and horizontal vents
+  #[clap(short, long)]
+  straigth_lines_only: bool
+}
+
+// Import puzzle solutions module
+use hydrothermal_venture;
 
 fn main() {
-  let args: Vec<String> = env::args().collect();
-  let filename = &args[1];
-  let contents = fs::read_to_string(filename)
-    .expect("Couldn't read input file.");
-  
-  let lines: Vec<&str> = contents.lines().collect();
-  let sea_floor: SeaFloor = init_sea_floor(&lines);
-  let straight_line_point_cloud = sea_floor.create_point_cloud(true);
+  let args = Args::parse();
 
+  let cloud = hydrothermal_venture::vent_point_cloud(
+    &args.filename, args.straigth_lines_only);
   println!("1. Number of vents with intensity 1: {}", 
-    straight_line_point_cloud.iter().filter(|p| p.intensity == 1).count());
+    cloud.iter().filter(|p| p.intensity == 1).count());
   println!("1. Number of vents with intensity > 1: {}", 
-    straight_line_point_cloud.iter().filter(|p| p.intensity > 1).count());
-
-  let full_point_cloud = sea_floor.create_point_cloud(false);
-  println!("2. Number of vents with intensity 1: {}", 
-    full_point_cloud.iter().filter(|p| p.intensity == 1).count());
-  println!("2. Number of vents with intensity > 1: {}", 
-    full_point_cloud.iter().filter(|p| p.intensity > 1).count());
+    cloud.iter().filter(|p| p.intensity > 1).count());
 }
 

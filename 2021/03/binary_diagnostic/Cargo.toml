@@ -5,12 +5,12 @@ edition = "2021"
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
-#[lib]
-#name = "binary_diagnostic"
-#path = "src/binary_diagnostic/lib.rs"
-#test = true
-#doctest = false
-#bench = false
+[lib]
+name = "binary_diagnostic"
+path = "src/binary_diagnostic/lib.rs"
+test = true
+doctest = false
+bench = false
 
 [[bin]]
 name = "binary_diagnostic"
