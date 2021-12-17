@@ -20,7 +20,7 @@ pub fn solution_2(filename: &String) -> i32 {
 
 // Test example inputs against the reference solution
 #[cfg(test)]
-mod tests {
+mod rust_template_tests {
   use super::{solution_1, solution_2};
   use pretty_assertions::assert_eq;
   const INPUT_FILENAME_1: &str = "input/example_input.txt";
