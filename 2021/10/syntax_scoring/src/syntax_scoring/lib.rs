@@ -39,18 +39,18 @@ pub fn completion_score(filename: &String) -> i64 {
 }
 
 #[cfg(test)]
-mod tests {
+mod syntax_scoring_tests {
   use super::{error_score, completion_score};
   const INPUT_FILENAME: &str = "input/example_input.txt";
 
   #[test]
-  fn test_1() {
+  fn task_1() {
     let score = error_score(&INPUT_FILENAME.to_string());
     assert_eq!(score, 26397);
   }
 
   #[test]
-  fn test_2() {
+  fn task_2() {
     let score = completion_score(&INPUT_FILENAME.to_string());
     assert_eq!(score, 288957);
   }

@@ -15,7 +15,7 @@ pub fn increasing_measurements(filename: &String, window: usize) -> usize {
 
 // Test example inputs against the reference solution
 #[cfg(test)]
-mod tests {
+mod sonar_sweep_tests {
   use super::increasing_measurements;
   const INPUT_FILENAME_1: &str = "input/example_input.txt";
 

@@ -62,17 +62,17 @@ fn sum_all_outputs(filename: &String) -> i32 {
 
 
 #[cfg(test)]
-mod tests {
+mod seven_segment_search_tests {
   use super::*;
   const INPUT_FILENAME: &str = "input/example_input.txt";
 
   #[test]
-  fn test_1() {
+  fn task_1() {
     assert_eq!(get_amount_of_1478(&INPUT_FILENAME.to_string()), 26);
   }
 
   #[test]
-  fn test_2() {
+  fn task_2() {
     assert_eq!(sum_all_outputs(&INPUT_FILENAME.to_string()), 61229);
   }
 }

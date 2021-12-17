@@ -116,18 +116,18 @@ fn get_stencil(m: &usize, n: &usize, idx: &usize) -> Vec<usize> {
 }
 
 #[cfg(test)]
-mod tests {
+mod dumbo_octopus_tests {
   use super::{flashes, all_flash};
   const INPUT_FILENAME: &str = "input/example_input.txt";
 
   #[test]
-  fn test_1() {
+  fn task_1() {
     assert_eq!(flashes(&INPUT_FILENAME.to_string(), &10), 204);
     assert_eq!(flashes(&INPUT_FILENAME.to_string(), &100), 1656);
   }
 
   #[test]
-  fn test_2() {
+  fn task_2() {
     assert_eq!(all_flash(&INPUT_FILENAME.to_string()), 195);
   }
 }

@@ -126,12 +126,12 @@ fn get_stencil(m: &usize, n: &usize, idx: &usize) -> Vec<usize> {
 }
 
 #[cfg(test)]
-mod tests {
+mod smoke_basin_tests {
   use super::*;
   const INPUT_FILENAME: &str = "input/example_input.txt";
 
   #[test]
-  fn test_1() {
+  fn task_1() {
     let risk = risk_level(&INPUT_FILENAME.to_string());
     assert_eq!(risk.len(), 4);
     assert_eq!(risk.iter().filter(|&x| *x == 1).count(), 1);
@@ -140,7 +140,7 @@ mod tests {
   }
 
   #[test]
-  fn test_2() {
+  fn task_2() {
     let basin = basins(&INPUT_FILENAME.to_string(), 3);
     assert_eq!(basin.len(), 3);
     assert_eq!(basin.iter().filter(|&x| *x == 9).count(), 2);

@@ -64,6 +64,8 @@ aoc-2021:test:
   script:
     - cargo test --release --workspace --no-fail-fast --verbose -j1 -- -Z unstable-options --report-time
   after_script:
+    - export PATH="$PATH:/root/.cargo/bin:$HOME/.cargo/bin"
+    - export CARGO_TARGET_DIR=${BUILD_DIR}
     - cargo test --release --workspace --no-fail-fast --verbose -j1 -- -Z unstable-options --format json --report-time | cargo2junit > JUnitReports.xml
   artifacts:
     paths:

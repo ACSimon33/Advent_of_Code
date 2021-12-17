@@ -76,7 +76,7 @@ fn simulate(
 
 // Test example inputs against the reference solution
 #[cfg(test)]
-mod tests {
+mod extended_polymerization_tests {
   use super::{get_elements};
   const INPUT_FILENAME_1: &str = "input/example_input.txt";
 

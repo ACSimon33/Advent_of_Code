@@ -23,7 +23,7 @@ pub fn evaluate(filename: &String) -> u64 {
 
 // Test example inputs against the reference solution
 #[cfg(test)]
-mod tests {
+mod packet_decoder_tests {
   use super::{version_numbers, evaluate};
   use pretty_assertions::assert_eq;
   const INPUT_FILENAME_1_1: &str = "input/example_input_1_1.txt";

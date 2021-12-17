@@ -48,23 +48,23 @@ fn get_single_fish_population(
 }
 
 #[cfg(test)]
-mod tests {
-    use super::*;
-    const INPUT_FILENAME: &str = "input/example_input.txt";
+mod lanternfish_tests {
+  use super::*;
+  const INPUT_FILENAME: &str = "input/example_input.txt";
 
-    #[test]
-    fn test_18() {
-      assert_eq!(lanternfish(&INPUT_FILENAME.to_string(), &18), 26);
-    }
+  #[test]
+  fn task_1_18() {
+    assert_eq!(lanternfish(&INPUT_FILENAME.to_string(), &18), 26);
+  }
 
-    #[test]
-    fn test_80() {
-      assert_eq!(lanternfish(&INPUT_FILENAME.to_string(), &80), 5934);
-    }
+  #[test]
+  fn task_1_80() {
+    assert_eq!(lanternfish(&INPUT_FILENAME.to_string(), &80), 5934);
+  }
 
-    #[test]
-    fn test_256() {
-      assert_eq!(lanternfish(&INPUT_FILENAME.to_string(), &256), 26984457539);
-    }
+  #[test]
+  fn task_2_256() {
+    assert_eq!(lanternfish(&INPUT_FILENAME.to_string(), &256), 26984457539);
+  }
 }
 

@@ -19,7 +19,7 @@ pub fn get_paths(filename: &String, max_visits: usize) -> usize {
 }
 
 #[cfg(test)]
-mod tests {
+mod passage_pathing_tests {
   use super::get_paths;
   const INPUT_FILENAME_1: &str = "input/example_input_1.txt";
   const INPUT_FILENAME_2: &str = "input/example_input_2.txt";

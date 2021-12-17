@@ -50,7 +50,7 @@ fn parse(lines: &Vec<&str>) -> (Sheet, Vec<Fold>) {
 
 // Test example inputs against the reference solution
 #[cfg(test)]
-mod tests {
+mod transparent_origami_tests {
   use super::{first_fold, gen_code};
   const INPUT_FILENAME_1: &str = "input/example_input.txt";
 

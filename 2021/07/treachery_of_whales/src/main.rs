@@ -63,17 +63,17 @@ fn sum_of_ints(i: &i32) -> i32 {
 }
 
 #[cfg(test)]
-mod tests {
+mod treachery_of_whales_tests {
   use super::*;
   const INPUT_FILENAME: &str = "input/example_input.txt";
 
   #[test]
-  fn test_1() {
+  fn task_1() {
     assert_eq!(crab_formation_1(&INPUT_FILENAME.to_string()), (2, 37));
   }
 
   #[test]
-  fn test_2() {
+  fn task_2() {
     assert_eq!(crab_formation_2(&INPUT_FILENAME.to_string()), (5, 168));
   }
 }

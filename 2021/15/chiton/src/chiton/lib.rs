@@ -37,7 +37,7 @@ fn parse(filename: &String) -> (usize, usize, Vec<u32>) {
 
 // Test example inputs against the reference solution
 #[cfg(test)]
-mod tests {
+mod chiton_tests {
   use super::{lowest_total_risk, lowest_total_risk_full};
   use pretty_assertions::assert_eq;
   const INPUT_FILENAME: &str = "input/example_input.txt";
