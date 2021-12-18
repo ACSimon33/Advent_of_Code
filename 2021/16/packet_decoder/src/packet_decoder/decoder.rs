@@ -15,7 +15,7 @@ pub struct Packet {
   pub version: u8,
   pub typeid: u8,
   pub sub_packets: Vec<Packet>,
-  pub value: u64
+  pub value: u64,
 }
 
 impl Packet {
@@ -26,7 +26,7 @@ impl Packet {
       version: ver,
       typeid: LITERAL_TYPE,
       sub_packets: Vec::new(),
-      value: val
+      value: val,
     }
   }
 
@@ -37,7 +37,7 @@ impl Packet {
       version: ver,
       typeid: id,
       sub_packets: packets,
-      value: 0
+      value: 0,
     }
   }
 
@@ -54,7 +54,7 @@ impl Packet {
       while !last {
         last = bin_str.chars().nth(idx).unwrap() == '0';
         idx += 1;
-        val_bin += &bin_str[idx..idx+VALUE_LEN];
+        val_bin += &bin_str[idx..idx + VALUE_LEN];
         idx += VALUE_LEN;
       }
       let val: u64 = u64::from_str_radix(&val_bin, 2).unwrap();
@@ -65,7 +65,7 @@ impl Packet {
       if lid == 0 {
         let p_len = usize::from_str_radix(&bin_str[PACKET_LENGTH], 2).unwrap();
         idx = 22;
-        while idx-22 < p_len {
+        while idx - 22 < p_len {
           let (p, n) = Packet::decode(&bin_str[idx..]);
           packets.push(p);
           idx += n;
@@ -102,44 +102,41 @@ impl Packet {
         for p in self.sub_packets.iter() {
           result += p.evaluate();
         }
-      },
+      }
       1 => {
         result = 1;
         for p in self.sub_packets.iter() {
           result *= p.evaluate();
         }
-      },
+      }
       2 => {
         result = u64::MAX;
         for p in self.sub_packets.iter() {
           result = cmp::min(result, p.evaluate());
         }
-      },
+      }
       3 => {
         result = u64::MIN;
         for p in self.sub_packets.iter() {
           result = cmp::max(result, p.evaluate());
         }
-      },
+      }
       4 => {
         result = self.value;
-      },
+      }
       5 => {
-        result = (
-          self.sub_packets[0].evaluate() > self.sub_packets[1].evaluate()
-        ) as u64;
-      },
+        result = (self.sub_packets[0].evaluate()
+          > self.sub_packets[1].evaluate()) as u64;
+      }
       6 => {
-        result = (
-          self.sub_packets[0].evaluate() < self.sub_packets[1].evaluate()
-        ) as u64;
-      },
+        result = (self.sub_packets[0].evaluate()
+          < self.sub_packets[1].evaluate()) as u64;
+      }
       7 => {
-        result = (
-          self.sub_packets[0].evaluate() == self.sub_packets[1].evaluate()
-        ) as u64;
-      },
-      _ => panic!("???")
+        result = (self.sub_packets[0].evaluate()
+          == self.sub_packets[1].evaluate()) as u64;
+      }
+      _ => panic!("???"),
     }
 
     return result;
@@ -155,7 +152,7 @@ impl From<String> for Packet {
 /// Decoder at the top of the packet tree
 #[derive(Clone, Debug)]
 pub struct Decoder {
-  pub root: Packet
+  pub root: Packet,
 }
 
 impl Decoder {
@@ -165,19 +162,23 @@ impl Decoder {
     let mut bin_str: String = String::new();
     let mut idx: usize = 0;
     while idx < n {
-      let num = u128::from_str_radix(
-        &hex_str[idx..cmp::min(idx+32, n)], 16).unwrap();   
+      let num =
+        u128::from_str_radix(&hex_str[idx..cmp::min(idx + 32, n)], 16).unwrap();
 
       let bin_s = format!("{:b}", num);
-      bin_str += String::from_utf8(
-        vec![b'0'; cmp::min(4*(n-idx), 128) - bin_s.len()]
-      ).unwrap().as_str();
+      bin_str += String::from_utf8(vec![
+        b'0';
+        cmp::min(4 * (n - idx), 128)
+          - bin_s.len()
+      ])
+      .unwrap()
+      .as_str();
       bin_str += bin_s.as_str();
       idx += 32;
     }
 
     Decoder {
-      root: Packet::from(bin_str)
+      root: Packet::from(bin_str),
     }
   }
 

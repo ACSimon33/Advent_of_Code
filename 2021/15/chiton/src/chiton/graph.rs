@@ -15,7 +15,7 @@ impl Node {
     Node {
       index: index,
       risk: risk,
-      cumulative_risk: u32::MAX
+      cumulative_risk: u32::MAX,
     }
   }
 }
@@ -25,7 +25,7 @@ impl Node {
 pub struct Graph {
   pub nodes: Vec<Node>,
   pub m: usize,
-  pub n: usize
+  pub n: usize,
 }
 
 impl Graph {
@@ -34,7 +34,7 @@ impl Graph {
     let mut nodes: Vec<Node> = Vec::new();
     for ki in 0..*dup {
       for i in 0..*m {
-        for kj in 0..*dup {    
+        for kj in 0..*dup {
           for j in 0..*n {
             let idx = i * n + j;
             let idx_full = (ki * m + i) * dup * n + kj * n + j;
@@ -52,7 +52,7 @@ impl Graph {
     Graph {
       nodes: nodes,
       m: dup * m,
-      n: dup * n
+      n: dup * n,
     }
   }
 
@@ -64,8 +64,11 @@ impl Graph {
 
     // Create reverse priority queue
     let mut queue: PriorityQueue<usize, Reverse<u32>> = PriorityQueue::from(
-      nodes.iter().map(|n| Reverse(n.cumulative_risk))
-        .enumerate().collect::<Vec<(usize, Reverse<u32>)>>()
+      nodes
+        .iter()
+        .map(|n| Reverse(n.cumulative_risk))
+        .enumerate()
+        .collect::<Vec<(usize, Reverse<u32>)>>(),
     );
 
     // Dijkstra
@@ -76,7 +79,7 @@ impl Graph {
       for neighbour in get_stencil(&self.m, &self.n, &node_idx) {
         let neighbour_risk = queue.get_priority(&neighbour);
 
-        if neighbour_risk.is_some() { 
+        if neighbour_risk.is_some() {
           let new_neighbour_risk = c_risk.0 + nodes[neighbour].risk;
           if new_neighbour_risk < neighbour_risk.unwrap().0 {
             queue.change_priority(&neighbour, Reverse(new_neighbour_risk));
@@ -94,7 +97,7 @@ impl Graph {
     println!("{} {} {}", self.nodes.len(), self.m, self.n);
     for i in 0..self.m {
       for j in 0..self.n {
-        print!("{}", self.nodes[i*self.n + j].risk);
+        print!("{}", self.nodes[i * self.n + j].risk);
       }
       println!();
     }
@@ -104,16 +107,16 @@ impl Graph {
 /// Returns the neighbour indices for a given index
 fn get_stencil(m: &usize, n: &usize, idx: &usize) -> Vec<usize> {
   let mut stencil: Vec<usize> = Vec::new();
-  if (idx+1) % n != 1 {
+  if (idx + 1) % n != 1 {
     stencil.push(idx - 1);
   }
-  if (idx+1) % n != 0 {
+  if (idx + 1) % n != 0 {
     stencil.push(idx + 1);
   }
-  if *idx >= *n  {
+  if *idx >= *n {
     stencil.push(idx - n);
   }
-  if *idx < (m-1)*n {
+  if *idx < (m - 1) * n {
     stencil.push(idx + n);
   }
   return stencil;

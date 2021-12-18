@@ -9,11 +9,11 @@ use snailfish;
 /// Benchmark of part 1
 fn task_1(c: &mut Criterion) {
   let mut group = c.benchmark_group("Day 18");
-  group.bench_function(
-    "Task 1 - Sum of all Snailfish numbers", 
-    |b| b.iter(|| snailfish::sum_of_all_numbers(
-      black_box(&INPUT_FILENAME.to_string())
-  )));
+  group.bench_function("Task 1 - Sum of all Snailfish numbers", |b| {
+    b.iter(|| {
+      snailfish::sum_of_all_numbers(black_box(&INPUT_FILENAME.to_string()))
+    })
+  });
   group.finish();
 }
 
@@ -21,10 +21,11 @@ fn task_1(c: &mut Criterion) {
 fn task_2(c: &mut Criterion) {
   let mut group = c.benchmark_group("Day 18");
   group.bench_function(
-    "Task 2 - Largest sum between two Snailfish numbers", 
-    |b| b.iter(|| snailfish::largest_sum(
-      black_box(&INPUT_FILENAME.to_string())
-  )));
+    "Task 2 - Largest sum between two Snailfish numbers",
+    |b| {
+      b.iter(|| snailfish::largest_sum(black_box(&INPUT_FILENAME.to_string())))
+    },
+  );
   group.finish();
 }
 

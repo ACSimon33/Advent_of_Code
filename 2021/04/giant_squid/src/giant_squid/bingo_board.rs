@@ -2,7 +2,7 @@
 #[derive(Clone, Debug)]
 pub struct BingoBoard {
   pub board: Vec<i32>,
-  pub checked: Vec<bool>
+  pub checked: Vec<bool>,
 }
 
 impl BingoBoard {
@@ -10,14 +10,15 @@ impl BingoBoard {
   pub fn new() -> BingoBoard {
     BingoBoard {
       board: Vec::new(),
-      checked: Vec::new()
+      checked: Vec::new(),
     }
   }
 
   /// Add a row to the bingo board.
   pub fn grow_board(&mut self, line: &str) {
-    self.board.extend(
-      line.split_whitespace().map(|x| x.parse::<i32>().unwrap()));
+    self
+      .board
+      .extend(line.split_whitespace().map(|x| x.parse::<i32>().unwrap()));
   }
 
   /// Check if the board is square.
@@ -60,11 +61,17 @@ impl BingoBoard {
     let row: usize = idx / side_len;
     let column: usize = idx % side_len;
 
-    let column_full = self.checked.iter().enumerate()
+    let column_full = self
+      .checked
+      .iter()
+      .enumerate()
       .filter(|(i, _)| i % side_len == column)
       .all(|(_, c)| *c);
 
-    let row_full = self.checked.iter().enumerate()
+    let row_full = self
+      .checked
+      .iter()
+      .enumerate()
       .filter(|(i, _)| i / side_len == row)
       .all(|(_, c)| *c);
 

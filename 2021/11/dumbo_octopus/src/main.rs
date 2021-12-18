@@ -10,7 +10,7 @@ struct Args {
 
   /// Amount of simulation steps.
   #[clap(short, long)]
-  steps: usize
+  steps: usize,
 }
 
 // Import puzzle solutions module
@@ -21,7 +21,10 @@ fn main() {
   let args = Args::parse();
 
   let n_flashes = dumbo_octopus::flashes(&args.filename, &args.steps);
-  println!("1. Amount of flashes after {} steps: {}", args.steps, n_flashes);
+  println!(
+    "1. Amount of flashes after {} steps: {}",
+    args.steps, n_flashes
+  );
 
   let steps = dumbo_octopus::all_flash(&args.filename);
   println!("2. All octopus flash after {} steps.", steps);

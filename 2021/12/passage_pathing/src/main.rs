@@ -10,7 +10,7 @@ struct Args {
 
   /// Maximum number of visits per small cave.
   #[clap(short, long, default_value_t = 1)]
-  visits: usize
+  visits: usize,
 }
 
 // Import puzzle solutions module

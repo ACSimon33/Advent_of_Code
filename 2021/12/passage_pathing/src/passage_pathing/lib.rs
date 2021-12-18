@@ -5,8 +5,8 @@ use caves::CaveSystem;
 
 /// Calculate the number of possible paths through the cave system.
 pub fn get_paths(filename: &String, max_visits: usize) -> usize {
-  let contents = fs::read_to_string(filename)
-    .expect("Couldn't read input file.");
+  let contents =
+    fs::read_to_string(filename).expect("Couldn't read input file.");
   let lines: Vec<&str> = contents.lines().collect();
 
   let mut cave_system: CaveSystem = CaveSystem::new();
@@ -57,4 +57,3 @@ mod passage_pathing_tests {
     assert_eq!(get_paths(&INPUT_FILENAME_3.to_string(), 2), 3509);
   }
 }
-

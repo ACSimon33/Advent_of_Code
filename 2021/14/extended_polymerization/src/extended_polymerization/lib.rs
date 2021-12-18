@@ -1,5 +1,5 @@
-use std::fs;
 use std::collections::HashMap;
+use std::fs;
 
 mod polymer;
 use polymer::Pair;
@@ -23,13 +23,16 @@ pub fn get_elements(filename: &String, steps: &usize) -> HashMap<char, i64> {
   *char_count.entry(boundaries.first).or_default() += 1;
   *char_count.entry(boundaries.second).or_default() += 1;
 
-  return char_count.iter().map(|(c, count)| (*c, count / 2)).collect();
+  return char_count
+    .iter()
+    .map(|(c, count)| (*c, count / 2))
+    .collect();
 }
 
 /// Parse the input file.
 pub fn parse(filename: &String) -> (HashMap<Pair, i64>, Vec<Rule>, Pair) {
-  let contents = fs::read_to_string(filename)
-    .expect("Couldn't read input file.");
+  let contents =
+    fs::read_to_string(filename).expect("Couldn't read input file.");
   let lines: Vec<&str> = contents.lines().collect();
 
   // Parse template
@@ -42,22 +45,21 @@ pub fn parse(filename: &String) -> (HashMap<Pair, i64>, Vec<Rule>, Pair) {
   // Get first / last pair
   let boundaries = Pair::new(
     &template.chars().next().unwrap(),
-    &template.chars().last().unwrap());
+    &template.chars().last().unwrap(),
+  );
 
   // Parse rules
-  let rules = lines.iter()
+  let rules = lines
+    .iter()
     .filter(|line| line.contains(" -> "))
     .map(|line| Rule::new(line))
     .collect();
-    
+
   return (pairs, rules, boundaries);
 }
 
 /// Simulates the growth of a polymer.
-fn simulate(
-  steps: &usize, rules: &Vec<Rule>, pairs: &mut HashMap<Pair, i64>
-) {
-
+fn simulate(steps: &usize, rules: &Vec<Rule>, pairs: &mut HashMap<Pair, i64>) {
   for _ in 0..*steps {
     let mut new_pairs = HashMap::new();
     for rule in rules.iter() {
@@ -71,13 +73,12 @@ fn simulate(
     }
     *pairs = new_pairs;
   }
-
 }
 
 // Test example inputs against the reference solution
 #[cfg(test)]
 mod extended_polymerization_tests {
-  use super::{get_elements};
+  use super::get_elements;
   const INPUT_FILENAME_1: &str = "input/example_input.txt";
 
   #[test]

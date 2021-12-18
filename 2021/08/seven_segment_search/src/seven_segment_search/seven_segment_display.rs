@@ -3,7 +3,7 @@ use std::collections::HashMap;
 /// A seven segment display with a custom wire mapping.
 #[derive(Clone, Debug)]
 pub struct SevenSegmentDisplay {
-  pub mapping: HashMap<char, char>
+  pub mapping: HashMap<char, char>,
 }
 
 impl SevenSegmentDisplay {
@@ -17,8 +17,7 @@ impl SevenSegmentDisplay {
   /// Initialize the wire mapping.
   pub fn init(&mut self, line: &str) {
     let digits: Vec<&str> = line.split_whitespace().collect();
-    let mut letter_count: std::collections::HashMap<char, i32> =
-      std::collections::HashMap::new();
+    let mut letter_count: HashMap<char, i32> = HashMap::new();
 
     // Count letter_count in all 10 configurations
     for digit in digits.iter() {
@@ -30,41 +29,80 @@ impl SevenSegmentDisplay {
 
     // Deduce b (6), e (4) and f (9)
     self.mapping.insert(
-      *letter_count.iter().filter(|(_, &count)| count == 6)
-        .nth(0).unwrap().0, 'b'
+      *letter_count
+        .iter()
+        .filter(|(_, &count)| count == 6)
+        .nth(0)
+        .unwrap()
+        .0,
+      'b',
     );
     self.mapping.insert(
-      *letter_count.iter().filter(|(_, &count)| count == 4)
-        .nth(0).unwrap().0, 'e'
+      *letter_count
+        .iter()
+        .filter(|(_, &count)| count == 4)
+        .nth(0)
+        .unwrap()
+        .0,
+      'e',
     );
     self.mapping.insert(
-      *letter_count.iter().filter(|(_, &count)| count == 9)
-        .nth(0).unwrap().0, 'f'
+      *letter_count
+        .iter()
+        .filter(|(_, &count)| count == 9)
+        .nth(0)
+        .unwrap()
+        .0,
+      'f',
     );
 
     // Deduce c (search for 1)
-    for c in digits.iter().filter(|d| d.len() == 2).nth(0).unwrap().chars() {
+    for c in digits
+      .iter()
+      .filter(|d| d.len() == 2)
+      .nth(0)
+      .unwrap()
+      .chars()
+    {
       if !self.mapping.contains_key(&c) {
         self.mapping.insert(c, 'c');
       }
     }
 
     // Deduce a (search for 7)
-    for c in digits.iter().filter(|d| d.len() == 3).nth(0).unwrap().chars() {
+    for c in digits
+      .iter()
+      .filter(|d| d.len() == 3)
+      .nth(0)
+      .unwrap()
+      .chars()
+    {
       if !self.mapping.contains_key(&c) {
         self.mapping.insert(c, 'a');
       }
     }
 
     // Deduce d (search for 4)
-    for c in digits.iter().filter(|d| d.len() == 4).nth(0).unwrap().chars() {
+    for c in digits
+      .iter()
+      .filter(|d| d.len() == 4)
+      .nth(0)
+      .unwrap()
+      .chars()
+    {
       if !self.mapping.contains_key(&c) {
         self.mapping.insert(c, 'd');
       }
     }
 
     // Deduce g (search for 8)
-    for c in digits.iter().filter(|d| d.len() == 7).nth(0).unwrap().chars() {
+    for c in digits
+      .iter()
+      .filter(|d| d.len() == 7)
+      .nth(0)
+      .unwrap()
+      .chars()
+    {
       if !self.mapping.contains_key(&c) {
         self.mapping.insert(c, 'g');
         break;
@@ -74,8 +112,8 @@ impl SevenSegmentDisplay {
 
   /// Convert a number.
   pub fn convert_number(&self, num: &str) -> i32 {
-    let mut segments: Vec<char> = num.chars()
-      .map(|c| self.mapping[&c]).collect();
+    let mut segments: Vec<char> =
+      num.chars().map(|c| self.mapping[&c]).collect();
     segments.sort();
     if segments == ['a', 'b', 'c', 'e', 'f', 'g'] {
       return 0;
@@ -101,5 +139,4 @@ impl SevenSegmentDisplay {
       panic!("Unkown number!")
     }
   }
-
 }

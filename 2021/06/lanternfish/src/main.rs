@@ -10,7 +10,7 @@ struct Args {
 
   /// Days in the simulation.
   #[clap(short, long)]
-  days: i128
+  days: i128,
 }
 
 // Import puzzle solutions module

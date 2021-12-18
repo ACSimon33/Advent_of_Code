@@ -4,7 +4,7 @@ use std::cmp::Ordering;
 #[derive(Clone, Debug, PartialEq, Eq)]
 pub struct Point {
   pub x: i32,
-  pub y: i32
+  pub y: i32,
 }
 
 impl Point {
@@ -12,7 +12,7 @@ impl Point {
   pub fn new(x_coord: i32, y_coord: i32) -> Point {
     Point {
       x: x_coord,
-      y: y_coord
+      y: y_coord,
     }
   }
 }
@@ -40,14 +40,14 @@ impl Ord for Point {
 #[derive(Clone, Debug, PartialEq)]
 pub enum FoldDirection {
   HORIZONTAL,
-  VERTICAL
+  VERTICAL,
 }
 
 /// Fold with a fold position and direction.
 #[derive(Clone, Debug)]
 pub struct Fold {
   pub value: i32,
-  pub direction: FoldDirection
+  pub direction: FoldDirection,
 }
 
 impl Fold {
@@ -56,14 +56,14 @@ impl Fold {
     if fold_direction == "x" {
       return Fold {
         value: fold_value,
-        direction: FoldDirection::HORIZONTAL
-      }
+        direction: FoldDirection::HORIZONTAL,
+      };
     } else if fold_direction == "y" {
       return Fold {
         value: fold_value,
-        direction: FoldDirection::VERTICAL
-      }
-    } 
+        direction: FoldDirection::VERTICAL,
+      };
+    }
     panic!("Error: Unknown fold direction.");
   }
 
@@ -82,16 +82,16 @@ impl Fold {
 pub struct Sheet {
   pub points: Vec<Point>,
   pub top_left: Point,
-  pub bottom_right: Point
+  pub bottom_right: Point,
 }
 
 impl Sheet {
   /// Create a new sheet from a point cloud.
-  pub fn new(points: Vec<Point>) -> Sheet{
+  pub fn new(points: Vec<Point>) -> Sheet {
     let mut sheet = Sheet {
       points: points,
       top_left: Point::new(i32::MIN, i32::MIN),
-      bottom_right: Point::new(i32::MAX, i32::MAX)
+      bottom_right: Point::new(i32::MAX, i32::MAX),
     };
     sheet.shrink_to_fit();
     return sheet;
@@ -121,11 +121,11 @@ impl Sheet {
   pub fn shrink_to_fit(&mut self) {
     self.top_left = Point::new(
       self.points.iter().map(|p| p.x).min().unwrap(),
-      self.points.iter().map(|p| p.y).min().unwrap()
+      self.points.iter().map(|p| p.y).min().unwrap(),
     );
     self.bottom_right = Point::new(
       self.points.iter().map(|p| p.x).max().unwrap(),
-      self.points.iter().map(|p| p.y).max().unwrap()
+      self.points.iter().map(|p| p.y).max().unwrap(),
     );
   }
 
@@ -142,8 +142,8 @@ impl Sheet {
   /// Print the sheet.
   pub fn to_string(&self) -> String {
     let mut s: String = String::new();
-    for y in self.top_left.y .. self.bottom_right.y+1 {
-      for x in self.top_left.x .. self.bottom_right.x+1 {
+    for y in self.top_left.y..self.bottom_right.y + 1 {
+      for x in self.top_left.x..self.bottom_right.x + 1 {
         if self.check_coords(x, y) {
           s += "#";
         } else {

@@ -1,10 +1,10 @@
-use std::ops;
 use std::fmt;
+use std::ops;
 
 #[derive(Clone, Debug, PartialEq)]
 enum TypeID {
   PAIR,
-  NUMBER
+  NUMBER,
 }
 
 /// Pair number.
@@ -12,7 +12,7 @@ enum TypeID {
 pub struct Pair {
   id: TypeID,
   pub sub_pairs: Vec<Pair>,
-  pub value: i32
+  pub value: i32,
 }
 
 impl Pair {
@@ -21,7 +21,7 @@ impl Pair {
     Pair {
       id: TypeID::NUMBER,
       sub_pairs: Vec::new(),
-      value: val.unwrap_or_default()
+      value: val.unwrap_or_default(),
     }
   }
 
@@ -106,7 +106,9 @@ impl Pair {
       if self.value >= 10 {
         self.id = TypeID::PAIR;
         self.sub_pairs.push(Pair::new(Some(self.value / 2)));
-        self.sub_pairs.push(Pair::new(Some(self.value / 2 + self.value % 2)));
+        self
+          .sub_pairs
+          .push(Pair::new(Some(self.value / 2 + self.value % 2)));
         self.value = 0;
         return true;
       }
@@ -140,14 +142,14 @@ impl From<String> for Pair {
         ',' => {
           if bracket_count == 1 {
             num.id = TypeID::PAIR;
-            num.sub_pairs.push(
-              Pair::from(string[1 .. idx].to_string()));
-            num.sub_pairs.push(
-              Pair::from(string[idx+1 .. string.len()-1].to_string()));
+            num.sub_pairs.push(Pair::from(string[1..idx].to_string()));
+            num
+              .sub_pairs
+              .push(Pair::from(string[idx + 1..string.len() - 1].to_string()));
             break;
           }
-        },
-        _ => continue
+        }
+        _ => continue,
       }
     }
 

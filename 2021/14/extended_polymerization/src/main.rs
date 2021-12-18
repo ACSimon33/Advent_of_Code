@@ -10,7 +10,7 @@ struct Args {
 
   /// Amount of of simulation steps.
   #[clap(short, long, default_value_t = 1)]
-  steps: usize
+  steps: usize,
 }
 
 // Import puzzle solutions module
@@ -20,9 +20,11 @@ use extended_polymerization;
 fn main() {
   let args = Args::parse();
 
-  let occurences = extended_polymerization::get_elements(
-    &args.filename, &args.steps);
+  let occurences =
+    extended_polymerization::get_elements(&args.filename, &args.steps);
   println!("Occurences:\n{:?}", occurences);
-  println!("Max difference: {}",
-    occurences.values().max().unwrap() - occurences.values().min().unwrap());
+  println!(
+    "Max difference: {}",
+    occurences.values().max().unwrap() - occurences.values().min().unwrap()
+  );
 }

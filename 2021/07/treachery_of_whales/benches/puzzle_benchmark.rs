@@ -10,10 +10,15 @@ use treachery_of_whales;
 fn task_1(c: &mut Criterion) {
   let mut group = c.benchmark_group("Day 07");
   group.bench_function(
-    "Task 1 - Crab formation with constant fuel consumption", 
-    |b| b.iter(|| treachery_of_whales::crab_formation_1(
-      black_box(&INPUT_FILENAME.to_string())
-  )));
+    "Task 1 - Crab formation with constant fuel consumption",
+    |b| {
+      b.iter(|| {
+        treachery_of_whales::crab_formation_1(black_box(
+          &INPUT_FILENAME.to_string(),
+        ))
+      })
+    },
+  );
   group.finish();
 }
 
@@ -21,10 +26,15 @@ fn task_1(c: &mut Criterion) {
 fn task_2(c: &mut Criterion) {
   let mut group = c.benchmark_group("Day 07");
   group.bench_function(
-    "Task 2 - Crab formation with linear fuel consumption", 
-    |b| b.iter(|| treachery_of_whales::crab_formation_2(
-      black_box(&INPUT_FILENAME.to_string())
-  )));
+    "Task 2 - Crab formation with linear fuel consumption",
+    |b| {
+      b.iter(|| {
+        treachery_of_whales::crab_formation_2(black_box(
+          &INPUT_FILENAME.to_string(),
+        ))
+      })
+    },
+  );
   group.finish();
 }
 

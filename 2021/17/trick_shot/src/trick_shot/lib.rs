@@ -20,7 +20,7 @@ pub fn distinct_velocities(filename: &String) -> usize {
       if x_step == y_step || (x_speed == x_step && x_step <= y_step) {
         if !velocities.contains(&(*x_speed, *y_speed)) {
           velocities.push((*x_speed, *y_speed));
-          // println!("{} {}", x_speed, y_speed); 
+          // println!("{} {}", x_speed, y_speed);
         }
       }
     }
@@ -31,8 +31,8 @@ pub fn distinct_velocities(filename: &String) -> usize {
 
 /// Parse the input.
 fn parse(filename: &String) -> (i32, i32, i32, i32) {
-  let mut contents = fs::read_to_string(filename)
-    .expect("Couldn't read input file.");
+  let mut contents =
+    fs::read_to_string(filename).expect("Couldn't read input file.");
   contents = contents.replace("target area: x=", "");
 
   let (x_str, y_str) = contents.split_once(", y=").unwrap();
@@ -56,8 +56,8 @@ fn get_possible_x_speeds(x0: &i32, x1: &i32) -> (Vec<i32>, Vec<i32>) {
       break;
     }
 
-    for steps in 1..speed+1 {
-      let distance = gauss(speed) - gauss(speed-steps);
+    for steps in 1..speed + 1 {
+      let distance = gauss(speed) - gauss(speed - steps);
       if distance >= *x0 && distance <= *x1 {
         x_speeds.push(speed);
         x_steps.push(steps);
@@ -78,7 +78,7 @@ fn get_possible_y_speeds(y0: &i32, y1: &i32) -> (Vec<i32>, Vec<i32>) {
     }
 
     for steps in 1.. {
-      let height = gauss(speed) - gauss(speed-steps);
+      let height = gauss(speed) - gauss(speed - steps);
       if height >= *y0 && height <= *y1 {
         y_speeds.push(speed);
         y_steps.push(steps);
@@ -99,7 +99,7 @@ fn gauss(x: i32) -> i32 {
 // Test example inputs against the reference solution
 #[cfg(test)]
 mod trick_shot_tests {
-  use super::{heighest_shot, distinct_velocities};
+  use super::{distinct_velocities, heighest_shot};
   use pretty_assertions::assert_eq;
   const INPUT_FILENAME_1: &str = "input/example_input.txt";
 
@@ -107,7 +107,7 @@ mod trick_shot_tests {
   fn task_1() {
     assert_eq!(heighest_shot(&INPUT_FILENAME_1.to_string()), 45);
   }
-  
+
   #[test]
   fn task_2() {
     assert_eq!(distinct_velocities(&INPUT_FILENAME_1.to_string()), 112);

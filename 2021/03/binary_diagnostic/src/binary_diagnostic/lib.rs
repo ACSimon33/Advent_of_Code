@@ -2,13 +2,17 @@ use std::fs;
 
 /// Calculate epsilon and gamma.
 pub fn gamma_and_epsilon(filename: &String) -> (i32, i32) {
-  let contents = fs::read_to_string(filename)
-    .expect("Couldn't read input file.");
+  let contents =
+    fs::read_to_string(filename).expect("Couldn't read input file.");
 
   const RADIX: u32 = 10;
-  let binary_nums: Vec<Vec<i32>> = contents.lines()
-    .map(|s| s.chars()
-      .map(|c| c.to_digit(RADIX).unwrap() as i32).collect())
+  let binary_nums: Vec<Vec<i32>> = contents
+    .lines()
+    .map(|s| {
+      s.chars()
+        .map(|c| c.to_digit(RADIX).unwrap() as i32)
+        .collect()
+    })
     .collect();
 
   let half: i32 = (binary_nums.len() / 2).try_into().unwrap();
@@ -30,13 +34,17 @@ pub fn gamma_and_epsilon(filename: &String) -> (i32, i32) {
 
 /// Caluclatye oxygen and CO2 levels
 pub fn oxygen_and_co2(filename: &String) -> (i32, i32) {
-  let contents = fs::read_to_string(filename)
-    .expect("Couldn't read input file.");
+  let contents =
+    fs::read_to_string(filename).expect("Couldn't read input file.");
 
   const RADIX: u32 = 10;
-  let binary_nums: Vec<Vec<i32>> = contents.lines()
-    .map(|s| s.chars()
-      .map(|c| c.to_digit(RADIX).unwrap() as i32).collect())
+  let binary_nums: Vec<Vec<i32>> = contents
+    .lines()
+    .map(|s| {
+      s.chars()
+        .map(|c| c.to_digit(RADIX).unwrap() as i32)
+        .collect()
+    })
     .collect();
 
   let mut oxygen = binary_nums.clone();
@@ -47,8 +55,8 @@ pub fn oxygen_and_co2(filename: &String) -> (i32, i32) {
     let half: f32 = (oxygen.len() as f32) / 2.0;
     let bin_sum: Vec<i32> = binary_sum(&oxygen);
     oxygen.retain(|x| {
-      (x[current_bit] == 1 && (bin_sum[current_bit] as f32) >= half) ||
-      (x[current_bit] == 0 && (bin_sum[current_bit] as f32) < half)
+      (x[current_bit] == 1 && (bin_sum[current_bit] as f32) >= half)
+        || (x[current_bit] == 0 && (bin_sum[current_bit] as f32) < half)
     });
     current_bit += 1;
   }
@@ -58,8 +66,8 @@ pub fn oxygen_and_co2(filename: &String) -> (i32, i32) {
     let half: f32 = (co2.len() as f32) / 2.0;
     let bin_sum: Vec<i32> = binary_sum(&co2);
     co2.retain(|x| {
-      (x[current_bit] == 1 && (bin_sum[current_bit] as f32) < half) ||
-      (x[current_bit] == 0 && (bin_sum[current_bit] as f32) >= half)
+      (x[current_bit] == 1 && (bin_sum[current_bit] as f32) < half)
+        || (x[current_bit] == 0 && (bin_sum[current_bit] as f32) >= half)
     });
     current_bit += 1;
   }

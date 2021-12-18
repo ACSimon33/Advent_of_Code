@@ -2,7 +2,7 @@
 #[derive(Clone, Debug, PartialEq, Eq, Hash)]
 pub struct Pair {
   pub first: char,
-  pub second: char
+  pub second: char,
 }
 
 impl Pair {
@@ -10,7 +10,7 @@ impl Pair {
   pub fn new(first: &char, second: &char) -> Pair {
     Pair {
       first: *first,
-      second: *second
+      second: *second,
     }
   }
 
@@ -18,7 +18,7 @@ impl Pair {
   pub fn from_str(pair_str: &str) -> Pair {
     Pair::new(
       &pair_str.chars().nth(0).unwrap(),
-      &pair_str.chars().nth(1).unwrap()
+      &pair_str.chars().nth(1).unwrap(),
     )
   }
 }
@@ -27,7 +27,7 @@ impl Pair {
 #[derive(Clone, Debug)]
 pub struct Rule {
   pub pair: Pair,
-  pub insert: char
+  pub insert: char,
 }
 
 impl Rule {
@@ -36,7 +36,7 @@ impl Rule {
     let (pair_str, insert_str) = line.split_once(" -> ").unwrap();
     Rule {
       pair: Pair::from_str(pair_str),
-      insert: insert_str.chars().nth(0).unwrap()
+      insert: insert_str.chars().nth(0).unwrap(),
     }
   }
 
@@ -44,6 +44,7 @@ impl Rule {
   pub fn get_new_pairs(&self) -> Vec<Pair> {
     vec![
       Pair::new(&self.pair.first, &self.insert),
-      Pair::new(&self.insert, &self.pair.second)]
+      Pair::new(&self.insert, &self.pair.second),
+    ]
   }
 }

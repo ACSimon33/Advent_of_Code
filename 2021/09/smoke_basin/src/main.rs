@@ -10,7 +10,7 @@ struct Args {
 
   /// Amount of basins.
   #[clap(short, long)]
-  basins: usize
+  basins: usize,
 }
 
 // Import puzzle solutions module
@@ -25,5 +25,5 @@ fn main() {
 
   let basin = smoke_basin::basins(&args.filename, args.basins);
   println!("2. {} largest basins: {:?}", basin.len(), basin);
-  println!("2. Product: {}", basin.iter().product::<usize>());  
+  println!("2. Product: {}", basin.iter().product::<usize>());
 }

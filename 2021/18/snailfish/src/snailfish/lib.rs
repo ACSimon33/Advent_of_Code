@@ -1,18 +1,18 @@
-use std::fs;
 use std::cmp;
+use std::fs;
 
 mod pair;
 use pair::Pair;
 
 /// Sum up all snailfish numbers and return the magnitude.
 pub fn sum_of_all_numbers(filename: &String) -> i32 {
-  let contents = fs::read_to_string(filename)
-    .expect("Couldn't read input file.");
+  let contents =
+    fs::read_to_string(filename).expect("Couldn't read input file.");
   let lines: Vec<&str> = contents.lines().collect();
 
   // Parse snailfish numbers
-  let nums: Vec<Pair> = lines.iter()
-    .map(|s| Pair::from(s.to_string())).collect();
+  let nums: Vec<Pair> =
+    lines.iter().map(|s| Pair::from(s.to_string())).collect();
 
   // Reduce and return magnitude
   let mut final_sum = nums[0].clone();
@@ -26,13 +26,13 @@ pub fn sum_of_all_numbers(filename: &String) -> i32 {
 
 /// Calculate the largest sum of two snailfish numbers.
 pub fn largest_sum(filename: &String) -> i32 {
-  let contents = fs::read_to_string(filename)
-    .expect("Couldn't read input file.");
+  let contents =
+    fs::read_to_string(filename).expect("Couldn't read input file.");
   let lines: Vec<&str> = contents.lines().collect();
 
   // Parse snailfish numbers
-  let nums: Vec<Pair> = lines.iter()
-    .map(|s| Pair::from(s.to_string())).collect();
+  let nums: Vec<Pair> =
+    lines.iter().map(|s| Pair::from(s.to_string())).collect();
 
   // Reduce and return magnitude
   let mut magnitude: i32 = 0;
@@ -41,14 +41,14 @@ pub fn largest_sum(filename: &String) -> i32 {
       magnitude = cmp::max(magnitude, (num1 + num2).magnitude());
     }
   }
-  
+
   return magnitude;
 }
 
 // Test example inputs against the reference solution
 #[cfg(test)]
 mod snailfish_tests {
-  use super::{sum_of_all_numbers, largest_sum};
+  use super::{largest_sum, sum_of_all_numbers};
   use pretty_assertions::assert_eq;
   const INPUT_FILENAME_1: &str = "input/example_input_1.txt";
   const INPUT_FILENAME_2: &str = "input/example_input_2.txt";

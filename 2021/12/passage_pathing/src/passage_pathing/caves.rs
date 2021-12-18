@@ -1,8 +1,10 @@
+use std::collections::HashMap;
+
 /// Cave struct.
 #[derive(Clone, Debug)]
 pub struct Cave {
   pub is_big: bool,
-  pub visited: usize
+  pub visited: usize,
 }
 
 impl Cave {
@@ -10,13 +12,17 @@ impl Cave {
   pub fn new(big: bool) -> Cave {
     Cave {
       is_big: big,
-      visited: 0
+      visited: 0,
     }
   }
 
   /// Visit cave.
   pub fn visit(
-    &mut self, max_visits: &usize, looped: &mut bool, is_start: bool) -> bool {
+    &mut self,
+    max_visits: &usize,
+    looped: &mut bool,
+    is_start: bool,
+  ) -> bool {
     if self.is_big || self.visited == 0 {
       self.visited += 1;
       return true;
@@ -51,16 +57,16 @@ impl Cave {
 /// Cave system as a Graph of caves and connections between them.
 #[derive(Clone, Debug)]
 pub struct CaveSystem {
-  pub caves: std::collections::HashMap<String, Cave>,
-  pub connections: std::collections::HashMap<String, Vec<String>>
+  pub caves: HashMap<String, Cave>,
+  pub connections: HashMap<String, Vec<String>>,
 }
 
 impl CaveSystem {
   /// Create an emtpy cave system.
   pub fn new() -> CaveSystem {
     CaveSystem {
-      caves: std::collections::HashMap::new(),
-      connections: std::collections::HashMap::new()
+      caves: HashMap::new(),
+      connections: HashMap::new(),
     }
   }
 
@@ -74,8 +80,8 @@ impl CaveSystem {
     // Create caves if necessary
     for s in cvs.iter() {
       if !self.caves.contains_key(&s.to_string()) {
-        let cave = Cave::new(
-          s.chars().all(|c| c.is_ascii_uppercase()) || *s == "end");
+        let cave =
+          Cave::new(s.chars().all(|c| c.is_ascii_uppercase()) || *s == "end");
         self.caves.insert(s.to_string(), cave);
         self.connections.insert(s.to_string(), Vec::new());
       }
@@ -84,14 +90,23 @@ impl CaveSystem {
     // Connect caves
     for c1 in cvs.iter() {
       for c2 in cvs.iter().filter(|c2| c1 != *c2) {
-        self.connections.get_mut(&c1.to_string()).unwrap().push(c2.to_string());
+        self
+          .connections
+          .get_mut(&c1.to_string())
+          .unwrap()
+          .push(c2.to_string());
       }
     }
   }
 
   /// Traverse the cave system.
   pub fn traverse(&mut self, id: &String, mv: &usize, looped: &mut bool) {
-    if self.caves.get_mut(id).unwrap().visit(mv, looped, id == "start") {
+    if self
+      .caves
+      .get_mut(id)
+      .unwrap()
+      .visit(mv, looped, id == "start")
+    {
       if id != "end" {
         let connect = self.connections[id].clone();
         for cave_id in connect.iter() {

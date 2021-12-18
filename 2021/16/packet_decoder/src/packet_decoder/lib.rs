@@ -5,18 +5,18 @@ use decoder::Decoder;
 
 /// Part1: Calulate the sum of all version numbers
 pub fn version_numbers(filename: &String) -> u64 {
-  let contents = fs::read_to_string(filename)
-    .expect("Couldn't read input file.");
-  
+  let contents =
+    fs::read_to_string(filename).expect("Couldn't read input file.");
+
   let dec = Decoder::new(&contents);
   return dec.version_sum();
 }
 
 /// Part2: Evaluate the expression tree
 pub fn evaluate(filename: &String) -> u64 {
-  let contents = fs::read_to_string(filename)
-    .expect("Couldn't read input file.");
-  
+  let contents =
+    fs::read_to_string(filename).expect("Couldn't read input file.");
+
   let dec = Decoder::new(&contents);
   return dec.evaluate();
 }
@@ -24,7 +24,7 @@ pub fn evaluate(filename: &String) -> u64 {
 // Test example inputs against the reference solution
 #[cfg(test)]
 mod packet_decoder_tests {
-  use super::{version_numbers, evaluate};
+  use super::{evaluate, version_numbers};
   use pretty_assertions::assert_eq;
   const INPUT_FILENAME_1_1: &str = "input/example_input_1_1.txt";
   const INPUT_FILENAME_1_2: &str = "input/example_input_1_2.txt";

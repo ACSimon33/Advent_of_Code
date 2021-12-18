@@ -1,13 +1,13 @@
+use num::range_inclusive;
+use num::range_step_inclusive;
 use std::cmp;
 use std::collections::HashMap;
-use num::range_step_inclusive;
-use num::range_inclusive;
 
 /// A point.
 #[derive(Clone, Copy, Debug, PartialEq)]
 pub struct Point {
   pub x: i32,
-  pub y: i32
+  pub y: i32,
 }
 
 impl Point {
@@ -16,7 +16,7 @@ impl Point {
     let coords: Vec<i32> = s.split(",").map(|x| x.parse().unwrap()).collect();
     Point {
       x: coords[0],
-      y: coords[1]
+      y: coords[1],
     }
   }
 }
@@ -25,7 +25,7 @@ impl Point {
 #[derive(Clone, Debug)]
 pub struct Line {
   pub start: Point,
-  pub end: Point
+  pub end: Point,
 }
 
 impl Line {
@@ -34,7 +34,7 @@ impl Line {
     let points: Vec<Point> = s.split(" -> ").map(|x| Point::new(x)).collect();
     Line {
       start: points[0],
-      end: points[1]
+      end: points[1],
     }
   }
 
@@ -71,17 +71,23 @@ impl Line {
 
     if self.is_horizontal() {
       for current_x in range_step_inclusive(self.start.x, self.end.x, x_step) {
-        points.push(Point {x: current_x, y: self.start.y});
+        points.push(Point {
+          x: current_x,
+          y: self.start.y,
+        });
       }
     } else if self.is_vertical() {
       for current_y in range_step_inclusive(self.start.y, self.end.y, y_step) {
-        points.push(Point {x: self.start.x, y: current_y});
+        points.push(Point {
+          x: self.start.x,
+          y: current_y,
+        });
       }
     } else {
       for i in range_inclusive(0, (self.end.x - self.start.x) / x_step) {
         points.push(Point {
-          x: self.start.x + i*x_step,
-          y: self.start.y + i*y_step
+          x: self.start.x + i * x_step,
+          y: self.start.y + i * y_step,
         });
       }
     }
@@ -95,7 +101,7 @@ impl Line {
 pub struct SeaFloor {
   pub vents: Vec<Line>,
   pub m: usize,
-  pub n: usize
+  pub n: usize,
 }
 
 impl SeaFloor {
@@ -104,7 +110,7 @@ impl SeaFloor {
     let mut seafloor = SeaFloor {
       vents: lines.iter().map(|x| Line::new(x)).collect(),
       m: 0,
-      n: 0
+      n: 0,
     };
 
     seafloor.m = seafloor.vents.iter().map(|l| l.max_y()).max().unwrap();

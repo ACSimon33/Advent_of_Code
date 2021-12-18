@@ -2,8 +2,8 @@ use std::fs;
 
 /// Get the amount of flashes after a certain amount of steps.
 pub fn flashes(filename: &String, steps: &usize) -> usize {
-  let contents = fs::read_to_string(filename)
-    .expect("Couldn't read input file.");
+  let contents =
+    fs::read_to_string(filename).expect("Couldn't read input file.");
   let lines: Vec<&str> = contents.lines().collect();
 
   // Get dimensions
@@ -13,13 +13,12 @@ pub fn flashes(filename: &String, steps: &usize) -> usize {
   // Get octopuses
   let mut octopuses: Vec<i32> = Vec::new();
   for line in lines.iter() {
-    octopuses.extend(
-      line.chars().map(|x| x.to_digit(10).unwrap() as i32));
+    octopuses.extend(line.chars().map(|x| x.to_digit(10).unwrap() as i32));
   }
 
   // Simulate
   let mut n_flashes: usize = 0;
-  for _ in 0 .. *steps {
+  for _ in 0..*steps {
     n_flashes += simulate_step(&m, &n, &mut octopuses);
   }
 
@@ -28,8 +27,8 @@ pub fn flashes(filename: &String, steps: &usize) -> usize {
 
 /// Calculate the step when the flashes synchronize.
 pub fn all_flash(filename: &String) -> usize {
-  let contents = fs::read_to_string(filename)
-    .expect("Couldn't read input file.");
+  let contents =
+    fs::read_to_string(filename).expect("Couldn't read input file.");
   let lines: Vec<&str> = contents.lines().collect();
 
   // Get dimensions
@@ -39,8 +38,7 @@ pub fn all_flash(filename: &String) -> usize {
   // Get octopuses
   let mut octopuses: Vec<i32> = Vec::new();
   for line in lines.iter() {
-    octopuses.extend(
-      line.chars().map(|x| x.to_digit(10).unwrap() as i32));
+    octopuses.extend(line.chars().map(|x| x.to_digit(10).unwrap() as i32));
   }
 
   // Simulate until all flash
@@ -65,18 +63,22 @@ fn simulate_step(m: &usize, n: &usize, octopuses: &mut Vec<i32>) -> usize {
 
 /// Simulate flashes.
 fn get_flashes(
-  m: &usize, n: &usize, octopuses: &mut Vec<i32>,
-  flashed: &mut Vec<usize>) -> bool {
+  m: &usize,
+  n: &usize,
+  octopuses: &mut Vec<i32>,
+  flashed: &mut Vec<usize>,
+) -> bool {
   let mut has_flashed: bool = false;
   for i in 0..*m {
     for j in 0..*n {
-      let idx = i*n + j;
+      let idx = i * n + j;
       if !flashed.contains(&idx) && octopuses[idx] > 9 {
         octopuses[idx] = 0;
         flashed.push(idx);
         has_flashed = true;
 
-        get_stencil(m, n, &idx).iter()
+        get_stencil(m, n, &idx)
+          .iter()
           .filter(|k| !flashed.contains(&k))
           .for_each(|k| octopuses[*k] += 1);
       }
@@ -90,31 +92,31 @@ fn get_flashes(
 fn get_stencil(m: &usize, n: &usize, idx: &usize) -> Vec<usize> {
   let mut stencil: Vec<usize> = Vec::new();
   // left
-  if (idx+1) % n != 1 {
+  if (idx + 1) % n != 1 {
     stencil.push(idx - 1);
     if *idx >= *n {
       stencil.push(idx - n - 1);
     }
-    if *idx < (m-1)*n {
+    if *idx < (m - 1) * n {
       stencil.push(idx + n - 1);
     }
   }
   // right
-  if (idx+1) % n != 0 {
+  if (idx + 1) % n != 0 {
     stencil.push(idx + 1);
     if *idx >= *n {
       stencil.push(idx - n + 1);
     }
-    if *idx < (m-1)*n {
+    if *idx < (m - 1) * n {
       stencil.push(idx + n + 1);
     }
   }
   // up
-  if *idx >= *n  {
+  if *idx >= *n {
     stencil.push(idx - n);
   }
   // down
-  if *idx < (m-1)*n {
+  if *idx < (m - 1) * n {
     stencil.push(idx + n);
   }
   return stencil;
@@ -123,7 +125,7 @@ fn get_stencil(m: &usize, n: &usize, idx: &usize) -> Vec<usize> {
 // Test example inputs against the reference solution
 #[cfg(test)]
 mod dumbo_octopus_tests {
-  use super::{flashes, all_flash};
+  use super::{all_flash, flashes};
   const INPUT_FILENAME: &str = "input/example_input.txt";
 
   #[test]
@@ -137,4 +139,3 @@ mod dumbo_octopus_tests {
     assert_eq!(all_flash(&INPUT_FILENAME.to_string()), 195);
   }
 }
-

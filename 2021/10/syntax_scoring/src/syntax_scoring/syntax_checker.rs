@@ -28,15 +28,13 @@ static MATCHING_BRACKET: phf::Map<char, char> = phf_map! {
 /// the error and completion scores. Uses a stack to keep track of tokens.
 #[derive(Debug)]
 pub struct SyntaxChecker {
-  pub stack: Vec<char>
+  pub stack: Vec<char>,
 }
 
 impl SyntaxChecker {
   /// Create a new empty syntax checker.
   pub fn new() -> SyntaxChecker {
-    SyntaxChecker {
-      stack: Vec::new(),
-    }
+    SyntaxChecker { stack: Vec::new() }
   }
 
   /// Parses a single input line and returns the error score for that line.
@@ -52,7 +50,7 @@ impl SyntaxChecker {
             return ERROR_SCORE[&c];
           }
         }
-        _ => panic!("Unknown character: '{}'", c)
+        _ => panic!("Unknown character: '{}'", c),
       }
     }
     return 0;

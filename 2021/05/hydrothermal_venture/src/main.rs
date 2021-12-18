@@ -10,7 +10,7 @@ struct Args {
 
   /// Consider only vertical and horizontal vents
   #[clap(short, long)]
-  straigth_lines_only: bool
+  straigth_lines_only: bool,
 }
 
 // Import puzzle solutions module
@@ -20,10 +20,15 @@ fn main() {
   let args = Args::parse();
 
   let cloud = hydrothermal_venture::vent_point_cloud(
-    &args.filename, args.straigth_lines_only);
-  println!("1. Number of vents with intensity 1: {}", 
-    cloud.iter().filter(|(_, &i)| i > 1).count());
-  println!("1. Number of vents with intensity > 1: {}", 
-    cloud.iter().filter(|(_, &i)| i > 1).count());
+    &args.filename,
+    args.straigth_lines_only,
+  );
+  println!(
+    "1. Number of vents with intensity 1: {}",
+    cloud.iter().filter(|(_, &i)| i > 1).count()
+  );
+  println!(
+    "1. Number of vents with intensity > 1: {}",
+    cloud.iter().filter(|(_, &i)| i > 1).count()
+  );
 }
-

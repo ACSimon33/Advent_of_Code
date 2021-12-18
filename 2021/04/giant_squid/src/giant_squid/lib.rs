@@ -4,13 +4,13 @@ mod bingo_board;
 use bingo_board::BingoBoard;
 
 /// Return the score of the first winning board and the winning number.
-pub fn first_winning_board(filename: &String) -> (i32, i32)  {
-  let contents = fs::read_to_string(filename)
-    .expect("Couldn't read input file.");
+pub fn first_winning_board(filename: &String) -> (i32, i32) {
+  let contents =
+    fs::read_to_string(filename).expect("Couldn't read input file.");
 
   let lines: Vec<&str> = contents.lines().collect();
-  let nums: Vec<i32> = lines[0].split(",")
-    .map(|x| x.parse().unwrap()).collect();
+  let nums: Vec<i32> =
+    lines[0].split(",").map(|x| x.parse().unwrap()).collect();
 
   let mut bingo_boards: Vec<BingoBoard> = Vec::new();
   for line in lines.iter().skip(1) {
@@ -31,7 +31,8 @@ pub fn first_winning_board(filename: &String) -> (i32, i32)  {
 
 /// Return the first winning board and the winning number.
 fn first_to_win(
-  boards: &mut Vec<BingoBoard>, nums: &Vec<i32>
+  boards: &mut Vec<BingoBoard>,
+  nums: &Vec<i32>,
 ) -> (Option<BingoBoard>, i32) {
   for n in nums.iter() {
     for board in boards.iter_mut() {
@@ -46,12 +47,12 @@ fn first_to_win(
 
 /// Return the score of the last winning board and the winning number.
 pub fn last_winning_board(filename: &String) -> (i32, i32) {
-  let contents = fs::read_to_string(filename)
-    .expect("Couldn't read input file.");
+  let contents =
+    fs::read_to_string(filename).expect("Couldn't read input file.");
 
   let lines: Vec<&str> = contents.lines().collect();
-  let nums: Vec<i32> = lines[0].split(",")
-    .map(|x| x.parse().unwrap()).collect();
+  let nums: Vec<i32> =
+    lines[0].split(",").map(|x| x.parse().unwrap()).collect();
 
   let mut bingo_boards: Vec<BingoBoard> = Vec::new();
   for line in lines.iter().skip(1) {
@@ -72,7 +73,8 @@ pub fn last_winning_board(filename: &String) -> (i32, i32) {
 
 /// Return the last winning board and the winning number.
 fn last_to_win(
-  boards: &mut Vec<BingoBoard>, nums: &Vec<i32>
+  boards: &mut Vec<BingoBoard>,
+  nums: &Vec<i32>,
 ) -> (Option<BingoBoard>, i32) {
   let mut won_boards = vec![false; boards.len()];
   for n in nums.iter() {

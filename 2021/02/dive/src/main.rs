@@ -6,7 +6,7 @@ use clap::Parser;
 struct Args {
   /// Input file (e.g. input/puzzle_input.txt)
   #[clap(short, long)]
-  filename: String
+  filename: String,
 }
 
 // Import puzzle solutions module

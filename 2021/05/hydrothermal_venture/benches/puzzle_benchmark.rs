@@ -9,22 +9,28 @@ use hydrothermal_venture;
 /// Benchmark of part 1
 fn task_1(c: &mut Criterion) {
   let mut group = c.benchmark_group("Day 05");
-  group.bench_function(
-    "Task 1 - Horizontal and vertical vents", 
-    |b| b.iter(|| hydrothermal_venture::vent_point_cloud(
-      black_box(&INPUT_FILENAME.to_string()), black_box(true)
-  )));
+  group.bench_function("Task 1 - Horizontal and vertical vents", |b| {
+    b.iter(|| {
+      hydrothermal_venture::vent_point_cloud(
+        black_box(&INPUT_FILENAME.to_string()),
+        black_box(true),
+      )
+    })
+  });
   group.finish();
 }
 
 /// Benchmark of part 2
 fn task_2(c: &mut Criterion) {
   let mut group = c.benchmark_group("Day 05");
-  group.bench_function(
-    "Task 2 - All vents", 
-    |b| b.iter(|| hydrothermal_venture::vent_point_cloud(
-      black_box(&INPUT_FILENAME.to_string()), black_box(false)
-  )));
+  group.bench_function("Task 2 - All vents", |b| {
+    b.iter(|| {
+      hydrothermal_venture::vent_point_cloud(
+        black_box(&INPUT_FILENAME.to_string()),
+        black_box(false),
+      )
+    })
+  });
   group.finish();
 }
 

@@ -14,13 +14,13 @@ pub fn lowest_total_risk(filename: &String) -> u32 {
 pub fn lowest_total_risk_full(filename: &String) -> u32 {
   let (m, n, risks) = parse(filename);
   let cave: Graph = Graph::new(&m, &n, &risks, &5);
-  return cave.dijkstra(0, 5*m * 5*n - 1);
+  return cave.dijkstra(0, 5 * m * 5 * n - 1);
 }
 
 /// Parses the input.
 fn parse(filename: &String) -> (usize, usize, Vec<u32>) {
-  let contents = fs::read_to_string(filename)
-    .expect("Couldn't read input file.");
+  let contents =
+    fs::read_to_string(filename).expect("Couldn't read input file.");
   let lines: Vec<&str> = contents.lines().collect();
 
   // Get dimensions

@@ -5,8 +5,8 @@ use syntax_checker::SyntaxChecker;
 
 /// Returns the error score
 pub fn error_score(filename: &String) -> i64 {
-  let contents = fs::read_to_string(filename)
-    .expect("Couldn't read input file.");
+  let contents =
+    fs::read_to_string(filename).expect("Couldn't read input file.");
   let lines: Vec<&str> = contents.lines().collect();
 
   let mut score: i64 = 0;
@@ -21,8 +21,8 @@ pub fn error_score(filename: &String) -> i64 {
 
 /// Returns the completion score
 pub fn completion_score(filename: &String) -> i64 {
-  let contents = fs::read_to_string(filename)
-    .expect("Couldn't read input file.");
+  let contents =
+    fs::read_to_string(filename).expect("Couldn't read input file.");
   let lines: Vec<&str> = contents.lines().collect();
 
   let mut scores: Vec<i64> = Vec::new();
@@ -41,7 +41,7 @@ pub fn completion_score(filename: &String) -> i64 {
 // Test example inputs against the reference solution
 #[cfg(test)]
 mod syntax_scoring_tests {
-  use super::{error_score, completion_score};
+  use super::{completion_score, error_score};
   const INPUT_FILENAME: &str = "input/example_input.txt";
 
   #[test]
