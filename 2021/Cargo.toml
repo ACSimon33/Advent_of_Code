@@ -18,5 +18,6 @@ members = [
   "14/extended_polymerization",
   "15/chiton",
   "16/packet_decoder",
-  "17/trick_shot"
+  "17/trick_shot",
+  "18/snailfish"
 ]

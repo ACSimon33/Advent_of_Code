@@ -868,6 +868,15 @@ dependencies = [
 ]
 
 [[package]]
+name = "snailfish"
+version = "0.1.0"
+dependencies = [
+ "clap 3.0.0-rc.4",
+ "criterion",
+ "pretty_assertions",
+]
+
+[[package]]
 name = "sonar_sweep"
 version = "0.1.0"
 dependencies = [
