@@ -1,7 +1,7 @@
 stages:
   - build
   - test
-  - bench
+  - benchmark
   - clean
 
 # Disables git clone/fetch
@@ -80,14 +80,27 @@ aoc-2021:test:
     when: always
     expire_in: 1 week
 
+# 2021 Rust fmt check
+aoc-2021:format:
+  stage: "test"
+  extends:
+    - .no-git-template
+    - .rust-template
+  needs:
+    - aoc-2021:build
+  script:
+    - cargo fmt --verbose -- --check
+  allow_failure: true
+
 # 2021 Rust benchmark (release)
 aoc-2021:bench:
-  stage: "bench"
+  stage: "benchmark"
   extends:
     - .no-git-template
     - .rust-template
   needs:
     - aoc-2021:test
+    - aoc-2021:format
   script:
     - git clean -dfx .
     - git clone git@github.com:ACSimon33/Advent_of_Code.git -b gh-pages
@@ -102,7 +115,7 @@ aoc-2021:bench:
     - git commit -m "Updated benchmark results."
     - git push
 
-# Linux clean stage
+# Clean stage
 clean:
   stage: "clean"
   tags:
