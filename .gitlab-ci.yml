@@ -32,7 +32,7 @@ stages:
     - pushes
     - web
     - schedules
-  timeout: 10m
+  timeout: 20m
   extends:
     - .bsd-machine-template
   variables:
@@ -95,7 +95,7 @@ aoc-2021:bench:
     - mv Advent_of_Code/* $BUILD_DIR/criterion/
     - >-
       cargo bench --workspace --no-fail-fast --verbose -j1 --
-      --warm-up-time 1 --sample-size 30
+      --warm-up-time 1 --measurement-time 4 --sample-size 50
     - cd Advent_of_Code
     - mv $BUILD_DIR/criterion/* .
     - git add .
