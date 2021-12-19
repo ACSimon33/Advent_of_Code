@@ -53,6 +53,7 @@ version = "0.1.0"
 dependencies = [
  "clap 3.0.0-rc.4",
  "criterion",
+ "pretty_assertions",
 ]
 
 [[package]]
@@ -267,6 +268,7 @@ version = "0.1.0"
 dependencies = [
  "clap 3.0.0-rc.4",
  "criterion",
+ "pretty_assertions",
 ]
 
 [[package]]
@@ -275,6 +277,7 @@ version = "0.1.0"
 dependencies = [
  "clap 3.0.0-rc.4",
  "criterion",
+ "pretty_assertions",
 ]
 
 [[package]]
@@ -289,6 +292,7 @@ version = "0.1.0"
 dependencies = [
  "clap 3.0.0-rc.4",
  "criterion",
+ "pretty_assertions",
 ]
 
 [[package]]
@@ -308,6 +312,7 @@ version = "0.1.0"
 dependencies = [
  "clap 3.0.0-rc.4",
  "criterion",
+ "pretty_assertions",
 ]
 
 [[package]]
@@ -347,6 +352,7 @@ dependencies = [
  "clap 3.0.0-rc.4",
  "criterion",
  "num",
+ "pretty_assertions",
 ]
 
 [[package]]
@@ -395,6 +401,7 @@ version = "0.1.0"
 dependencies = [
  "clap 3.0.0-rc.4",
  "criterion",
+ "pretty_assertions",
 ]
 
 [[package]]
@@ -545,6 +552,7 @@ version = "0.1.0"
 dependencies = [
  "clap 3.0.0-rc.4",
  "criterion",
+ "pretty_assertions",
 ]
 
 [[package]]
@@ -872,6 +880,7 @@ version = "0.1.0"
 dependencies = [
  "clap 3.0.0-rc.4",
  "criterion",
+ "pretty_assertions",
 ]
 
 [[package]]
@@ -886,6 +895,7 @@ version = "0.1.0"
 dependencies = [
  "clap 3.0.0-rc.4",
  "criterion",
+ "pretty_assertions",
 ]
 
 [[package]]
@@ -903,6 +913,7 @@ version = "0.1.0"
 dependencies = [
  "clap 3.0.0-rc.4",
  "criterion",
+ "pretty_assertions",
 ]
 
 [[package]]
@@ -929,6 +940,7 @@ dependencies = [
  "clap 3.0.0-rc.4",
  "criterion",
  "phf",
+ "pretty_assertions",
 ]
 
 [[package]]
@@ -971,6 +983,7 @@ version = "0.1.0"
 dependencies = [
  "clap 3.0.0-rc.4",
  "criterion",
+ "pretty_assertions",
 ]
 
 [[package]]
@@ -979,6 +992,7 @@ version = "0.1.0"
 dependencies = [
  "clap 3.0.0-rc.4",
  "criterion",
+ "pretty_assertions",
 ]
 
 [[package]]

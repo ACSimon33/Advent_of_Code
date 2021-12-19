@@ -7,8 +7,8 @@ edition = "2021"
 
 [lib]
 name = "hydrothermal_venture"
-path = "src/hydrothermal_venture/lib.rs"
-test = true
+path = "src/lib.rs"
+test = false
 doctest = false
 bench = false
 
@@ -19,8 +19,14 @@ test = false
 doctest = false
 bench = false
 
+[[test]]
+name = "example_tests"
+test = true
+doctest = false
+bench = false
+
 [[bench]]
-name = "puzzle_benchmark"
+name = "puzzle_benchmarks"
 harness = false
 test = false
 doctest = false
@@ -37,3 +43,6 @@ features = ["derive"]
 [dependencies.num]
 version = "0.4"
 default-features = false
+
+[dependencies.pretty_assertions]
+version = "1.0.0"
