@@ -73,7 +73,7 @@ aoc-2021:test:
     - >-
       cargo test --workspace --no-fail-fast --verbose -j1 --
       -Z unstable-options --format json --report-time
-      
+      | cargo2junit > JUnitReports.xml
   artifacts:
     reports:
       junit: 2021/JUnitReports.xml
