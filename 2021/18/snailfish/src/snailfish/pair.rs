@@ -1,6 +1,7 @@
 use std::fmt;
 use std::ops;
 
+/// The id that determines if a pair contains a value or sub pairs.
 #[derive(Clone, Debug, PartialEq)]
 enum TypeID {
   PAIR,
@@ -16,7 +17,7 @@ pub struct Pair {
 }
 
 impl Pair {
-  /// Create a new node from an index and a risk
+  /// Create with an optional value.
   pub fn new(val: Option<i32>) -> Pair {
     Pair {
       id: TypeID::NUMBER,

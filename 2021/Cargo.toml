@@ -19,5 +19,6 @@ members = [
   "15/chiton",
   "16/packet_decoder",
   "17/trick_shot",
-  "18/snailfish"
+  "18/snailfish",
+  "19/beacon_scanner"
 ]
