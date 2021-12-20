@@ -67,9 +67,9 @@ fn enhance_image(
       let mut idx: usize = 0;
       for (k, l) in get_stencil(*m as i32, *n as i32, i, j).iter().enumerate() {
         if *l != usize::MAX {
-          idx += (image[*l] * 2_i32.pow(8-k as u32)) as usize;
+          idx += (image[*l] * 2_i32.pow(8 - k as u32)) as usize;
         } else {
-          idx += (*background * 2_i32.pow(8-k as u32)) as usize;
+          idx += (*background * 2_i32.pow(8 - k as u32)) as usize;
         }
       }
       //_print_image(&3, &3, &bin_str.chars().collect());
