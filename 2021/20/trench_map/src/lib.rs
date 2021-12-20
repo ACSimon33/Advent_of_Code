@@ -1,9 +1,9 @@
 use std::fs;
 
 /// Count the amount of lit pixels after a certain amount of steps
-pub fn count_lit_pixels(filename: &String, steps: &usize) -> usize {
+pub fn count_lit_pixels(filename: &String, steps: &usize) -> i32 {
   let (mut m, mut n, key, mut image) = parse(filename);
-  let mut background = '0';
+  let mut background = 0;
 
   for _ in 0..*steps {
     //_print_image(&m, &n, &image);
@@ -11,11 +11,11 @@ pub fn count_lit_pixels(filename: &String, steps: &usize) -> usize {
   }
   //_print_image(&m, &n, &image);
 
-  return image.iter().filter(|&c| *c == '1').count();
+  return image.iter().sum();
 }
 
 /// Parse the input.
-fn parse(filename: &String) -> (usize, usize, Vec<char>, Vec<char>) {
+fn parse(filename: &String) -> (usize, usize, Vec<i32>, Vec<i32>) {
   let contents =
     fs::read_to_string(filename).expect("Couldn't read input file.");
   let lines: Vec<&str> = contents.lines().collect();
@@ -24,9 +24,9 @@ fn parse(filename: &String) -> (usize, usize, Vec<char>, Vec<char>) {
   let key = lines[0]
     .chars()
     .map(|c| match c {
-      '.' => '0',
-      '#' => '1',
-      _ => c,
+      '.' => 0,
+      '#' => 1,
+      _ => panic!("Unknown input"),
     })
     .collect();
 
@@ -41,11 +41,11 @@ fn parse(filename: &String) -> (usize, usize, Vec<char>, Vec<char>) {
       line
         .chars()
         .map(|c| match c {
-          '.' => '0',
-          '#' => '1',
-          _ => c,
+          '.' => 0,
+          '#' => 1,
+          _ => panic!("Unknown input"),
         })
-        .collect::<Vec<char>>()
+        .collect::<Vec<i32>>()
     })
     .collect();
 
@@ -56,33 +56,35 @@ fn parse(filename: &String) -> (usize, usize, Vec<char>, Vec<char>) {
 fn enhance_image(
   m: &mut usize,
   n: &mut usize,
-  key: &Vec<char>,
-  image: &mut Vec<char>,
-  background: &mut char,
+  key: &Vec<i32>,
+  image: &mut Vec<i32>,
+  background: &mut i32,
 ) {
-  let mut new_image: Vec<char> = vec!['0'; (*m + 2) * (*n + 2)];
+  let mut new_image: Vec<i32> = vec![0; (*m + 2) * (*n + 2)];
 
   for i in -1..(*m as i32) + 1 {
     for j in -1..(*n as i32) + 1 {
-      let mut bin_str = String::new();
-      for k in get_stencil(*m as i32, *n as i32, i, j).iter() {
-        if *k == usize::MAX {
-          bin_str.push(*background);
+      let mut idx: usize = 0;
+      for (k, l) in get_stencil(*m as i32, *n as i32, i, j).iter().enumerate() {
+        if *l != usize::MAX {
+          idx += (image[*l] * 2_i32.pow(8-k as u32)) as usize;
         } else {
-          bin_str.push(image[*k]);
+          idx += (*background * 2_i32.pow(8-k as u32)) as usize;
         }
       }
       //_print_image(&3, &3, &bin_str.chars().collect());
-      new_image[index((*n + 2) as i32, i + 1, j + 1)] =
-        key[usize::from_str_radix(&bin_str, 2).unwrap()]
+      new_image[index((*n + 2) as i32, i + 1, j + 1)] = key[idx];
     }
   }
 
   // Process background (this part was sneaky). Since the value in the key
   // at position 0 was 1 and the value at position 511 was 0 the infinite
   // backgroud changes the value in each iteration.
-  let background_idx = vec![*background; 9].iter().collect::<String>();
-  *background = key[usize::from_str_radix(background_idx.as_str(), 2).unwrap()];
+  if *background == 0 {
+    *background = key[0];
+  } else {
+    *background = key[511];
+  }
 
   *m += 2;
   *n += 2;
@@ -142,11 +144,11 @@ fn index(n: i32, i: i32, j: i32) -> usize {
 }
 
 /// Print the image (for debug purposes).
-fn _print_image(m: &usize, n: &usize, image: &Vec<char>) {
+fn _print_image(m: &usize, n: &usize, image: &Vec<i32>) {
   for i in 0..*m {
     for j in 0..*n {
       let idx = index(*n as i32, i as i32, j as i32);
-      if image[idx] == '0' {
+      if image[idx] == 0 {
         print!(".");
       } else {
         print!("#");
