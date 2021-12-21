@@ -56,7 +56,14 @@ pub fn deterministic_die(filename: &String) -> (i32, i32) {
 }
 
 /// Universe as a state tuple of the game.
-type Universe = (i32, i32, i32, i32, bool);
+#[derive(Clone, Copy, Debug, PartialEq, Eq, Hash)]
+struct Universe {
+  player1: i32,
+  player2: i32,
+  player1_points: i32,
+  player2_points: i32,
+  player1_turn: bool,
+}
 
 /// Multiverse which maps universes to their game results.
 type Muliverse = HashMap<Universe, (u64, u64)>;
@@ -68,71 +75,59 @@ pub fn quantum_die(filename: &String) -> (u64, u64) {
 
   // Keep track of possible universes
   let mut multiverse: Muliverse = Muliverse::new();
-  return split_and_count_wins(player1, player2, 0, 0, true, &mut multiverse);
+  let root_universe = Universe {
+    player1: player1,
+    player2: player2,
+    player1_points: 0,
+    player2_points: 0,
+    player1_turn: true,
+  };
+
+  return process_universe(&mut multiverse, root_universe);
 }
 
 /// Play all possible universes recursively and count how many each player wins.
-pub fn split_and_count_wins(
-  player1: i32,
-  player2: i32,
-  player1_points: i32,
-  player2_points: i32,
-  player1_turn: bool,
+fn process_universe(
   multiverse: &mut Muliverse,
+  universe: Universe,
 ) -> (u64, u64) {
-  if player1_points >= WINNING_THRESHOLD {
+  // Quick return if one of the players won
+  if universe.player1_points >= WINNING_THRESHOLD {
     return (1, 0);
-  } else if player2_points >= WINNING_THRESHOLD {
+  } else if universe.player2_points >= WINNING_THRESHOLD {
     return (0, 1);
   }
 
-  // Current universe
-  let universe: Universe = (
-    player1,
-    player2,
-    player1_points,
-    player2_points,
-    player1_turn,
-  );
-
+  // Quick return if the universe was already visited
   if multiverse.contains_key(&universe) {
     return multiverse[&universe];
-  } else {
-    let mut wins: (u64, u64) = (0, 0);
-    for (roll, &frequency) in UNIVERSE_FREQUENCIES.entries() {
-      let sub_wins: (u64, u64);
-      if player1_turn {
-        let sub_player1 = (player1 + roll) % 10;
-        let sub_player1_points = player1_points + sub_player1 + 1;
+  }
 
-        sub_wins = split_and_count_wins(
-          sub_player1,
-          player2,
-          sub_player1_points,
-          player2_points,
-          false,
-          multiverse,
-        );
-      } else {
-        let sub_player2 = (player2 + roll) % 10;
-        let sub_player2_points = player2_points + sub_player2 + 1;
+  let mut wins: (u64, u64) = (0, 0);
+  for (roll, &frequency) in UNIVERSE_FREQUENCIES.entries() {
+    let mut new_universe = Universe {
+      player1: universe.player1,
+      player2: universe.player2,
+      player1_points: universe.player1_points,
+      player2_points: universe.player2_points,
+      player1_turn: !universe.player1_turn,
+    };
 
-        sub_wins = split_and_count_wins(
-          player1,
-          sub_player2,
-          player1_points,
-          sub_player2_points,
-          true,
-          multiverse,
-        );
-      }
-      wins.0 += frequency * sub_wins.0;
-      wins.1 += frequency * sub_wins.1;
+    if universe.player1_turn {
+      new_universe.player1 = (new_universe.player1 + roll) % 10;
+      new_universe.player1_points += new_universe.player1 + 1;
+    } else {
+      new_universe.player2 = (new_universe.player2 + roll) % 10;
+      new_universe.player2_points += new_universe.player2 + 1;
     }
 
-    multiverse.insert(universe, wins);
-    return wins;
+    let sub_wins = process_universe(multiverse, new_universe);
+    wins.0 += frequency * sub_wins.0;
+    wins.1 += frequency * sub_wins.1;
   }
+
+  multiverse.insert(universe, wins);
+  return wins;
 }
 
 /// Parse the starting positions of the players from the input.
