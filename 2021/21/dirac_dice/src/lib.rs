@@ -98,35 +98,36 @@ fn process_universe(
     return (0, 1);
   }
 
-  // Quick return if the universe was already visited
-  if multiverse.contains_key(&universe) {
-    return multiverse[&universe];
-  }
+  // Get universe entry or create a new one
+  let mut wins: (u64, u64) = *multiverse.entry(universe).or_default();
 
-  let mut wins: (u64, u64) = (0, 0);
-  for (roll, &frequency) in UNIVERSE_FREQUENCIES.entries() {
-    let mut new_universe = Universe {
-      player1: universe.player1,
-      player2: universe.player2,
-      player1_points: universe.player1_points,
-      player2_points: universe.player2_points,
-      player1_turn: !universe.player1_turn,
-    };
+  // If the universe wasn't visited before, calulcate and store the wins
+  if wins == (0, 0) {
+    for (roll, &frequency) in UNIVERSE_FREQUENCIES.entries() {
+      let mut new_universe = Universe {
+        player1: universe.player1,
+        player2: universe.player2,
+        player1_points: universe.player1_points,
+        player2_points: universe.player2_points,
+        player1_turn: !universe.player1_turn,
+      };
 
-    if universe.player1_turn {
-      new_universe.player1 = (new_universe.player1 + roll) % 10;
-      new_universe.player1_points += new_universe.player1 + 1;
-    } else {
-      new_universe.player2 = (new_universe.player2 + roll) % 10;
-      new_universe.player2_points += new_universe.player2 + 1;
+      if universe.player1_turn {
+        new_universe.player1 = (new_universe.player1 + roll) % 10;
+        new_universe.player1_points += new_universe.player1 + 1;
+      } else {
+        new_universe.player2 = (new_universe.player2 + roll) % 10;
+        new_universe.player2_points += new_universe.player2 + 1;
+      }
+
+      let sub_wins = process_universe(multiverse, new_universe);
+      wins.0 += frequency * sub_wins.0;
+      wins.1 += frequency * sub_wins.1;
     }
 
-    let sub_wins = process_universe(multiverse, new_universe);
-    wins.0 += frequency * sub_wins.0;
-    wins.1 += frequency * sub_wins.1;
+    *multiverse.get_mut(&universe).unwrap() = wins;
   }
 
-  multiverse.insert(universe, wins);
   return wins;
 }
 
