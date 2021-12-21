@@ -263,6 +263,16 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "0e25ea47919b1560c4e3b7fe0aaab9becf5b84a10325ddf7db0f0ba5e1026499"
 
 [[package]]
+name = "dirac_dice"
+version = "0.1.0"
+dependencies = [
+ "clap 3.0.0-rc.4",
+ "criterion",
+ "phf",
+ "pretty_assertions",
+]
+
+[[package]]
 name = "dive"
 version = "0.1.0"
 dependencies = [
@@ -988,6 +998,15 @@ dependencies = [
 
 [[package]]
 name = "treachery_of_whales"
+version = "0.1.0"
+dependencies = [
+ "clap 3.0.0-rc.4",
+ "criterion",
+ "pretty_assertions",
+]
+
+[[package]]
+name = "trench_map"
 version = "0.1.0"
 dependencies = [
  "clap 3.0.0-rc.4",
