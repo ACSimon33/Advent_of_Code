@@ -1,11 +1,11 @@
 group,function,value,throughput_num,throughput_type,sample_measured_value,unit,iteration_count
-Day 21,Task 2 - Quantum die,,,,434300896.0,ns,1
-Day 21,Task 2 - Quantum die,,,,434757370.0,ns,1
-Day 21,Task 2 - Quantum die,,,,434854061.0,ns,1
-Day 21,Task 2 - Quantum die,,,,434788104.0,ns,1
-Day 21,Task 2 - Quantum die,,,,434555051.0,ns,1
-Day 21,Task 2 - Quantum die,,,,434264218.0,ns,1
-Day 21,Task 2 - Quantum die,,,,437724818.0,ns,1
-Day 21,Task 2 - Quantum die,,,,434214847.0,ns,1
-Day 21,Task 2 - Quantum die,,,,434260195.0,ns,1
-Day 21,Task 2 - Quantum die,,,,434324678.0,ns,1
+Day 21,Task 2 - Quantum die,,,,76017310.0,ns,6
+Day 21,Task 2 - Quantum die,,,,154373713.0,ns,12
+Day 21,Task 2 - Quantum die,,,,229845852.0,ns,18
+Day 21,Task 2 - Quantum die,,,,306405595.0,ns,24
+Day 21,Task 2 - Quantum die,,,,388368234.0,ns,30
+Day 21,Task 2 - Quantum die,,,,458223551.0,ns,36
+Day 21,Task 2 - Quantum die,,,,536278932.0,ns,42
+Day 21,Task 2 - Quantum die,,,,612496918.0,ns,48
+Day 21,Task 2 - Quantum die,,,,687941713.0,ns,54
+Day 21,Task 2 - Quantum die,,,,764785337.0,ns,60
