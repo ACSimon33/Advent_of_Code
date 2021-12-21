@@ -21,5 +21,6 @@ members = [
   "17/trick_shot",
   "18/snailfish",
   "19/beacon_scanner",
-  "20/trench_map"
+  "20/trench_map",
+  "21/dirac_dice"
 ]
