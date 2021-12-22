@@ -1,6 +1,10 @@
 use std::fmt;
 use std::ops;
 
+// Pair indices
+const LEFT: usize = 0;
+const RIGHT: usize = 1;
+
 /// The id that determines if a pair contains a value or sub pairs.
 #[derive(Clone, Debug, PartialEq)]
 enum TypeID {
@@ -41,7 +45,7 @@ impl Pair {
     if self.contains_number() {
       return &mut self.value;
     } else {
-      return self.sub_pairs[0].left_most_value();
+      return self.sub_pairs[LEFT].left_most_value();
     }
   }
 
@@ -50,7 +54,7 @@ impl Pair {
     if self.contains_number() {
       return &mut self.value;
     } else {
-      return self.sub_pairs[1].right_most_value();
+      return self.sub_pairs[RIGHT].right_most_value();
     }
   }
 
@@ -71,8 +75,8 @@ impl Pair {
   pub fn explode(&mut self, depth: usize) -> (bool, Option<i32>, Option<i32>) {
     if self.contains_pair() {
       if depth >= 5 {
-        let left = self.sub_pairs[0].value;
-        let right = self.sub_pairs[1].value;
+        let left = self.sub_pairs[LEFT].value;
+        let right = self.sub_pairs[RIGHT].value;
 
         self.id = TypeID::NUMBER;
         self.sub_pairs.clear();
@@ -80,18 +84,18 @@ impl Pair {
 
         return (true, Some(left), Some(right));
       } else {
-        let (exploded, left, right) = self.sub_pairs[0].explode(depth + 1);
+        let (exploded, left, right) = self.sub_pairs[LEFT].explode(depth + 1);
         if exploded {
           if right.is_some() {
-            *self.sub_pairs[1].left_most_value() += right.unwrap();
+            *self.sub_pairs[RIGHT].left_most_value() += right.unwrap();
           }
           return (exploded, left, None);
         }
 
-        let (exploded, left, right) = self.sub_pairs[1].explode(depth + 1);
+        let (exploded, left, right) = self.sub_pairs[RIGHT].explode(depth + 1);
         if exploded {
           if left.is_some() {
-            *self.sub_pairs[0].right_most_value() += left.unwrap();
+            *self.sub_pairs[LEFT].right_most_value() += left.unwrap();
           }
           return (exploded, None, right);
         }
@@ -114,7 +118,7 @@ impl Pair {
         return true;
       }
     } else {
-      return self.sub_pairs[0].split() || self.sub_pairs[1].split();
+      return self.sub_pairs[LEFT].split() || self.sub_pairs[RIGHT].split();
     }
     return false;
   }
@@ -124,7 +128,7 @@ impl Pair {
     if self.contains_number() {
       self.value
     } else {
-      3 * self.sub_pairs[0].magnitude() + 2 * self.sub_pairs[1].magnitude()
+      3 * self.sub_pairs[LEFT].magnitude() + 2 * self.sub_pairs[RIGHT].magnitude()
     }
   }
 }
@@ -183,7 +187,7 @@ impl fmt::Display for Pair {
     if self.contains_number() {
       write!(f, "{}", self.value)
     } else {
-      write!(f, "[{},{}]", self.sub_pairs[0], self.sub_pairs[1])
+      write!(f, "[{},{}]", self.sub_pairs[LEFT], self.sub_pairs[RIGHT])
     }
   }
 }
