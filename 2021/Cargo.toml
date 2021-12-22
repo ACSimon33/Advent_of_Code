@@ -22,5 +22,6 @@ members = [
   "18/snailfish",
   "19/beacon_scanner",
   "20/trench_map",
-  "21/dirac_dice"
+  "21/dirac_dice",
+  "22/reactor_reboot"
 ]
