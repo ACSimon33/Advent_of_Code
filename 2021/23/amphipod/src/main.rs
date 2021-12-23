@@ -16,9 +16,6 @@ use amphipod;
 fn main() {
   let args = Args::parse();
 
-  let val_1 = amphipod::solution_1(&args.filename);
-  println!("1. Solution: {}", val_1);
-
-  let val_2 = amphipod::solution_2(&args.filename);
-  println!("2. Solution: {}", val_2);
+  let energy = amphipod::least_amount_of_energy(&args.filename);
+  println!("Least amount of energy: {}", energy);
 }
