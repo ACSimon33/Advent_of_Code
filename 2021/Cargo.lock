@@ -12,6 +12,16 @@ dependencies = [
 ]
 
 [[package]]
+name = "amphipod"
+version = "0.1.0"
+dependencies = [
+ "clap 3.0.0-rc.4",
+ "criterion",
+ "pretty_assertions",
+ "regex",
+]
+
+[[package]]
 name = "ansi_term"
 version = "0.12.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
