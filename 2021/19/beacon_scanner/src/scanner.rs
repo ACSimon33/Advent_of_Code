@@ -20,12 +20,7 @@ pub struct Vec3D {
 impl Vec3D {
   /// Create a new 3D Vector.
   pub fn new() -> Vec3D {
-    Vec3D {
-      x: 0,
-      y: 0,
-      z: 0,
-      orientation: 0,
-    }
+    Vec3D { x: 0, y: 0, z: 0, orientation: 0 }
   }
 
   /// Rotate Vec3D around the origin (which is some scanner).
@@ -81,11 +76,7 @@ pub struct Scanner {
 impl Scanner {
   /// Create a new scanner.
   pub fn new() -> Scanner {
-    Scanner {
-      beacons: Vec::new(),
-      merged: false,
-      position: Vec3D::new(),
-    }
+    Scanner { beacons: Vec::new(), merged: false, position: Vec3D::new() }
   }
 
   /// Try to find overlapping beacons between this and another scanner.

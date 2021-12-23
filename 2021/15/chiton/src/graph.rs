@@ -12,11 +12,7 @@ pub struct Node {
 impl Node {
   /// Create a new node from an index and a risk
   pub fn new(index: usize, risk: u32) -> Node {
-    Node {
-      index: index,
-      risk: risk,
-      cumulative_risk: u32::MAX,
-    }
+    Node { index: index, risk: risk, cumulative_risk: u32::MAX }
   }
 }
 
@@ -49,11 +45,7 @@ impl Graph {
       }
     }
 
-    Graph {
-      nodes: nodes,
-      m: dup * m,
-      n: dup * n,
-    }
+    Graph { nodes: nodes, m: dup * m, n: dup * n }
   }
 
   /// Performs a classic dijkstra path finder using a reverse priority queue

@@ -128,7 +128,8 @@ impl Pair {
     if self.contains_number() {
       self.value
     } else {
-      3 * self.sub_pairs[LEFT].magnitude() + 2 * self.sub_pairs[RIGHT].magnitude()
+      3 * self.sub_pairs[LEFT].magnitude()
+        + 2 * self.sub_pairs[RIGHT].magnitude()
     }
   }
 }

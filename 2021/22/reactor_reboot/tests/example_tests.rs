@@ -16,7 +16,7 @@ mod day_22_reactor_reboot {
   #[test]
   fn task_1_1() {
     assert_eq!(
-      reactor_reboot::count_cubes(&INPUT_FILENAME_1.to_string(), 0),
+      reactor_reboot::count_cubes(&INPUT_FILENAME_1.to_string(), 50),
       27
     );
   }
@@ -25,7 +25,7 @@ mod day_22_reactor_reboot {
   #[test]
   fn task_1_2() {
     assert_eq!(
-      reactor_reboot::count_cubes(&INPUT_FILENAME_2.to_string(), 0),
+      reactor_reboot::count_cubes(&INPUT_FILENAME_2.to_string(), 50),
       46
     );
   }
@@ -34,7 +34,7 @@ mod day_22_reactor_reboot {
   #[test]
   fn task_1_3() {
     assert_eq!(
-      reactor_reboot::count_cubes(&INPUT_FILENAME_3.to_string(), 0),
+      reactor_reboot::count_cubes(&INPUT_FILENAME_3.to_string(), 50),
       38
     );
   }
@@ -43,12 +43,12 @@ mod day_22_reactor_reboot {
   #[test]
   fn task_1_4() {
     assert_eq!(
-      reactor_reboot::count_cubes(&INPUT_FILENAME_4.to_string(), 0),
+      reactor_reboot::count_cubes(&INPUT_FILENAME_4.to_string(), 50),
       39
     );
   }
 
-  /// Test of part 1 (large example).
+  /// Test of part 1 (medium example).
   #[test]
   fn task_1_5() {
     assert_eq!(
@@ -57,9 +57,9 @@ mod day_22_reactor_reboot {
     );
   }
 
-  /// Test of part 2 (subspace).
+  /// Test of part 1 (large example).
   #[test]
-  fn task_2_1() {
+  fn task_1_6() {
     assert_eq!(
       reactor_reboot::count_cubes(&INPUT_FILENAME_6.to_string(), 50),
       474140
@@ -68,7 +68,7 @@ mod day_22_reactor_reboot {
 
   /// Test of part 2 (full space).
   #[test]
-  fn task_2_2() {
+  fn task_2() {
     assert_eq!(
       reactor_reboot::count_cubes(&INPUT_FILENAME_6.to_string(), 0),
       2758514936282235

@@ -8,10 +8,7 @@ pub struct BingoBoard {
 impl BingoBoard {
   /// Create an empty bingo board.
   pub fn new() -> BingoBoard {
-    BingoBoard {
-      board: Vec::new(),
-      checked: Vec::new(),
-    }
+    BingoBoard { board: Vec::new(), checked: Vec::new() }
   }
 
   /// Add a row to the bingo board.

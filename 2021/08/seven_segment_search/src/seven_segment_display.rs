@@ -9,9 +9,7 @@ pub struct SevenSegmentDisplay {
 impl SevenSegmentDisplay {
   /// Create an epmty seven segment display.
   pub fn new() -> SevenSegmentDisplay {
-    SevenSegmentDisplay {
-      mapping: HashMap::new(),
-    }
+    SevenSegmentDisplay { mapping: HashMap::new() }
   }
 
   /// Initialize the wire mapping.

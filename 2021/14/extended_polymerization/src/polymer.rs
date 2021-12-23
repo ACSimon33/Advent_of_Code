@@ -8,10 +8,7 @@ pub struct Pair {
 impl Pair {
   /// Create a new pair from two chars
   pub fn new(first: &char, second: &char) -> Pair {
-    Pair {
-      first: *first,
-      second: *second,
-    }
+    Pair { first: *first, second: *second }
   }
 
   /// Create a new pair from a string

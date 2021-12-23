@@ -10,10 +10,7 @@ pub struct Cave {
 impl Cave {
   /// Create a new big or small cave.
   pub fn new(big: bool) -> Cave {
-    Cave {
-      is_big: big,
-      visited: 0,
-    }
+    Cave { is_big: big, visited: 0 }
   }
 
   /// Visit cave.
@@ -64,10 +61,7 @@ pub struct CaveSystem {
 impl CaveSystem {
   /// Create an emtpy cave system.
   pub fn new() -> CaveSystem {
-    CaveSystem {
-      caves: HashMap::new(),
-      connections: HashMap::new(),
-    }
+    CaveSystem { caves: HashMap::new(), connections: HashMap::new() }
   }
 
   /// Add a new connection between caves.

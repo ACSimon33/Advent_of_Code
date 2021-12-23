@@ -10,10 +10,7 @@ pub struct Point {
 impl Point {
   /// Create a new point.
   pub fn new(x_coord: i32, y_coord: i32) -> Point {
-    Point {
-      x: x_coord,
-      y: y_coord,
-    }
+    Point { x: x_coord, y: y_coord }
   }
 }
 
@@ -54,15 +51,9 @@ impl Fold {
   /// Create a new fold.
   pub fn new(fold_value: i32, fold_direction: &str) -> Fold {
     if fold_direction == "x" {
-      return Fold {
-        value: fold_value,
-        direction: FoldDirection::HORIZONTAL,
-      };
+      return Fold { value: fold_value, direction: FoldDirection::HORIZONTAL };
     } else if fold_direction == "y" {
-      return Fold {
-        value: fold_value,
-        direction: FoldDirection::VERTICAL,
-      };
+      return Fold { value: fold_value, direction: FoldDirection::VERTICAL };
     }
     panic!("Error: Unknown fold direction.");
   }

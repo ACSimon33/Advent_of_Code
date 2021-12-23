@@ -14,10 +14,7 @@ impl Point {
   /// Create a new point from a string.
   fn new(s: &str) -> Point {
     let coords: Vec<i32> = s.split(",").map(|x| x.parse().unwrap()).collect();
-    Point {
-      x: coords[0],
-      y: coords[1],
-    }
+    Point { x: coords[0], y: coords[1] }
   }
 }
 
@@ -32,10 +29,7 @@ impl Line {
   /// Create line from a string.
   fn new(s: &str) -> Line {
     let points: Vec<Point> = s.split(" -> ").map(|x| Point::new(x)).collect();
-    Line {
-      start: points[0],
-      end: points[1],
-    }
+    Line { start: points[0], end: points[1] }
   }
 
   /// Get the maximum x coordinate.
@@ -71,17 +65,11 @@ impl Line {
 
     if self.is_horizontal() {
       for current_x in range_step_inclusive(self.start.x, self.end.x, x_step) {
-        points.push(Point {
-          x: current_x,
-          y: self.start.y,
-        });
+        points.push(Point { x: current_x, y: self.start.y });
       }
     } else if self.is_vertical() {
       for current_y in range_step_inclusive(self.start.y, self.end.y, y_step) {
-        points.push(Point {
-          x: self.start.x,
-          y: current_y,
-        });
+        points.push(Point { x: self.start.x, y: current_y });
       }
     } else {
       for i in range_inclusive(0, (self.end.x - self.start.x) / x_step) {

@@ -33,12 +33,7 @@ impl Packet {
   /// Create a new operator packet
   pub fn new_operator_packet(ver: u8, id: u8, packets: Vec<Packet>) -> Packet {
     assert_ne!(id, LITERAL_TYPE);
-    Packet {
-      version: ver,
-      typeid: id,
-      sub_packets: packets,
-      value: 0,
-    }
+    Packet { version: ver, typeid: id, sub_packets: packets, value: 0 }
   }
 
   /// Decode a binary string into a package hierachy
@@ -177,9 +172,7 @@ impl Decoder {
       idx += 32;
     }
 
-    Decoder {
-      root: Packet::from(bin_str),
-    }
+    Decoder { root: Packet::from(bin_str) }
   }
 
   /// Return the sum of all packet versions
