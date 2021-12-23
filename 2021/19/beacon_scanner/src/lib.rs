@@ -40,7 +40,7 @@ pub fn parse(filename: &String) -> Vec<Scanner> {
     fs::read_to_string(filename).expect("Couldn't read input file.");
 
   // Split input and parse scanners
-  let seperator = Regex::new(r"(\n|\r)*--- scanner (0|[1-9][0-9]*) ---(\n|\r)")
+  let seperator = Regex::new(r"(\n|\r)*--- scanner (0|[1-9][0-9]*) ---(\n|\r)*")
     .expect("Invalid regex");
   seperator
     .split(contents.as_str())
