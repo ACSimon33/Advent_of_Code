@@ -1,12 +1,16 @@
 use clap::Parser;
 
-/// Day 0: Rust Template
+/// Day 22: Reactor Reboot
 #[derive(Parser, Debug)]
 #[clap(about, version, author)]
 struct Args {
   /// Input file (e.g. input/puzzle_input.txt)
   #[clap(short, long)]
   filename: String,
+
+  /// The subspace dimension to consider
+  #[clap(short, long, default_value_t = 0)]
+  subspace: i64,
 }
 
 // Import puzzle solutions module
@@ -16,9 +20,6 @@ use reactor_reboot;
 fn main() {
   let args = Args::parse();
 
-  let val_1 = reactor_reboot::solution_1(&args.filename);
-  println!("1. Solution: {}", val_1);
-
-  let val_2 = reactor_reboot::solution_2(&args.filename);
-  println!("2. Solution: {}", val_2);
+  let n = reactor_reboot::count_cubes(&args.filename, args.subspace);
+  println!("1. Amount of cubes which are on: {}", n);
 }

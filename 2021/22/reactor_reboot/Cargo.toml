@@ -42,3 +42,6 @@ features = ["derive"]
 
 [dependencies.pretty_assertions]
 version = "1.0.0"
+
+[dependencies.regex]
+version = "1.5.4"

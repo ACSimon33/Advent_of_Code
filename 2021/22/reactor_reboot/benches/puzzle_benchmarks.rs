@@ -9,8 +9,14 @@ use reactor_reboot;
 /// Benchmark of part 1
 fn task_1(c: &mut Criterion) {
   let mut group = c.benchmark_group("Day 22");
-  group.bench_function("Task 1 - Rust Template", |b| {
-    b.iter(|| reactor_reboot::solution_1(black_box(&INPUT_FILENAME.to_string())))
+  group.sample_size(10);
+  group.bench_function("Task 1 - Lit cubes in the initialization area", |b| {
+    b.iter(|| {
+      reactor_reboot::count_cubes(
+        black_box(&INPUT_FILENAME.to_string()),
+        black_box(50),
+      )
+    })
   });
   group.finish();
 }
@@ -18,8 +24,14 @@ fn task_1(c: &mut Criterion) {
 /// Benchmark of part 2
 fn task_2(c: &mut Criterion) {
   let mut group = c.benchmark_group("Day 22");
-  group.bench_function("Task 2 - Rust Template", |b| {
-    b.iter(|| reactor_reboot::solution_2(black_box(&INPUT_FILENAME.to_string())))
+  group.sample_size(10);
+  group.bench_function("Task 2 - Lit cubes in the whole domain", |b| {
+    b.iter(|| {
+      reactor_reboot::count_cubes(
+        black_box(&INPUT_FILENAME.to_string()),
+        black_box(0),
+      )
+    })
   });
   group.finish();
 }
