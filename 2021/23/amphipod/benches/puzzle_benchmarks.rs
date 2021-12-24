@@ -10,7 +10,6 @@ use amphipod;
 /// Benchmark of part 1
 fn task_1(c: &mut Criterion) {
   let mut group = c.benchmark_group("Day 23");
-  group.sample_size(10);
   group.bench_function("Task 1 - Least amount of energy (small rooms)", |b| {
     b.iter(|| {
       amphipod::least_amount_of_energy(black_box(&INPUT_FILENAME_1.to_string()))
@@ -22,7 +21,6 @@ fn task_1(c: &mut Criterion) {
 /// Benchmark of part 2
 fn task_2(c: &mut Criterion) {
   let mut group = c.benchmark_group("Day 23");
-  group.sample_size(10);
   group.bench_function("Task 2 - Least amount of energy (large rooms)", |b| {
     b.iter(|| {
       amphipod::least_amount_of_energy(black_box(&INPUT_FILENAME_2.to_string()))

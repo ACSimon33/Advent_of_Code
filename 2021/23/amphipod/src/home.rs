@@ -12,15 +12,12 @@ const WAITING_POS: [usize; 7] = [0, 1, 3, 5, 7, 9, 10];
 /// Hallway positions in front of the rooms.
 const ROOM_POS: [usize; AMOUNT_OF_SPECIES] = [2, 4, 6, 8];
 
-/// The amphipod species.
-const SPECIES: [char; AMOUNT_OF_SPECIES] = ['A', 'B', 'C', 'D'];
-
 /// The energy consumption per species.
 const ENERGY_CONSUMPTION: [u32; AMOUNT_OF_SPECIES] = [1, 10, 100, 1000];
 
 // Some helper types
-type Hallway = [char; HALLWAY_LENGHT];
-type Room = Vec<char>;
+type Hallway = [usize; HALLWAY_LENGHT];
+type Room = Vec<usize>;
 type Rooms = [Room; AMOUNT_OF_SPECIES];
 
 /// Move struct which defines the move of single amphipod.
@@ -53,11 +50,33 @@ impl AmphipodHome {
   /// Creates a new empty amphipod home.
   pub fn new() -> AmphipodHome {
     AmphipodHome {
-      hallway: ['\0'; HALLWAY_LENGHT],
+      hallway: [AMOUNT_OF_SPECIES; HALLWAY_LENGHT],
       rooms: [Vec::new(), Vec::new(), Vec::new(), Vec::new()],
       room_size: 0,
       moves: Vec::new(),
     }
+  }
+
+  /// Unique ID for a home for faster hashing in the cache.
+  pub fn id(&self) -> u64 {
+    let mut id: u64 = 0;
+    id += self
+      .hallway
+      .iter()
+      .enumerate()
+      .map(|(idx, c)| (*c as u64) * 5_u64.pow(idx as u32))
+      .sum::<u64>();
+    for i in 0..AMOUNT_OF_SPECIES {
+      id += self.rooms[i]
+        .iter()
+        .enumerate()
+        .map(|(idx, c)| {
+          (*c as u64)
+            * 5_u64.pow((HALLWAY_LENGHT + i * self.room_size + idx) as u32)
+        })
+        .sum::<u64>();
+    }
+    id
   }
 
   /// Calculate all possible moves. If there is a move into a room, this move
@@ -70,7 +89,7 @@ impl AmphipodHome {
       if self.is_room_free(i) {
         // ... from the hallway
         for &pos in WAITING_POS.iter() {
-          if self.hallway[pos] == SPECIES[i] {
+          if self.hallway[pos] == i {
             if self.is_hallway_free(pos, ROOM_POS[i]) {
               let end = self.get_free_room_position(i);
               moves.push(Move {
@@ -86,7 +105,7 @@ impl AmphipodHome {
         // ... from other rooms
         for i2 in (0..AMOUNT_OF_SPECIES).filter(|i2| *i2 != i) {
           let (start, amphipod) = self.get_top_amphipod(i2);
-          if amphipod == SPECIES[i] {
+          if amphipod == i {
             if self.is_hallway_free(ROOM_POS[i2], ROOM_POS[i]) {
               let end = self.get_free_room_position(i);
               moves.push(Move {
@@ -111,7 +130,7 @@ impl AmphipodHome {
             moves.push(Move {
               start: start,
               end: pos,
-              species: SPECIES.iter().position(|c| *c == amphipod).unwrap(),
+              species: amphipod,
               steps: self.calculate_steps(start, pos),
             })
           }
@@ -127,20 +146,20 @@ impl AmphipodHome {
     if m.start < HALLWAY_LENGHT {
       let i = (m.end - HALLWAY_LENGHT) / self.room_size;
       let j = (m.end - HALLWAY_LENGHT) % self.room_size;
-      self.hallway[m.start] = '\0';
-      self.rooms[i][j] = SPECIES[m.species];
+      self.hallway[m.start] = AMOUNT_OF_SPECIES;
+      self.rooms[i][j] = m.species;
     } else if m.end < HALLWAY_LENGHT {
       let i = (m.start - HALLWAY_LENGHT) / self.room_size;
       let j = (m.start - HALLWAY_LENGHT) % self.room_size;
-      self.rooms[i][j] = '\0';
-      self.hallway[m.end] = SPECIES[m.species];
+      self.rooms[i][j] = AMOUNT_OF_SPECIES;
+      self.hallway[m.end] = m.species;
     } else {
       let i1 = (m.start - HALLWAY_LENGHT) / self.room_size;
       let j1 = (m.start - HALLWAY_LENGHT) % self.room_size;
       let i2 = (m.end - HALLWAY_LENGHT) / self.room_size;
       let j2 = (m.end - HALLWAY_LENGHT) % self.room_size;
-      self.rooms[i1][j1] = '\0';
-      self.rooms[i2][j2] = SPECIES[m.species];
+      self.rooms[i1][j1] = AMOUNT_OF_SPECIES;
+      self.rooms[i2][j2] = m.species;
     }
 
     self.moves.push(m);
@@ -152,35 +171,41 @@ impl AmphipodHome {
     if m.start < HALLWAY_LENGHT {
       let i = (m.end - HALLWAY_LENGHT) / self.room_size;
       let j = (m.end - HALLWAY_LENGHT) % self.room_size;
-      self.hallway[m.start] = SPECIES[m.species];
-      self.rooms[i][j] = '\0';
+      self.hallway[m.start] = m.species;
+      self.rooms[i][j] = AMOUNT_OF_SPECIES;
     } else if m.end < HALLWAY_LENGHT {
       let i = (m.start - HALLWAY_LENGHT) / self.room_size;
       let j = (m.start - HALLWAY_LENGHT) % self.room_size;
-      self.rooms[i][j] = SPECIES[m.species];
-      self.hallway[m.end] = '\0';
+      self.rooms[i][j] = m.species;
+      self.hallway[m.end] = AMOUNT_OF_SPECIES;
     } else {
       let i1 = (m.start - HALLWAY_LENGHT) / self.room_size;
       let j1 = (m.start - HALLWAY_LENGHT) % self.room_size;
       let i2 = (m.end - HALLWAY_LENGHT) / self.room_size;
       let j2 = (m.end - HALLWAY_LENGHT) % self.room_size;
-      self.rooms[i1][j1] = SPECIES[m.species];
-      self.rooms[i2][j2] = '\0';
+      self.rooms[i1][j1] = m.species;
+      self.rooms[i2][j2] = AMOUNT_OF_SPECIES;
     }
   }
 
   /// Checks if all amphipods are in their rooms.
   pub fn is_final_position(&self) -> bool {
-    (0..AMOUNT_OF_SPECIES)
-      .all(|i| self.rooms[i].iter().all(|c| *c == SPECIES[i]))
+    (0..AMOUNT_OF_SPECIES).all(|i| self.rooms[i].iter().all(|c| *c == i))
   }
 
   /// Check if non of the amphipods is missing (for debugging purposes).
   pub fn _validate(&self) -> bool {
     let mut count = 0;
-    count += self.hallway.iter().filter(|&c| *c != '\0').count();
+    count += self
+      .hallway
+      .iter()
+      .filter(|&c| *c != AMOUNT_OF_SPECIES)
+      .count();
     for i in 0..AMOUNT_OF_SPECIES {
-      count += self.rooms[i].iter().filter(|&c| *c != '\0').count();
+      count += self.rooms[i]
+        .iter()
+        .filter(|&c| *c != AMOUNT_OF_SPECIES)
+        .count();
     }
     count == AMOUNT_OF_SPECIES * self.room_size
   }
@@ -191,12 +216,12 @@ impl AmphipodHome {
       WAITING_POS
         .iter()
         .filter(|&p| *p > start && *p <= end)
-        .all(|&p| self.hallway[p] == '\0')
+        .all(|&p| self.hallway[p] == AMOUNT_OF_SPECIES)
     } else {
       WAITING_POS
         .iter()
         .filter(|&p| *p >= end && *p < start)
-        .all(|&p| self.hallway[p] == '\0')
+        .all(|&p| self.hallway[p] == AMOUNT_OF_SPECIES)
     }
   }
 
@@ -204,19 +229,19 @@ impl AmphipodHome {
   fn is_room_free(&self, room_idx: usize) -> bool {
     self.rooms[room_idx]
       .iter()
-      .all(|c| *c == '\0' || *c == SPECIES[room_idx])
-      && self.rooms[room_idx][0] == '\0'
+      .all(|c| *c == AMOUNT_OF_SPECIES || *c == room_idx)
+      && self.rooms[room_idx][0] == AMOUNT_OF_SPECIES
   }
 
   /// Check if a room is full (with the correct amphipods).
   fn is_room_full(&self, room_idx: usize) -> bool {
-    self.rooms[room_idx].iter().all(|c| *c == SPECIES[room_idx])
+    self.rooms[room_idx].iter().all(|c| *c == room_idx)
   }
 
   /// Returns the next free position in the room.
   fn get_free_room_position(&self, room_idx: usize) -> usize {
     for j in (0..self.room_size).rev() {
-      if self.rooms[room_idx][j] == '\0' {
+      if self.rooms[room_idx][j] == AMOUNT_OF_SPECIES {
         return HALLWAY_LENGHT + room_idx * self.room_size + j;
       }
     }
@@ -224,14 +249,14 @@ impl AmphipodHome {
   }
 
   /// Returns the highest amphipod in the room as well as its position.
-  fn get_top_amphipod(&self, room_idx: usize) -> (usize, char) {
+  fn get_top_amphipod(&self, room_idx: usize) -> (usize, usize) {
     for j in 0..self.room_size {
-      if self.rooms[room_idx][j] != '\0' {
+      if self.rooms[room_idx][j] != AMOUNT_OF_SPECIES {
         let idx = HALLWAY_LENGHT + room_idx * self.room_size + j;
         return (idx, self.rooms[room_idx][j]);
       }
     }
-    return (usize::MAX, '\0');
+    return (usize::MAX, AMOUNT_OF_SPECIES);
   }
 
   /// Calculate the steps between two positions in the home.
@@ -281,8 +306,15 @@ impl From<String> for AmphipodHome {
         let cap = cap_opt.unwrap();
         if cap.len() == AMOUNT_OF_SPECIES + 1 {
           for i in 0..AMOUNT_OF_SPECIES {
-            home.rooms[i]
-              .push(cap.get(i + 1).unwrap().as_str().chars().nth(0).unwrap());
+            home.rooms[i].push(
+              match cap.get(i + 1).unwrap().as_str().chars().nth(0).unwrap() {
+                'A' => 0,
+                'B' => 1,
+                'C' => 2,
+                'D' => 3,
+                _ => panic!("Unknown amphipod!"),
+              },
+            );
           }
           home.room_size += 1;
         }

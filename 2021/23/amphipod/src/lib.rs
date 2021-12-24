@@ -1,3 +1,4 @@
+use std::collections::HashMap;
 use std::fs;
 
 mod home;
@@ -12,8 +13,9 @@ pub fn least_amount_of_energy(filename: &String) -> u32 {
   // Initialize home
   let mut home = AmphipodHome::from(contents);
   let mut cheapest_solution: u32 = u32::MAX;
+  let mut cache: HashMap<u64, u32> = HashMap::new();
 
-  simulate(&mut home, 0, &mut cheapest_solution);
+  simulate(&mut home, 0, &mut cheapest_solution, &mut cache);
   return cheapest_solution;
 }
 
@@ -22,7 +24,17 @@ fn simulate(
   home: &mut AmphipodHome,
   current_price: u32,
   cheapest_solution: &mut u32,
+  cache: &mut HashMap<u64, u32>,
 ) {
+  // Return, if this configuration is cached with a smaller price
+  let cached_value = cache.entry(home.id()).or_insert(u32::MAX);
+  if *cached_value <= current_price {
+    return;
+  } else {
+    *cached_value = current_price;
+  }
+
+  // Calculate possible moves
   let mut moves = home.calc_possible_moves();
 
   // if !home._validate() {
@@ -44,7 +56,7 @@ fn simulate(
 
     if price < *cheapest_solution {
       home.make_move(m);
-      simulate(home, price, cheapest_solution);
+      simulate(home, price, cheapest_solution, cache);
       home.revert_move();
     }
   }
