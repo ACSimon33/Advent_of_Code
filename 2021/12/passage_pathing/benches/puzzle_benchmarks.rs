@@ -9,6 +9,7 @@ use passage_pathing;
 /// Benchmark of part 1
 fn task_1(c: &mut Criterion) {
   let mut group = c.benchmark_group("Day 12");
+  group.sample_size(20);
   group.bench_function("Task 1 - Amount of paths", |b| {
     b.iter(|| {
       passage_pathing::get_paths(
@@ -23,6 +24,7 @@ fn task_1(c: &mut Criterion) {
 /// Benchmark of part 2
 fn task_2(c: &mut Criterion) {
   let mut group = c.benchmark_group("Day 12");
+  group.sample_size(20);
   group.bench_function("Task 2 - Amount of paths with repetitions", |b| {
     b.iter(|| {
       passage_pathing::get_paths(

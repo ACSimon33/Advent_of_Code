@@ -9,6 +9,7 @@ use beacon_scanner;
 /// Benchmark of part 1
 fn task_1(c: &mut Criterion) {
   let mut group = c.benchmark_group("Day 19");
+  group.sample_size(10);
   group.bench_function("Task 1 - Amount of beacons", |b| {
     b.iter(|| {
       beacon_scanner::count_beacons(black_box(&INPUT_FILENAME.to_string()))
@@ -20,6 +21,7 @@ fn task_1(c: &mut Criterion) {
 /// Benchmark of part 2
 fn task_2(c: &mut Criterion) {
   let mut group = c.benchmark_group("Day 19");
+  group.sample_size(10);
   group.bench_function("Task 2 - Manhatten distance", |b| {
     b.iter(|| {
       beacon_scanner::manhatten_distance(black_box(&INPUT_FILENAME.to_string()))
