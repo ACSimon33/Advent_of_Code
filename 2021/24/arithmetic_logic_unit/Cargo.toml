@@ -1,0 +1,44 @@
+[package]
+name = "arithmetic_logic_unit"
+version = "0.1.0"
+edition = "2021"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[lib]
+name = "arithmetic_logic_unit"
+path = "src/lib.rs"
+test = false
+doctest = false
+bench = false
+
+[[bin]]
+name = "arithmetic_logic_unit"
+path = "src/main.rs"
+test = false
+doctest = false
+bench = false
+
+[[test]]
+name = "example_tests"
+test = true
+doctest = false
+bench = false
+
+[[bench]]
+name = "puzzle_benchmarks"
+harness = false
+test = false
+doctest = false
+bench = true
+
+[dependencies.criterion]
+version = "0.3.5"
+features = ["html_reports"]
+
+[dependencies.clap]
+git = "https://github.com/clap-rs/clap.git"
+features = ["derive"]
+
+[dependencies.pretty_assertions]
+version = "1.0.0"

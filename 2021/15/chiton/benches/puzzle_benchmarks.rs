@@ -19,7 +19,7 @@ fn task_1(c: &mut Criterion) {
 /// Benchmark of part 2
 fn task_2(c: &mut Criterion) {
   let mut group = c.benchmark_group("Day 15");
-  group.sample_size(20);
+  group.sample_size(10);
   group.bench_function("Task 2 - Lowest Total Risk (full map)", |b| {
     b.iter(|| {
       chiton::lowest_total_risk_full(black_box(&INPUT_FILENAME.to_string()))

@@ -24,5 +24,6 @@ members = [
   "20/trench_map",
   "21/dirac_dice",
   "22/reactor_reboot",
-  "23/amphipod"
+  "23/amphipod",
+  "24/arithmetic_logic_unit"
 ]

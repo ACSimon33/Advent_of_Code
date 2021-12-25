@@ -31,6 +31,15 @@ dependencies = [
 ]
 
 [[package]]
+name = "arithmetic_logic_unit"
+version = "0.1.0"
+dependencies = [
+ "clap 3.0.0-rc.4",
+ "criterion",
+ "pretty_assertions",
+]
+
+[[package]]
 name = "atty"
 version = "0.2.14"
 source = "registry+https://github.com/rust-lang/crates.io-index"
