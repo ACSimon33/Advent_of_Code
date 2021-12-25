@@ -1,4 +1,4 @@
-mod day_08 {
+mod day_08_seven_segment_search {
   use pretty_assertions::assert_eq;
 
   // Example input
