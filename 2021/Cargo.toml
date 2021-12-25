@@ -25,5 +25,6 @@ members = [
   "21/dirac_dice",
   "22/reactor_reboot",
   "23/amphipod",
-  "24/arithmetic_logic_unit"
+  "24/arithmetic_logic_unit",
+  "25/sea_cucumber"
 ]
