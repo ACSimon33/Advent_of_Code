@@ -105,14 +105,14 @@ aoc-2021:bench:
     - git clean -dfx .
     - git clone git@github.com:ACSimon33/Advent_of_Code.git -b gh-pages
     - mkdir $BUILD_DIR/criterion
-    - mv Advent_of_Code/* $BUILD_DIR/criterion/
+    - mv Advent_of_Code/2021/* $BUILD_DIR/criterion/
     - >-
       cargo bench --workspace --no-fail-fast --verbose -j1 --
-      --warm-up-time 1 --measurement-time 4 --sample-size 50
-    - cd Advent_of_Code
+      --warm-up-time 1 --measurement-time 2 --sample-size 10
+    - cd Advent_of_Code/2021
     - mv $BUILD_DIR/criterion/* .
     - git add .
-    - git commit -m "Updated benchmark results."
+    - git commit -m "Updated 2021 benchmark results for commit '$CI_COMMIT_MESSAGE'"
     - git push
 
 # Clean stage

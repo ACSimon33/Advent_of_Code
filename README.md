@@ -4,7 +4,5 @@
 My Advent of Code solutions starting 2021.
 
 Challenges:
-- [2021: Learning **Rust**](2021)
+- [2021: Learning **Rust**](2021) [⭢ *Benchmarks* ⭠](https://acsimon33.github.io/Advent_of_Code/2021/report/index.html)
 - 2022: ...
-
-## Benchmarks: [Results](https://acsimon33.github.io/Advent_of_Code/report/index.html)
