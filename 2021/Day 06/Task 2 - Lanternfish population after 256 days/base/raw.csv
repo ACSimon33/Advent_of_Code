@@ -1,11 +1,11 @@
 group,function,value,throughput_num,throughput_type,sample_measured_value,unit,iteration_count
-Day 06,Task 2 - Lanternfish population after 256 days,,,,35330240.0,ns,463
-Day 06,Task 2 - Lanternfish population after 256 days,,,,70645464.0,ns,926
-Day 06,Task 2 - Lanternfish population after 256 days,,,,106904110.0,ns,1389
-Day 06,Task 2 - Lanternfish population after 256 days,,,,141555312.0,ns,1852
-Day 06,Task 2 - Lanternfish population after 256 days,,,,177342077.0,ns,2315
-Day 06,Task 2 - Lanternfish population after 256 days,,,,212745439.0,ns,2778
-Day 06,Task 2 - Lanternfish population after 256 days,,,,248809826.0,ns,3241
-Day 06,Task 2 - Lanternfish population after 256 days,,,,283204007.0,ns,3704
-Day 06,Task 2 - Lanternfish population after 256 days,,,,318508519.0,ns,4167
-Day 06,Task 2 - Lanternfish population after 256 days,,,,354386674.0,ns,4630
+Day 06,Task 2 - Lanternfish population after 256 days,,,,36368552.0,ns,472
+Day 06,Task 2 - Lanternfish population after 256 days,,,,73055994.0,ns,944
+Day 06,Task 2 - Lanternfish population after 256 days,,,,109273796.0,ns,1416
+Day 06,Task 2 - Lanternfish population after 256 days,,,,147631756.0,ns,1888
+Day 06,Task 2 - Lanternfish population after 256 days,,,,181790545.0,ns,2360
+Day 06,Task 2 - Lanternfish population after 256 days,,,,217863720.0,ns,2832
+Day 06,Task 2 - Lanternfish population after 256 days,,,,254611425.0,ns,3304
+Day 06,Task 2 - Lanternfish population after 256 days,,,,291241264.0,ns,3776
+Day 06,Task 2 - Lanternfish population after 256 days,,,,347957282.0,ns,4248
+Day 06,Task 2 - Lanternfish population after 256 days,,,,364558981.0,ns,4720
