@@ -1,11 +1,11 @@
 group,function,value,throughput_num,throughput_type,sample_measured_value,unit,iteration_count
-Day 01,Task 1 - Amount of increasing measurements,,,,36119346.0,ns,610
-Day 01,Task 1 - Amount of increasing measurements,,,,81969131.0,ns,1220
-Day 01,Task 1 - Amount of increasing measurements,,,,109310530.0,ns,1830
-Day 01,Task 1 - Amount of increasing measurements,,,,154871788.0,ns,2440
-Day 01,Task 1 - Amount of increasing measurements,,,,181461507.0,ns,3050
-Day 01,Task 1 - Amount of increasing measurements,,,,217053499.0,ns,3660
-Day 01,Task 1 - Amount of increasing measurements,,,,252220096.0,ns,4270
-Day 01,Task 1 - Amount of increasing measurements,,,,289353885.0,ns,4880
-Day 01,Task 1 - Amount of increasing measurements,,,,329874582.0,ns,5490
-Day 01,Task 1 - Amount of increasing measurements,,,,360551906.0,ns,6100
+Day 01,Task 1 - Amount of increasing measurements,,,,36251588.0,ns,614
+Day 01,Task 1 - Amount of increasing measurements,,,,72555950.0,ns,1228
+Day 01,Task 1 - Amount of increasing measurements,,,,108698571.0,ns,1842
+Day 01,Task 1 - Amount of increasing measurements,,,,145391300.0,ns,2456
+Day 01,Task 1 - Amount of increasing measurements,,,,181809743.0,ns,3070
+Day 01,Task 1 - Amount of increasing measurements,,,,217514681.0,ns,3684
+Day 01,Task 1 - Amount of increasing measurements,,,,253616771.0,ns,4298
+Day 01,Task 1 - Amount of increasing measurements,,,,291961396.0,ns,4912
+Day 01,Task 1 - Amount of increasing measurements,,,,326603066.0,ns,5526
+Day 01,Task 1 - Amount of increasing measurements,,,,363272661.0,ns,6140

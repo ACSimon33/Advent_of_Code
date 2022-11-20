@@ -1,11 +1,11 @@
 group,function,value,throughput_num,throughput_type,sample_measured_value,unit,iteration_count
-Day 00,Task 1 - Rust Template,,,,37352088.0,ns,3752
-Day 00,Task 1 - Rust Template,,,,72280941.0,ns,7504
-Day 00,Task 1 - Rust Template,,,,107666964.0,ns,11256
-Day 00,Task 1 - Rust Template,,,,144292372.0,ns,15008
-Day 00,Task 1 - Rust Template,,,,179746675.0,ns,18760
-Day 00,Task 1 - Rust Template,,,,224040724.0,ns,22512
-Day 00,Task 1 - Rust Template,,,,251887651.0,ns,26264
-Day 00,Task 1 - Rust Template,,,,288822696.0,ns,30016
-Day 00,Task 1 - Rust Template,,,,325151992.0,ns,33768
-Day 00,Task 1 - Rust Template,,,,359004691.0,ns,37520
+Day 00,Task 1 - Rust Template,,,,36164664.0,ns,3769
+Day 00,Task 1 - Rust Template,,,,72040603.0,ns,7538
+Day 00,Task 1 - Rust Template,,,,113316931.0,ns,11307
+Day 00,Task 1 - Rust Template,,,,143785942.0,ns,15076
+Day 00,Task 1 - Rust Template,,,,180407610.0,ns,18845
+Day 00,Task 1 - Rust Template,,,,216190079.0,ns,22614
+Day 00,Task 1 - Rust Template,,,,251851737.0,ns,26383
+Day 00,Task 1 - Rust Template,,,,288225595.0,ns,30152
+Day 00,Task 1 - Rust Template,,,,324052241.0,ns,33921
+Day 00,Task 1 - Rust Template,,,,360256241.0,ns,37690
