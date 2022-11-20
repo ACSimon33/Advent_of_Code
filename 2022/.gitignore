@@ -1,3 +1,4 @@
 # Typescript targets
 build
 node_modules
+*.tsbuildinfo

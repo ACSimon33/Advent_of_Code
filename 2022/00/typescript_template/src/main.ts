@@ -21,7 +21,7 @@ export const args = parse<AoCArgs>({
 
 // ************************************************************************** //
 
-import * as typescript_template from "./lib";
+import * as typescript_template from "./typescript_template";
 
 const val_1: number = typescript_template.solution_1(args.filename);
 console.log(val_1);

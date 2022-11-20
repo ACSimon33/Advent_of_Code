@@ -13,5 +13,5 @@ export function solution_2(filename: string): number {
   const contents: string = fs.readFileSync(filename, 'utf8');
   const lines = contents.split(/\r?\n/);
 
-  return lines.length;
+  return 2 * lines.length;
 }
