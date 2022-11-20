@@ -1,11 +1,11 @@
 group,function,value,throughput_num,throughput_type,sample_measured_value,unit,iteration_count
-Day 16,Task 2 - Expression tree evaluation,,,,36152594.0,ns,491
-Day 16,Task 2 - Expression tree evaluation,,,,72354421.0,ns,982
-Day 16,Task 2 - Expression tree evaluation,,,,108647709.0,ns,1473
-Day 16,Task 2 - Expression tree evaluation,,,,144157637.0,ns,1964
-Day 16,Task 2 - Expression tree evaluation,,,,180878854.0,ns,2455
-Day 16,Task 2 - Expression tree evaluation,,,,233470751.0,ns,2946
-Day 16,Task 2 - Expression tree evaluation,,,,261883213.0,ns,3437
-Day 16,Task 2 - Expression tree evaluation,,,,290583389.0,ns,3928
-Day 16,Task 2 - Expression tree evaluation,,,,327130304.0,ns,4419
-Day 16,Task 2 - Expression tree evaluation,,,,362092332.0,ns,4910
+Day 16,Task 2 - Expression tree evaluation,,,,36321467.0,ns,496
+Day 16,Task 2 - Expression tree evaluation,,,,72739257.0,ns,992
+Day 16,Task 2 - Expression tree evaluation,,,,109772507.0,ns,1488
+Day 16,Task 2 - Expression tree evaluation,,,,145337809.0,ns,1984
+Day 16,Task 2 - Expression tree evaluation,,,,182511826.0,ns,2480
+Day 16,Task 2 - Expression tree evaluation,,,,220451461.0,ns,2976
+Day 16,Task 2 - Expression tree evaluation,,,,254715154.0,ns,3472
+Day 16,Task 2 - Expression tree evaluation,,,,291154602.0,ns,3968
+Day 16,Task 2 - Expression tree evaluation,,,,327805264.0,ns,4464
+Day 16,Task 2 - Expression tree evaluation,,,,364851961.0,ns,4960

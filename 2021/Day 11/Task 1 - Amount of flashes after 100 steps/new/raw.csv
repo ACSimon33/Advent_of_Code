@@ -1,11 +1,11 @@
 group,function,value,throughput_num,throughput_type,sample_measured_value,unit,iteration_count
-Day 11,Task 1 - Amount of flashes after 100 steps,,,,36439054.0,ns,33
-Day 11,Task 1 - Amount of flashes after 100 steps,,,,72630334.0,ns,66
-Day 11,Task 1 - Amount of flashes after 100 steps,,,,108696180.0,ns,99
-Day 11,Task 1 - Amount of flashes after 100 steps,,,,145486732.0,ns,132
-Day 11,Task 1 - Amount of flashes after 100 steps,,,,180723011.0,ns,165
-Day 11,Task 1 - Amount of flashes after 100 steps,,,,225568867.0,ns,198
-Day 11,Task 1 - Amount of flashes after 100 steps,,,,254079025.0,ns,231
-Day 11,Task 1 - Amount of flashes after 100 steps,,,,289912581.0,ns,264
-Day 11,Task 1 - Amount of flashes after 100 steps,,,,326180982.0,ns,297
-Day 11,Task 1 - Amount of flashes after 100 steps,,,,362924848.0,ns,330
+Day 11,Task 1 - Amount of flashes after 100 steps,,,,36032713.0,ns,33
+Day 11,Task 1 - Amount of flashes after 100 steps,,,,75642101.0,ns,66
+Day 11,Task 1 - Amount of flashes after 100 steps,,,,108633161.0,ns,99
+Day 11,Task 1 - Amount of flashes after 100 steps,,,,145591527.0,ns,132
+Day 11,Task 1 - Amount of flashes after 100 steps,,,,180256573.0,ns,165
+Day 11,Task 1 - Amount of flashes after 100 steps,,,,216496164.0,ns,198
+Day 11,Task 1 - Amount of flashes after 100 steps,,,,252162927.0,ns,231
+Day 11,Task 1 - Amount of flashes after 100 steps,,,,291840742.0,ns,264
+Day 11,Task 1 - Amount of flashes after 100 steps,,,,327105606.0,ns,297
+Day 11,Task 1 - Amount of flashes after 100 steps,,,,365629414.0,ns,330
