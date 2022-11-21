@@ -1,11 +1,11 @@
 group,function,value,throughput_num,throughput_type,sample_measured_value,unit,iteration_count
-Day 18,Task 2 - Largest sum between two Snailfish numbers,,,,38453838.0,ns,1
-Day 18,Task 2 - Largest sum between two Snailfish numbers,,,,76608826.0,ns,2
-Day 18,Task 2 - Largest sum between two Snailfish numbers,,,,115266969.0,ns,3
-Day 18,Task 2 - Largest sum between two Snailfish numbers,,,,153630501.0,ns,4
-Day 18,Task 2 - Largest sum between two Snailfish numbers,,,,194168372.0,ns,5
-Day 18,Task 2 - Largest sum between two Snailfish numbers,,,,237738917.0,ns,6
-Day 18,Task 2 - Largest sum between two Snailfish numbers,,,,269282995.0,ns,7
-Day 18,Task 2 - Largest sum between two Snailfish numbers,,,,307746658.0,ns,8
-Day 18,Task 2 - Largest sum between two Snailfish numbers,,,,346168248.0,ns,9
-Day 18,Task 2 - Largest sum between two Snailfish numbers,,,,385850517.0,ns,10
+Day 18,Task 2 - Largest sum between two Snailfish numbers,,,,38376659.0,ns,1
+Day 18,Task 2 - Largest sum between two Snailfish numbers,,,,76854276.0,ns,2
+Day 18,Task 2 - Largest sum between two Snailfish numbers,,,,115064560.0,ns,3
+Day 18,Task 2 - Largest sum between two Snailfish numbers,,,,153247873.0,ns,4
+Day 18,Task 2 - Largest sum between two Snailfish numbers,,,,192007366.0,ns,5
+Day 18,Task 2 - Largest sum between two Snailfish numbers,,,,230549260.0,ns,6
+Day 18,Task 2 - Largest sum between two Snailfish numbers,,,,268961927.0,ns,7
+Day 18,Task 2 - Largest sum between two Snailfish numbers,,,,306790385.0,ns,8
+Day 18,Task 2 - Largest sum between two Snailfish numbers,,,,347538321.0,ns,9
+Day 18,Task 2 - Largest sum between two Snailfish numbers,,,,386566834.0,ns,10
