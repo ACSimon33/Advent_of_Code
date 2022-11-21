@@ -20,8 +20,8 @@ const OUTPUT_DIR: string =
     ? '../../build/benchmarks/00/typescript_template'
     : AoC22_root + '/build/benchmarks/00/typescript_template/';
 
-// Register benchmark suite
-benny.suite(
+// Register benchmark suite and export it
+module.exports = benny.suite(
   'Day 00 - typescript_template',
 
   // Benchmark of part 1

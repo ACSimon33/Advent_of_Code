@@ -7,7 +7,7 @@
     "typescript_template": "node ../../build/00/typescript_template/src/main.js",
     "format": "prettier --write '*/*.ts'",
     "check_format": "prettier --check '*/*.ts'",
-    "benchmark": "node ../../build/00/typescript_template/benches/puzzle_benchmarks.js"
+    "benchmark": "node ../../build/00/typescript_template/benchmarks/puzzle_benchmarks.js"
   },
   "keywords": [
     "AoC",
