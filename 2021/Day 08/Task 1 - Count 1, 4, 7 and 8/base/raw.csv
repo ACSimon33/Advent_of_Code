@@ -1,11 +1,11 @@
 group,function,value,throughput_num,throughput_type,sample_measured_value,unit,iteration_count
-Day 08,"Task 1 - Count 1, 4, 7 and 8",,,,36379111.0,ns,47
-Day 08,"Task 1 - Count 1, 4, 7 and 8",,,,72963674.0,ns,94
-Day 08,"Task 1 - Count 1, 4, 7 and 8",,,,109604290.0,ns,141
-Day 08,"Task 1 - Count 1, 4, 7 and 8",,,,146324790.0,ns,188
-Day 08,"Task 1 - Count 1, 4, 7 and 8",,,,181834949.0,ns,235
-Day 08,"Task 1 - Count 1, 4, 7 and 8",,,,218831541.0,ns,282
-Day 08,"Task 1 - Count 1, 4, 7 and 8",,,,260947815.0,ns,329
-Day 08,"Task 1 - Count 1, 4, 7 and 8",,,,291938549.0,ns,376
-Day 08,"Task 1 - Count 1, 4, 7 and 8",,,,327757369.0,ns,423
-Day 08,"Task 1 - Count 1, 4, 7 and 8",,,,366932122.0,ns,470
+Day 08,"Task 1 - Count 1, 4, 7 and 8",,,,36024533.0,ns,46
+Day 08,"Task 1 - Count 1, 4, 7 and 8",,,,72024012.0,ns,92
+Day 08,"Task 1 - Count 1, 4, 7 and 8",,,,108426888.0,ns,138
+Day 08,"Task 1 - Count 1, 4, 7 and 8",,,,144654331.0,ns,184
+Day 08,"Task 1 - Count 1, 4, 7 and 8",,,,179963872.0,ns,230
+Day 08,"Task 1 - Count 1, 4, 7 and 8",,,,215943886.0,ns,276
+Day 08,"Task 1 - Count 1, 4, 7 and 8",,,,253060348.0,ns,322
+Day 08,"Task 1 - Count 1, 4, 7 and 8",,,,291419242.0,ns,368
+Day 08,"Task 1 - Count 1, 4, 7 and 8",,,,324033657.0,ns,414
+Day 08,"Task 1 - Count 1, 4, 7 and 8",,,,360985394.0,ns,460
