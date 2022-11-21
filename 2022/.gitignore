@@ -1,4 +1,6 @@
-# Typescript targets
+# Build
 build
-node_modules
 *.tsbuildinfo
+
+# Dependency directory
+node_modules
