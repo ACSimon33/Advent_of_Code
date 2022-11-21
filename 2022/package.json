@@ -1,14 +1,14 @@
 {
-  "name": "day_00_typescript_template",
+  "name": "advent_of_code_2022",
   "version": "1.0.0",
-  "description": "Advent of Code solution day 00",
-  "scripts": {
-    "test": "jest",
-    "typescript_template": "node ../../build/00/typescript_template/src/main.js"
-  },
+  "description": "Advent of Code 2022",
   "keywords": ["AoC", "2022"],
   "author": "Simon Lukas Märtens",
   "license": "CC0",
+  "scripts": {
+    "test": "AOC_ROOT=. jest",
+    "typescript_template": "node build/00/typescript_template/src/main.js"
+  },
   "devDependencies": {
     "@types/jest": "^29.2.3",
     "@types/node": "^18.11.9",

@@ -11,8 +11,9 @@
 
     /* Modules */
     "module": "commonjs",
-    "rootDirs": ["src", "tests"],
+    "rootDir": ".",
     "resolveJsonModule": true,
+    "outDir": "build",
 
     /* Interop Constraints */
     "esModuleInterop": true,
