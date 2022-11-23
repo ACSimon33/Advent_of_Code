@@ -8,17 +8,7 @@ import * as kleur from 'kleur';
 import * as typescript_template from '../src/typescript_template';
 
 // Puzzle input
-const AoC22_root = process.env['AOC_ROOT'];
-const INPUT_FILENAME: string =
-  AoC22_root === undefined
-    ? './input/puzzle_input.txt'
-    : AoC22_root + '/00/typescript_template/input/puzzle_input.txt';
-
-// Output folder
-const OUTPUT_DIR: string =
-  AoC22_root === undefined
-    ? '../../build/benchmarks/00/typescript_template'
-    : AoC22_root + '/build/benchmarks/00/typescript_template/';
+const INPUT_FILENAME: string = './input/puzzle_input.txt';
 
 // Register benchmark suite and export it
 module.exports = benny.suite(
@@ -52,7 +42,7 @@ module.exports = benny.suite(
   // Save results as JSON filee
   benny.save({
     file: 'results',
-    folder: OUTPUT_DIR,
+    folder: '../../build/benchmarks/00/typescript_template',
     details: true,
     format: 'json'
   })
