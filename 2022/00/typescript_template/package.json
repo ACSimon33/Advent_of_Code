@@ -3,10 +3,11 @@
   "version": "1.0.0",
   "description": "Advent of Code solution day 00",
   "scripts": {
+    "tsc": "tsc --build .",
     "test": "jest",
-    "typescript_template": "node ../../build/00/typescript_template/src/main.js",
-    "format": "prettier --write '*/*.ts'",
-    "check_format": "prettier --check '*/*.ts'",
+    "exec": "node ../../build/00/typescript_template/src/main.js",
+    "format": "prettier --write */*.ts",
+    "check_format": "prettier --check */*.ts",
     "benchmark": "node ../../build/00/typescript_template/benchmarks/puzzle_benchmarks.js"
   },
   "keywords": [
