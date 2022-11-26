@@ -7,7 +7,7 @@
     "test": "jest",
     "exec": "node ../../build/00/typescript_template/src/main.js",
     "format": "prettier --write */*.ts",
-    "check_format": "prettier --check */*.ts",
+    "check-format": "prettier --check */*.ts",
     "benchmark": "node ../../build/00/typescript_template/benchmarks/puzzle_benchmarks.js"
   },
   "keywords": [
@@ -33,7 +33,7 @@
       "^.+\\.ts?$": "ts-jest"
     },
     "testEnvironment": "node",
-    "testRegex": "/tests/.*\\.(test|spec)?\\.(ts|tsx)$",
+    "testRegex": "/tests/example_tests.ts",
     "moduleFileExtensions": [
       "ts",
       "js"
