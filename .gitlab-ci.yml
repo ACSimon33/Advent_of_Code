@@ -61,7 +61,6 @@ test ~ aoc-2021:
   needs:
     - build ~ aoc-2021
   script:
-    - pushd ${AOC_YEAR}
     - >-
       cargo test --workspace --no-fail-fast --verbose -j1 --
       -Z unstable-options --report-time
@@ -151,7 +150,6 @@ test ~ aoc-2022:
   needs:
     - build ~ aoc-2022
   script:
-    - pushd ${AOC_YEAR}
     - >-
       npm test --workspaces -- --maxWorkers 1 --ci
       --reporters=default --reporters=jest-junit
@@ -167,7 +165,6 @@ format ~ aoc-2022:
   extends:
     - .2022-template
   script:
-    - pushd ${AOC_YEAR}
     - npm run check-format --workspaces
   allow_failure: true
 
@@ -180,7 +177,6 @@ bench ~ aoc-2022:
   needs:
     - test ~ aoc-2022
   script:
-    - pushd ${AOC_YEAR}
     - npm run tsc --workspaces
     - npm run benchmark --workspaces
 
