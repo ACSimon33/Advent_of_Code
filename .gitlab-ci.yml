@@ -150,6 +150,7 @@ test ~ aoc-2022:
   needs:
     - build ~ aoc-2022
   script:
+    - npm ci
     - >-
       npm test --workspaces -- --maxWorkers 1 --ci
       --reporters=default --reporters=jest-junit
@@ -165,6 +166,7 @@ format ~ aoc-2022:
   extends:
     - .2022-template
   script:
+    - npm ci
     - npm run check-format --workspaces
   allow_failure: true
 
@@ -177,6 +179,7 @@ bench ~ aoc-2022:
   needs:
     - test ~ aoc-2022
   script:
+    - npm ci
     - npm run tsc --workspaces
     - npm run benchmark --workspaces
 
