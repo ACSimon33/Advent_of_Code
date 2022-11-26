@@ -35,7 +35,8 @@ stages:
 # 2021 Rust template
 .2021-template:
   tags:
-    - rust
+    - AoC
+    - Rust
   timeout: 20m
   extends:
     - .bsd-machine-template
@@ -126,6 +127,8 @@ aoc-2021 ~ bench:
 # Clean stage
 clean:
   stage: Cleanup
+  tags:
+    - AoC
   timeout: 10m
   extends:
     - .bsd-machine-template
