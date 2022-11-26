@@ -140,7 +140,7 @@ build ~ aoc-2022:
     - .run-current-year-template
   script:
     - npm ci
-    - npm run tsc
+    - npm run tsc --workspaces
 
 # 2022 TypeScript test
 test ~ aoc-2022:
@@ -168,7 +168,7 @@ format ~ aoc-2022:
     - .2022-template
   script:
     - pushd ${AOC_YEAR}
-    - npm run check-format
+    - npm run check-format --workspaces
   allow_failure: true
 
 # 2022 TypeScript benchmark (release)
@@ -181,8 +181,8 @@ bench ~ aoc-2022:
     - test ~ aoc-2022
   script:
     - pushd ${AOC_YEAR}
-    - npm run tsc
-    - npm run benchmark
+    - npm run tsc --workspaces
+    - npm run benchmark --workspaces
 
 # Clean stage
 clean:
