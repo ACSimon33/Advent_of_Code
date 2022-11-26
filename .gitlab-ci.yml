@@ -1,8 +1,8 @@
 stages:
-  - build
-  - test
-  - benchmark
-  - clean
+  - Builds
+  - Tests
+  - Benchmarks
+  - Cleanup
 
 # Disables git clone/fetch
 .no-git-template:
@@ -13,6 +13,14 @@ stages:
 .git-template:
   variables:
     GIT_STRATEGY: fetch
+
+# Year rules
+.run-current-year-template:
+  variables:
+    AOC_CURRENT_YEAR: 2022
+  rules:
+    - if: '$AOC_CURRENT_YEAR == $AOC_YEAR'
+    - if: '$CI_PIPELINE_SOURCE == "schedule"'
 
 # Freebsd machine template
 .bsd-machine-template:
@@ -25,43 +33,44 @@ stages:
 # **************************************************************************** #
 
 # 2021 Rust template
-.rust-template:
+.2021-template:
   tags:
     - rust
-  only:
-    - pushes
-    - web
-    - schedules
   timeout: 20m
   extends:
     - .bsd-machine-template
   variables:
-    BUILD_DIR: ${PIPELINE_BASE_DIR}/pipe-$CI_PIPELINE_ID/2021
+    AOC_YEAR: 2021
+    BUILD_DIR: ${PIPELINE_BASE_DIR}/pipe-$CI_PIPELINE_ID/${AOC_YEAR}
   before_script:
     - export PATH="$PATH:/root/.cargo/bin:$HOME/.cargo/bin"
     - export CARGO_TARGET_DIR=${BUILD_DIR}
     - env
-    - cd 2021
+    - pwd
+    - ls
+    - pushd ${AOC_YEAR}
     - rustc --version && cargo --version  # Print version info for debugging
 
 # 2021 Rust build (debug + release)
-aoc-2021:build:
-  stage: "build"
+aoc-2021 ~ build:
+  stage: Builds
   extends:
     - .git-template
-    - .rust-template
+    - .2021-template
+    - .run-current-year-template
   script:
     - cargo build --workspace --verbose -j1
     - cargo build --release --workspace --verbose -j1
 
 # 2021 Rust test (debug)
-aoc-2021:test:
-  stage: "test"
+aoc-2021 ~ test:
+  stage: Tests
   extends:
     - .no-git-template
-    - .rust-template
+    - .2021-template
+    - .run-current-year-template
   needs:
-    - aoc-2021:build
+    - aoc-2021 ~ build
   script:
     - >-
       cargo test --workspace --no-fail-fast --verbose -j1 --
@@ -69,7 +78,7 @@ aoc-2021:test:
   after_script:
     - export PATH="$PATH:/root/.cargo/bin:$HOME/.cargo/bin"
     - export CARGO_TARGET_DIR=${BUILD_DIR}
-    - cd 2021
+    - pushd ${AOC_YEAR}
     - >-
       cargo test --workspace --no-fail-fast --verbose -j1 --
       -Z unstable-options --format json --report-time
@@ -81,26 +90,25 @@ aoc-2021:test:
     expire_in: 1 week
 
 # 2021 Rust fmt check
-aoc-2021:format:
-  stage: "test"
+aoc-2021 ~ format:
+  stage: Tests
   extends:
     - .no-git-template
-    - .rust-template
-  needs:
-    - aoc-2021:build
+    - .2021-template
   script:
     - cargo fmt --verbose -- --check
   allow_failure: true
 
 # 2021 Rust benchmark (release)
-aoc-2021:bench:
-  stage: "benchmark"
+aoc-2021 ~ bench:
+  stage: Benchmarks
   extends:
     - .no-git-template
-    - .rust-template
+    - .2021-template
+    - .run-current-year-template
   needs:
-    - aoc-2021:test
-    - aoc-2021:format
+    - aoc-2021 ~ test
+    - aoc-2021 ~ format
   script:
     - git clean -dfx .
     - git clone git@github.com:ACSimon33/Advent_of_Code.git -b gh-pages
@@ -109,7 +117,7 @@ aoc-2021:bench:
     - >-
       cargo bench --workspace --no-fail-fast --verbose -j1 --
       --warm-up-time 1 --measurement-time 2 --sample-size 10
-    - cd Advent_of_Code/2021
+    - pushd Advent_of_Code/2021
     - mv $BUILD_DIR/criterion/* .
     - git add .
     - git commit -m "Updated 2021 benchmark results for commit '$CI_COMMIT_MESSAGE'"
@@ -117,19 +125,14 @@ aoc-2021:bench:
 
 # Clean stage
 clean:
-  stage: "clean"
-  tags:
-    - rust
-  only:
-    - pushes
-    - web
-    - schedules
+  stage: Cleanup
   timeout: 10m
   extends:
     - .bsd-machine-template
   dependencies: []
   needs:
-    - aoc-2021:bench
+    - job: aoc-2021 ~ bench
+      optional: true
   when: always
   script:
     - echo $PIPELINE_DIR
