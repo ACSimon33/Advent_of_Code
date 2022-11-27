@@ -1,11 +1,11 @@
 group,function,value,throughput_num,throughput_type,sample_measured_value,unit,iteration_count
-Day 03,Task 1 - Power consumption,,,,36268992.0,ns,159
-Day 03,Task 1 - Power consumption,,,,79844990.0,ns,318
-Day 03,Task 1 - Power consumption,,,,112507046.0,ns,477
-Day 03,Task 1 - Power consumption,,,,145268457.0,ns,636
-Day 03,Task 1 - Power consumption,,,,182904195.0,ns,795
-Day 03,Task 1 - Power consumption,,,,221458436.0,ns,954
-Day 03,Task 1 - Power consumption,,,,255009280.0,ns,1113
-Day 03,Task 1 - Power consumption,,,,291024128.0,ns,1272
-Day 03,Task 1 - Power consumption,,,,329338940.0,ns,1431
-Day 03,Task 1 - Power consumption,,,,369831843.0,ns,1590
+Day 03,Task 1 - Power consumption,,,,36319078.0,ns,158
+Day 03,Task 1 - Power consumption,,,,73513434.0,ns,316
+Day 03,Task 1 - Power consumption,,,,108959918.0,ns,474
+Day 03,Task 1 - Power consumption,,,,148307120.0,ns,632
+Day 03,Task 1 - Power consumption,,,,180653331.0,ns,790
+Day 03,Task 1 - Power consumption,,,,217787278.0,ns,948
+Day 03,Task 1 - Power consumption,,,,254396846.0,ns,1106
+Day 03,Task 1 - Power consumption,,,,291777106.0,ns,1264
+Day 03,Task 1 - Power consumption,,,,326360687.0,ns,1422
+Day 03,Task 1 - Power consumption,,,,362454185.0,ns,1580
