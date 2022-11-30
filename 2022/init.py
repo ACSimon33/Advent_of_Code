@@ -19,9 +19,39 @@ import os
 import re
 import sys
 import argparse
+import shutil
 import glob
 from pathlib import Path
 import warnings
+
+TEMPLATE_DAY = 0
+TEMPLATE_PROJECT = "Typescript Template"
+
+# ---------------------------------------------------------------------------- #
+# Get day string
+def _get_day(day: int) -> str:
+  day_str = '0' if day <= 9 else ''
+  day_str += str(day)
+  return day_str
+
+# Get lowercase name string
+def _get_lower(name: str) -> str:
+  return re.sub(' ', '_', name.lower())
+
+# Get the folder name for a given day
+def _get_day_folder(day: int, name: str = None) -> Path:
+  day_folder = _get_day(day)
+  if name:
+    day_folder = os.path.join(day_folder, _get_lower(name))
+
+  return Path(os.path.join(Path(__file__).parent, day_folder))
+
+# Find next day
+def _find_next_day() -> int:
+  day = 1
+  while _get_day_folder(day).exists():
+    day += 1
+  return day
 
 # ---------------------------------------------------------------------------- #
 # Command line options
@@ -34,114 +64,85 @@ parser.add_argument(
   required=True)
 parser.add_argument(
   '-d', '--day', action='store', help='The number of the day',
-  type=int, default=0)
+  type=int, default=_find_next_day())
 opts = parser.parse_args()
 
 # ---------------------------------------------------------------------------- #
-# Copy file
-def _copy_file(filename):
-  output_file = filename
-  if opts.outplace:
-    _path = Path(filename)
-    output_file = "{0}_formatted{1}".format(_path.stem, _path.suffix)
+# Search and Replace
+def search_and_replace(day: int, name: str, contents: str) -> str:
+  contents = re.sub(_get_day(TEMPLATE_DAY), _get_day(day), contents)
+  contents = re.sub(TEMPLATE_PROJECT, name, contents)
+  contents = re.sub(_get_lower(TEMPLATE_PROJECT), _get_lower(name), contents)
+  return contents
 
-  # Preprocess ...
-  with open(filename, "r") as source:
-    lines = source.readlines()
-  with open(output_file, "w") as source:
-    for line in lines:
-      # ... comment out OpenMP pragmas
-      line = re.sub(r'#pragma omp', '//#pragma omp', line)
-      # ... comment out multiple case statements
-      line = re.sub(r'case (.*?):( +)(.*):', 'case \\1: /*\\3:*/', line)
-      source.write(line)
+# Initialize project from template
+def init_project(day: int, name: str,) -> None:
+  source = _get_day_folder(TEMPLATE_DAY, TEMPLATE_PROJECT)
+  destination = _get_day_folder(day, name)
 
-  clang_format_call = 'clang-format -i --Wno-error=unknown '
-  if not opts.silent:
-    clang_format_call += '--verbose '
-  if opts.dry_run:
-    clang_format_call += '--dry-run '
-  if opts.Werror:
-    clang_format_call += '--Werror '
+  for (dirpath, _, files) in os.walk(source):
+    output_dir = re.sub(str(source), str(destination), str(dirpath))
+    os.makedirs(output_dir)
 
-  # Call clang-format (ignore interupt signals)
-  result = run(
-    clang_format_call + output_file,
-    shell=True, stdout=PIPE, stderr=PIPE)
+    for filename in files:
+      input = os.path.join(dirpath, filename)
+      with open(input, 'r') as file:
+        contents = file.read()
 
-  # Postprocess ...
-  lines = []
-  with open(output_file, "r") as source:
-    line = source.read().strip('\n')
-    # global rexex
-    if not opts.dry_run:
-      a = re.findall(r'^( *),\n( *)(.*)', line, flags=re.MULTILINE)
-      if len(a):
-        line = re.sub(r'^( *),\n( *)(.*)', '\\1, \\3', line, flags=re.MULTILINE)
-    lines = [s + '\n' for s in line.split('\n')] # split and readd '\n'
-
-  with open(output_file, "w") as source:
-    # single line regEx
-    for line in lines:
-      # ... comment in OpenMP pragmas
-      line = re.sub(r'\/\/ *#pragma omp', '#pragma omp', line)
-      # ... comment in multiple case statements
-      line = re.sub(
-        r'case (.*?):( +)\/\*case (.*?):\*\/', 'case \\1: case \\3:', line)
-      source.write(line)
-
-  # Atomic write
-  sys.stdout.write(result.stderr.decode("utf-8"))
-
-  # Return the exit code of clang-format
-  return result.returncode
-
-# Disable interrupt signals for workers
-def init_worker():
-  signal.signal(signal.SIGINT, signal.SIG_IGN)
-
-# Gracefully shut down (wait for current jobs to finish)
-def sigint_handler(executer, signum, frame):
-  executer.shutdown(wait=True, cancel_futures=True)
-  sys.exit(signal.SIGINT)
+      output = os.path.join(output_dir, search_and_replace(day, name, filename))
+      with open(output, 'w') as file:
+        file.write(search_and_replace(day, name, contents))
 
 # ---------------------------------------------------------------------------- #
 def main():
-  # Format entire codebase
-  if opts.all:
-    repository_root = Path(__file__).parent.parent.resolve()
-    c_files = os.path.join(repository_root, '*', '*.c')
-    h_files = os.path.join(repository_root, '*', '*.h')
-    opts.args = [c_files, h_files]
+  # Check day
+  if opts.day < 1 or opts.day > 25:
+    raise RuntimeError('Day needs to be between 1 and 25.')
 
-  # Check amount of jobs
-  if int(opts.jobs) > os.cpu_count():
-    warnings.warn('The amount of jobs is higher than the cpu core count.')
+  # Test if folder already exists
+  folder = _get_day_folder(opts.day)
+  if folder.exists():
+    raise RuntimeError("Day '{0}' already exists.".format(folder))
 
-  # Create process pool (with custom signal handling for python >= 3.7)
-  if (sys.version_info[1] >= 7):
-    executer = ProcessPoolExecutor(int(opts.jobs), initializer=init_worker)
-  else:
-    executer = ProcessPoolExecutor(int(opts.jobs))
-    warnings.warn(
-      "Python < 3.7 -> Workers won't ignore interrupt signals! If you use "
-      "CTRL+C to cancel the formatting you might end up with scrambled files.")
+  # Initilaize project
+  init_project(opts.day, opts.name)
 
-  if (sys.version_info[1] >= 9):
-    signal.signal(signal.SIGINT, lambda s, f: sigint_handler(executer, s, f))
+  # Initialize as workspace
+  package_file = os.path.join(Path(__file__).parent, 'package.json')
+  config = []
+  with open(package_file, 'r') as file:
+    last_line_matched = False
+    add_workspace = False
+    for line in file.readlines():
+      if not add_workspace:
+        add_workspace = last_line_matched
+        m = re.match('    "([0-9]{2})\/([a-z_]*)"', line)
+        if m and len(m.groups()) == 2:
+          last_line_matched = True
+          add_workspace = (int(m.group(1)) > opts.day)
 
-  # Submit formatting jobs
-  future_results = []
-  for arg in opts.args:
-    for file in glob.glob(arg):
-      future_results.append(executer.submit(_format_file, file))
+        # Add workspace if the day of the next entry is larger or if this
+        # is the last entry in the workspace list
+        if add_workspace:
+          workspace = 4 * ' ' + '"'
+          workspace += _get_day(opts.day) + '/' + _get_lower(opts.name)
+          workspace += '"'
 
-  # Wait for all processes to finish and return exit code
-  exit_code = 0
-  for future in as_completed(future_results):
-    exit_code = future.result() if exit_code == 0 else exit_code
+          # Insert missing comma
+          if m and len(m.groups()) == 2:
+            workspace += ','
+          else:
+            config[-1] = re.sub('\n', ',\n', config[-1])
 
-  sys.exit(exit_code)
+          workspace += '\n'
+          config.append(workspace)
+
+      config.append(line)
+
+  with open(package_file, 'w') as file:
+    file.writelines(config)
+
+  sys.exit(0)
 
 if __name__ == "__main__":
   main()

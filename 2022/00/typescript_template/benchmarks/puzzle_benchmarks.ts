@@ -12,7 +12,7 @@ const INPUT_FILENAME: string = './input/puzzle_input.txt';
 
 // Register benchmark suite and export it
 module.exports = benny.suite(
-  'Day 00 - typescript_template',
+  'Day 00 - Typescript Template',
 
   // Benchmark of part 1
   benny.add('Task 1', () => {
