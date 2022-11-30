@@ -1,11 +1,11 @@
 group,function,value,throughput_num,throughput_type,sample_measured_value,unit,iteration_count
-Day 23,Task 1 - Least amount of energy (small rooms),,,,37939187.0,ns,3
-Day 23,Task 1 - Least amount of energy (small rooms),,,,75418636.0,ns,6
-Day 23,Task 1 - Least amount of energy (small rooms),,,,116747943.0,ns,9
-Day 23,Task 1 - Least amount of energy (small rooms),,,,165046858.0,ns,12
-Day 23,Task 1 - Least amount of energy (small rooms),,,,192329873.0,ns,15
-Day 23,Task 1 - Least amount of energy (small rooms),,,,233288299.0,ns,18
-Day 23,Task 1 - Least amount of energy (small rooms),,,,267096336.0,ns,21
-Day 23,Task 1 - Least amount of energy (small rooms),,,,305014377.0,ns,24
-Day 23,Task 1 - Least amount of energy (small rooms),,,,341791941.0,ns,27
-Day 23,Task 1 - Least amount of energy (small rooms),,,,377276486.0,ns,30
+Day 23,Task 1 - Least amount of energy (small rooms),,,,44027221.0,ns,3
+Day 23,Task 1 - Least amount of energy (small rooms),,,,88320166.0,ns,6
+Day 23,Task 1 - Least amount of energy (small rooms),,,,125469442.0,ns,9
+Day 23,Task 1 - Least amount of energy (small rooms),,,,175252901.0,ns,12
+Day 23,Task 1 - Least amount of energy (small rooms),,,,223185827.0,ns,15
+Day 23,Task 1 - Least amount of energy (small rooms),,,,375090812.0,ns,18
+Day 23,Task 1 - Least amount of energy (small rooms),,,,299245820.0,ns,21
+Day 23,Task 1 - Least amount of energy (small rooms),,,,357530990.0,ns,24
+Day 23,Task 1 - Least amount of energy (small rooms),,,,386750264.0,ns,27
+Day 23,Task 1 - Least amount of energy (small rooms),,,,434179268.0,ns,30

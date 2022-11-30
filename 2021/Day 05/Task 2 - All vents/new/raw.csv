@@ -1,11 +1,11 @@
 group,function,value,throughput_num,throughput_type,sample_measured_value,unit,iteration_count
-Day 05,Task 2 - All vents,,,,45089356.0,ns,3
-Day 05,Task 2 - All vents,,,,91216040.0,ns,6
-Day 05,Task 2 - All vents,,,,136689899.0,ns,9
-Day 05,Task 2 - All vents,,,,184055616.0,ns,12
-Day 05,Task 2 - All vents,,,,226373763.0,ns,15
-Day 05,Task 2 - All vents,,,,274442007.0,ns,18
-Day 05,Task 2 - All vents,,,,359898934.0,ns,21
-Day 05,Task 2 - All vents,,,,362621148.0,ns,24
-Day 05,Task 2 - All vents,,,,408830340.0,ns,27
-Day 05,Task 2 - All vents,,,,455500237.0,ns,30
+Day 05,Task 2 - All vents,,,,32220374.0,ns,2
+Day 05,Task 2 - All vents,,,,64485865.0,ns,4
+Day 05,Task 2 - All vents,,,,97085102.0,ns,6
+Day 05,Task 2 - All vents,,,,125937672.0,ns,8
+Day 05,Task 2 - All vents,,,,158616337.0,ns,10
+Day 05,Task 2 - All vents,,,,284825692.0,ns,12
+Day 05,Task 2 - All vents,,,,229574135.0,ns,14
+Day 05,Task 2 - All vents,,,,258596600.0,ns,16
+Day 05,Task 2 - All vents,,,,287808873.0,ns,18
+Day 05,Task 2 - All vents,,,,320962179.0,ns,20

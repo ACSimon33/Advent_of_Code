@@ -1,11 +1,11 @@
 group,function,value,throughput_num,throughput_type,sample_measured_value,unit,iteration_count
-Day 11,Task 2 - Amount of steps until synchronization,,,,37282425.0,ns,14
-Day 11,Task 2 - Amount of steps until synchronization,,,,74703728.0,ns,28
-Day 11,Task 2 - Amount of steps until synchronization,,,,112276302.0,ns,42
-Day 11,Task 2 - Amount of steps until synchronization,,,,150032721.0,ns,56
-Day 11,Task 2 - Amount of steps until synchronization,,,,187035424.0,ns,70
-Day 11,Task 2 - Amount of steps until synchronization,,,,226255992.0,ns,84
-Day 11,Task 2 - Amount of steps until synchronization,,,,261253379.0,ns,98
-Day 11,Task 2 - Amount of steps until synchronization,,,,300717311.0,ns,112
-Day 11,Task 2 - Amount of steps until synchronization,,,,358202592.0,ns,126
-Day 11,Task 2 - Amount of steps until synchronization,,,,395143902.0,ns,140
+Day 11,Task 2 - Amount of steps until synchronization,,,,35100286.0,ns,13
+Day 11,Task 2 - Amount of steps until synchronization,,,,75988379.0,ns,26
+Day 11,Task 2 - Amount of steps until synchronization,,,,106832092.0,ns,39
+Day 11,Task 2 - Amount of steps until synchronization,,,,144593963.0,ns,52
+Day 11,Task 2 - Amount of steps until synchronization,,,,188472601.0,ns,65
+Day 11,Task 2 - Amount of steps until synchronization,,,,482406660.0,ns,78
+Day 11,Task 2 - Amount of steps until synchronization,,,,298600470.0,ns,91
+Day 11,Task 2 - Amount of steps until synchronization,,,,288701042.0,ns,104
+Day 11,Task 2 - Amount of steps until synchronization,,,,526009919.0,ns,117
+Day 11,Task 2 - Amount of steps until synchronization,,,,445436762.0,ns,130
