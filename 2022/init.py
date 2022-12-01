@@ -19,10 +19,7 @@ import os
 import re
 import sys
 import argparse
-import shutil
-import glob
 from pathlib import Path
-import warnings
 
 TEMPLATE_DAY = 0
 TEMPLATE_PROJECT = "Typescript Template"
