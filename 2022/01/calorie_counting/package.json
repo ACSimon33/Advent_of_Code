@@ -6,8 +6,8 @@
     "tsc": "tsc --build --verbose",
     "test": "jest",
     "exec": "node ../../build/01/calorie_counting/src/main.js",
-    "format": "prettier --write */*.ts",
-    "check-format": "prettier --check */*.ts",
+    "format": "prettier --write */*.ts --cache --cache-location=../../build/01/calorie_counting/.prettier-cache",
+    "check-format": "prettier --check */*.ts --cache --cache-location=../../build/01/calorie_counting/.prettier-cache",
     "benchmark": "node ../../build/01/calorie_counting/benchmarks/puzzle_benchmarks.js"
   },
   "keywords": [

@@ -6,8 +6,8 @@
     "tsc": "tsc --build --verbose",
     "test": "jest",
     "exec": "node ../../build/00/typescript_template/src/main.js",
-    "format": "prettier --write */*.ts",
-    "check-format": "prettier --check */*.ts",
+    "format": "prettier --write */*.ts --cache --cache-location=../../build/00/typescript_template/.prettier-cache",
+    "check-format": "prettier --check */*.ts --cache --cache-location=../../build/00/typescript_template/.prettier-cache",
     "benchmark": "node ../../build/00/typescript_template/benchmarks/puzzle_benchmarks.js"
   },
   "keywords": [
