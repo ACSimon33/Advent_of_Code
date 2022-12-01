@@ -35,10 +35,8 @@ export const args = parse<AoCArgs>(
 
 import * as calorie_counting from './calorie_counting';
 
-const val_1: number = calorie_counting.max_calories(args.filename);
-console.log('Max calories:');
-console.log(val_1);
+const max_cal: number = calorie_counting.max_calories(args.filename);
+console.log('Max calories:', max_cal);
 
-let val_2: number = calorie_counting.sum_of_top_three(args.filename);
-console.log('Sum of top three calories:');
-console.log(val_2);
+const top_three_cal: number = calorie_counting.sum_of_top_three(args.filename);
+console.log('Sum of top three calories:', top_three_cal);

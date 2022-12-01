@@ -38,7 +38,7 @@ export const args = parse<AoCArgs>(
 import * as typescript_template from './typescript_template';
 
 const val_1: number = typescript_template.solution_1(args.filename);
-console.log(val_1);
+console.log('Solution of task 1:', val_1);
 
-let val_2: number = typescript_template.solution_2(args.filename);
-console.log(val_2);
+const val_2: number = typescript_template.solution_2(args.filename);
+console.log('Solution of task 2:', val_2);

@@ -8,11 +8,11 @@ const INPUT_FILENAME: string = './input/example_input.txt';
 describe('Typescript Template (day 00)', () => {
   // Test of part 1
   test('Task 1', () => {
-    expect(typescript_template.solution_1(INPUT_FILENAME)).toBe(3);
+    expect(typescript_template.solution_1(INPUT_FILENAME)).toBe(42);
   });
 
   // Test of part 2
   test('Task 2', () => {
-    expect(typescript_template.solution_2(INPUT_FILENAME)).toBe(6);
+    expect(typescript_template.solution_2(INPUT_FILENAME)).toBe(43);
   });
 });
