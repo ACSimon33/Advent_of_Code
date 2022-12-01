@@ -9,6 +9,7 @@
   "author": "Simon Lukas Märtens",
   "license": "CC0",
   "workspaces": [
-    "00/typescript_template"
+    "00/typescript_template",
+    "01/calorie_counting"
   ]
 }
