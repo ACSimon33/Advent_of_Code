@@ -1,22 +1,22 @@
 import * as fs from 'fs';
 
-// Your choices
+// Opponents choices
 enum Opponent {
   A = 1,
   B = 2,
-  C = 3,
-};
+  C = 3
+}
 
-// Opponents choices
+// Your choices
 enum You {
   X = 1,
   Y = 2,
-  Z = 3,
-};
+  Z = 3
+}
 
 interface MatchUp {
-  _opponent: Opponent,
-  _you: You
+  _opponent: Opponent;
+  _you: You;
 }
 
 // Match matrix
@@ -25,6 +25,11 @@ const results: number[][] = [
   [0, 3, 6],
   [6, 0, 3]
 ];
+
+// Calculate the points you get from a single match
+function calc_points(match: MatchUp): number {
+  return match._you + results[match._opponent - 1][match._you - 1];
+}
 
 /// First task.
 export function guess_instructioons(filename: string): number {
@@ -39,7 +44,7 @@ export function guess_instructioons(filename: string): number {
       _you: You[choices[1] as keyof typeof You]
     };
 
-    score += match._you + results[match._opponent - 1][match._you - 1];
+    score += calc_points(match);
   }
 
   return score;
@@ -67,7 +72,7 @@ export function follow_instructioons(filename: string): number {
       match._you += You.Z;
     }
 
-    score += match._you + results[match._opponent - 1][match._you - 1];
+    score += calc_points(match);
   }
 
   return score;
