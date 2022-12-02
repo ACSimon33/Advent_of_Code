@@ -10,6 +10,7 @@
   "license": "CC0",
   "workspaces": [
     "00/typescript_template",
-    "01/calorie_counting"
+    "01/calorie_counting",
+    "02/rock_paper_scissors"
   ]
 }
