@@ -11,6 +11,7 @@
   "workspaces": [
     "00/typescript_template",
     "01/calorie_counting",
-    "02/rock_paper_scissors"
+    "02/rock_paper_scissors",
+    "03/rucksack_reorganization"
   ]
 }
