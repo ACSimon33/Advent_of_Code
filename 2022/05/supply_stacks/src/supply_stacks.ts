@@ -5,9 +5,9 @@ import * as fs from 'fs';
 // Interface for a generic stack
 interface StackInterface<T> {
   push(crate: T): void;
-  pop(): T;
+  pop(): T | undefined;
   move_to(other: StackInterface<T>, amount: number): void;
-  top(): T;
+  top(): T | undefined;
   reverse(): void;
 }
 
@@ -26,7 +26,7 @@ class Stack<T> implements StackInterface<T> {
   }
 
   // Pop the top element from the stack
-  public pop(): T {
+  public pop(): T | undefined {
     return this.crates.pop()!;
   }
 
@@ -38,19 +38,19 @@ class Stack<T> implements StackInterface<T> {
   ): void {
     let tmp: Stack<T> = new Stack<T>();
     for (let i: number = 0; i < amount; i++) {
-      tmp.push(this.pop());
+      tmp.push(this.pop()!);
     }
     if (!retain_order) {
       tmp.reverse();
     }
     for (let i: number = 0; i < amount; i++) {
-      other.push(tmp.pop());
+      other.push(tmp.pop()!);
     }
   }
 
   // Return the top element without popping it
-  public top(): T {
-    return this.crates.at(-1)!;
+  public top(): T | undefined {
+    return this.crates.at(-1);
   }
 
   // Reverse the order of the stack
@@ -110,6 +110,6 @@ export function reorder_stacks(
 
   // Return the final configuration
   return stacks.reduce((acc: string, stack: Stack<string>) => {
-    return acc.concat(stack.top());
+    return acc.concat(stack.top()!);
   }, '');
 }
