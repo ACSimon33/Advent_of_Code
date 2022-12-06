@@ -27,7 +27,7 @@ class Stack<T> implements StackInterface<T> {
 
   // Pop the top element from the stack
   public pop(): T | undefined {
-    return this.crates.pop()!;
+    return this.crates.pop();
   }
 
   // Move a given amount of elements from this stack to another
