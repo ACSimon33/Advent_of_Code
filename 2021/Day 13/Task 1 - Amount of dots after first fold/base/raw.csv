@@ -1,11 +1,11 @@
 group,function,value,throughput_num,throughput_type,sample_measured_value,unit,iteration_count
-Day 13,Task 1 - Amount of dots after first fold,,,,35128764.0,ns,148
-Day 13,Task 1 - Amount of dots after first fold,,,,72931180.0,ns,296
-Day 13,Task 1 - Amount of dots after first fold,,,,105967983.0,ns,444
-Day 13,Task 1 - Amount of dots after first fold,,,,143844882.0,ns,592
-Day 13,Task 1 - Amount of dots after first fold,,,,179378313.0,ns,740
-Day 13,Task 1 - Amount of dots after first fold,,,,309596296.0,ns,888
-Day 13,Task 1 - Amount of dots after first fold,,,,261982042.0,ns,1036
-Day 13,Task 1 - Amount of dots after first fold,,,,291632165.0,ns,1184
-Day 13,Task 1 - Amount of dots after first fold,,,,341749383.0,ns,1332
-Day 13,Task 1 - Amount of dots after first fold,,,,361959438.0,ns,1480
+Day 13,Task 1 - Amount of dots after first fold,,,,36746008.0,ns,158
+Day 13,Task 1 - Amount of dots after first fold,,,,73857602.0,ns,316
+Day 13,Task 1 - Amount of dots after first fold,,,,109644967.0,ns,474
+Day 13,Task 1 - Amount of dots after first fold,,,,148048892.0,ns,632
+Day 13,Task 1 - Amount of dots after first fold,,,,181752188.0,ns,790
+Day 13,Task 1 - Amount of dots after first fold,,,,217686092.0,ns,948
+Day 13,Task 1 - Amount of dots after first fold,,,,254234302.0,ns,1106
+Day 13,Task 1 - Amount of dots after first fold,,,,290761143.0,ns,1264
+Day 13,Task 1 - Amount of dots after first fold,,,,326716624.0,ns,1422
+Day 13,Task 1 - Amount of dots after first fold,,,,363092666.0,ns,1580

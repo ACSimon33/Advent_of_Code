@@ -1,11 +1,11 @@
 group,function,value,throughput_num,throughput_type,sample_measured_value,unit,iteration_count
-Day 14,Task 1 - Element counts after 10 steps,,,,33140639.0,ns,99
-Day 14,Task 1 - Element counts after 10 steps,,,,63942105.0,ns,198
-Day 14,Task 1 - Element counts after 10 steps,,,,97960656.0,ns,297
-Day 14,Task 1 - Element counts after 10 steps,,,,128020785.0,ns,396
-Day 14,Task 1 - Element counts after 10 steps,,,,167611366.0,ns,495
-Day 14,Task 1 - Element counts after 10 steps,,,,200226749.0,ns,594
-Day 14,Task 1 - Element counts after 10 steps,,,,226455263.0,ns,693
-Day 14,Task 1 - Element counts after 10 steps,,,,318504087.0,ns,792
-Day 14,Task 1 - Element counts after 10 steps,,,,412639140.0,ns,891
-Day 14,Task 1 - Element counts after 10 steps,,,,342844813.0,ns,990
+Day 14,Task 1 - Element counts after 10 steps,,,,36434139.0,ns,116
+Day 14,Task 1 - Element counts after 10 steps,,,,73028975.0,ns,232
+Day 14,Task 1 - Element counts after 10 steps,,,,109959366.0,ns,348
+Day 14,Task 1 - Element counts after 10 steps,,,,145744563.0,ns,464
+Day 14,Task 1 - Element counts after 10 steps,,,,182352815.0,ns,580
+Day 14,Task 1 - Element counts after 10 steps,,,,218818022.0,ns,696
+Day 14,Task 1 - Element counts after 10 steps,,,,256121246.0,ns,812
+Day 14,Task 1 - Element counts after 10 steps,,,,291938404.0,ns,928
+Day 14,Task 1 - Element counts after 10 steps,,,,327621125.0,ns,1044
+Day 14,Task 1 - Element counts after 10 steps,,,,364999559.0,ns,1160

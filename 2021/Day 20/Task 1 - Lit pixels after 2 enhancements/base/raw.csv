@@ -1,11 +1,11 @@
 group,function,value,throughput_num,throughput_type,sample_measured_value,unit,iteration_count
-Day 20,Task 1 - Lit pixels after 2 enhancements,,,,68319450.0,ns,23
-Day 20,Task 1 - Lit pixels after 2 enhancements,,,,82964613.0,ns,46
-Day 20,Task 1 - Lit pixels after 2 enhancements,,,,121108075.0,ns,69
-Day 20,Task 1 - Lit pixels after 2 enhancements,,,,227251550.0,ns,92
-Day 20,Task 1 - Lit pixels after 2 enhancements,,,,345936603.0,ns,115
-Day 20,Task 1 - Lit pixels after 2 enhancements,,,,221593721.0,ns,138
-Day 20,Task 1 - Lit pixels after 2 enhancements,,,,258520610.0,ns,161
-Day 20,Task 1 - Lit pixels after 2 enhancements,,,,298092345.0,ns,184
-Day 20,Task 1 - Lit pixels after 2 enhancements,,,,584265601.0,ns,207
-Day 20,Task 1 - Lit pixels after 2 enhancements,,,,611931515.0,ns,230
+Day 20,Task 1 - Lit pixels after 2 enhancements,,,,37113325.0,ns,25
+Day 20,Task 1 - Lit pixels after 2 enhancements,,,,75112955.0,ns,50
+Day 20,Task 1 - Lit pixels after 2 enhancements,,,,112517110.0,ns,75
+Day 20,Task 1 - Lit pixels after 2 enhancements,,,,150605956.0,ns,100
+Day 20,Task 1 - Lit pixels after 2 enhancements,,,,189650108.0,ns,125
+Day 20,Task 1 - Lit pixels after 2 enhancements,,,,225385802.0,ns,150
+Day 20,Task 1 - Lit pixels after 2 enhancements,,,,277180844.0,ns,175
+Day 20,Task 1 - Lit pixels after 2 enhancements,,,,313692245.0,ns,200
+Day 20,Task 1 - Lit pixels after 2 enhancements,,,,356143811.0,ns,225
+Day 20,Task 1 - Lit pixels after 2 enhancements,,,,388311270.0,ns,250

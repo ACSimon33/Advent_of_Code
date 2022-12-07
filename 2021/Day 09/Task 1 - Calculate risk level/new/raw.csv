@@ -1,11 +1,11 @@
 group,function,value,throughput_num,throughput_type,sample_measured_value,unit,iteration_count
-Day 09,Task 1 - Calculate risk level,,,,30881745.0,ns,53
-Day 09,Task 1 - Calculate risk level,,,,61496723.0,ns,106
-Day 09,Task 1 - Calculate risk level,,,,95443710.0,ns,159
-Day 09,Task 1 - Calculate risk level,,,,125799108.0,ns,212
-Day 09,Task 1 - Calculate risk level,,,,160375436.0,ns,265
-Day 09,Task 1 - Calculate risk level,,,,189176314.0,ns,318
-Day 09,Task 1 - Calculate risk level,,,,218718050.0,ns,371
-Day 09,Task 1 - Calculate risk level,,,,255124488.0,ns,424
-Day 09,Task 1 - Calculate risk level,,,,288231433.0,ns,477
-Day 09,Task 1 - Calculate risk level,,,,310242941.0,ns,530
+Day 09,Task 1 - Calculate risk level,,,,36763079.0,ns,58
+Day 09,Task 1 - Calculate risk level,,,,72528476.0,ns,116
+Day 09,Task 1 - Calculate risk level,,,,108344949.0,ns,174
+Day 09,Task 1 - Calculate risk level,,,,142662696.0,ns,232
+Day 09,Task 1 - Calculate risk level,,,,180237942.0,ns,290
+Day 09,Task 1 - Calculate risk level,,,,213703908.0,ns,348
+Day 09,Task 1 - Calculate risk level,,,,247501022.0,ns,406
+Day 09,Task 1 - Calculate risk level,,,,288803145.0,ns,464
+Day 09,Task 1 - Calculate risk level,,,,322397819.0,ns,522
+Day 09,Task 1 - Calculate risk level,,,,353922285.0,ns,580

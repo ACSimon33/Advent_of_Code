@@ -1,11 +1,11 @@
 group,function,value,throughput_num,throughput_type,sample_measured_value,unit,iteration_count
-Day 08,Task 2 - Decode and sum outputs,,,,34360581.0,ns,42
-Day 08,Task 2 - Decode and sum outputs,,,,66789087.0,ns,84
-Day 08,Task 2 - Decode and sum outputs,,,,102687514.0,ns,126
-Day 08,Task 2 - Decode and sum outputs,,,,134152338.0,ns,168
-Day 08,Task 2 - Decode and sum outputs,,,,164561222.0,ns,210
-Day 08,Task 2 - Decode and sum outputs,,,,207654810.0,ns,252
-Day 08,Task 2 - Decode and sum outputs,,,,242499102.0,ns,294
-Day 08,Task 2 - Decode and sum outputs,,,,275167662.0,ns,336
-Day 08,Task 2 - Decode and sum outputs,,,,310506842.0,ns,378
-Day 08,Task 2 - Decode and sum outputs,,,,351602991.0,ns,420
+Day 08,Task 2 - Decode and sum outputs,,,,36041448.0,ns,46
+Day 08,Task 2 - Decode and sum outputs,,,,86866675.0,ns,92
+Day 08,Task 2 - Decode and sum outputs,,,,109153679.0,ns,138
+Day 08,Task 2 - Decode and sum outputs,,,,149884012.0,ns,184
+Day 08,Task 2 - Decode and sum outputs,,,,187123711.0,ns,230
+Day 08,Task 2 - Decode and sum outputs,,,,217309096.0,ns,276
+Day 08,Task 2 - Decode and sum outputs,,,,258408124.0,ns,322
+Day 08,Task 2 - Decode and sum outputs,,,,296166113.0,ns,368
+Day 08,Task 2 - Decode and sum outputs,,,,332638418.0,ns,414
+Day 08,Task 2 - Decode and sum outputs,,,,367373729.0,ns,460
