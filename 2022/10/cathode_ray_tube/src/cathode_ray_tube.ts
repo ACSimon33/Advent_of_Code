@@ -7,7 +7,7 @@ class CRT {
   private _buffer: boolean[];
   private _idx: number;
 
-  // Craete display with goiven width and height
+  // Create display with given width and height
   public constructor(width: number, height: number) {
     this._width = width;
     this._height = height;
@@ -40,10 +40,10 @@ class CPU {
   private _register_x: number;
   private _cycle: number;
   private _signal_strength: number;
-  private _crt: CRT | null;
+  private _crt?: CRT;
 
-  // Create a CPU and optionally couple a CRT display
-  public constructor(crt: CRT | null = null) {
+  // Create a CPU and optionally couple it with a CRT display
+  public constructor(crt?: CRT) {
     this._register_x = 1;
     this._cycle = 0;
     this._signal_strength = 0;
@@ -80,7 +80,7 @@ export function signal_strength(filename: string): number {
   const contents: string = fs.readFileSync(filename, 'utf8');
   const lines = contents.split(/\r?\n/);
 
-  // Create a standalone CPU and parse instructions
+  // Create a standalone CPU and parse the instructions
   let cpu: CPU = new CPU();
   for (const line of lines) {
     cpu.perform_instruction(line);
@@ -95,7 +95,7 @@ export function display_output(filename: string): string {
   const contents: string = fs.readFileSync(filename, 'utf8');
   const lines = contents.split(/\r?\n/);
 
-  // Create a CPU coupled to a CRT display and parse instructions
+  // Create a CPU coupled to a CRT display and parse the instructions
   let crt: CRT = new CRT(40, 6);
   let cpu: CPU = new CPU(crt);
   for (const line of lines) {
