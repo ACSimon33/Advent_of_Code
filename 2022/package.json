@@ -19,6 +19,11 @@
     "07/no_space_left_on_device",
     "08/treetop_tree_house",
     "09/rope_bridge",
-    "10/cathode_ray_tube"
-  ]
+    "10/cathode_ray_tube",
+    "11/monkey_in_the_middle",
+    "12/hill_climbing_algorithm"
+  ],
+  "devDependencies": {
+    "priority-queue-typescript": "^1.0.1"
+  }
 }
