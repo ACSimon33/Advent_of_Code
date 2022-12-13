@@ -21,7 +21,8 @@
     "09/rope_bridge",
     "10/cathode_ray_tube",
     "11/monkey_in_the_middle",
-    "12/hill_climbing_algorithm"
+    "12/hill_climbing_algorithm",
+    "13/distress_signal"
   ],
   "devDependencies": {
     "priority-queue-typescript": "^1.0.1"
