@@ -1,5 +1,7 @@
 import * as fs from 'fs';
 
+// ************************************************************************** //
+
 // Section class
 class Section {
   // Compartments
@@ -33,6 +35,8 @@ function count<T>(arr: T[], predicate: (elem: T) => boolean): number {
     return acc + Number(predicate(cur));
   }, 0);
 }
+
+// ************************************************************************** //
 
 /// First task.
 export function count_contained_sections(filename: string): number {

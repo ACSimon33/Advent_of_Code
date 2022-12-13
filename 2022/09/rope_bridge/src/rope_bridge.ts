@@ -1,5 +1,7 @@
 import * as fs from 'fs';
 
+// ************************************************************************** //
+
 // Directions
 enum Direction {
   U,
@@ -127,6 +129,8 @@ class Rope {
     }
   }
 }
+
+// ************************************************************************** //
 
 /// First & second task.
 export function tail_positions(filename: string, rope_length: number): number {

@@ -1,5 +1,7 @@
 import * as fs from 'fs';
 
+// ************************************************************************** //
+
 // Create intersection of the two arrays
 function find_matches(arr1: number[], arr2: number[]): number[] {
   return arr1.filter((value: number) => {
@@ -45,6 +47,8 @@ class Rucksack {
     });
   }
 }
+
+// ************************************************************************** //
 
 /// First task.
 export function sum_of_priorities(filename: string): number {

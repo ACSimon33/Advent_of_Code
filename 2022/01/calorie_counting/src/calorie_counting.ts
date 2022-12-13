@@ -1,5 +1,23 @@
 import * as fs from 'fs';
 
+// ************************************************************************** //
+
+// Get the index of the smalles value in the array
+function idx_of_smallest(array: number[]): number {
+  let idx: number = 0;
+  let smallest: number = Number.MAX_SAFE_INTEGER;
+  for (const i in array) {
+    if (array[i] <= smallest) {
+      smallest = array[i];
+      idx = Number(i);
+    }
+  }
+
+  return idx;
+}
+
+// ************************************************************************** //
+
 /// First task.
 export function max_calories(filename: string): number {
   const contents: string = fs.readFileSync(filename, 'utf8');
@@ -47,18 +65,4 @@ export function sum_of_top_three(filename: string): number {
   return max_three.reduce<number>((accumulator, current) => {
     return accumulator + current;
   }, 0);
-}
-
-// Get the index of the smalles value in the array
-function idx_of_smallest(array: number[]): number {
-  let idx: number = 0;
-  let smallest: number = Number.MAX_SAFE_INTEGER;
-  for (const i in array) {
-    if (array[i] <= smallest) {
-      smallest = array[i];
-      idx = Number(i);
-    }
-  }
-
-  return idx;
 }

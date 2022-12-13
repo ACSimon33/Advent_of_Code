@@ -1,6 +1,8 @@
 import * as fs from 'fs';
 import PriorityQueue from 'priority-queue-typescript';
 
+// ************************************************************************** //
+
 // Node interface
 interface Node {
   id: number;
@@ -118,6 +120,8 @@ function parse_nodes(lines: string[]): [Node[], number, number] {
 
   return [nodes, start, end];
 }
+
+// ************************************************************************** //
 
 /// First task.
 export function shortest_path(filename: string): number {

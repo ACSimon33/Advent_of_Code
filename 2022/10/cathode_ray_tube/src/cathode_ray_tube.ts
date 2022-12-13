@@ -1,5 +1,7 @@
 import * as fs from 'fs';
 
+// ************************************************************************** //
+
 // CRT display
 class CRT {
   private _width: number;
@@ -74,6 +76,8 @@ class CPU {
     this._crt?.draw_pixel(this._register_x);
   }
 }
+
+// ************************************************************************** //
 
 /// First task.
 export function signal_strength(filename: string): number {

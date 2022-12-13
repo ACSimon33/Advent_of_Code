@@ -1,5 +1,11 @@
 import * as fs from 'fs';
 
+// ************************************************************************** //
+
+
+
+// ************************************************************************** //
+
 /// First task.
 export function solution_1(filename: string): number {
   const contents: string = fs.readFileSync(filename, 'utf8');

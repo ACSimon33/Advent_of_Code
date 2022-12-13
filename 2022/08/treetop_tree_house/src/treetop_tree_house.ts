@@ -1,5 +1,7 @@
 import * as fs from 'fs';
 
+// ************************************************************************** //
+
 // Viewing direction
 enum Direction {
   Top = 0,
@@ -131,6 +133,8 @@ class TreeGrid {
     return max_scenic_score;
   }
 }
+
+// ************************************************************************** //
 
 /// First task.
 export function number_of_visible_trees(filename: string): number {

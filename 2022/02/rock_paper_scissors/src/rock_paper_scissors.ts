@@ -1,5 +1,7 @@
 import * as fs from 'fs';
 
+// ************************************************************************** //
+
 // Opponents choices
 enum Opponent {
   A = 1,
@@ -30,6 +32,8 @@ const results: number[][] = [
 function calc_points(match: MatchUp): number {
   return match._you + results[match._opponent - 1][match._you - 1];
 }
+
+// ************************************************************************** //
 
 /// First task.
 export function guess_instructioons(filename: string): number {

@@ -1,5 +1,7 @@
 import * as fs from 'fs';
 
+// ************************************************************************** //
+
 // Item with a worry level which uses modulo arithmetic
 class Item {
   private static _modulo: number = 1;
@@ -152,6 +154,8 @@ class Monkey {
     return this._inspect_counter;
   }
 }
+
+// ************************************************************************** //
 
 /// First task.
 export function with_worry_reduction(filename: string): number {
