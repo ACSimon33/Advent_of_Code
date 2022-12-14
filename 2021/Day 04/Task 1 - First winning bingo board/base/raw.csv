@@ -1,11 +1,11 @@
 group,function,value,throughput_num,throughput_type,sample_measured_value,unit,iteration_count
-Day 04,Task 1 - First winning bingo board,,,,36338162.0,ns,188
-Day 04,Task 1 - First winning bingo board,,,,72519306.0,ns,376
-Day 04,Task 1 - First winning bingo board,,,,108773369.0,ns,564
-Day 04,Task 1 - First winning bingo board,,,,145696208.0,ns,752
-Day 04,Task 1 - First winning bingo board,,,,188101818.0,ns,940
-Day 04,Task 1 - First winning bingo board,,,,228730908.0,ns,1128
-Day 04,Task 1 - First winning bingo board,,,,262595254.0,ns,1316
-Day 04,Task 1 - First winning bingo board,,,,292571579.0,ns,1504
-Day 04,Task 1 - First winning bingo board,,,,326679954.0,ns,1692
-Day 04,Task 1 - First winning bingo board,,,,364807269.0,ns,1880
+Day 04,Task 1 - First winning bingo board,,,,36904990.0,ns,183
+Day 04,Task 1 - First winning bingo board,,,,72591473.0,ns,366
+Day 04,Task 1 - First winning bingo board,,,,109744523.0,ns,549
+Day 04,Task 1 - First winning bingo board,,,,235848072.0,ns,732
+Day 04,Task 1 - First winning bingo board,,,,219270212.0,ns,915
+Day 04,Task 1 - First winning bingo board,,,,215204313.0,ns,1098
+Day 04,Task 1 - First winning bingo board,,,,251947410.0,ns,1281
+Day 04,Task 1 - First winning bingo board,,,,298578787.0,ns,1464
+Day 04,Task 1 - First winning bingo board,,,,342497524.0,ns,1647
+Day 04,Task 1 - First winning bingo board,,,,384848901.0,ns,1830

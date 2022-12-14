@@ -1,11 +1,11 @@
 group,function,value,throughput_num,throughput_type,sample_measured_value,unit,iteration_count
-Day 09,Task 2 - Caluclate size of the 3 largest basins,,,,35863788.0,ns,24
-Day 09,Task 2 - Caluclate size of the 3 largest basins,,,,71578247.0,ns,48
-Day 09,Task 2 - Caluclate size of the 3 largest basins,,,,107727624.0,ns,72
-Day 09,Task 2 - Caluclate size of the 3 largest basins,,,,144476893.0,ns,96
-Day 09,Task 2 - Caluclate size of the 3 largest basins,,,,179470513.0,ns,120
-Day 09,Task 2 - Caluclate size of the 3 largest basins,,,,216163120.0,ns,144
-Day 09,Task 2 - Caluclate size of the 3 largest basins,,,,252168484.0,ns,168
-Day 09,Task 2 - Caluclate size of the 3 largest basins,,,,287992915.0,ns,192
-Day 09,Task 2 - Caluclate size of the 3 largest basins,,,,325346576.0,ns,216
-Day 09,Task 2 - Caluclate size of the 3 largest basins,,,,361508556.0,ns,240
+Day 09,Task 2 - Caluclate size of the 3 largest basins,,,,37252964.0,ns,24
+Day 09,Task 2 - Caluclate size of the 3 largest basins,,,,75578475.0,ns,48
+Day 09,Task 2 - Caluclate size of the 3 largest basins,,,,112057484.0,ns,72
+Day 09,Task 2 - Caluclate size of the 3 largest basins,,,,163741046.0,ns,96
+Day 09,Task 2 - Caluclate size of the 3 largest basins,,,,184871202.0,ns,120
+Day 09,Task 2 - Caluclate size of the 3 largest basins,,,,350526002.0,ns,144
+Day 09,Task 2 - Caluclate size of the 3 largest basins,,,,551257338.0,ns,168
+Day 09,Task 2 - Caluclate size of the 3 largest basins,,,,293568108.0,ns,192
+Day 09,Task 2 - Caluclate size of the 3 largest basins,,,,553921387.0,ns,216
+Day 09,Task 2 - Caluclate size of the 3 largest basins,,,,415033541.0,ns,240

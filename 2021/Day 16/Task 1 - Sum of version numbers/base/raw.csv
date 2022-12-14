@@ -1,11 +1,11 @@
 group,function,value,throughput_num,throughput_type,sample_measured_value,unit,iteration_count
-Day 16,Task 1 - Sum of version numbers,,,,36133253.0,ns,504
-Day 16,Task 1 - Sum of version numbers,,,,72732303.0,ns,1008
-Day 16,Task 1 - Sum of version numbers,,,,108717111.0,ns,1512
-Day 16,Task 1 - Sum of version numbers,,,,145786882.0,ns,2016
-Day 16,Task 1 - Sum of version numbers,,,,180641344.0,ns,2520
-Day 16,Task 1 - Sum of version numbers,,,,217910036.0,ns,3024
-Day 16,Task 1 - Sum of version numbers,,,,255025981.0,ns,3528
-Day 16,Task 1 - Sum of version numbers,,,,291469652.0,ns,4032
-Day 16,Task 1 - Sum of version numbers,,,,326602487.0,ns,4536
-Day 16,Task 1 - Sum of version numbers,,,,365552229.0,ns,5040
+Day 16,Task 1 - Sum of version numbers,,,,32815459.0,ns,431
+Day 16,Task 1 - Sum of version numbers,,,,62819271.0,ns,862
+Day 16,Task 1 - Sum of version numbers,,,,97465034.0,ns,1293
+Day 16,Task 1 - Sum of version numbers,,,,128514053.0,ns,1724
+Day 16,Task 1 - Sum of version numbers,,,,161556019.0,ns,2155
+Day 16,Task 1 - Sum of version numbers,,,,189306122.0,ns,2586
+Day 16,Task 1 - Sum of version numbers,,,,316236768.0,ns,3017
+Day 16,Task 1 - Sum of version numbers,,,,353989549.0,ns,3448
+Day 16,Task 1 - Sum of version numbers,,,,405093405.0,ns,3879
+Day 16,Task 1 - Sum of version numbers,,,,320124940.0,ns,4310

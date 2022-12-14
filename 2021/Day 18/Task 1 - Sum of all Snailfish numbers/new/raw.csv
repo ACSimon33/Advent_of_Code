@@ -1,11 +1,11 @@
 group,function,value,throughput_num,throughput_type,sample_measured_value,unit,iteration_count
-Day 18,Task 1 - Sum of all Snailfish numbers,,,,37091055.0,ns,17
-Day 18,Task 1 - Sum of all Snailfish numbers,,,,81359502.0,ns,34
-Day 18,Task 1 - Sum of all Snailfish numbers,,,,119227957.0,ns,51
-Day 18,Task 1 - Sum of all Snailfish numbers,,,,152624901.0,ns,68
-Day 18,Task 1 - Sum of all Snailfish numbers,,,,187565284.0,ns,85
-Day 18,Task 1 - Sum of all Snailfish numbers,,,,249778074.0,ns,102
-Day 18,Task 1 - Sum of all Snailfish numbers,,,,265481035.0,ns,119
-Day 18,Task 1 - Sum of all Snailfish numbers,,,,298911332.0,ns,136
-Day 18,Task 1 - Sum of all Snailfish numbers,,,,341660745.0,ns,153
-Day 18,Task 1 - Sum of all Snailfish numbers,,,,378313040.0,ns,170
+Day 18,Task 1 - Sum of all Snailfish numbers,,,,35613054.0,ns,16
+Day 18,Task 1 - Sum of all Snailfish numbers,,,,72413178.0,ns,32
+Day 18,Task 1 - Sum of all Snailfish numbers,,,,107980069.0,ns,48
+Day 18,Task 1 - Sum of all Snailfish numbers,,,,145527841.0,ns,64
+Day 18,Task 1 - Sum of all Snailfish numbers,,,,181027624.0,ns,80
+Day 18,Task 1 - Sum of all Snailfish numbers,,,,219138720.0,ns,96
+Day 18,Task 1 - Sum of all Snailfish numbers,,,,251688693.0,ns,112
+Day 18,Task 1 - Sum of all Snailfish numbers,,,,373928402.0,ns,128
+Day 18,Task 1 - Sum of all Snailfish numbers,,,,341257928.0,ns,144
+Day 18,Task 1 - Sum of all Snailfish numbers,,,,551323082.0,ns,160

@@ -1,11 +1,11 @@
 group,function,value,throughput_num,throughput_type,sample_measured_value,unit,iteration_count
-Day 10,Task 1 - Error score,,,,36587064.0,ns,251
-Day 10,Task 1 - Error score,,,,72973346.0,ns,502
-Day 10,Task 1 - Error score,,,,109569750.0,ns,753
-Day 10,Task 1 - Error score,,,,145921711.0,ns,1004
-Day 10,Task 1 - Error score,,,,181727518.0,ns,1255
-Day 10,Task 1 - Error score,,,,226685634.0,ns,1506
-Day 10,Task 1 - Error score,,,,272860188.0,ns,1757
-Day 10,Task 1 - Error score,,,,309903702.0,ns,2008
-Day 10,Task 1 - Error score,,,,353753235.0,ns,2259
-Day 10,Task 1 - Error score,,,,401289401.0,ns,2510
+Day 10,Task 1 - Error score,,,,33299799.0,ns,229
+Day 10,Task 1 - Error score,,,,69716995.0,ns,458
+Day 10,Task 1 - Error score,,,,103356218.0,ns,687
+Day 10,Task 1 - Error score,,,,135236501.0,ns,916
+Day 10,Task 1 - Error score,,,,172235276.0,ns,1145
+Day 10,Task 1 - Error score,,,,232725320.0,ns,1374
+Day 10,Task 1 - Error score,,,,245844477.0,ns,1603
+Day 10,Task 1 - Error score,,,,295931927.0,ns,1832
+Day 10,Task 1 - Error score,,,,400527780.0,ns,2061
+Day 10,Task 1 - Error score,,,,361111132.0,ns,2290

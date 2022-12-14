@@ -1,11 +1,11 @@
 group,function,value,throughput_num,throughput_type,sample_measured_value,unit,iteration_count
-Day 21,Task 1 - Deterministic die,,,,36343850.0,ns,3028
-Day 21,Task 1 - Deterministic die,,,,72320370.0,ns,6056
-Day 21,Task 1 - Deterministic die,,,,108492175.0,ns,9084
-Day 21,Task 1 - Deterministic die,,,,145667632.0,ns,12112
-Day 21,Task 1 - Deterministic die,,,,180201313.0,ns,15140
-Day 21,Task 1 - Deterministic die,,,,219337627.0,ns,18168
-Day 21,Task 1 - Deterministic die,,,,254354199.0,ns,21196
-Day 21,Task 1 - Deterministic die,,,,289716763.0,ns,24224
-Day 21,Task 1 - Deterministic die,,,,326022271.0,ns,27252
-Day 21,Task 1 - Deterministic die,,,,363368348.0,ns,30280
+Day 21,Task 1 - Deterministic die,,,,34641048.0,ns,2726
+Day 21,Task 1 - Deterministic die,,,,72211540.0,ns,5452
+Day 21,Task 1 - Deterministic die,,,,109817075.0,ns,8178
+Day 21,Task 1 - Deterministic die,,,,143428052.0,ns,10904
+Day 21,Task 1 - Deterministic die,,,,184213103.0,ns,13630
+Day 21,Task 1 - Deterministic die,,,,220611424.0,ns,16356
+Day 21,Task 1 - Deterministic die,,,,258114817.0,ns,19082
+Day 21,Task 1 - Deterministic die,,,,292566352.0,ns,21808
+Day 21,Task 1 - Deterministic die,,,,331992821.0,ns,24534
+Day 21,Task 1 - Deterministic die,,,,361864808.0,ns,27260

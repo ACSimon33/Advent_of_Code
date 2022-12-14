@@ -1,11 +1,11 @@
 group,function,value,throughput_num,throughput_type,sample_measured_value,unit,iteration_count
-Day 06,Task 1 - Lanternfish population after 80 days,,,,35877846.0,ns,1720
-Day 06,Task 1 - Lanternfish population after 80 days,,,,71955590.0,ns,3440
-Day 06,Task 1 - Lanternfish population after 80 days,,,,109211271.0,ns,5160
-Day 06,Task 1 - Lanternfish population after 80 days,,,,143615988.0,ns,6880
-Day 06,Task 1 - Lanternfish population after 80 days,,,,179527626.0,ns,8600
-Day 06,Task 1 - Lanternfish population after 80 days,,,,215141775.0,ns,10320
-Day 06,Task 1 - Lanternfish population after 80 days,,,,250630358.0,ns,12040
-Day 06,Task 1 - Lanternfish population after 80 days,,,,289787193.0,ns,13760
-Day 06,Task 1 - Lanternfish population after 80 days,,,,326937403.0,ns,15480
-Day 06,Task 1 - Lanternfish population after 80 days,,,,361590204.0,ns,17200
+Day 06,Task 1 - Lanternfish population after 80 days,,,,35692035.0,ns,1637
+Day 06,Task 1 - Lanternfish population after 80 days,,,,73862368.0,ns,3274
+Day 06,Task 1 - Lanternfish population after 80 days,,,,107028581.0,ns,4911
+Day 06,Task 1 - Lanternfish population after 80 days,,,,145435470.0,ns,6548
+Day 06,Task 1 - Lanternfish population after 80 days,,,,193697652.0,ns,8185
+Day 06,Task 1 - Lanternfish population after 80 days,,,,228233786.0,ns,9822
+Day 06,Task 1 - Lanternfish population after 80 days,,,,270388029.0,ns,11459
+Day 06,Task 1 - Lanternfish population after 80 days,,,,296140913.0,ns,13096
+Day 06,Task 1 - Lanternfish population after 80 days,,,,325281045.0,ns,14733
+Day 06,Task 1 - Lanternfish population after 80 days,,,,353440949.0,ns,16370

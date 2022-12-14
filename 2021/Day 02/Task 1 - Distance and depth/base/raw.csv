@@ -1,11 +1,11 @@
 group,function,value,throughput_num,throughput_type,sample_measured_value,unit,iteration_count
-Day 02,Task 1 - Distance and depth,,,,36223280.0,ns,256
-Day 02,Task 1 - Distance and depth,,,,72724341.0,ns,512
-Day 02,Task 1 - Distance and depth,,,,108564288.0,ns,768
-Day 02,Task 1 - Distance and depth,,,,145409595.0,ns,1024
-Day 02,Task 1 - Distance and depth,,,,183247482.0,ns,1280
-Day 02,Task 1 - Distance and depth,,,,218748288.0,ns,1536
-Day 02,Task 1 - Distance and depth,,,,255515746.0,ns,1792
-Day 02,Task 1 - Distance and depth,,,,291034964.0,ns,2048
-Day 02,Task 1 - Distance and depth,,,,328319333.0,ns,2304
-Day 02,Task 1 - Distance and depth,,,,364606042.0,ns,2560
+Day 02,Task 1 - Distance and depth,,,,36507685.0,ns,248
+Day 02,Task 1 - Distance and depth,,,,70754384.0,ns,496
+Day 02,Task 1 - Distance and depth,,,,107772992.0,ns,744
+Day 02,Task 1 - Distance and depth,,,,146715618.0,ns,992
+Day 02,Task 1 - Distance and depth,,,,181751323.0,ns,1240
+Day 02,Task 1 - Distance and depth,,,,280248571.0,ns,1488
+Day 02,Task 1 - Distance and depth,,,,265979633.0,ns,1736
+Day 02,Task 1 - Distance and depth,,,,285517777.0,ns,1984
+Day 02,Task 1 - Distance and depth,,,,325011777.0,ns,2232
+Day 02,Task 1 - Distance and depth,,,,360297881.0,ns,2480
