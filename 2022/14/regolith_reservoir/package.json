@@ -1,14 +1,14 @@
 {
-  "name": "day_13_distress_signal",
+  "name": "day_14_regolith_reservoir",
   "version": "1.0.0",
-  "description": "Advent of Code solution day 13",
+  "description": "Advent of Code solution day 14",
   "scripts": {
     "tsc": "tsc --build --verbose",
     "test": "jest",
-    "exec": "node ../../build/13/distress_signal/src/main.js",
-    "format": "prettier --write */*.ts --cache --cache-location=../../build/13/distress_signal/.prettier-cache",
-    "check-format": "prettier --check */*.ts --cache --cache-location=../../build/13/distress_signal/.prettier-cache",
-    "benchmark": "node ../../build/13/distress_signal/benchmarks/puzzle_benchmarks.js"
+    "exec": "node ../../build/14/regolith_reservoir/src/main.js",
+    "format": "prettier --write */*.ts --cache --cache-location=../../build/14/regolith_reservoir/.prettier-cache",
+    "check-format": "prettier --check */*.ts --cache --cache-location=../../build/14/regolith_reservoir/.prettier-cache",
+    "benchmark": "node ../../build/14/regolith_reservoir/benchmarks/puzzle_benchmarks.js"
   },
   "keywords": [
     "AoC",
@@ -24,7 +24,6 @@
     "jest-junit": "^15.0.0",
     "kleur": "^4.1.5",
     "prettier": "^2.7.1",
-    "priority-queue-typescript": "^1.0.1",
     "ts-command-line-args": "^2.3.1",
     "ts-jest": "^29.0.3",
     "typescript": "^4.9.3"
