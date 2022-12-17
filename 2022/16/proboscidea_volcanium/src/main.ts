@@ -7,6 +7,7 @@ import { parse } from 'ts-command-line-args';
 // Command line arguments
 interface AoCArgs {
   filename: string;
+  time: number;
   elefants: number;
   help?: boolean;
 }
@@ -24,6 +25,12 @@ export const args = parse<AoCArgs>(
       alias: 'e',
       defaultValue: 0,
       description: 'Number of elefants to help with opening the valves'
+    },
+    time: {
+      type: Number,
+      alias: 't',
+      defaultValue: 30,
+      description: 'Remaining time (in minutes)'
     },
     help: {
       type: Boolean,
@@ -45,12 +52,22 @@ export const args = parse<AoCArgs>(
 import * as proboscidea_volcanium from './proboscidea_volcanium';
 
 const val_1: number = proboscidea_volcanium.max_pressure_release(
-  args.filename, 0
+  args.filename,
+  args.time,
+  0
 );
-console.log('Maximum pressure release:', val_1);
+console.log('Maximum pressure release after', args.time, 'minutes:', val_1);
 
 const val_2: number = proboscidea_volcanium.max_pressure_release(
   args.filename,
+  args.time,
   args.elefants
 );
-console.log('Maximum pressure release with', args.elefants, 'elefants:', val_2);
+console.log(
+  'Maximum pressure release after',
+  args.time,
+  'minutes with',
+  args.elefants,
+  'elefants:',
+  val_2
+);

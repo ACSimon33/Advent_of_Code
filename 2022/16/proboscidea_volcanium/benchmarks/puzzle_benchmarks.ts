@@ -8,7 +8,7 @@ import * as kleur from 'kleur';
 import * as proboscidea_volcanium from '../src/proboscidea_volcanium';
 
 // Puzzle input
-const INPUT_FILENAME: string = './input/example_input.txt';
+const INPUT_FILENAME: string = './input/puzzle_input.txt';
 
 // Register benchmark suite and export it
 module.exports = benny.suite(
@@ -16,12 +16,12 @@ module.exports = benny.suite(
 
   // Benchmark of part 1
   benny.add('Task 1', () => {
-    proboscidea_volcanium.max_pressure_release(INPUT_FILENAME, 0);
+    proboscidea_volcanium.max_pressure_release(INPUT_FILENAME, 30, 0);
   }),
 
-  // Benchmark of part 2
+  // Benchmark of part 2 (takes too long)
   benny.add('Task 2', () => {
-    proboscidea_volcanium.max_pressure_release(INPUT_FILENAME, 1);
+    proboscidea_volcanium.max_pressure_release(INPUT_FILENAME, 20, 1);
   }),
 
   // Run becnhmarks
