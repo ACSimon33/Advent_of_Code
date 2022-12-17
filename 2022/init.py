@@ -39,9 +39,9 @@ def _get_lower(name: str) -> str:
 def _get_day_folder(day: int, name: str = None) -> Path:
   day_folder = _get_day(day)
   if name:
-    day_folder = os.path.join(day_folder, _get_lower(name))
+    day_folder = Path(day_folder) / _get_lower(name)
 
-  return Path(os.path.join(Path(__file__).parent, day_folder))
+  return Path(__file__).parent / day_folder
 
 # Find next day
 def _find_next_day() -> int:
@@ -74,19 +74,19 @@ def search_and_replace(day: int, name: str, contents: str) -> str:
 
 # Initialize project from template
 def init_project(day: int, name: str,) -> None:
-  source = _get_day_folder(TEMPLATE_DAY, TEMPLATE_PROJECT)
-  destination = _get_day_folder(day, name)
+  source = _get_day_folder(TEMPLATE_DAY, TEMPLATE_PROJECT).as_posix()
+  destination = _get_day_folder(day, name).as_posix()
 
   for (dirpath, _, files) in os.walk(source):
-    output_dir = re.sub(str(source), str(destination), str(dirpath))
+    output_dir = re.sub(source, destination, Path(dirpath).as_posix())
     os.makedirs(output_dir)
 
     for filename in files:
-      input = os.path.join(dirpath, filename)
+      input = Path(dirpath) / filename
       with open(input, 'r') as file:
         contents = file.read()
 
-      output = os.path.join(output_dir, search_and_replace(day, name, filename))
+      output = Path(output_dir) / search_and_replace(day, name, filename)
       with open(output, 'w') as file:
         file.write(search_and_replace(day, name, contents))
 
@@ -105,7 +105,7 @@ def main():
   init_project(opts.day, opts.name)
 
   # Initialize as workspace
-  package_file = os.path.join(Path(__file__).parent, 'package.json')
+  package_file = Path(__file__).parent / 'package.json'
   config = []
   with open(package_file, 'r') as file:
     last_line_matched = False
