@@ -7,6 +7,7 @@ import { parse } from 'ts-command-line-args';
 // Command line arguments
 interface AoCArgs {
   filename: string;
+  elefants: number;
   help?: boolean;
 }
 
@@ -17,6 +18,12 @@ export const args = parse<AoCArgs>(
       type: String,
       alias: 'f',
       description: 'Input file (e.g. input/puzzle_input.txt)'
+    },
+    elefants: {
+      type: Number,
+      alias: 'e',
+      defaultValue: 0,
+      description: 'Number of elefants to help with opening the valves'
     },
     help: {
       type: Boolean,
@@ -37,8 +44,13 @@ export const args = parse<AoCArgs>(
 
 import * as proboscidea_volcanium from './proboscidea_volcanium';
 
-const val_1: number = proboscidea_volcanium.solution_1(args.filename);
-console.log('Solution of task 1:', val_1);
+const val_1: number = proboscidea_volcanium.max_pressure_release(
+  args.filename, 0
+);
+console.log('Maximum pressure release:', val_1);
 
-const val_2: number = proboscidea_volcanium.solution_2(args.filename);
-console.log('Solution of task 2:', val_2);
+const val_2: number = proboscidea_volcanium.max_pressure_release(
+  args.filename,
+  args.elefants
+);
+console.log('Maximum pressure release with', args.elefants, 'elefants:', val_2);

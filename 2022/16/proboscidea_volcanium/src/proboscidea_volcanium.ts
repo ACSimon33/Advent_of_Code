@@ -1,4 +1,3 @@
-import exp from 'constants';
 import * as fs from 'fs';
 
 // ************************************************************************** //
@@ -7,16 +6,18 @@ class Valve {
   private _id: string;
   private _flow_rate: number;
   private _neighbours: [Valve, number][];
+  private _pressure_release: Map<string, number[]>;
+  private _distances: Map<string, number>;
   private _is_open: boolean;
-  private _visited: boolean;
 
   public constructor(str: string) {
     const match = str.match(/Valve ([A-Z]+) has flow rate=([0-9]*);.*/)!;
     this._id = match[1];
     this._flow_rate = Number(match[2]);
     this._neighbours = [];
-    this._is_open = (this._flow_rate == 0);
-    this._visited = false;
+    this._pressure_release = new Map<string, number[]>();
+    this._distances = new Map<string, number>();
+    this._is_open = false;
   }
 
   public id(): string {
@@ -42,7 +43,6 @@ class Valve {
     }
 
     if (!found) {
-      // console.log("Add neighbour", valve.id(), "to valve", this._id)
       this._neighbours.push([valve, time]);
     }
   }
@@ -50,32 +50,26 @@ class Valve {
   public remove_neighbour(id: string): void {
     for (let i: number = 0; i < this._neighbours.length; i++) {
       if (this._neighbours[i][0].id() == id) {
-        // console.log("Remove neighbour", id, "from valve", this._id)
         this._neighbours.splice(i, 1);
         break;
       }
     }
   }
 
-  public distance_to_closed_valve(prev: string = this._id): number {
-    if (!this._is_open) {
-      return 0;
-    }
+  public set_pressure_release(pressure_release: Map<string, number[]>): void {
+    this._pressure_release = new Map<string, number[]>(pressure_release);
+  }
 
-    if (this._visited) {
-      return Number.POSITIVE_INFINITY;
-    }
+  public pressure_release(): Map<string, number[]> {
+    return this._pressure_release;
+  }
 
-    this._visited = true;
-    const distance = this._neighbours.reduce((acc: number, [valve, distance]: [Valve, number]): number => {
-      if (prev == valve.id()) {
-        return acc;
-      }
-      return Math.min(acc, distance + valve.distance_to_closed_valve(this._id))
-    }, Number.POSITIVE_INFINITY);
-    this._visited = false;
+  public set_distances(distances: Map<string, number>): void {
+    this._distances = new Map<string, number>(distances);
+  }
 
-    return distance;
+  public distances(): Map<string, number> {
+    return this._distances;
   }
 
   public open(): void {
@@ -92,92 +86,52 @@ class Valve {
 }
 
 function explore_tunnels(
-  current: Valve,
-  current_flow: number,
-  max_flow: number,
-  time: number
-) {
-  // Quick return is time's up
-  if (time <= 0) {
+  valves: Map<string, Valve>,
+  current: string[],
+  remaining_time: number[]
+): number {
+
+  const max_time: number = Math.max(...remaining_time);
+  const agent: number = remaining_time.indexOf(max_time);
+
+  // Quick return if time's up
+  if (max_time <= 0) {
     return 0;
   }
 
-  // Prune branch
-  if (current_flow == max_flow) {
-    console.log(time)
-    return time * max_flow;
+  let max_release: number = 0;
+  const valve: Valve = valves.get(current[agent])!;
+
+  valve.open();
+  for (const [id, release] of valve.pressure_release().entries()) {
+    const next: Valve = valves.get(id)!;
+    if (!(next.is_open() || current.includes(id))) {
+      let new_remaining_time = [...remaining_time];
+      new_remaining_time[agent] -= valve.distances().get(id)! + 1;
+
+      let new_current = [...current];
+      new_current[agent] = id;
+
+      max_release = Math.max(max_release, release[max_time - 1] + explore_tunnels(valves, new_current, new_remaining_time));
+    }
   }
+  valve.close();
 
-  // We spend at least one minute here (walking or opening the valve)
-  if (time <= 1) {
-    return current_flow;
-  }
-
-  // Open the current valve and explore
-  let release_1: number = 0;
-  if (!current.is_open()) {
-    // Open valve
-    release_1 += current_flow
-    current.open();
-    current_flow += current.flow_rate();
-    time--;
-
-    release_1 += current
-      .neighbours()
-      .reduce((acc: number, [neighbour, distance]: [Valve, number]) => {
-        // if (neighbour.distance_to_closed_valve(current.id()) == Number.POSITIVE_INFINITY) {
-        //   return acc;
-        // }
-
-        const steps: number = Math.min(distance, time);
-        return Math.max(
-          acc,
-          current_flow * steps + explore_tunnels(
-            neighbour,
-            current_flow,
-            max_flow,
-            time - steps
-          )
-        );
-      }, 0);
-
-    // Close valve
-    current.close();
-    current_flow -= current.flow_rate();
-    time++;
-  }
-
-  // Explore tunnels without opening the current valve
-  let release_2: number = current
-    .neighbours()
-    .reduce((acc: number, [neighbour, distance]: [Valve, number]) => {
-      // if (neighbour.distance_to_closed_valve(current.id()) == Number.POSITIVE_INFINITY) {
-      //   return acc;
-      // }
-
-      const steps: number = Math.min(distance, time);
-      return Math.max(
-        acc,
-        current_flow * steps + explore_tunnels(
-          neighbour,
-          current_flow,
-          max_flow,
-          time - steps
-        )
-      );
-    }, 0);
-
-  return Math.max(release_1, release_2);
+  return max_release;
 }
 
 // ************************************************************************** //
 
-/// First task.
-export function solution_1(filename: string): number {
+/// First & second task.
+export function max_pressure_release(
+  filename: string,
+  elefants: number
+): number {
   const contents: string = fs.readFileSync(filename, 'utf8');
   const lines = contents.split(/\r?\n/);
 
   const start_id: string = 'AA';
+  const minutes: number = 19;
 
   // Parse valves
   let valves: Map<string, Valve> = new Map<string, Valve>();
@@ -185,8 +139,6 @@ export function solution_1(filename: string): number {
     const vlv = new Valve(line);
     valves.set(vlv.id(), vlv);
   }
-
-  //console.log(valves)
 
   // Parse tunnel system
   for (const line of lines) {
@@ -196,8 +148,6 @@ export function solution_1(filename: string): number {
       vlv.add_neighbour(valves.get(id)!);
     }
   }
-
-  //console.log(valves)
 
   // Remove valves with zero flow rate
   const eliminate_vertex = (): boolean => {
@@ -220,24 +170,64 @@ export function solution_1(filename: string): number {
     }
 
     return false;
-  }
-
+  };
   while (eliminate_vertex()) {}
 
-  //console.log(valves)
+  // Precalculate pressure releases from each valve to each valve
+  let graph: Map<string, Valve>;
+  let distance: Map<string, number> = new Map<string, number>();
+  for (let [id, valve] of valves.entries()) {
+    // Init graph and distances for Dijkstra
+    graph = new Map<string, Valve>(valves);
+    for (let id2 of valves.keys()) {
+      distance.set(id2, id2 == id ? 0 : Number.POSITIVE_INFINITY);
+    }
 
-  const max_flow = Array.from(valves.values()).reduce((acc: number, valve: Valve) => {
-    return acc + valve.flow_rate();
-  }, 0);
+    while (graph.size > 0) {
+      // Get id of nearest valve
+      const min_id: string = Array.from(graph.keys()).reduce(
+        (acc: string, current: string) => {
+          if (acc == '') {
+            return current;
+          }
+          return distance.get(acc)! <= distance.get(current)! ? acc : current;
+        },
+        ''
+      );
+
+      // Update distance of neighbouring valves
+      for (const [neighbour, dist] of graph.get(min_id)!.neighbours()) {
+        distance.set(
+          neighbour.id(),
+          Math.min(distance.get(neighbour.id())!, distance.get(min_id)! + dist)
+        );
+      }
+
+      // Remove valve
+      graph.delete(min_id);
+    }
+
+    // Calculate pressure releases for each valve and time step
+    let pressure_release: Map<string, number[]> = new Map<string, number[]>();
+    for (const [id2, dist] of distance.entries()) {
+      let release_timeline: number[] = new Array<number>(minutes);
+      for (let i: number = 0; i < minutes; i++) {
+        release_timeline[i] =
+          Math.max(0, i - dist) * valves.get(id2)!.flow_rate();
+      }
+      pressure_release.set(id2, release_timeline);
+    }
+    //console.log(valve.id(), pressure_release)
+    valve.set_distances(distance);
+    valve.set_pressure_release(pressure_release);
+  }
+
+  // Initialize agents
+  let remaining_time: number[] = new Array<number>(elefants + 1);
+  remaining_time.fill(minutes - 4 * elefants);
+  let start: string[] = new Array<string>(elefants + 1);
+  start.fill(start_id);
 
   // Explore tunnel system until 30 minutes are reached
-  return explore_tunnels(valves.get('AA')!, 0, max_flow, 25);
-}
-
-/// Second task.
-export function solution_2(filename: string): number {
-  const contents: string = fs.readFileSync(filename, 'utf8');
-  const lines = contents.split(/\r?\n/);
-
-  return 43;
+  return explore_tunnels(valves, start, remaining_time);
 }

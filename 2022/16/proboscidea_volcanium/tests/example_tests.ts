@@ -8,11 +8,15 @@ const INPUT_FILENAME: string = './input/example_input.txt';
 describe('Proboscidea Volcanium (day 16)', () => {
   // Test of part 1
   test('Task 1', () => {
-    expect(proboscidea_volcanium.solution_1(INPUT_FILENAME)).toBe(1651);
+    expect(proboscidea_volcanium.max_pressure_release(INPUT_FILENAME, 0)).toBe(
+      1651
+    );
   });
 
   // Test of part 2
   test('Task 2', () => {
-    expect(proboscidea_volcanium.solution_2(INPUT_FILENAME)).toBe(43);
+    expect(proboscidea_volcanium.max_pressure_release(INPUT_FILENAME, 1)).toBe(
+      1707
+    );
   });
 });

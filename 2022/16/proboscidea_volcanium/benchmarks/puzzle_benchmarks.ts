@@ -16,12 +16,12 @@ module.exports = benny.suite(
 
   // Benchmark of part 1
   benny.add('Task 1', () => {
-    proboscidea_volcanium.solution_1(INPUT_FILENAME);
+    proboscidea_volcanium.max_pressure_release(INPUT_FILENAME, 0);
   }),
 
   // Benchmark of part 2
   benny.add('Task 2', () => {
-    proboscidea_volcanium.solution_2(INPUT_FILENAME);
+    proboscidea_volcanium.max_pressure_release(INPUT_FILENAME, 1);
   }),
 
   // Run becnhmarks
