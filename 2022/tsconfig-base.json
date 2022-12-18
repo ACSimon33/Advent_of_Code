@@ -6,8 +6,8 @@
     "composite": true,
 
     /* Language and Environment */
-    "target": "es2016",
-    "lib": ["es6"],
+    "target": "es2022",
+    "lib": ["ES2022"],
 
     /* Modules */
     "module": "commonjs",

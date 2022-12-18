@@ -11,7 +11,7 @@ Example uses:
     Initializes the next uninitialized day.
 
   init.py --name <name> --day <day>
-    Initializes the next uninitialized day.
+    Initializes a given day.
 
 '''
 
