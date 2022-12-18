@@ -28,37 +28,17 @@ class Coverage {
 
   // Calculate size of the covered range
   public size(): number {
-    console.log(this._ranges);
-    let covered_points: number = this._ranges.reduce(
-      (acc: number, range: Range): number => {
-        return acc + (range.end - range.start) + 1;
-      },
-      0
-    );
+    let covered_points: number = 0;
+    let start: number = this.find_start();
+    let end: number;
 
-    console.log(covered_points);
-
-    for (let idx1: number = 0; idx1 < this._ranges.length; idx1++) {
-      const r1 = this._ranges[idx1];
-      for (let idx2: number = idx1 + 1; idx2 < this._ranges.length; idx2++) {
-        const r2 = this._ranges[idx2];
-
-        const max_start = Math.max(r1.start, r2.start);
-        const min_end = Math.min(r1.end, r2.end);
-
-        if (r1.start >= r2.start && r1.end <= r2.end) {
-          console.log(idx1, idx2, r1.start, r1.end, -((r1.end - r1.start) + 1));
-          covered_points -= (r1.end - r1.start) + 1;
-        } else if (r2.start >= r1.start && r2.end <= r1.end) {
-          console.log(idx1, idx2, r2.start, r2.end, -((r2.end - r2.start) + 1));
-          covered_points -= (r2.end - r2.start) + 1;
-        } else if (!(r1.end < r2.start || r2.end < r1.start)) {
-          if (max_start >= min_end) {
-            console.log(idx1, idx2, max_start, min_end, -(max_start - min_end + 1));
-            covered_points -= max_start - min_end + 1;
-          }
-        }
-      }
+    while (Number.isFinite(start)) {
+      end = this.find_uncovered({
+        start: start,
+        end: Number.POSITIVE_INFINITY
+      })!;
+      covered_points += end - start;
+      start = this.find_start(end);
     }
 
     return covered_points;
@@ -87,6 +67,13 @@ class Coverage {
   public reset(): void {
     this._ranges = [];
   }
+
+  // Find starting point of a range above a certain point
+  private find_start(lb: number = Number.NEGATIVE_INFINITY): number {
+    return this._ranges.reduce((acc: number, range: Range): number => {
+      return range.start >= lb && range.start < acc ? range.start : acc;
+    }, Number.POSITIVE_INFINITY);
+  }
 }
 
 // Sensor at a given point with the beacon it's detecting
@@ -106,14 +93,14 @@ class Sensor {
   }
 
   // Return the range of a given scanline that is covered by this sensor
-  public scan_line(y: number): [boolean, Range] {
+  public scan_line(y: number): [number | undefined, Range] {
     const distance_x: number = Math.abs(this._beacon[0] - this._coords[0]);
     const distance_y: number = Math.abs(this._beacon[1] - this._coords[1]);
     const manhatten: number = distance_x + distance_y;
     const d: number = manhatten - Math.abs(this._coords[1] - y);
 
     return [
-      this._beacon[1] == y,
+      this._beacon[1] == y ? this._beacon[0] : undefined,
       { start: this._coords[0] - d, end: this._coords[0] + d }
     ];
   }
@@ -127,17 +114,19 @@ export function invalid_positions(filename: string, y: number): number {
   const lines = contents.split(/\r?\n/);
 
   const sensors: Sensor[] = lines.map((line: string) => new Sensor(line));
-  let beacons: number = 0;
+  let beacons: Set<number> = new Set<number>();
 
   // Create coverage for given scan line
   let cov: Coverage = new Coverage();
   sensors.forEach((sensor: Sensor): void => {
     let scan = sensor.scan_line(y);
-    beacons += Number(scan[0]);
+    if (scan[0]) {
+      beacons.add(scan[0]);
+    }
     cov.add(scan[1]);
   });
 
-  return cov.size() - beacons;
+  return cov.size() - beacons.size;
 }
 
 /// Second task.
