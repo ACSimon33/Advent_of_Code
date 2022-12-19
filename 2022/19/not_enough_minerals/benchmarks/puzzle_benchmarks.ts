@@ -5,30 +5,30 @@ import * as benny from 'benny';
 import * as kleur from 'kleur';
 
 // Import puzzle solutions module
-import * as not_enough_minerals from '../src/not_enough_minerals';
+import * as not_enough_minerals from '../src/not_enough_minerals.js';
 
 // Puzzle input
-const INPUT_FILENAME: string = './input/example_input.txt';
+const INPUT_FILENAME: string = './input/puzzle_input.txt';
 
 // Register benchmark suite and export it
-module.exports = benny.suite(
+benny.suite(
   'Day 19 - Not Enough Minerals',
 
   // Benchmark of part 1
-  benny.add('Task 1', () => {
-    not_enough_minerals.solution_1(INPUT_FILENAME);
+  benny.add('Task 1', async () => {
+    await not_enough_minerals.blueprint_quality(INPUT_FILENAME);
   }),
 
   // Benchmark of part 2
-  // benny.add('Task 2', () => {
-  //   not_enough_minerals.solution_2(INPUT_FILENAME);
-  // }),
+  benny.add('Task 2', async () => {
+    await not_enough_minerals.geodes_product(INPUT_FILENAME);
+  }),
 
   // Run becnhmarks
   benny.cycle((result, summary) => {
     if (result.samples) {
       console.log(
-        kleur.green(`\n  ${result.name}:\n`) +
+        `\n  ${result.name}:\n` +
           `    ${result.details.mean.toExponential(2)} seconds ` +
           `±${result.margin.toFixed(2)}% (${result.samples} samples)`
       );

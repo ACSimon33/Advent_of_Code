@@ -45,15 +45,22 @@ class Factory {
   public robot_cost(material: Material): MaterialCost {
     return this._costs[material];
   }
+
+  public max_cost(): MaterialCost {
+    return this._costs.reduce((acc: MaterialCost, current: MaterialCost) => {
+      return acc.map((cost: number, m: Material) => Math.max(cost, current[m]));
+    }, [0, 0, 0]);
+  }
 }
 
 // Invetory that holds information about material and robot amounts
 class Inventory {
   private _materials: number[];
   private _robots: number[];
+  private _max_costs: MaterialCost;
 
   // Create an inventory with a single ore robot
-  public constructor() {
+  public constructor(max_costs: MaterialCost) {
     this._materials = new Array<number>(Material.TYPES);
     this._materials[Material.ORE] = 0;
     this._materials[Material.CLAY] = 0;
@@ -65,6 +72,8 @@ class Inventory {
     this._robots[Material.CLAY] = 0;
     this._robots[Material.OBSIDIAN] = 0;
     this._robots[Material.GEODE] = 0;
+
+    this._max_costs = max_costs;
   }
 
   // Mine for a certain amount of time
@@ -83,8 +92,10 @@ class Inventory {
 
   // Caluclate the time it needs until we can build a certain robot
   public time_to_build(robot_type: Material, cost: MaterialCost): number {
-    if (this._robots[robot_type] >= 9) {
-      return Number.POSITIVE_INFINITY;
+    if (robot_type != Material.GEODE) {
+      if (this._robots[robot_type] >= this._max_costs[robot_type]) {
+        return Number.POSITIVE_INFINITY;
+      }
     }
 
     return cost.reduce((diff, amount: number, m: Material) => {
@@ -145,9 +156,8 @@ class Inventory {
 function mine_geodes(
   factory: Factory,
   time: number,
-  inventory: Inventory = new Inventory(),
-  current_geodes: number = 0,
-  states: Map<number, number> = new Map<number, number>()
+  inventory: Inventory = new Inventory(factory.max_cost()),
+  current_geodes: number = 0
 ): number {
   let geodes: number = 0;
 
@@ -161,13 +171,6 @@ function mine_geodes(
     return current_geodes;
   }
 
-  // Quick return if we had this state already
-  const hash = inventory.hash(time - 1);
-  const state = states.get(hash);
-  if (state) {
-    return state;
-  }
-
   // Build robots if there is time
   for (let m: Material = Material.GEODE; m >= Material.ORE; m--) {
     let t: number = inventory.time_to_build(m, factory.robot_cost(m));
@@ -176,7 +179,7 @@ function mine_geodes(
       inventory.build(m, factory.robot_cost(m));
       geodes = Math.max(
         geodes,
-        mine_geodes(factory, time - t, inventory, geodes, states)
+        mine_geodes(factory, time - t, inventory, geodes)
       );
       inventory.restore(m, factory.robot_cost(m));
       inventory.unmine(t);
@@ -185,18 +188,13 @@ function mine_geodes(
     }
   }
 
-  // Add the current state to the hashmap if there is space
-  if (states.size < 16777216) {
-    states.set(hash, geodes);
-  }
-
   return geodes;
 }
 
 // ************************************************************************** //
 
 /// First task.
-export async function solution_1(filename: string): Promise<number> {
+export async function blueprint_quality(filename: string): Promise<number> {
   const contents: string = fs.readFileSync(filename, 'utf8');
   const lines = contents.split(/\r?\n/);
 
@@ -220,7 +218,7 @@ export async function solution_1(filename: string): Promise<number> {
 }
 
 /// Second task.
-export async function solution_2(filename: string): Promise<number> {
+export async function geodes_product(filename: string): Promise<number> {
   const contents: string = fs.readFileSync(filename, 'utf8');
   const lines = contents.split(/\r?\n/);
 
