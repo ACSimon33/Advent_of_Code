@@ -6,11 +6,12 @@
     "composite": true,
 
     /* Language and Environment */
-    "target": "es2022",
+    "target": "ES2022",
     "lib": ["ES2022"],
 
     /* Modules */
-    "module": "commonjs",
+    "module": "ES2022",
+    "moduleResolution": "Node",
     "rootDir": ".",
     "resolveJsonModule": true,
     "outDir": "build",

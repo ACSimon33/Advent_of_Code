@@ -1,6 +1,7 @@
 {
   "name": "advent_of_code_2022",
   "version": "1.0.0",
+  "type": "module",
   "description": "Advent of Code 2022",
   "keywords": [
     "AoC",
@@ -27,6 +28,7 @@
     "15/beacon_exclusion_zone",
     "16/proboscidea_volcanium",
     "17/pyroclastic_flow",
-    "18/boiling_boulders"
+    "18/boiling_boulders",
+    "19/not_enough_minerals"
   ]
 }
