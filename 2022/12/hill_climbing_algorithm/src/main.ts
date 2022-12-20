@@ -35,7 +35,7 @@ export const args = parse<AoCArgs>(
 
 // ************************************************************************** //
 
-import * as hill_climbing_algorithm from './hill_climbing_algorithm';
+import * as hill_climbing_algorithm from './hill_climbing_algorithm.js';
 
 const val_1: number = hill_climbing_algorithm.shortest_path(args.filename);
 console.log('Shortest path from start to end:', val_1);

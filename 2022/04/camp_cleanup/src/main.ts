@@ -33,7 +33,7 @@ export const args = parse<AoCArgs>(
 
 // ************************************************************************** //
 
-import * as camp_cleanup from './camp_cleanup';
+import * as camp_cleanup from './camp_cleanup.js';
 
 const val_1: number = camp_cleanup.count_contained_sections(args.filename);
 console.log('Number of contained sections:', val_1);

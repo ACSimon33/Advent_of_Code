@@ -49,7 +49,7 @@ export const args = parse<AoCArgs>(
 
 // ************************************************************************** //
 
-import * as beacon_exclusion_zone from './beacon_exclusion_zone';
+import * as beacon_exclusion_zone from './beacon_exclusion_zone.js';
 
 const val_1: number = beacon_exclusion_zone.invalid_positions(
   args.filename,

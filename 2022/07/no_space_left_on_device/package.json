@@ -1,6 +1,7 @@
 {
   "name": "day_07_no_space_left_on_device",
   "version": "1.0.0",
+  "type": "module",
   "description": "Advent of Code solution day 07",
   "scripts": {
     "tsc": "tsc --build --verbose",

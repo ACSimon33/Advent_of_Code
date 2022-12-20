@@ -1,6 +1,7 @@
 {
   "name": "day_05_supply_stacks",
   "version": "1.0.0",
+  "type": "module",
   "description": "Advent of Code solution day 05",
   "scripts": {
     "tsc": "tsc --build --verbose",

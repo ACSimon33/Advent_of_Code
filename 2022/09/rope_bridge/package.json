@@ -1,6 +1,7 @@
 {
   "name": "day_09_rope_bridge",
   "version": "1.0.0",
+  "type": "module",
   "description": "Advent of Code solution day 09",
   "scripts": {
     "tsc": "tsc --build --verbose",

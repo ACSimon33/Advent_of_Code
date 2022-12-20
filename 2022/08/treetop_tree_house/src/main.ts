@@ -33,7 +33,7 @@ export const args = parse<AoCArgs>(
 
 // ************************************************************************** //
 
-import * as treetop_tree_house from './treetop_tree_house';
+import * as treetop_tree_house from './treetop_tree_house.js';
 
 const val_1: number = treetop_tree_house.number_of_visible_trees(args.filename);
 console.log('Number of visible trees:', val_1);

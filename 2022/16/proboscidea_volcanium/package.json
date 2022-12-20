@@ -1,6 +1,7 @@
 {
   "name": "day_16_proboscidea_volcanium",
   "version": "1.0.0",
+  "type": "module",
   "description": "Advent of Code solution day 16",
   "scripts": {
     "tsc": "tsc --build --verbose",

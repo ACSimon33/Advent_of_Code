@@ -33,7 +33,7 @@ export const args = parse<AoCArgs>(
 
 // ************************************************************************** //
 
-import * as cathode_ray_tube from './cathode_ray_tube';
+import * as cathode_ray_tube from './cathode_ray_tube.js';
 
 const val_1: number = cathode_ray_tube.signal_strength(args.filename);
 console.log('Signal strength:', val_1);

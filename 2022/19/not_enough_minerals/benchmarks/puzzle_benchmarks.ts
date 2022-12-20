@@ -2,7 +2,7 @@
 import * as benny from 'benny';
 
 // Import kleur for colored output (https://github.com/lukeed/kleur)
-import * as kleur from 'kleur';
+import { red, green } from 'kleur/colors';
 
 // Import puzzle solutions module
 import * as not_enough_minerals from '../src/not_enough_minerals.js';
@@ -11,7 +11,7 @@ import * as not_enough_minerals from '../src/not_enough_minerals.js';
 const INPUT_FILENAME: string = './input/puzzle_input.txt';
 
 // Register benchmark suite and export it
-benny.suite(
+export const suite = benny.suite(
   'Day 19 - Not Enough Minerals',
 
   // Benchmark of part 1
@@ -25,16 +25,16 @@ benny.suite(
   }),
 
   // Run becnhmarks
-  benny.cycle((result, summary) => {
+  benny.cycle((result) => {
     if (result.samples) {
       console.log(
-        `\n  ${result.name}:\n` +
+        green(`\n  ${result.name}:\n`) +
           `    ${result.details.mean.toExponential(2)} seconds ` +
           `±${result.margin.toFixed(2)}% (${result.samples} samples)`
       );
     } else {
       console.log(
-        kleur.red(`\n  ${result.name}:\n`) + '    No samples recorded!'
+        red(`\n  ${result.name}:\n`) + '    No samples recorded!'
       );
     }
   }),

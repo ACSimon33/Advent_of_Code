@@ -33,7 +33,7 @@ export const args = parse<AoCArgs>(
 
 // ************************************************************************** //
 
-import * as supply_stacks from './supply_stacks';
+import * as supply_stacks from './supply_stacks.js';
 
 const val_1: string = supply_stacks.reorder_stacks(args.filename, false);
 console.log('Final configuration with CrateMover 9000:', val_1);

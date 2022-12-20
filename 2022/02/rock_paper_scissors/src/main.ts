@@ -35,7 +35,7 @@ export const args = parse<AoCArgs>(
 
 // ************************************************************************** //
 
-import * as rock_paper_scissors from './rock_paper_scissors';
+import * as rock_paper_scissors from './rock_paper_scissors.js';
 
 const points_1: number = rock_paper_scissors.guess_instructioons(args.filename);
 console.log('Your total points with X=Rock, Y=Paper, Z=Scissors:', points_1);

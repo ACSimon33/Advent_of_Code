@@ -1,6 +1,7 @@
 {
   "name": "day_04_camp_cleanup",
   "version": "1.0.0",
+  "type": "module",
   "description": "Advent of Code solution day 04",
   "scripts": {
     "tsc": "tsc --build --verbose",

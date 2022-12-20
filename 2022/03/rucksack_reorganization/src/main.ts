@@ -35,7 +35,7 @@ export const args = parse<AoCArgs>(
 
 // ************************************************************************** //
 
-import * as rucksack_reorganization from './rucksack_reorganization';
+import * as rucksack_reorganization from './rucksack_reorganization.js';
 
 const val_1: number = rucksack_reorganization.sum_of_priorities(args.filename);
 console.log('Sum of priorities of duplicate items:', val_1);

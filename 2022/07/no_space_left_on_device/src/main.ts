@@ -35,7 +35,7 @@ export const args = parse<AoCArgs>(
 
 // ************************************************************************** //
 
-import * as no_space_left_on_device from './no_space_left_on_device';
+import * as no_space_left_on_device from './no_space_left_on_device.js';
 
 const val_1: number = no_space_left_on_device.folders_below_100000(
   args.filename

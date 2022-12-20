@@ -1,6 +1,7 @@
 {
   "name": "day_03_rucksack_reorganization",
   "version": "1.0.0",
+  "type": "module",
   "description": "Advent of Code solution day 03",
   "scripts": {
     "tsc": "tsc --build --verbose",

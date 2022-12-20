@@ -33,7 +33,7 @@ export const args = parse<AoCArgs>(
 
 // ************************************************************************** //
 
-import * as regolith_reservoir from './regolith_reservoir';
+import * as regolith_reservoir from './regolith_reservoir.js';
 
 const val_1: number = regolith_reservoir.fill_cave(args.filename, false);
 console.log('Sand units without an infinite floor:', val_1);

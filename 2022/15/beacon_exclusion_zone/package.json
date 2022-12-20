@@ -1,6 +1,7 @@
 {
   "name": "day_15_beacon_exclusion_zone",
   "version": "1.0.0",
+  "type": "module",
   "description": "Advent of Code solution day 15",
   "scripts": {
     "tsc": "tsc --build --verbose",

@@ -49,7 +49,7 @@ export const args = parse<AoCArgs>(
 
 // ************************************************************************** //
 
-import * as proboscidea_volcanium from './proboscidea_volcanium';
+import * as proboscidea_volcanium from './proboscidea_volcanium.js';
 
 const val_1: number = proboscidea_volcanium.max_pressure_release(
   args.filename,

@@ -1,6 +1,7 @@
 {
   "name": "day_01_calorie_counting",
   "version": "1.0.0",
+  "type": "module",
   "description": "Advent of Code solution day 01",
   "scripts": {
     "tsc": "tsc --build --verbose",

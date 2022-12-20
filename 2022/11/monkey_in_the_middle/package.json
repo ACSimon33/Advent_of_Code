@@ -1,6 +1,7 @@
 {
   "name": "day_11_monkey_in_the_middle",
   "version": "1.0.0",
+  "type": "module",
   "description": "Advent of Code solution day 11",
   "scripts": {
     "tsc": "tsc --build --verbose",

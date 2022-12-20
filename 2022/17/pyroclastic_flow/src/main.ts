@@ -40,7 +40,7 @@ export const args = parse<AoCArgs>(
 
 // ************************************************************************** //
 
-import * as pyroclastic_flow from './pyroclastic_flow';
+import * as pyroclastic_flow from './pyroclastic_flow.js';
 
 const val: number = pyroclastic_flow.cave_height(args.filename, args.rocks);
 console.log('Cave height after', args.rocks, 'rocks:', val);

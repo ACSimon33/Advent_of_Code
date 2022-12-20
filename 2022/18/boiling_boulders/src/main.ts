@@ -33,7 +33,7 @@ export const args = parse<AoCArgs>(
 
 // ************************************************************************** //
 
-import * as boiling_boulders from './boiling_boulders';
+import * as boiling_boulders from './boiling_boulders.js';
 
 const val_1: number = boiling_boulders.surface_area(args.filename);
 console.log('Overall surface area:', val_1);

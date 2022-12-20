@@ -33,7 +33,7 @@ export const args = parse<AoCArgs>(
 
 // ************************************************************************** //
 
-import * as tuning_trouble from './tuning_trouble';
+import * as tuning_trouble from './tuning_trouble.js';
 
 const val_1: number = tuning_trouble.find_start_marker(args.filename, 4);
 console.log('Find start-of-package marker:', val_1);

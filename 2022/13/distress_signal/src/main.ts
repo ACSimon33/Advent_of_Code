@@ -33,7 +33,7 @@ export const args = parse<AoCArgs>(
 
 // ************************************************************************** //
 
-import * as distress_signal from './distress_signal';
+import * as distress_signal from './distress_signal.js';
 
 const val_1: number = distress_signal.correct_order(args.filename);
 console.log('Index sum of correct signal pairs:', val_1);

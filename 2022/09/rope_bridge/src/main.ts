@@ -33,7 +33,7 @@ export const args = parse<AoCArgs>(
 
 // ************************************************************************** //
 
-import * as rope_bridge from './rope_bridge';
+import * as rope_bridge from './rope_bridge.js';
 
 const val_1: number = rope_bridge.tail_positions(args.filename, 2);
 console.log('Rope of length 2:', val_1);

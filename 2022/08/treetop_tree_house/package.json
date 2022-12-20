@@ -1,6 +1,7 @@
 {
   "name": "day_08_treetop_tree_house",
   "version": "1.0.0",
+  "type": "module",
   "description": "Advent of Code solution day 08",
   "scripts": {
     "tsc": "tsc --build --verbose",

@@ -34,7 +34,7 @@
       "^.+\\.ts?$": "ts-jest"
     },
     "testEnvironment": "node",
-    "testRegex": "/tests/example_tests.ts",
+    "testRegex": "./tests/example_tests.ts",
     "moduleFileExtensions": [
       "ts",
       "js"

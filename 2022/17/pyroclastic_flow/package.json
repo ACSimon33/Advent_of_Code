@@ -1,6 +1,7 @@
 {
   "name": "day_17_pyroclastic_flow",
   "version": "1.0.0",
+  "type": "module",
   "description": "Advent of Code solution day 17",
   "scripts": {
     "tsc": "tsc --build --verbose",

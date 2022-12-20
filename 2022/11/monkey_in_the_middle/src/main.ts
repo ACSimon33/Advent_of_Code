@@ -35,7 +35,7 @@ export const args = parse<AoCArgs>(
 
 // ************************************************************************** //
 
-import * as monkey_in_the_middle from './monkey_in_the_middle';
+import * as monkey_in_the_middle from './monkey_in_the_middle.js';
 
 const val_1: number = monkey_in_the_middle.with_worry_reduction(args.filename);
 console.log('Monkey business after 20 rounds with worry reduction:', val_1);

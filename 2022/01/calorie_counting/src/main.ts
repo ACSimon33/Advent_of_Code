@@ -33,7 +33,7 @@ export const args = parse<AoCArgs>(
 
 // ************************************************************************** //
 
-import * as calorie_counting from './calorie_counting';
+import * as calorie_counting from './calorie_counting.js';
 
 const max_cal: number = calorie_counting.max_calories(args.filename);
 console.log('Max calories:', max_cal);

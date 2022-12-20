@@ -1,6 +1,7 @@
 {
   "name": "day_10_cathode_ray_tube",
   "version": "1.0.0",
+  "type": "module",
   "description": "Advent of Code solution day 10",
   "scripts": {
     "tsc": "tsc --build --verbose",
