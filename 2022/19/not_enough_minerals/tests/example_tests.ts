@@ -1,5 +1,5 @@
 // Import puzzle solutions module
-import * as not_enough_minerals from '../src/not_enough_minerals';
+import * as not_enough_minerals from '../src/not_enough_minerals.js';
 
 // Example input
 const INPUT_FILENAME: string = './input/example_input.txt';

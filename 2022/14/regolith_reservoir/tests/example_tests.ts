@@ -1,5 +1,5 @@
 // Import puzzle solutions module
-import * as regolith_reservoir from '../src/regolith_reservoir';
+import * as regolith_reservoir from '../src/regolith_reservoir.js';
 
 // Example input
 const INPUT_FILENAME: string = './input/example_input.txt';

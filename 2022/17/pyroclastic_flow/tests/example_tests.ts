@@ -1,5 +1,5 @@
 // Import puzzle solutions module
-import * as pyroclastic_flow from '../src/pyroclastic_flow';
+import * as pyroclastic_flow from '../src/pyroclastic_flow.js';
 
 // Example input
 const INPUT_FILENAME: string = './input/example_input.txt';

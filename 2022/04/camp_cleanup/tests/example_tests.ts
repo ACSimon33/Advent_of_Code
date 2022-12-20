@@ -1,5 +1,5 @@
 // Import puzzle solutions module
-import * as camp_cleanup from '../src/camp_cleanup';
+import * as camp_cleanup from '../src/camp_cleanup.js';
 
 // Example input
 const INPUT_FILENAME: string = './input/example_input.txt';

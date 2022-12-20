@@ -1,5 +1,5 @@
 // Import puzzle solutions module
-import * as monkey_in_the_middle from '../src/monkey_in_the_middle';
+import * as monkey_in_the_middle from '../src/monkey_in_the_middle.js';
 
 // Example input
 const INPUT_FILENAME: string = './input/example_input.txt';

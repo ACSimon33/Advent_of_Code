@@ -1,5 +1,5 @@
 // Import puzzle solutions module
-import * as rucksack_reorganization from '../src/rucksack_reorganization';
+import * as rucksack_reorganization from '../src/rucksack_reorganization.js';
 
 // Example input
 const INPUT_FILENAME: string = './input/example_input.txt';

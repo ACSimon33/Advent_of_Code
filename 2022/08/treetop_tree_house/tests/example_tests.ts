@@ -1,5 +1,5 @@
 // Import puzzle solutions module
-import * as treetop_tree_house from '../src/treetop_tree_house';
+import * as treetop_tree_house from '../src/treetop_tree_house.js';
 
 // Example input
 const INPUT_FILENAME: string = './input/example_input.txt';

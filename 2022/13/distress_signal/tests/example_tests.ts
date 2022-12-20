@@ -1,5 +1,5 @@
 // Import puzzle solutions module
-import * as distress_signal from '../src/distress_signal';
+import * as distress_signal from '../src/distress_signal.js';
 
 // Example input
 const INPUT_FILENAME: string = './input/example_input.txt';

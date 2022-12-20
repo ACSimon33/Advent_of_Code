@@ -1,5 +1,5 @@
 // Import puzzle solutions module
-import * as no_space_left_on_device from '../src/no_space_left_on_device';
+import * as no_space_left_on_device from '../src/no_space_left_on_device.js';
 
 // Example input
 const INPUT_FILENAME: string = './input/example_input.txt';

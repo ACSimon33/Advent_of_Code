@@ -1,5 +1,5 @@
 // Import puzzle solutions module
-import * as hill_climbing_algorithm from '../src/hill_climbing_algorithm';
+import * as hill_climbing_algorithm from '../src/hill_climbing_algorithm.js';
 
 // Example input
 const INPUT_FILENAME: string = './input/example_input.txt';

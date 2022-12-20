@@ -1,5 +1,5 @@
 // Import puzzle solutions module
-import * as boiling_boulders from '../src/boiling_boulders';
+import * as boiling_boulders from '../src/boiling_boulders.js';
 
 // Example input
 const INPUT_FILENAME_1: string = './input/example_input_1.txt';

@@ -1,5 +1,5 @@
 // Import puzzle solutions module
-import * as rope_bridge from '../src/rope_bridge';
+import * as rope_bridge from '../src/rope_bridge.js';
 
 // Example input
 const INPUT_FILENAME_1: string = './input/example_input_1.txt';

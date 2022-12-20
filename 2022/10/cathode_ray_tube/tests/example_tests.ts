@@ -1,5 +1,5 @@
 // Import puzzle solutions module
-import * as cathode_ray_tube from '../src/cathode_ray_tube';
+import * as cathode_ray_tube from '../src/cathode_ray_tube.js';
 
 // Example input
 const INPUT_FILENAME: string = './input/example_input.txt';

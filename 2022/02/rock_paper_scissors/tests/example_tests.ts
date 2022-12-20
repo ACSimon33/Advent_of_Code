@@ -1,5 +1,5 @@
 // Import puzzle solutions module
-import * as rock_paper_scissors from '../src/rock_paper_scissors';
+import * as rock_paper_scissors from '../src/rock_paper_scissors.js';
 
 // Example input
 const INPUT_FILENAME: string = './input/example_input.txt';

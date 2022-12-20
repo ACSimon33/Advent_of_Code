@@ -1,5 +1,5 @@
 // Import puzzle solutions module
-import * as typescript_template from '../src/typescript_template';
+import * as typescript_template from '../src/typescript_template.js';
 
 // Example input
 const INPUT_FILENAME: string = './input/example_input.txt';

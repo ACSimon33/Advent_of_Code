@@ -1,5 +1,5 @@
 // Import puzzle solutions module
-import * as calorie_counting from '../src/calorie_counting';
+import * as calorie_counting from '../src/calorie_counting.js';
 
 // Example input
 const INPUT_FILENAME: string = './input/example_input.txt';

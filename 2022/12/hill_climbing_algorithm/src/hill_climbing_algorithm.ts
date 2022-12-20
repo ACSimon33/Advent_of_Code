@@ -1,5 +1,5 @@
 import * as fs from 'fs';
-import PriorityQueue from 'priority-queue-typescript';
+import PriorityQueue = require('priority-queue-typescript');
 
 // ************************************************************************** //
 
@@ -14,7 +14,7 @@ interface Node {
 // Calculate the distance between two nodes or from one node to all others
 function distance(nodes: Node[], start: number, end?: number): number {
   // Create priority queue and add starting node
-  let queue = new PriorityQueue<Node>(nodes.length, (n1: Node, n2: Node) => {
+  let queue = new PriorityQueue.default<Node>(nodes.length, (n1: Node, n2: Node) => {
     return n1.distance - n2.distance;
   });
   queue.add(nodes[start]);

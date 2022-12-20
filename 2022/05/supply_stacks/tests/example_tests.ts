@@ -1,5 +1,5 @@
 // Import puzzle solutions module
-import * as supply_stacks from '../src/supply_stacks';
+import * as supply_stacks from '../src/supply_stacks.js';
 
 // Example input
 const INPUT_FILENAME: string = './input/example_input.txt';

@@ -1,5 +1,5 @@
 // Import puzzle solutions module
-import * as beacon_exclusion_zone from '../src/beacon_exclusion_zone';
+import * as beacon_exclusion_zone from '../src/beacon_exclusion_zone.js';
 
 // Example input
 const INPUT_FILENAME: string = './input/example_input.txt';

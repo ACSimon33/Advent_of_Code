@@ -1,5 +1,5 @@
 // Import puzzle solutions module
-import * as proboscidea_volcanium from '../src/proboscidea_volcanium';
+import * as proboscidea_volcanium from '../src/proboscidea_volcanium.js';
 
 // Example input
 const INPUT_FILENAME: string = './input/example_input.txt';

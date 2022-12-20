@@ -1,5 +1,5 @@
 // Import puzzle solutions module
-import * as tuning_trouble from '../src/tuning_trouble';
+import * as tuning_trouble from '../src/tuning_trouble.js';
 
 // Example input
 const INPUT_FILENAME_1: string = './input/example_input_1.txt';

@@ -10,8 +10,8 @@
     "lib": ["ES2022"],
 
     /* Modules */
-    "module": "ES2022",
-    "moduleResolution": "Node",
+    "module": "NodeNext",
+    "moduleResolution": "NodeNext",
     "rootDir": ".",
     "resolveJsonModule": true,
     "outDir": "build",
