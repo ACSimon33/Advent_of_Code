@@ -47,9 +47,14 @@ class Factory {
   }
 
   public max_cost(): MaterialCost {
-    return this._costs.reduce((acc: MaterialCost, current: MaterialCost) => {
-      return acc.map((cost: number, m: Material) => Math.max(cost, current[m]));
-    }, [0, 0, 0]);
+    return this._costs.reduce(
+      (acc: MaterialCost, current: MaterialCost) => {
+        return acc.map((cost: number, m: Material) =>
+          Math.max(cost, current[m])
+        );
+      },
+      [0, 0, 0]
+    );
   }
 }
 

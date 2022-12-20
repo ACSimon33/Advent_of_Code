@@ -33,9 +33,7 @@ export const suite = benny.suite(
           `±${result.margin.toFixed(2)}% (${result.samples} samples)`
       );
     } else {
-      console.log(
-        red(`\n  ${result.name}:\n`) + '    No samples recorded!'
-      );
+      console.log(red(`\n  ${result.name}:\n`) + '    No samples recorded!');
     }
   }),
 

@@ -14,9 +14,12 @@ interface Node {
 // Calculate the distance between two nodes or from one node to all others
 function distance(nodes: Node[], start: number, end?: number): number {
   // Create priority queue and add starting node
-  let queue = new PriorityQueue.default<Node>(nodes.length, (n1: Node, n2: Node) => {
-    return n1.distance - n2.distance;
-  });
+  let queue = new PriorityQueue.default<Node>(
+    nodes.length,
+    (n1: Node, n2: Node) => {
+      return n1.distance - n2.distance;
+    }
+  );
   queue.add(nodes[start]);
 
   // Create a set to store the processed node ids

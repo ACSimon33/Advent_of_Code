@@ -37,7 +37,9 @@ export const args = parse<AoCArgs>(
 
 import * as not_enough_minerals from './not_enough_minerals.js';
 
-const val_1: number = await not_enough_minerals.blueprint_quality(args.filename);
+const val_1: number = await not_enough_minerals.blueprint_quality(
+  args.filename
+);
 console.log('Blueprint quality sum:', val_1);
 
 const val_2: number = await not_enough_minerals.geodes_product(args.filename);
