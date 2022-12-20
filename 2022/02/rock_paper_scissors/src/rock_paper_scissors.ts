@@ -30,7 +30,7 @@ const results: number[][] = [
 
 // Calculate the points you get from a single match
 function calc_points(match: MatchUp): number {
-  return match._you + results[match._opponent - 1][match._you - 1];
+  return match._you + results[match._opponent - 1]![match._you - 1]!;
 }
 
 // ************************************************************************** //

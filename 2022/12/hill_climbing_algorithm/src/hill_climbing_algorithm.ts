@@ -20,7 +20,7 @@ function distance(nodes: Node[], start: number, end?: number): number {
       return n1.distance - n2.distance;
     }
   );
-  queue.add(nodes[start]);
+  queue.add(nodes[start]!);
 
   // Create a set to store the processed node ids
   let done: Set<number> = new Set<number>();
@@ -30,7 +30,7 @@ function distance(nodes: Node[], start: number, end?: number): number {
     let current: Node = queue.poll()!;
 
     // If the end nodes is found, return the current path length
-    if (end !== undefined && current.id == nodes[end].id) {
+    if (end !== undefined && current.id == nodes[end]!.id) {
       return current.distance;
     }
 
@@ -58,7 +58,7 @@ function distance(nodes: Node[], start: number, end?: number): number {
 // Parse input height map to a graph
 function parse_nodes(lines: string[]): [Node[], number, number] {
   const height: number = lines.length;
-  const width: number = lines[0].length;
+  const width: number = lines[0]!.length;
   const n: number = width * height;
 
   let nodes: Node[] = Array.from(Array(n).keys()).map((idx: number): Node => {
@@ -77,45 +77,45 @@ function parse_nodes(lines: string[]): [Node[], number, number] {
       const idx = index(i, j);
 
       // Start
-      if (lines[i].charAt(j) == 'S') {
-        lines[i] = lines[i].replace('S', 'a');
+      if (lines[i]!.charAt(j) == 'S') {
+        lines[i] = lines[i]!.replace('S', 'a');
         start = idx;
       }
 
       // End
-      if (lines[i].charAt(j) == 'E') {
-        lines[i] = lines[i].replace('E', 'z');
+      if (lines[i]!.charAt(j) == 'E') {
+        lines[i] = lines[i]!.replace('E', 'z');
         end = idx;
       }
 
       // Elevation
-      nodes[idx].elevation = lines[i].charCodeAt(j);
+      nodes[idx]!.elevation = lines[i]!.charCodeAt(j);
 
       // Left neighbour
       if (j > 0) {
-        if (nodes[idx].elevation - lines[i].charCodeAt(j - 1) <= 1) {
-          nodes[idx].neighbours.push(nodes[index(i, j - 1)]);
+        if (nodes[idx]!.elevation - lines[i]!.charCodeAt(j - 1) <= 1) {
+          nodes[idx]!.neighbours.push(nodes[index(i, j - 1)]!);
         }
       }
 
       // Right neighbour
       if (j < width - 1) {
-        if (nodes[idx].elevation - lines[i].charCodeAt(j + 1) <= 1) {
-          nodes[idx].neighbours.push(nodes[index(i, j + 1)]);
+        if (nodes[idx]!.elevation - lines[i]!.charCodeAt(j + 1) <= 1) {
+          nodes[idx]!.neighbours.push(nodes[index(i, j + 1)]!);
         }
       }
 
       // Top neighbour
       if (i > 0) {
-        if (nodes[idx].elevation - lines[i - 1].charCodeAt(j) <= 1) {
-          nodes[idx].neighbours.push(nodes[index(i - 1, j)]);
+        if (nodes[idx]!.elevation - lines[i - 1]!.charCodeAt(j) <= 1) {
+          nodes[idx]!.neighbours.push(nodes[index(i - 1, j)]!);
         }
       }
 
       // Bottom neighbour
       if (i < height - 1) {
-        if (nodes[idx].elevation - lines[i + 1].charCodeAt(j) <= 1) {
-          nodes[idx].neighbours.push(nodes[index(i + 1, j)]);
+        if (nodes[idx]!.elevation - lines[i + 1]!.charCodeAt(j) <= 1) {
+          nodes[idx]!.neighbours.push(nodes[index(i + 1, j)]!);
         }
       }
     }

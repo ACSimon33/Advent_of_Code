@@ -10,12 +10,10 @@ interface File {
 
 // Directory class
 class Directory {
-  private _name: string;
   private _children: (File | Directory)[];
 
   // Create an empty folder with a given name
-  public constructor(name: string) {
-    this._name = name;
+  public constructor() {
     this._children = [];
   }
 
@@ -24,7 +22,7 @@ class Directory {
     let i: number;
     for (i = idx; i < content.length; i++) {
       // Check for directory
-      const match_dir = content[i].match(/\$ cd (.*)/);
+      const match_dir = content[i]!.match(/\$ cd (.*)/);
       if (match_dir) {
         // Go up
         if (match_dir[1] == '..') {
@@ -32,17 +30,17 @@ class Directory {
         }
 
         // Create new directory
-        let dir = new Directory(match_dir[1]);
+        let dir = new Directory();
         i = dir.parse_file_tree(content, i + 1);
         this._children.push(dir);
         continue;
       }
 
       // Check for file
-      const match_file = content[i].match(/([0-9]+) (.*)/);
+      const match_file = content[i]!.match(/([0-9]+) (.*)/);
       if (match_file) {
         this._children.push({
-          _name: match_file[2],
+          _name: match_file[2]!,
           _size: Number(match_file[1])
         });
       }
@@ -114,7 +112,7 @@ export function folders_below_100000(filename: string): number {
   const contents: string = fs.readFileSync(filename, 'utf8');
   const lines = contents.split(/\r?\n/);
 
-  let root = new Directory('/');
+  let root = new Directory();
   root.parse_file_tree(lines, 1);
 
   return root.sum_sizes_below(100000);
@@ -125,7 +123,7 @@ export function find_folder_to_delete(filename: string): number {
   const contents: string = fs.readFileSync(filename, 'utf8');
   const lines = contents.split(/\r?\n/);
 
-  let root = new Directory('/');
+  let root = new Directory();
   root.parse_file_tree(lines, 1);
 
   const total_space: number = 70000000;

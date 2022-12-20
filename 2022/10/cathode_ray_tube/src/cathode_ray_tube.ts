@@ -49,7 +49,10 @@ class CPU {
     this._register_x = 1;
     this._cycle = 0;
     this._signal_strength = 0;
-    this._crt = crt;
+
+    if (crt) {
+      this._crt = crt;
+    }
   }
 
   // Perform a single instruction

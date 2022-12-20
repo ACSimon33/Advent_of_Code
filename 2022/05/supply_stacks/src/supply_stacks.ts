@@ -70,7 +70,7 @@ export function reorder_stacks(
   const lines = contents.split(/\r?\n/);
 
   // Calculate the amount of stacks and initialize them
-  const amount_of_stacks: number = (lines[0].length + 1) / 4;
+  const amount_of_stacks: number = (lines[0]!.length + 1) / 4;
   const stacks: Stack<string>[] = [];
 
   for (let i: number = 0; i < amount_of_stacks; i++) {
@@ -85,7 +85,7 @@ export function reorder_stacks(
 
     for (let i: number = 0; i < amount_of_stacks; i++) {
       if (line.at(4 * i) == '[') {
-        stacks[i].push(line.at(4 * i + 1)!);
+        stacks[i]!.push(line.at(4 * i + 1)!);
       }
     }
   }
@@ -104,7 +104,7 @@ export function reorder_stacks(
       const from: number = Number(matches?.at(2)) - 1;
       const to: number = Number(matches?.at(3)) - 1;
 
-      stacks[from].move_to(stacks[to], amount, retain_order);
+      stacks[from]!.move_to(stacks[to]!, amount, retain_order);
     }
   }
 

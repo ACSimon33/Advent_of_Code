@@ -81,7 +81,7 @@ class Signal {
             return intermediate;
           }
         } else {
-          const second: Signal = new Signal(other._tokens[i].toString(), 0);
+          const second: Signal = new Signal(other._tokens[i]!.toString(), 0);
           intermediate = first.compare(second); // (signal vs. number)
 
           // Return if there is a definite result
@@ -91,7 +91,7 @@ class Signal {
         }
       } else {
         if (other._tokens[i] instanceof Signal) {
-          const first: Signal = new Signal(this._tokens[i].toString(), 0);
+          const first: Signal = new Signal(this._tokens[i]!.toString(), 0);
           const second: Signal = other._tokens[i] as Signal;
           intermediate = first.compare(second); // (number vs. signal)
 
@@ -101,9 +101,9 @@ class Signal {
           }
         } else {
           // (number vs. number)
-          if (this._tokens[i] < other._tokens[i]) {
+          if (this._tokens[i]! < other._tokens[i]!) {
             return Order.CORRECT;
-          } else if (this._tokens[i] > other._tokens[i]) {
+          } else if (this._tokens[i]! > other._tokens[i]!) {
             return Order.FALSE;
           }
         }
@@ -142,7 +142,7 @@ export function correct_order(filename: string): number {
 
   // Add indices of signal pairs in correct order
   return signals.reduce((acc: number, pair: Signal[], idx: number) => {
-    return acc + (pair[0].compare(pair[1]) == Order.CORRECT ? idx + 1 : 0);
+    return acc + (pair[0]!.compare(pair[1]!) == Order.CORRECT ? idx + 1 : 0);
   }, 0);
 }
 

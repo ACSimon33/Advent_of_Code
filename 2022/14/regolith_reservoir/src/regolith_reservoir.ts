@@ -1,6 +1,4 @@
-import { add } from 'benny';
 import * as fs from 'fs';
-import { threadId } from 'worker_threads';
 
 // ************************************************************************** //
 
@@ -60,19 +58,19 @@ class Cave {
         return coords.split(',').map((coord: string) => Number(coord));
       });
       for (let i: number = 1; i < lines.length; i++) {
-        if (lines[i - 1][1] == lines[i][1]) {
+        if (lines[i - 1]![1] == lines[i]![1]) {
           // Horizontal
-          const start: number = Math.min(lines[i][0], lines[i - 1][0]);
-          const end: number = Math.max(lines[i][0], lines[i - 1][0]);
+          const start: number = Math.min(lines[i]![0]!, lines[i - 1]![0]!);
+          const end: number = Math.max(lines[i]![0]!, lines[i - 1]![0]!);
           for (let j: number = start; j <= end; j++) {
-            this._grid[lines[i][1]][j - this._min_x] = Material.ROCK;
+            this._grid[lines[i]![1]!]![j - this._min_x] = Material.ROCK;
           }
-        } else if (lines[i - 1][0] == lines[i][0]) {
+        } else if (lines[i - 1]![0] == lines[i]![0]) {
           // Vertical
-          const start: number = Math.min(lines[i][1], lines[i - 1][1]);
-          const end: number = Math.max(lines[i][1], lines[i - 1][1]);
+          const start: number = Math.min(lines[i]![1]!, lines[i - 1]![1]!);
+          const end: number = Math.max(lines[i]![1]!, lines[i - 1]![1]!);
           for (let j: number = start; j <= end; j++) {
-            this._grid[j][lines[i][0] - this._min_x] = Material.ROCK;
+            this._grid[j]![lines[i]![0]! - this._min_x] = Material.ROCK;
           }
         }
       }
@@ -80,7 +78,7 @@ class Cave {
 
     // Add infinite floor
     if (add_floor) {
-      this._grid[this._max_y].fill(Material.ROCK);
+      this._grid[this._max_y]!.fill(Material.ROCK);
     }
   }
 
@@ -92,32 +90,32 @@ class Cave {
       let s: number[] = [0, this._source];
 
       // Check if source is blocked
-      if (this._grid[s[0]][s[1] - this._min_x] != Material.AIR) {
+      if (this._grid[s[0]!]![s[1]! - this._min_x] != Material.AIR) {
         break;
       }
 
       let stationary: boolean = false;
       while (true) {
         // Check boundary
-        if (s[0] >= this._max_y || s[1] <= this._min_x || s[1] >= this._max_x) {
+        if (s[0]! >= this._max_y || s[1]! <= this._min_x || s[1]! >= this._max_x) {
           break;
         }
 
         // Check below
-        if (this._grid[s[0] + 1][s[1] - this._min_x] == Material.AIR) {
+        if (this._grid[s[0]! + 1]![s[1]! - this._min_x] == Material.AIR) {
           s[0]++;
           continue;
         }
 
         // Check left
-        if (this._grid[s[0] + 1][s[1] - 1 - this._min_x] == Material.AIR) {
+        if (this._grid[s[0]! + 1]![s[1]! - 1 - this._min_x] == Material.AIR) {
           s[0]++;
           s[1]--;
           continue;
         }
 
         // Check right
-        if (this._grid[s[0] + 1][s[1] + 1 - this._min_x] == Material.AIR) {
+        if (this._grid[s[0]! + 1]![s[1]! + 1 - this._min_x] == Material.AIR) {
           s[0]++;
           s[1]++;
           continue;
@@ -129,7 +127,7 @@ class Cave {
 
       // Add sand to the cave or break
       if (stationary) {
-        this._grid[s[0]][s[1] - this._min_x] = Material.STATIONARY_SAND;
+        this._grid[s[0]!]![s[1]! - this._min_x] = Material.STATIONARY_SAND;
         sand_counter++;
       } else {
         break;

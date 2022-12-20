@@ -7,8 +7,8 @@ function idx_of_smallest(array: number[]): number {
   let idx: number = 0;
   let smallest: number = Number.MAX_SAFE_INTEGER;
   for (const i in array) {
-    if (array[i] <= smallest) {
-      smallest = array[i];
+    if (array[i]! <= smallest) {
+      smallest = array[i]!;
       idx = Number(i);
     }
   }
@@ -52,14 +52,14 @@ export function sum_of_top_three(filename: string): number {
       count += Number(line);
     } else {
       const idx: number = idx_of_smallest(max_three);
-      max_three[idx] = Math.max(max_three[idx], count);
+      max_three[idx] = Math.max(max_three[idx]!, count);
       count = 0;
     }
   }
 
   // Consider last group
   const idx: number = idx_of_smallest(max_three);
-  max_three[idx] = Math.max(max_three[idx], count);
+  max_three[idx] = Math.max(max_three[idx]!, count);
 
   // Return sum
   return max_three.reduce<number>((accumulator, current) => {

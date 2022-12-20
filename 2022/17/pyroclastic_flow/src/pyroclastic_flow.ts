@@ -127,7 +127,7 @@ class Cave {
   public toString(): string {
     let str: string = '';
     for (let y: number = this._volumes.length - 1; y >= 0; y--) {
-      str += (this._volumes[y] >>> 0).toString(2) + '\n';
+      str += (this._volumes[y]! >>> 0).toString(2) + '\n';
     }
 
     return str.replaceAll('0', '.').replaceAll('1', '#');
@@ -142,7 +142,7 @@ class Cave {
     const is_overlapping = (): boolean => {
       let overlapping: boolean = false;
       for (let i: number = 0; i < rock.height(); i++) {
-        overlapping ||= Boolean(rock.volume()[i] & this._volumes[y + i]);
+        overlapping ||= Boolean(rock.volume()[i]! & this._volumes[y + i]!);
       }
 
       return overlapping;
@@ -165,7 +165,7 @@ class Cave {
 
     // Insert the rock
     for (let i: number = 0; i < rock.volume().length; i++) {
-      this._volumes[y + i] |= rock.volume()[i];
+      this._volumes[y + i] |= rock.volume()[i]!;
     }
 
     // Remove empty line from the cave
@@ -223,9 +223,9 @@ export function cave_height(filename: string, rocks: number): number {
   for (i = 0; i < rocks; i++) {
     const rock_type: number = i % 5;
     const jet: number = add_rock_to_cave(cave, rock_type);
-    jet_counters[rock_type].push(jet);
+    jet_counters[rock_type]!.push(jet);
 
-    const jet_count: number = jet_counters[rock_type].filter(
+    const jet_count: number = jet_counters[rock_type]!.filter(
       (j: number) => j == jet
     ).length;
     if (!cylce_found && jet_count == 2) {

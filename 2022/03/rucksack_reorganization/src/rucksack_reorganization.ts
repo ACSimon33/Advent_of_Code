@@ -24,7 +24,7 @@ class Rucksack {
 
   // Find the item which is in both compartments
   public find_duplicate_item(): number {
-    return find_matches(this.first_compartment, this.second_compartment)[0];
+    return find_matches(this.first_compartment, this.second_compartment)[0]!;
   }
 
   // Find the items which are in both Rucksacks
@@ -84,9 +84,9 @@ export function sum_of_badges(filename: string): number {
   let sum_of_badges = 0;
   for (let i = 0; i < rucksacks.length; i += 3) {
     sum_of_badges += find_matches(
-      rucksacks[i].compare(rucksacks[i + 1]),
-      rucksacks[i + 1].compare(rucksacks[i + 2])
-    )[0];
+      rucksacks[i]!.compare(rucksacks[i + 1]!),
+      rucksacks[i + 1]!.compare(rucksacks[i + 2]!)
+    )[0]!;
   }
 
   return sum_of_badges;

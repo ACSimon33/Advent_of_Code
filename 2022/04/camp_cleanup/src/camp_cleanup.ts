@@ -52,7 +52,7 @@ export function count_contained_sections(filename: string): number {
 
   // Count number of section pairs that contain each other completely
   return count(sections, (sec: Section[]) => {
-    return sec[0].contains(sec[1]) || sec[1].contains(sec[0]);
+    return sec[0]!.contains(sec[1]!) || sec[1]!.contains(sec[0]!);
   });
 }
 
@@ -70,6 +70,6 @@ export function count_overlapping_sections(filename: string): number {
 
   // Count number of section pairs that overlap
   return count(sections, (sec: Section[]) => {
-    return sec[0].overlaps(sec[1]);
+    return sec[0]!.overlaps(sec[1]!);
   });
 }

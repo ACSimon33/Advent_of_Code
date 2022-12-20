@@ -94,14 +94,14 @@ class Sensor {
 
   // Return the range of a given scanline that is covered by this sensor
   public scan_line(y: number): [number | undefined, Range] {
-    const distance_x: number = Math.abs(this._beacon[0] - this._coords[0]);
-    const distance_y: number = Math.abs(this._beacon[1] - this._coords[1]);
+    const distance_x: number = Math.abs(this._beacon[0]! - this._coords[0]!);
+    const distance_y: number = Math.abs(this._beacon[1]! - this._coords[1]!);
     const manhatten: number = distance_x + distance_y;
-    const d: number = manhatten - Math.abs(this._coords[1] - y);
+    const d: number = manhatten - Math.abs(this._coords[1]! - y);
 
     return [
       this._beacon[1] == y ? this._beacon[0] : undefined,
-      { start: this._coords[0] - d, end: this._coords[0] + d }
+      { start: this._coords[0]! - d, end: this._coords[0]! + d }
     ];
   }
 }

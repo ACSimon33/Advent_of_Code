@@ -36,33 +36,33 @@ class Rope {
   public move(dir: Direction, steps: number): void {
     for (let i = 0; i < steps; i++) {
       // Move the head of the rope
-      this._knots[0].push({ ...this._knots[0].at(-1)! });
+      this._knots[0]!.push({ ...this._knots[0]!.at(-1)! });
       switch (dir) {
         case Direction.U:
-          this._knots[0].at(-1)!.row++;
-          if (this._knots[0].at(-1)!.row > this._tr.row) {
-            this._tr.row = this._knots[0].at(-1)!.row;
+          this._knots[0]!.at(-1)!.row++;
+          if (this._knots[0]!.at(-1)!.row > this._tr.row) {
+            this._tr.row = this._knots[0]!.at(-1)!.row;
           }
           break;
 
         case Direction.D:
-          this._knots[0].at(-1)!.row--;
-          if (this._knots[0].at(-1)!.row < this._bl.row) {
-            this._bl.row = this._knots[0].at(-1)!.row;
+          this._knots[0]!.at(-1)!.row--;
+          if (this._knots[0]!.at(-1)!.row < this._bl.row) {
+            this._bl.row = this._knots[0]!.at(-1)!.row;
           }
           break;
 
         case Direction.L:
-          this._knots[0].at(-1)!.col--;
-          if (this._knots[0].at(-1)!.col < this._bl.col) {
-            this._bl.col = this._knots[0].at(-1)!.col;
+          this._knots[0]!.at(-1)!.col--;
+          if (this._knots[0]!.at(-1)!.col < this._bl.col) {
+            this._bl.col = this._knots[0]!.at(-1)!.col;
           }
           break;
 
         case Direction.R:
-          this._knots[0].at(-1)!.col++;
-          if (this._knots[0].at(-1)!.col > this._tr.col) {
-            this._tr.col = this._knots[0].at(-1)!.col;
+          this._knots[0]!.at(-1)!.col++;
+          if (this._knots[0]!.at(-1)!.col > this._tr.col) {
+            this._tr.col = this._knots[0]!.at(-1)!.col;
           }
           break;
       }
@@ -89,7 +89,7 @@ class Rope {
       for (let j: number = this._bl.col; j <= this._tr.col; j++) {
         let found: boolean = false;
         for (const k in this._knots) {
-          const pos = this._knots[k].at(-1)!;
+          const pos = this._knots[k]!.at(-1)!;
           if (pos.row == i && pos.col == j) {
             line += k as string;
             found = true;
@@ -109,21 +109,21 @@ class Rope {
   private apply_physics(): void {
     for (let i: number = 1; i < this._knots.length; i++) {
       const row_diff: number =
-        this._knots[i - 1].at(-1)!.row - this._knots[i].at(-1)!.row;
+        this._knots[i - 1]!.at(-1)!.row - this._knots[i]!.at(-1)!.row;
       const col_diff: number =
-        this._knots[i - 1].at(-1)!.col - this._knots[i].at(-1)!.col;
+        this._knots[i - 1]!.at(-1)!.col - this._knots[i]!.at(-1)!.col;
 
-      this._knots[i].push({ ...this._knots[i].at(-1)! });
+      this._knots[i]!.push({ ...this._knots[i]!.at(-1)! });
 
       if (Math.abs(row_diff) == 2) {
-        this._knots[i].at(-1)!.row += Math.sign(row_diff);
+        this._knots[i]!.at(-1)!.row += Math.sign(row_diff);
         if (Math.abs(col_diff) >= 1) {
-          this._knots[i].at(-1)!.col += Math.sign(col_diff);
+          this._knots[i]!.at(-1)!.col += Math.sign(col_diff);
         }
       } else if (Math.abs(col_diff) > 1) {
-        this._knots[i].at(-1)!.col += Math.sign(col_diff);
+        this._knots[i]!.at(-1)!.col += Math.sign(col_diff);
         if (Math.abs(row_diff) >= 1) {
-          this._knots[i].at(-1)!.row += Math.sign(row_diff);
+          this._knots[i]!.at(-1)!.row += Math.sign(row_diff);
         }
       }
     }

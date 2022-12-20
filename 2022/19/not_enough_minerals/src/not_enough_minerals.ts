@@ -43,14 +43,14 @@ class Factory {
 
   // Return the cost of the robot that mines the given material
   public robot_cost(material: Material): MaterialCost {
-    return this._costs[material];
+    return this._costs[material]!;
   }
 
   public max_cost(): MaterialCost {
     return this._costs.reduce(
       (acc: MaterialCost, current: MaterialCost) => {
         return acc.map((cost: number, m: Material) =>
-          Math.max(cost, current[m])
+          Math.max(cost, current[m]!)
         );
       },
       [0, 0, 0]
@@ -84,33 +84,33 @@ class Inventory {
   // Mine for a certain amount of time
   public mine(time: number): void {
     for (let m: Material = Material.ORE; m < Material.TYPES; m++) {
-      this._materials[m] += this._robots[m] * time;
+      this._materials[m] += this._robots[m]! * time;
     }
   }
 
   // Undo the mining
   public unmine(time: number): void {
     for (let m: Material = Material.ORE; m < Material.TYPES; m++) {
-      this._materials[m] -= this._robots[m] * time;
+      this._materials[m] -= this._robots[m]! * time;
     }
   }
 
   // Caluclate the time it needs until we can build a certain robot
   public time_to_build(robot_type: Material, cost: MaterialCost): number {
     if (robot_type != Material.GEODE) {
-      if (this._robots[robot_type] >= this._max_costs[robot_type]) {
+      if (this._robots[robot_type]! >= this._max_costs[robot_type]!) {
         return Number.POSITIVE_INFINITY;
       }
     }
 
     return cost.reduce((diff, amount: number, m: Material) => {
-      if (amount - this._materials[m] > 0) {
+      if (amount - this._materials[m]! > 0) {
         if (this._robots[m] == 0) {
           return Number.POSITIVE_INFINITY;
         } else {
           return Math.max(
             diff,
-            1 + Math.ceil((amount - this._materials[m]) / this._robots[m])
+            1 + Math.ceil((amount - this._materials[m]!) / this._robots[m]!)
           );
         }
       }
@@ -121,7 +121,7 @@ class Inventory {
   // Build a certain robot
   public build(robot_type: Material, cost: MaterialCost): void {
     for (let m: Material = Material.ORE; m < Material.TYPES - 1; m++) {
-      this._materials[m] -= cost[m];
+      this._materials[m] -= cost[m]!;
     }
     this._robots[robot_type] += 1;
   }
@@ -129,14 +129,14 @@ class Inventory {
   // Destroy a certain robot and harvest it's materials
   public restore(robot_type: Material, cost: MaterialCost): void {
     for (let m: Material = Material.ORE; m < Material.TYPES - 1; m++) {
-      this._materials[m] += cost[m];
+      this._materials[m] += cost[m]!;
     }
     this._robots[robot_type] -= 1;
   }
 
   // Return projected number of geodes
   public geodes(t: number = 0): number {
-    return this._materials[Material.GEODE] + t * this._robots[Material.GEODE];
+    return this._materials[Material.GEODE]! + t * this._robots[Material.GEODE]!;
   }
 
   // Return the maximal possible amount of geodes
@@ -148,10 +148,10 @@ class Inventory {
   public hash(t: number = 0): number {
     let inventory_hash: number = t;
     for (let m: Material = Material.ORE; m < Material.TYPES - 1; m++) {
-      inventory_hash += Math.pow(2, 5 + 5 * m) * this._robots[m];
+      inventory_hash += Math.pow(2, 5 + 5 * m) * this._robots[m]!;
     }
     for (let m: Material = Material.ORE; m < Material.TYPES - 1; m++) {
-      inventory_hash += Math.pow(2, 25 + 8 * m) * this._materials[m];
+      inventory_hash += Math.pow(2, 25 + 8 * m) * this._materials[m]!;
     }
     return inventory_hash;
   }
@@ -235,7 +235,7 @@ export async function geodes_product(filename: string): Promise<number> {
   for (let i: number = 0; i < Math.min(factories.length, 3); i++) {
     promises.push(
       new Promise<number>((resolve) => {
-        resolve(mine_geodes(factories[i], 32));
+        resolve(mine_geodes(factories[i]!, 32));
       })
     );
   }

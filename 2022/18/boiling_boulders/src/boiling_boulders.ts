@@ -19,9 +19,9 @@ function surface(voxels: Voxel[]) {
   let surfaces: number = 6 * voxels.length;
 
   for (let i: number = 0; i < voxels.length; i++) {
-    const v1: Voxel = voxels[i];
+    const v1: Voxel = voxels[i]!;
     for (let j: number = i + 1; j < voxels.length; j++) {
-      const v2: Voxel = voxels[j];
+      const v2: Voxel = voxels[j]!;
       if (manhatten(v1, v2) == 1) {
         surfaces -= 2;
       }
@@ -63,37 +63,37 @@ export function exterior_surface_area(filename: string): number {
   let y_range: number[] = [Number.POSITIVE_INFINITY, Number.NEGATIVE_INFINITY];
   let z_range: number[] = [Number.POSITIVE_INFINITY, Number.NEGATIVE_INFINITY];
   for (const voxel of voxels) {
-    if (voxel.x < x_range[0]) {
+    if (voxel.x < x_range[0]!) {
       x_range[0] = voxel.x;
     }
-    if (voxel.x > x_range[1]) {
+    if (voxel.x > x_range[1]!) {
       x_range[1] = voxel.x;
     }
-    if (voxel.y < y_range[0]) {
+    if (voxel.y < y_range[0]!) {
       y_range[0] = voxel.y;
     }
-    if (voxel.y > y_range[1]) {
+    if (voxel.y > y_range[1]!) {
       y_range[1] = voxel.y;
     }
-    if (voxel.z < z_range[0]) {
+    if (voxel.z < z_range[0]!) {
       z_range[0] = voxel.z;
     }
-    if (voxel.z > z_range[1]) {
+    if (voxel.z > z_range[1]!) {
       z_range[1] = voxel.z;
     }
   }
 
   // Range sizes
-  const x_size = x_range[1] - x_range[0] + 1;
-  const y_size = y_range[1] - y_range[0] + 1;
-  const z_size = z_range[1] - z_range[0] + 1;
+  const x_size = x_range[1]! - x_range[0]! + 1;
+  const y_size = y_range[1]! - y_range[0]! + 1;
+  const z_size = z_range[1]! - z_range[0]! + 1;
 
   // Lambda to get a unique id for a given voxel
   let to_id = (v: Voxel): number => {
     return (
-      (v.x - x_range[0]) * y_size * z_size +
-      (v.y - y_range[0]) * z_size +
-      (v.z - z_range[0])
+      (v.x - x_range[0]!) * y_size * z_size +
+      (v.y - y_range[0]!) * z_size +
+      (v.z - z_range[0]!)
     );
   };
 
@@ -110,37 +110,37 @@ export function exterior_surface_area(filename: string): number {
   let air: Set<number> = new Set<number>();
 
   // Add all sides of the surrounding cube to the air set
-  for (let x: number = x_range[0]; x <= x_range[1]; x++) {
-    for (let y: number = y_range[0]; y <= y_range[1]; y++) {
-      const id1: number = to_id({ x: x, y: y, z: z_range[0] });
+  for (let x: number = x_range[0]!; x <= x_range[1]!; x++) {
+    for (let y: number = y_range[0]!; y <= y_range[1]!; y++) {
+      const id1: number = to_id({ x: x, y: y, z: z_range[0]! });
       if (!lava.has(id1)) {
         air.add(id1);
       }
-      const id2: number = to_id({ x: x, y: y, z: z_range[1] });
+      const id2: number = to_id({ x: x, y: y, z: z_range[1]! });
       if (!lava.has(id1)) {
         air.add(id2);
       }
     }
   }
-  for (let x: number = x_range[0]; x <= x_range[1]; x++) {
-    for (let z: number = z_range[0]; z <= z_range[1]; z++) {
-      const id1: number = to_id({ x: x, y: y_range[0], z: z });
+  for (let x: number = x_range[0]!; x <= x_range[1]!; x++) {
+    for (let z: number = z_range[0]!; z <= z_range[1]!; z++) {
+      const id1: number = to_id({ x: x, y: y_range[0]!, z: z });
       if (!lava.has(id1)) {
         air.add(id1);
       }
-      const id2: number = to_id({ x: x, y: y_range[1], z: z });
+      const id2: number = to_id({ x: x, y: y_range[1]!, z: z });
       if (!lava.has(id1)) {
         air.add(id2);
       }
     }
   }
-  for (let y: number = y_range[0]; y <= y_range[1]; y++) {
-    for (let z: number = z_range[0]; z <= z_range[1]; z++) {
-      const id1: number = to_id({ x: x_range[0], y: y, z: z });
+  for (let y: number = y_range[0]!; y <= y_range[1]!; y++) {
+    for (let z: number = z_range[0]!; z <= z_range[1]!; z++) {
+      const id1: number = to_id({ x: x_range[0]!, y: y, z: z });
       if (!lava.has(id1)) {
         air.add(id1);
       }
-      const id2: number = to_id({ x: x_range[1], y: y, z: z });
+      const id2: number = to_id({ x: x_range[1]!, y: y, z: z });
       if (!lava.has(id1)) {
         air.add(id2);
       }
@@ -155,7 +155,6 @@ export function exterior_surface_area(filename: string): number {
         const v: Voxel = from_id(id);
 
         // Add neighbours in z direction
-        const z_pos = id % z_size;
         if (v.z > 0 && !lava.has(id - 1)) {
           air.add(id - 1);
         }

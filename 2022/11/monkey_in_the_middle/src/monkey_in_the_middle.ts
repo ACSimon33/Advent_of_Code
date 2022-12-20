@@ -69,7 +69,7 @@ class Monkey {
 
   public constructor(monkey_str: string, worry_divisor: number = 1) {
     this._items = [];
-    this._operation = (Item): void => {};
+    this._operation = (_: Item): void => {};
     this._test_divisor = 0;
     this._throw_to = Array(2);
     this._inspect_counter = 0;
@@ -81,7 +81,7 @@ class Monkey {
       // Parse items
       const match_items = line.match(/Starting items: ([0-9 ,]*)/);
       if (match_items) {
-        this._items = match_items[1].split(', ').map((level: string): Item => {
+        this._items = match_items[1]!.split(', ').map((level: string): Item => {
           return new Item(Number(level));
         });
       }
@@ -138,7 +138,7 @@ class Monkey {
       monkey_id =
         this._throw_to[
           Number(current_item.is_divisible_by(this._test_divisor))
-        ];
+        ]!;
     }
 
     return [monkey_id, current_item];
@@ -173,7 +173,7 @@ export function with_worry_reduction(filename: string): number {
       while (true) {
         let [id, item] = monkey.inspect();
         if (item) {
-          monkeys[id].push(item);
+          monkeys[id]!.push(item);
         } else {
           break;
         }
@@ -189,7 +189,7 @@ export function with_worry_reduction(filename: string): number {
     .sort((n1, n2) => n2 - n1);
 
   // Calculate monkey buiness
-  return sorted_counter[0] * sorted_counter[1];
+  return sorted_counter[0]! * sorted_counter[1]!;
 }
 
 /// Second task.
@@ -208,7 +208,7 @@ export function without_worry_reduction(filename: string): number {
       while (true) {
         let [id, item] = monkey.inspect();
         if (item) {
-          monkeys[id].push(item);
+          monkeys[id]!.push(item);
         } else {
           break;
         }
@@ -224,5 +224,5 @@ export function without_worry_reduction(filename: string): number {
     .sort((n1, n2) => n2 - n1);
 
   // Calculate monkey buiness
-  return sorted_counter[0] * sorted_counter[1];
+  return sorted_counter[0]! * sorted_counter[1]!;
 }

@@ -14,7 +14,7 @@ class Valve {
   // Create a valve node from the input string
   public constructor(str: string) {
     const match = str.match(/Valve ([A-Z]+) has flow rate=([0-9]*);.*/)!;
-    this._id = match[1];
+    this._id = match[1]!;
     this._flow_rate = Number(match[2]);
     this._neighbours = [];
     this._pressure_release = new Map<string, number[]>();
@@ -41,9 +41,9 @@ class Valve {
   public add_neighbour(valve: Valve, time: number = 1): void {
     let found: boolean = false;
     for (let j: number = 0; j < this._neighbours.length; j++) {
-      if (this._neighbours[j][0].id() == valve.id()) {
+      if (this._neighbours[j]![0].id() == valve.id()) {
         found = true;
-        this._neighbours[j][1] = Math.min(this._neighbours[j][1], time);
+        this._neighbours[j]![1] = Math.min(this._neighbours[j]![1], time);
         break;
       }
     }
@@ -56,7 +56,7 @@ class Valve {
   // Remove a neighbour
   public remove_neighbour(id: string): void {
     for (let i: number = 0; i < this._neighbours.length; i++) {
-      if (this._neighbours[i][0].id() == id) {
+      if (this._neighbours[i]![0].id() == id) {
         this._neighbours.splice(i, 1);
         break;
       }
@@ -117,7 +117,7 @@ function explore_tunnels(
   }
 
   let max_release: number = 0;
-  const valve: Valve = valves.get(current[agent])!;
+  const valve: Valve = valves.get(current[agent]!)!;
 
   // Open current valve and continue the exploration with an unopened valve
   // that is not occupied by any other agent.
@@ -134,7 +134,7 @@ function explore_tunnels(
       // Explore
       max_release = Math.max(
         max_release,
-        release[max_time - 1] +
+        release[max_time - 1]! +
           explore_tunnels(valves, new_current, new_remaining_time)
       );
     }
@@ -167,8 +167,8 @@ export function max_pressure_release(
   // Parse tunnel system
   for (const line of lines) {
     const match = line.match(/Valve ([A-Z]*) .* valves? ([A-Z ,]*)/)!;
-    let vlv = valves.get(match[1])!;
-    for (const id of match[2].split(', ')) {
+    let vlv = valves.get(match[1]!)!;
+    for (const id of match[2]!.split(', ')) {
       vlv.add_neighbour(valves.get(id)!);
     }
   }

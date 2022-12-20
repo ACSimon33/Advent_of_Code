@@ -30,24 +30,24 @@ class TreeGrid {
   // Count visible trees
   public count_visible_trees(): number {
     let visible_trees: number =
-      2 * this.trees.length + 2 * this.trees[0].length - 4;
+      2 * this.trees.length + 2 * this.trees[0]!.length - 4;
 
     // Iterate over trees inside the gridd
     for (let i = 1; i < this.trees.length - 1; i++) {
-      for (let j = 1; j < this.trees[i].length - 1; j++) {
+      for (let j = 1; j < this.trees[i]!.length - 1; j++) {
         let visible: boolean[] = [true, true, true, true];
 
         // Iterate over top neighbours
         for (let k = j - 1; k >= 0; k--) {
-          if (this.trees[i][k] >= this.trees[i][j]) {
+          if (this.trees[i]![k]! >= this.trees[i]![j]!) {
             visible[Direction.Top] = false;
             break;
           }
         }
 
         // Iterate over bottom neighbours
-        for (let k = j + 1; k < this.trees[i].length; k++) {
-          if (this.trees[i][k] >= this.trees[i][j]) {
+        for (let k = j + 1; k < this.trees[i]!.length; k++) {
+          if (this.trees[i]![k]! >= this.trees[i]![j]!) {
             visible[Direction.Bottom] = false;
             break;
           }
@@ -55,7 +55,7 @@ class TreeGrid {
 
         // Iterate over left neighbours
         for (let k = i - 1; k >= 0; k--) {
-          if (this.trees[k][j] >= this.trees[i][j]) {
+          if (this.trees[k]![j]! >= this.trees[i]![j]!) {
             visible[Direction.Left] = false;
             break;
           }
@@ -63,7 +63,7 @@ class TreeGrid {
 
         // Iterate over right neighbours
         for (let k = i + 1; k < this.trees.length; k++) {
-          if (this.trees[k][j] >= this.trees[i][j]) {
+          if (this.trees[k]![j]! >= this.trees[i]![j]!) {
             visible[Direction.Right] = false;
             break;
           }
@@ -85,21 +85,21 @@ class TreeGrid {
 
     // Iterate over inner trees
     for (let i = 1; i < this.trees.length - 1; i++) {
-      for (let j = 1; j < this.trees[i].length - 1; j++) {
+      for (let j = 1; j < this.trees[i]!.length - 1; j++) {
         let visible_trees: number[] = [0, 0, 0, 0];
 
         // Iterate over top neighbours
         for (let k = j - 1; k >= 0; k--) {
           visible_trees[Direction.Top]++;
-          if (this.trees[i][k] >= this.trees[i][j]) {
+          if (this.trees[i]![k]! >= this.trees[i]![j]!) {
             break;
           }
         }
 
         // Iterate over bottom neighbours
-        for (let k = j + 1; k < this.trees[i].length; k++) {
+        for (let k = j + 1; k < this.trees[i]!.length; k++) {
           visible_trees[Direction.Bottom]++;
-          if (this.trees[i][k] >= this.trees[i][j]) {
+          if (this.trees[i]![k]! >= this.trees[i]![j]!) {
             break;
           }
         }
@@ -107,7 +107,7 @@ class TreeGrid {
         // Iterate over left neighbours
         for (let k = i - 1; k >= 0; k--) {
           visible_trees[Direction.Left]++;
-          if (this.trees[k][j] >= this.trees[i][j]) {
+          if (this.trees[k]![j]! >= this.trees[i]![j]!) {
             break;
           }
         }
@@ -115,7 +115,7 @@ class TreeGrid {
         // Iterate over right neighbours
         for (let k = i + 1; k < this.trees.length; k++) {
           visible_trees[Direction.Right]++;
-          if (this.trees[k][j] >= this.trees[i][j]) {
+          if (this.trees[k]![j]! >= this.trees[i]![j]!) {
             break;
           }
         }
