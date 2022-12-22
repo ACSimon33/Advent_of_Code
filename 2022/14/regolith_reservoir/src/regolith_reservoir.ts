@@ -97,7 +97,11 @@ class Cave {
       let stationary: boolean = false;
       while (true) {
         // Check boundary
-        if (s[0]! >= this._max_y || s[1]! <= this._min_x || s[1]! >= this._max_x) {
+        if (
+          s[0]! >= this._max_y ||
+          s[1]! <= this._min_x ||
+          s[1]! >= this._max_x
+        ) {
           break;
         }
 
