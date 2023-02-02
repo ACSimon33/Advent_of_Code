@@ -26,6 +26,10 @@ before_script:
 # Prepare docker for 2021
 prepare-docker ~ aoc-2021:
   stage: Prepare
+  tags:
+    - linux
+    - docker
+    - dind
   script:
     - docker build -t aoc-2021-rust 2021
     - docker pull $CI_REGISTRY_IMAGE:aoc-2021-rust-latest || true
