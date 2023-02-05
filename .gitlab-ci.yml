@@ -37,6 +37,7 @@ services:
     - docker login -u ${CI_REGISTRY_USER} -p ${CI_REGISTRY_PASSWORD} ${CI_REGISTRY}
     - docker pull ${CI_REGISTRY_IMAGE}:${DOCKER_CURRENT_TAG} || true
     - docker pull ${CI_REGISTRY_IMAGE}:${DOCKER_LATEST_TAG} || true
+    - docker images
   timeout: 20m
 
 # Prepare docker
