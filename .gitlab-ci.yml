@@ -28,15 +28,15 @@ services:
     - dind
   variables:
     DOCKER_VOL: ${CI_PROJECT_DIR}/${AOC_YEAR}
-    DOCKER_CURRENT_TAG: aoc-${AOC_YEAR}-${CI_COMMIT_SHA}
-    DOCKER_LATEST_TAG: aoc-${AOC_YEAR}-latest
+    DOCKER_CURRENT_IMAGE: ${CI_REGISTRY_IMAGE}:aoc-${AOC_YEAR}-${CI_COMMIT_SHA}
+    DOCKER_LATEST_IMAGE: ${CI_REGISTRY_IMAGE}:aoc-${AOC_YEAR}-latest
   before_script:
     - env
     - pwd
     - ls
     - docker login -u ${CI_REGISTRY_USER} -p ${CI_REGISTRY_PASSWORD} ${CI_REGISTRY}
-    - docker pull ${CI_REGISTRY_IMAGE}:${DOCKER_CURRENT_TAG} || true
-    - docker pull ${CI_REGISTRY_IMAGE}:${DOCKER_LATEST_TAG} || true
+    - docker pull ${DOCKER_CURRENT_IMAGE} || true
+    - docker pull ${DOCKER_LATEST_IMAGE} || true
     - docker images
   timeout: 20m
 
@@ -45,11 +45,10 @@ services:
   stage: Prepare
   script:
     - >-
-      docker build --cache-from ${CI_REGISTRY_IMAGE}:${DOCKER_LATEST_TAG}
-      --tag ${CI_REGISTRY_IMAGE}:${DOCKER_CURRENT_TAG}
-      --tag ${CI_REGISTRY_IMAGE}:${DOCKER_LATEST_TAG} ${AOC_YEAR}
-    - docker push ${CI_REGISTRY_IMAGE}:${DOCKER_CURRENT_TAG}
-    - docker push ${CI_REGISTRY_IMAGE}:${DOCKER_LATEST_TAG}
+      docker build --cache-from ${DOCKER_LATEST_IMAGE}
+      --tag ${DOCKER_CURRENT_IMAGE} --tag ${DOCKER_LATEST_IMAGE} ${AOC_YEAR}
+    - docker push ${DOCKER_CURRENT_IMAGE}
+    - docker push ${DOCKER_LATEST_IMAGE}
 
 # **************************************************************************** #
 #                            Advent of Code 2021                               #
@@ -78,10 +77,10 @@ build ~ aoc-2021:
     - prepare-docker ~ aoc-2021
   script:
     - >-
-      docker run --rm -v ${DOCKER_VOL}:/${AOC_YEAR} ${DOCKER_CURRENT_TAG}
+      docker run --rm -v ${DOCKER_VOL}:/${AOC_YEAR} ${DOCKER_CURRENT_IMAGE}
       cargo build --workspace -j4
     - >-
-      docker run --rm -v ${DOCKER_VOL}:/${AOC_YEAR} ${DOCKER_CURRENT_TAG}
+      docker run --rm -v ${DOCKER_VOL}:/${AOC_YEAR} ${DOCKER_CURRENT_IMAGE}
       cargo build --release --workspace --verbose -j1
 
 # 2021 Rust test (debug)
@@ -94,12 +93,12 @@ test ~ aoc-2021:
     - build ~ aoc-2021
   script:
     - >-
-      docker run --rm -v ${DOCKER_VOL}:/${AOC_YEAR} ${DOCKER_CURRENT_TAG}
+      docker run --rm -v ${DOCKER_VOL}:/${AOC_YEAR} ${DOCKER_CURRENT_IMAGE}
       cargo test --workspace --no-fail-fast --verbose -j1 --
       -Z unstable-options --report-time
   after_script:
     - >-
-      docker run --rm -v ${DOCKER_VOL}:/${AOC_YEAR} ${DOCKER_CURRENT_TAG}
+      docker run --rm -v ${DOCKER_VOL}:/${AOC_YEAR} ${DOCKER_CURRENT_IMAGE}
       cargo test --workspace --no-fail-fast --verbose -j1 --
       -Z unstable-options --format json --report-time
       | cargo2junit > JUnitReports.xml
@@ -116,7 +115,7 @@ format ~ aoc-2021:
     - .2021-template
   script:
     - >-
-      docker run --rm -v ${DOCKER_VOL}:/${AOC_YEAR} ${DOCKER_CURRENT_TAG}
+      docker run --rm -v ${DOCKER_VOL}:/${AOC_YEAR} ${DOCKER_CURRENT_IMAGE}
       cargo fmt --verbose -- --check
   allow_failure: true
 
@@ -134,7 +133,7 @@ bench ~ aoc-2021:
     - mkdir $BUILD_DIR/criterion
     - mv Advent_of_Code/2021/* $BUILD_DIR/criterion/
     - >-
-      docker run --rm -v ${DOCKER_VOL}:/${AOC_YEAR} ${DOCKER_CURRENT_TAG}
+      docker run --rm -v ${DOCKER_VOL}:/${AOC_YEAR} ${DOCKER_CURRENT_IMAGE}
       cargo bench --workspace --no-fail-fast --verbose -j1 --
       --warm-up-time 1 --measurement-time 2 --sample-size 10
     - pushd Advent_of_Code/2021
