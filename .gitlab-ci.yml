@@ -35,7 +35,7 @@ services:
     - >-
       run_docker() {
         docker run --rm -v ${CI_PROJECT_DIR}/${AOC_YEAR}:/${AOC_YEAR}
-                   aoc-${AOC_YEAR}-${CI_COMMIT_SHA} $@
+                   aoc-${AOC_YEAR}-${CI_COMMIT_SHA} \$@
       }
   timeout: 20m
 
