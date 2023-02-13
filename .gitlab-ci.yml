@@ -78,10 +78,10 @@ build ~ aoc-2021:
   script:
     - >-
       docker run --rm -v ${DOCKER_VOL}:/${AOC_YEAR} ${DOCKER_CURRENT_IMAGE}
-      cargo build --workspace -j2
+      sh -c 'cargo build --workspace -j2'
     - >-
       docker run --rm -v ${DOCKER_VOL}:/${AOC_YEAR} ${DOCKER_CURRENT_IMAGE}
-      cargo build --release --workspace --verbose -j2
+      sh -c 'cargo build --release --workspace --verbose -j2'
 
 # 2021 Rust test (debug)
 test ~ aoc-2021:
@@ -94,14 +94,14 @@ test ~ aoc-2021:
   script:
     - >-
       docker run --rm -v ${DOCKER_VOL}:/${AOC_YEAR} ${DOCKER_CURRENT_IMAGE}
-      cargo test --workspace --no-fail-fast --verbose -j2 --
-      -Z unstable-options --report-time
+      sh -c 'cargo test --workspace --no-fail-fast --verbose -j2 --
+      -Z unstable-options --report-time'
   after_script:
     - >-
       docker run --rm -v ${DOCKER_VOL}:/${AOC_YEAR} ${DOCKER_CURRENT_IMAGE}
-      cargo test --workspace --no-fail-fast --verbose -j2 --
+      sh -c 'cargo test --workspace --no-fail-fast --verbose -j2 --
       -Z unstable-options --format json --report-time
-      | cargo2junit > JUnitReports.xml
+      | cargo2junit > JUnitReports.xml'
   artifacts:
     reports:
       junit: 2021/JUnitReports.xml
@@ -116,7 +116,7 @@ format ~ aoc-2021:
   script:
     - >-
       docker run --rm -v ${DOCKER_VOL}:/${AOC_YEAR} ${DOCKER_CURRENT_IMAGE}
-      cargo fmt --verbose -- --check
+      sh -c 'cargo fmt --verbose -- --check'
   allow_failure: true
 
 # 2021 Rust benchmark (release)
@@ -134,8 +134,8 @@ bench ~ aoc-2021:
     - mv Advent_of_Code/2021/* $BUILD_DIR/criterion/
     - >-
       docker run --rm -v ${DOCKER_VOL}:/${AOC_YEAR} ${DOCKER_CURRENT_IMAGE}
-      cargo bench --workspace --no-fail-fast --verbose -j2 --
-      --warm-up-time 1 --measurement-time 2 --sample-size 10
+      sh -c 'cargo bench --workspace --no-fail-fast --verbose -j2 --
+      --warm-up-time 1 --measurement-time 2 --sample-size 10'
     - pushd Advent_of_Code/2021
     - mv $BUILD_DIR/criterion/* .
     - git add .
