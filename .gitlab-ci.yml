@@ -114,6 +114,7 @@ format ~ aoc-2021:
   extends:
     - .2021-template
   script:
+    - docker run --rm echo lol
     - >-
       docker run --rm -v ${DOCKER_VOL}:/${AOC_YEAR} ${DOCKER_CURRENT_IMAGE}
       cargo fmt --verbose -- --check
