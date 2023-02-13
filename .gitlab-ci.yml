@@ -38,6 +38,8 @@ services:
     - docker pull ${DOCKER_CURRENT_IMAGE} || true
     - docker pull ${DOCKER_LATEST_IMAGE} || true
     - docker images
+    - mkdir /sys/fs/cgroup/systemd
+    - mount -t cgroup -o none,name=systemd cgroup /sys/fs/cgroup/systemd
   timeout: 20m
 
 # Prepare docker
