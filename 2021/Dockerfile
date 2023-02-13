@@ -1,5 +1,7 @@
+# syntax=docker/dockerfile:1
+
 FROM rust:1.67.0
 WORKDIR /2021
 
-# Rust toolchain
-rustup component add rustfmt
+# Setup rust toolchain
+RUN rustup component add rustfmt
