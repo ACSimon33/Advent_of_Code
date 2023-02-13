@@ -113,8 +113,6 @@ format ~ aoc-2021:
   stage: Test
   extends:
     - .2021-template
-  needs:
-    - build ~ aoc-2021
   script:
     - >-
       docker run --rm -v ${DOCKER_VOL}:/${AOC_YEAR} ${DOCKER_CURRENT_IMAGE}
@@ -198,8 +196,6 @@ format ~ aoc-2022:
   stage: Test
   extends:
     - .2022-template
-  needs:
-    - build ~ aoc-2022
   script:
     - >-
       docker run --rm -v ${DOCKER_VOL}:/${AOC_YEAR} ${DOCKER_CURRENT_IMAGE}
