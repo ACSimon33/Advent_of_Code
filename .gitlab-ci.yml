@@ -139,6 +139,7 @@ bench ~ aoc-2021:
       --warm-up-time 1 --measurement-time 2 --sample-size 10'
     - mv ${AOC_YEAR}/target/criterion/ gh-pages/${AOC_YEAR}
     - cd gh-pages/${AOC_YEAR}
+    - git remote set-url origin https://${AOC_AT}@github.com/ACSimon33/Advent_of_Code.git
     - git add .
     - git config user.email "git@slmaertens.dev"
     - git config user.name "Simon Lukas Märtens"
