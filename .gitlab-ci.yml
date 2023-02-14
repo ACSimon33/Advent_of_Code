@@ -129,19 +129,20 @@ bench ~ aoc-2021:
     - test ~ aoc-2021
   script:
     - git clean -dfx .
-    - git clone https://${AOC_AT}@github.com/ACSimon33/Advent_of_Code.git -b gh-pages
-    - mkdir $BUILD_DIR/criterion
-    - mv Advent_of_Code/2021/* $BUILD_DIR/criterion/
+    - git clone https://${AOC_AT}@github.com/ACSimon33/Advent_of_Code.git -b gh-pages gh-pages
+    - mkdir ${AOC_YEAR}/target
+    - mkdir ${AOC_YEAR}/target/criterion
+    - mv gh-pages/${AOC_YEAR}/* ${AOC_YEAR}/target/criterion/
     - >-
       docker run --rm -v ${DOCKER_VOL}:/${AOC_YEAR} ${DOCKER_CURRENT_IMAGE}
       sh -c 'cargo bench --workspace --no-fail-fast --verbose -j2 --
       --warm-up-time 1 --measurement-time 2 --sample-size 10'
-    - cd Advent_of_Code/2021
-    - mv $BUILD_DIR/criterion/* .
+    - cd gh-pages/${AOC_YEAR}
+    - mv ${AOC_YEAR}/target/criterion/ .
     - git add .
     - git config user.email "git@slmaertens.dev"
     - git config user.name "Simon Lukas Märtens"
-    - git commit -m "Updated 2021 benchmark results for commit '$CI_COMMIT_MESSAGE'"
+    - git commit -m "Updated 2021 benchmark results for commit '$CI_COMMIT_SHA'"
     - git push
 
 # # **************************************************************************** #
