@@ -20,9 +20,9 @@ export const suite = benny.suite(
   }),
 
   // Benchmark of part 2
-  benny.add('Task 2', () => {
-    monkey_map.solution_2(INPUT_FILENAME);
-  }),
+  // benny.add('Task 2', () => {
+  //   monkey_map.solution_2(INPUT_FILENAME);
+  // }),
 
   // Run becnhmarks
   benny.cycle((result) => {
