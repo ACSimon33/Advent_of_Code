@@ -138,11 +138,11 @@ bench ~ aoc-2021:
       sh -c 'cargo bench --workspace --no-fail-fast --verbose -j2 --
       --warm-up-time 1 --measurement-time 2 --sample-size 10'
     - cd gh-pages/${AOC_YEAR}
-    - mv ${AOC_YEAR}/target/criterion/ .
+    - mv ${AOC_YEAR}/target/criterion/* .
     - git add .
     - git config user.email "git@slmaertens.dev"
     - git config user.name "Simon Lukas Märtens"
-    - git commit -m "Updated 2021 benchmark results for commit '$CI_COMMIT_SHA'"
+    - git commit -m "Updated 2021 benchmark results for commit '$CI_COMMIT_MESSAGE'"
     - git push
 
 # # **************************************************************************** #
