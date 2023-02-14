@@ -136,7 +136,7 @@ bench ~ aoc-2021:
       docker run --rm -v ${DOCKER_VOL}:/${AOC_YEAR} ${DOCKER_CURRENT_IMAGE}
       sh -c 'cargo bench --workspace --no-fail-fast --verbose -j2 --
       --warm-up-time 1 --measurement-time 2 --sample-size 10'
-    - pushd Advent_of_Code/2021
+    - cd Advent_of_Code/2021
     - mv $BUILD_DIR/criterion/* .
     - git add .
     - git commit -m "Updated 2021 benchmark results for commit '$CI_COMMIT_MESSAGE'"

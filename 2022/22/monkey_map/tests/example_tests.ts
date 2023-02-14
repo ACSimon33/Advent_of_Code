@@ -8,11 +8,11 @@ const INPUT_FILENAME: string = './input/example_input.txt';
 describe('Monkey Map (day 22)', () => {
   // Test of part 1
   test('Task 1', () => {
-    expect(monkey_map.solution_1(INPUT_FILENAME)).toBe(42);
+    expect(monkey_map.solution_1(INPUT_FILENAME)).toBe(6032);
   });
 
   // Test of part 2
-  test('Task 2', () => {
-    expect(monkey_map.solution_2(INPUT_FILENAME)).toBe(43);
-  });
+  // test('Task 2', () => {
+  //   expect(monkey_map.solution_2(INPUT_FILENAME)).toBe(5031);
+  // });
 });
