@@ -137,8 +137,8 @@ bench ~ aoc-2021:
       docker run --rm -v ${DOCKER_VOL}:/${AOC_YEAR} ${DOCKER_CURRENT_IMAGE}
       sh -c 'cargo bench --workspace --no-fail-fast --verbose -j2 --
       --warm-up-time 1 --measurement-time 2 --sample-size 10'
+    - mv ${AOC_YEAR}/target/criterion/ gh-pages/${AOC_YEAR}
     - cd gh-pages/${AOC_YEAR}
-    - mv ${AOC_YEAR}/target/criterion/* .
     - git add .
     - git config user.email "git@slmaertens.dev"
     - git config user.name "Simon Lukas Märtens"
