@@ -227,6 +227,8 @@ bench ~ aoc-2022:
 # Create pages with benchmark results
 pages:
   stage: Deploy
+  tags:
+    - linux
   needs:
     - job: bench ~ aoc-2021
       optional: true
