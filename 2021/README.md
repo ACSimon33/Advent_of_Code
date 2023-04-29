@@ -1,6 +1,6 @@
 # Advent of Code 2021 - Rust
 
-[⭢ *Benchmarks* ⭠](https://acsimon33.github.io/Advent_of_Code/2021/report/index.html)
+[⭢ *Benchmarks* ⭠](https://acsimon33.gitlab.io/Advent_of_Code/2021/report/index.html)
 
 ## Execute puzzles
 
