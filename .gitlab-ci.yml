@@ -229,6 +229,8 @@ pages:
   stage: Deploy
   tags:
     - linux
+  rules:
+    - if: '$CI_PIPELINE_SOURCE == "schedule"'
   needs:
     - job: bench ~ aoc-2021
       optional: true
@@ -236,10 +238,10 @@ pages:
       optional: true
   script:
     - mkdir -p public
-    - if [ -d "benchmarks_2021"]; then
+    - if [ -d "benchmarks_2021" ]; then
     -   mv benchmarks_2021 public/2021
     - fi
-    - if [ -d "benchmarks_2022"]; then
+    - if [ -d "benchmarks_2022" ]; then
     -   mv benchmarks_2022 public/2022
     - fi
   artifacts:
