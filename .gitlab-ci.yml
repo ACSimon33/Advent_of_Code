@@ -115,7 +115,8 @@ format ~ aoc-2021:
   extends:
     - .2021-template
   needs:
-    - build ~ aoc-2021
+    - job: build ~ aoc-2021
+      optional: true
   script:
     - >-
       docker run --rm -v ${DOCKER_VOL}:/${AOC_YEAR} ${DOCKER_CURRENT_IMAGE}
@@ -196,7 +197,8 @@ format ~ aoc-2022:
   extends:
     - .2022-template
   needs:
-    - build ~ aoc-2022
+    - job: build ~ aoc-2022
+      optional: true
   script:
     - >-
       docker run --rm -v ${DOCKER_VOL}:/${AOC_YEAR} ${DOCKER_CURRENT_IMAGE}
