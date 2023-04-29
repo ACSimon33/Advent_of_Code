@@ -3,6 +3,7 @@ stages:
   - Build
   - Test
   - Benchmark
+  - Deploy
 
 image: docker:20.10.18-git
 services:
@@ -113,6 +114,8 @@ format ~ aoc-2021:
   stage: Test
   extends:
     - .2021-template
+  needs:
+    - build ~ aoc-2021
   script:
     - >-
       docker run --rm -v ${DOCKER_VOL}:/${AOC_YEAR} ${DOCKER_CURRENT_IMAGE}
@@ -132,11 +135,11 @@ bench ~ aoc-2021:
       docker run --rm -v ${DOCKER_VOL}:/${AOC_YEAR} ${DOCKER_CURRENT_IMAGE}
       sh -c 'cargo bench --workspace --no-fail-fast --verbose -j2 --
       --warm-up-time 1 --measurement-time 2 --sample-size 10'
-    - mkdir -p public
-    - mv ${AOC_YEAR}/target/criterion/ public
+    - mkdir -p benchmarks_${AOC_YEAR}
+    - mv ${AOC_YEAR}/target/criterion/* benchmarks_${AOC_YEAR}
   artifacts:
     paths:
-      - public
+      - benchmarks_${AOC_YEAR}
 
 # **************************************************************************** #
 #                            Advent of Code 2022                               #
@@ -192,6 +195,8 @@ format ~ aoc-2022:
   stage: Test
   extends:
     - .2022-template
+  needs:
+    - build ~ aoc-2022
   script:
     - >-
       docker run --rm -v ${DOCKER_VOL}:/${AOC_YEAR} ${DOCKER_CURRENT_IMAGE}
@@ -210,3 +215,27 @@ bench ~ aoc-2022:
     - >-
       docker run --rm -v ${DOCKER_VOL}:/${AOC_YEAR} ${DOCKER_CURRENT_IMAGE}
       sh -c 'npm ci && npm run tsc --workspaces && npm run benchmark --workspaces'
+
+# **************************************************************************** #
+#                               Pages deployment                               #
+# **************************************************************************** #
+
+# Create pages with benchmark results
+pages:
+  stage: Deploy
+  needs:
+    - job: bench ~ aoc-2021
+      optional: true
+    - job: bench ~ aoc-2022
+      optional: true
+  script:
+    - mkdir -p public
+    - if [ -d "benchmarks_2021"]; then
+    -   mv benchmarks_2021 public/2021
+    - fi
+    - if [ -d "benchmarks_2022"]; then
+    -   mv benchmarks_2022 public/2022
+    - fi
+  artifacts:
+    paths:
+      - public
