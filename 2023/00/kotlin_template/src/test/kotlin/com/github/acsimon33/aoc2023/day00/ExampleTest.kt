@@ -15,10 +15,10 @@ class ExampleTest {
     val app = KotlinTemplate(File(INPUT_FILENAME).readText(Charsets.UTF_8))
 
     @Test fun task_1() {
-        assertEquals(app.solution_1(), 0, "Example result for task 1 is wrong")
+        assertEquals(app.solution1(), 0, "Example result for task 1 is wrong")
     }
 
     @Test fun task_2() {
-        assertEquals(app.solution_2(), 1, "Example result for task 2 is wrong")
+        assertEquals(app.solution2(), 1, "Example result for task 2 is wrong")
     }
 }

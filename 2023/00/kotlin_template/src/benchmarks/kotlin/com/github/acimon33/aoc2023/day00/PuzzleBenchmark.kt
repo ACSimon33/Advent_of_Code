@@ -23,11 +23,11 @@ open class PuzzleBenchmarks {
 
     @Benchmark
     fun task1() {
-        app.solution_1()
+        app.solution1()
     }
 
     @Benchmark
     fun task2() {
-        app.solution_2()
+        app.solution2()
     }
 }

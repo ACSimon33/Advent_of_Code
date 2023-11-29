@@ -14,10 +14,10 @@ class App : CliktCommand(help = "Day 0: Kotlin Template") {
     override fun run() {
         val app: KotlinTemplate = KotlinTemplate(input.readText(Charsets.UTF_8))
 
-        val result_1: Int = app.solution_1()
+        val result_1: Int = app.solution1()
         println("1. Solution: $result_1")
 
-        val result_2: Int = app.solution_2()
+        val result_2: Int = app.solution2()
         println("2. Solution: $result_2")
     }
 }

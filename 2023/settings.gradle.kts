@@ -12,3 +12,4 @@ plugins {
 
 rootProject.name = "advent_of_code_2023"
 include("00:kotlin_template")
+
