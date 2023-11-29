@@ -1,4 +1,3 @@
-
 package com.github.acsimon33.aoc2023.day00.kotlinTemplate
 
 public class KotlinTemplate(input: String) {
