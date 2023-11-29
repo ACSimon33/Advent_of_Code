@@ -177,7 +177,7 @@ def main() -> None:
                 # or if this is the last entry in the workspace list
                 if add_workspace:
                     workspace = 'include("'
-                    workspace += _get_day(opts.day) + ':'
+                    workspace += _get_day(opts.day) + ":"
                     workspace += _snake_case(opts.name) + '")\n'
                     config.append(workspace)
 
