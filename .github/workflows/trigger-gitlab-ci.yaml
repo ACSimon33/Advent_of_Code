@@ -6,7 +6,11 @@ jobs:
   build:
     runs-on: self-hosted
     steps:
-    - uses: actions/checkout@v1
+    - name: Checkout
+      uses: actions/checkout@v4
+      with:
+        fetch-depth: 0
+    - run: git checkout main && git pull --all
     - name: Mirror + trigger CI
       uses: ACSimon33/gitlab-mirror-and-ci-action@master
       with:
