@@ -67,6 +67,7 @@ docker ~ aoc-2021:
   extends:
     - .2021-template
     - .prepare-docker-template
+    - .run-current-year-template
 
 # 2021 Rust build (debug + release)
 build ~ aoc-2021:
@@ -114,6 +115,7 @@ format ~ aoc-2021:
   stage: Test
   extends:
     - .2021-template
+    - .run-current-year-template
   needs:
     - docker ~ aoc-2021
     - job: build ~ aoc-2021
@@ -159,6 +161,7 @@ docker ~ aoc-2022:
   extends:
     - .2022-template
     - .prepare-docker-template
+    - .run-current-year-template
 
 # 2022 TypeScript build
 build ~ aoc-2022:
@@ -197,6 +200,7 @@ format ~ aoc-2022:
   stage: Test
   extends:
     - .2022-template
+    - .run-current-year-template
   needs:
     - docker ~ aoc-2022
     - job: build ~ aoc-2022
@@ -236,6 +240,7 @@ docker ~ aoc-2023:
   extends:
     - .2023-template
     - .prepare-docker-template
+    - .run-current-year-template
 
 # 2023 Kotlin build
 build ~ aoc-2023:
@@ -264,7 +269,7 @@ test ~ aoc-2023:
       sh -c 'gradle test --max-workers 1'
   artifacts:
     reports:
-      junit: 2023/**/ExampleTest.xml
+      junit: 2023/**/*ExampleTest.xml
     when: always
     expire_in: 1 week
 
@@ -273,6 +278,7 @@ format ~ aoc-2023:
   stage: Test
   extends:
     - .2023-template
+    - .run-current-year-template
   needs:
     - docker ~ aoc-2023
     - job: build ~ aoc-2023
