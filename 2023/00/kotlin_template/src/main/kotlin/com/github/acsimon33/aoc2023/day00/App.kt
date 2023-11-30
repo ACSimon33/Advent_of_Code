@@ -1,7 +1,6 @@
 package com.github.acsimon33.aoc2023.day00
 
-// Import CLI argument parser
-// Import Solution
+// Import solution and CLI argument parser
 import com.github.acsimon33.aoc2023.day00.kotlinTemplate.KotlinTemplate
 import com.github.ajalt.clikt.core.CliktCommand
 import com.github.ajalt.clikt.parameters.arguments.argument

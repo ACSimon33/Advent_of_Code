@@ -164,12 +164,10 @@ def main() -> None:
         last_line_matched = False
         add_workspace = False
         for line in file.readlines():
-            print(line)
             if not add_workspace:
                 add_workspace = last_line_matched
                 m = re.match(r'include\("([0-9]{2}):([a-z_]*)"\)', line)
                 if m and len(m.groups()) == 2:
-                    print("lol")
                     last_line_matched = True
                     add_workspace = int(m.group(1)) > opts.day
 
