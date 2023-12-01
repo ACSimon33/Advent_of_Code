@@ -26,7 +26,7 @@ java {
 
 application {
     // Define the main class for the application.
-    mainClass.set("com.github.acsimon33.aoc2023.day00.AppKt")
+    mainClass.set("aoc2023.day00.AppKt")
 }
 
 tasks.named<Test>("test") {

@@ -1,4 +1,4 @@
-package com.github.acsimon33.aoc2023.day01.trebuchet
+package aoc2023.day01.trebuchet
 
 /** List of valid digit strings */
 val digitStrings: List<String> =

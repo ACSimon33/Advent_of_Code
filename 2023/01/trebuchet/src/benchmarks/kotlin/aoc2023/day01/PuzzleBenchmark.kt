@@ -1,7 +1,7 @@
-package com.github.acsimon33.aoc2023.day00
+package aoc2023.day01
 
 // Import solution and benchmarking annotations
-import com.github.acsimon33.aoc2023.day00.kotlinTemplate.KotlinTemplate
+import aoc2023.day01.trebuchet.Trebuchet
 import java.io.File
 import java.util.concurrent.TimeUnit
 import org.openjdk.jmh.annotations.*
@@ -15,7 +15,7 @@ const val INPUT_FILENAME: String = "./input/puzzle_input.txt"
 @Warmup(iterations = 2)
 @Measurement(iterations = 2, time = 1, timeUnit = TimeUnit.SECONDS)
 open class PuzzleBenchmarks {
-    val app = KotlinTemplate(File(INPUT_FILENAME).readText(Charsets.UTF_8))
+    val app = Trebuchet(File(INPUT_FILENAME).readText(Charsets.UTF_8))
 
     @Setup fun setUp() {}
 

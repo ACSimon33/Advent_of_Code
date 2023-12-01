@@ -1,7 +1,7 @@
-package com.github.acsimon33.aoc2023.day00
+package aoc2023.day00
 
 // Import solution and testing framework
-import com.github.acsimon33.aoc2023.day00.kotlinTemplate.KotlinTemplate
+import aoc2023.day00.kotlinTemplate.KotlinTemplate
 import java.io.File
 import kotlin.test.Test
 import kotlin.test.assertEquals

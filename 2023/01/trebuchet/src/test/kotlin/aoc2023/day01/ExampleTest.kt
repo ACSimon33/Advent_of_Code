@@ -1,7 +1,7 @@
-package com.github.acsimon33.aoc2023.day01
+package aoc2023.day01
 
 // Import solution and testing framework
-import com.github.acsimon33.aoc2023.day01.trebuchet.Trebuchet
+import aoc2023.day01.trebuchet.Trebuchet
 import java.io.File
 import kotlin.test.Test
 import kotlin.test.assertEquals

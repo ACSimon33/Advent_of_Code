@@ -1,4 +1,4 @@
-package com.github.acsimon33.aoc2023.day00.kotlinTemplate
+package aoc2023.day00.kotlinTemplate
 
 /** Kotlin Template Solver */
 public class KotlinTemplate(input: String) {
