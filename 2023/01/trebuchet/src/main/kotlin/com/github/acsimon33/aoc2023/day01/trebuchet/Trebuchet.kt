@@ -31,8 +31,8 @@ public class Trebuchet(input: String) {
     }
 
     /**
-     * Second task: First annotate the first and last digit string and
-     * then run the first task again.
+     * Second task: First annotate the first and last digit string and then run the first task
+     * again.
      */
     fun solution2(): Int {
         annotateFirstAndLastDigit()
@@ -40,8 +40,7 @@ public class Trebuchet(input: String) {
     }
 
     /**
-     * Replace the first character in the first and last digit string
-     * by the corresponding digit.
+     * Replace the first character in the first and last digit string by the corresponding digit.
      */
     fun annotateFirstAndLastDigit(): Unit {
         lines =
