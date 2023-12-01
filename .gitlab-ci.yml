@@ -253,7 +253,7 @@ build ~ aoc-2023:
   script:
     - >-
       docker run --rm -v ${DOCKER_VOL}:/${AOC_YEAR} ${DOCKER_CURRENT_IMAGE}
-      sh -c 'gradle build --max-workers 1'
+      sh -c 'gradle assemble --console verbose'
 
 # 2023 Kotlin test
 test ~ aoc-2023:
@@ -266,7 +266,7 @@ test ~ aoc-2023:
   script:
     - >-
       docker run --rm -v ${DOCKER_VOL}:/${AOC_YEAR} ${DOCKER_CURRENT_IMAGE}
-      sh -c 'gradle test --max-workers 1'
+      sh -c 'gradle test --console verbose --warning-mode none'
   artifacts:
     reports:
       junit: 2023/**/*ExampleTest.xml
@@ -286,7 +286,7 @@ format ~ aoc-2023:
   script:
     - >-
       docker run --rm -v ${DOCKER_VOL}:/${AOC_YEAR} ${DOCKER_CURRENT_IMAGE}
-      sh -c 'gradle ktfmtCheck'
+      sh -c 'gradle ktfmtCheck --console verbose --warning-mode none'
   allow_failure: true
 
 # 2023 Kotlin benchmark (release)
