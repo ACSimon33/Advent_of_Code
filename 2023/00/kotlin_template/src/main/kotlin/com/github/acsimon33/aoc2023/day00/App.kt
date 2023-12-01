@@ -6,7 +6,7 @@ import com.github.ajalt.clikt.core.CliktCommand
 import com.github.ajalt.clikt.parameters.arguments.argument
 import com.github.ajalt.clikt.parameters.types.file
 
-class App : CliktCommand(help = "Day 0: Kotlin Template") {
+class App : CliktCommand(help = "Day 00: Kotlin Template") {
     val input by argument().file(mustExist = true)
 
     override fun run() {
