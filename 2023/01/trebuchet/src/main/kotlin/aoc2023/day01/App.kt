@@ -12,11 +12,11 @@ class App : CliktCommand(help = "Day 01: Trebuchet") {
     override fun run() {
         val app: Trebuchet = Trebuchet(input.readText(Charsets.UTF_8))
 
-        val result_1: Int = app.solution1()
-        println("1. Solution: $result_1")
+        val result_1: Int = app.sumOfCalibrationValues()
+        println("Sum of calibration values: $result_1")
 
-        val result_2: Int = app.solution2()
-        println("2. Solution: $result_2")
+        val result_2: Int = app.sumOfLiteralCalibrationValues()
+        println("Sum of calibration values including digit strings: $result_2")
     }
 }
 

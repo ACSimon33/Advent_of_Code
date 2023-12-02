@@ -16,13 +16,13 @@ class ExampleTest {
     @Test
     fun task1() {
         val app = Trebuchet(File(INPUT_FILENAME_1).readText(Charsets.UTF_8))
-        assertEquals(app.solution1(), 142, "Example result for task 1 is wrong")
+        assertEquals(app.sumOfCalibrationValues(), 142, "Example result for task 1 is wrong")
     }
 
     /** Second task test */
     @Test
     fun task2() {
         val app = Trebuchet(File(INPUT_FILENAME_2).readText(Charsets.UTF_8))
-        assertEquals(app.solution2(), 281, "Example result for task 2 is wrong")
+        assertEquals(app.sumOfLiteralCalibrationValues(), 281, "Example result for task 2 is wrong")
     }
 }

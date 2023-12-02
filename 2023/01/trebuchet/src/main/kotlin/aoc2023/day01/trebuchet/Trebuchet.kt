@@ -9,7 +9,7 @@ public class Trebuchet(input: String) {
     var lines: List<String> = input.lines()
 
     /** First task: Find first and last digit in each line and sum them up */
-    fun solution1(): Int {
+    fun sumOfCalibrationValues(): Int {
         var result: Int = 0
         lines.forEach {
             for (c in it) {
@@ -34,15 +34,15 @@ public class Trebuchet(input: String) {
      * Second task: First annotate the first and last digit string and then run the first task
      * again.
      */
-    fun solution2(): Int {
+    fun sumOfLiteralCalibrationValues(): Int {
         annotateFirstAndLastDigit()
-        return solution1()
+        return sumOfCalibrationValues()
     }
 
     /**
      * Replace the first character in the first and last digit string by the corresponding digit.
      */
-    fun annotateFirstAndLastDigit(): Unit {
+    private fun annotateFirstAndLastDigit(): Unit {
         lines =
             lines.map {
                 val firstDigit: IndexedValue<Int>? =
