@@ -29,19 +29,19 @@ Example uses:
 """
 
 TEMPLATE_DAY = 0
-TEMPLATE_PROJECT = "Kotlin Template"
+TEMPLATE_NAME = "Kotlin Template"
 
 # -------------------------------------------------------------------- #
 
 
 def get_day(day: int) -> str:
-    """Get a two digit day string.
+    """Get a two-digit day string.
 
     Args:
-        day (int): Given or next day.
+        day (int): Given or the next day.
 
     Returns:
-        str: The two digit day string.
+        str: The two-digit day string.
     """
     day_str = "0" if day <= 9 else ""
     day_str += str(day)
@@ -110,7 +110,7 @@ def get_day_folder(day: int, name: str | None = None) -> Path:
 
 
 def find_next_day() -> int:
-    """Find next day if no day was given.
+    """Find the next day if no day was given.
 
     Returns:
         int: The next uninitialized day.
@@ -166,12 +166,10 @@ def search_and_replace(day: int, name: str, contents: str) -> str:
         str: The file contents of the new subproject
     """
     contents = re.sub(get_day(TEMPLATE_DAY), get_day(day), contents)
-    contents = re.sub(TEMPLATE_PROJECT, name, contents)
-    contents = re.sub(snake_case(TEMPLATE_PROJECT), snake_case(name), contents)
-    contents = re.sub(
-        pascal_case(TEMPLATE_PROJECT), pascal_case(name), contents
-    )
-    contents = re.sub(camel_case(TEMPLATE_PROJECT), camel_case(name), contents)
+    contents = re.sub(TEMPLATE_NAME, name, contents)
+    contents = re.sub(snake_case(TEMPLATE_NAME), snake_case(name), contents)
+    contents = re.sub(pascal_case(TEMPLATE_NAME), pascal_case(name), contents)
+    contents = re.sub(camel_case(TEMPLATE_NAME), camel_case(name), contents)
     return contents
 
 
@@ -181,14 +179,14 @@ def init_project(
 ) -> None:
     """Initialize a new subproject from the template.
 
-    Walk through each file in the template project and replaces the day
+    Walk through each file in the template project and replace the day
     and project name.
 
     Args:
         day (int): The new day (replacement for 00 in the template)
         name (str): The project name (replacement for the template name)
     """
-    source = get_day_folder(TEMPLATE_DAY, TEMPLATE_PROJECT).as_posix()
+    source = get_day_folder(TEMPLATE_DAY, TEMPLATE_NAME).as_posix()
     destination = get_day_folder(day, name).as_posix()
 
     for dirpath, _, files in os.walk(source):
@@ -243,10 +241,10 @@ def main() -> int:
     if folder.exists():
         raise RuntimeError("Day '{0}' already exists.".format(folder))
 
-    # Initilaize project
+    # Initialize project
     init_project(opts.day, opts.name)
 
-    # Initialize as subproject
+    # Initialize as a subproject
     package_file = Path(__file__).parent / "settings.gradle.kts"
     config: list[str] = []
     with open(package_file, "r") as file:
