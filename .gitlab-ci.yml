@@ -39,7 +39,7 @@ services:
     - docker pull ${DOCKER_CURRENT_IMAGE} || true
     - docker pull ${DOCKER_LATEST_IMAGE} || true
     - docker images
-  timeout: 40m
+  timeout: 1h
 
 # Prepare docker
 .prepare-docker-template:
