@@ -89,10 +89,10 @@ public class GearRatios(input: String) {
             .toList()
 
     /**
-     * Return a mutable list of part Numbers in the current [line] of the schematic which are
-     * adjacent to the gear at a given [position].
+     * Return a list of part Numbers in the current [line] of the schematic which are adjacent to
+     * the gear at a given [position].
      */
-    private fun getGearConnections(line: String?, position: Int): MutableList<Int> =
+    private fun getGearConnections(line: String?, position: Int): List<Int> =
         line?.let {
             Regex("([0-9]*)")
                 .findAll(line)
@@ -101,6 +101,6 @@ public class GearRatios(input: String) {
                         it.groups[1]!!.range.extend(line.length - 1).contains(position)
                 }
                 .map { it.groups[1]!!.value.toInt() }
-                .toMutableList()
-        } ?: mutableListOf<Int>()
+                .toList()
+        } ?: listOf<Int>()
 }
