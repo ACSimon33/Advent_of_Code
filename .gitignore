@@ -3,3 +3,6 @@
 
 # MacOS system files
 .DS_Store
+
+# Pyproject.toml since this isn't a python project (only init script)
+pyproject.toml
