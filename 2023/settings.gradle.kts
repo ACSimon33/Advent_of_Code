@@ -14,4 +14,5 @@ rootProject.name = "advent_of_code_2023"
 include("00:kotlin_template")
 include("01:trebuchet")
 include("02:cube_conundrum")
+include("03:gear_ratios")
 
