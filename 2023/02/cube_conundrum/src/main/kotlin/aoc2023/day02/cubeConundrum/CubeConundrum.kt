@@ -8,10 +8,10 @@ public class CubeConundrum(input: String) {
      * First task: Filter all games by checking if the specific draw of 12 red cubes, 13 green cubes
      * and 14 blue cubes is possible and sum up their ids.
      */
-    fun sumOfPossibleGameIds(): Int = games.filter { it.isDrawPossible(12, 13, 14) }.sumBy { it.id }
+    fun sumOfPossibleGameIds(): Int = games.filter { it.isDrawPossible(12, 13, 14) }.sumOf { it.id }
 
     /** Second task: Sum up the powers of all games */
-    fun sumOfGamePowers(): Int = games.sumBy { it.power }
+    fun sumOfGamePowers(): Int = games.sumOf { it.power }
 }
 
 /** Cube Game class */

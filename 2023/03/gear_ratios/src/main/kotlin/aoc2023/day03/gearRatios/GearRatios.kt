@@ -42,7 +42,7 @@ public class GearRatios(input: String) {
                         lines.elementAtOrNull(index + 1)
                     )
                     .filter { it.connections.size == 2 }
-                    .sumBy { it.connections[0] * it.connections[1] }
+                    .sumOf { it.connections[0] * it.connections[1] }
         }
 
         return gearRatios
