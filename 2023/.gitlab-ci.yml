@@ -1,0 +1,77 @@
+# **************************************************************************** #
+#                            Advent of Code 2023                               #
+# **************************************************************************** #
+
+# 2023 template
+.2023-template:
+  variables:
+    AOC_YEAR: 2023
+  extends:
+    - .setup-template
+
+# Prepare docker for 2023
+docker ~ aoc-2023:
+  extends:
+    - .2023-template
+    - .prepare-docker-template
+    - .run-current-year-template
+
+# 2023 Kotlin build
+build ~ aoc-2023:
+  stage: Build
+  extends:
+    - .2023-template
+    - .run-current-year-template
+  needs:
+    - docker ~ aoc-2023
+  script:
+    - >-
+      docker run --rm -v ${DOCKER_VOL}:/${AOC_YEAR} ${DOCKER_CURRENT_IMAGE}
+      sh -c 'gradle assemble --console plain'
+
+# 2023 Kotlin test
+test ~ aoc-2023:
+  stage: Test
+  extends:
+    - .2023-template
+    - .run-current-year-template
+  needs:
+    - build ~ aoc-2023
+  script:
+    - >-
+      docker run --rm -v ${DOCKER_VOL}:/${AOC_YEAR} ${DOCKER_CURRENT_IMAGE}
+      sh -c 'gradle test --console plain --warning-mode none'
+  artifacts:
+    reports:
+      junit: 2023/**/*ExampleTest.xml
+    when: always
+    expire_in: 1 week
+
+# 2023 Kotlin fmt check
+format ~ aoc-2023:
+  stage: Test
+  extends:
+    - .2023-template
+    - .run-current-year-template
+  needs:
+    - docker ~ aoc-2023
+    - job: build ~ aoc-2023
+      optional: true
+  script:
+    - >-
+      docker run --rm -v ${DOCKER_VOL}:/${AOC_YEAR} ${DOCKER_CURRENT_IMAGE}
+      sh -c 'gradle ktfmtCheck --console plain --warning-mode none'
+  allow_failure: true
+
+# 2023 Kotlin benchmark (release)
+bench ~ aoc-2023:
+  stage: Benchmark
+  extends:
+    - .2023-template
+    - .run-current-year-template
+  needs:
+    - test ~ aoc-2023
+  script:
+    - >-
+      docker run --rm -v ${DOCKER_VOL}:/${AOC_YEAR} ${DOCKER_CURRENT_IMAGE}
+      sh -c 'gradle benchmark --console plain --warning-mode none'
