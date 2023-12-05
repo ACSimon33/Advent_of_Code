@@ -83,10 +83,8 @@ public class IfYouGiveASeedAFertilizer(val input: String) {
      */
     fun nearestSeedIntervalLocation(): Long {
         val seeds: List<Interval> =
-            Regex("seeds: ([0-9 ]*)").find(input)!!.groups[1]!!.value.split(" ").let {
-                it.slice(0..it.size - 1 step 2).zip(it.slice(1..it.size step 2)).map {
-                    Interval(it.first.toLong(), it.second.toLong())
-                }
+            Regex("seeds: ([0-9 ]*)").find(input)!!.groups[1]!!.value.split(" ").chunked(2).map {
+                Interval(it[0].toLong(), it[1].toLong())
             }
 
         return seedsToLocations(seeds).map { it.start }.min()
