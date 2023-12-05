@@ -117,7 +117,7 @@ private class ConversionMap(initStr: List<String>) {
 
             for (source in nonConvertedOld) {
                 val (c, nc) = conv.apply(source)
-                if (c != null) {
+                if (c.length >= 1L) {
                     converted.add(c)
                 }
                 nonConverted.addAll(nc)
@@ -142,13 +142,11 @@ private class Conversion(initStr: List<String>) {
      * interval intersects with the [source] interval of the conversion as well as a list of
      * intervals which were no converted.
      */
-    fun apply(src: Interval): Pair<Interval?, List<Interval>> {
-        val intersection: Interval? = source.intersect(src)
+    fun apply(src: Interval): Pair<Interval, List<Interval>> {
+        var intersection: Interval = source.intersect(src)
         val difference: List<Interval> = src / intersection
-        if (intersection != null) {
-            intersection += (destination.start - source.start)
-        }
 
+        intersection += (destination.start - source.start)
         return Pair(intersection, difference)
     }
 }
@@ -160,19 +158,19 @@ private class Interval(var start: Long, val length: Long = 1) {
     var end = start + length
 
     /** Calculate the intersection interval between this interval and an [other] interval. */
-    fun intersect(other: Interval): Interval? {
+    fun intersect(other: Interval): Interval {
         val new_start = max(start, other.start)
         val new_end = min(end, other.end)
 
-        return if (new_end > new_start) Interval(new_start, new_end - new_start) else null
+        return Interval(new_start, max(0, new_end - new_start))
     }
 
     /**
      * Calculate the difference between this interval and an [other] interval. Results in zero, one,
      * or two new intervals.
      */
-    operator fun div(other: Interval?): List<Interval> {
-        return if (other == null) {
+    operator fun div(other: Interval): List<Interval> {
+        return if (other.length == 0L) {
             listOf<Interval>(Interval(start, length))
         } else if (other.start > start && other.end < end) {
             listOf<Interval>(
