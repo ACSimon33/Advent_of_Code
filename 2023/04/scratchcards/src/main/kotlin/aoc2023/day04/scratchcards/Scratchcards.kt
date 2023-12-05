@@ -3,9 +3,9 @@ package aoc2023.day04.scratchcards
 import kotlin.math.pow
 
 /**
- * If the [index] is smaller than the current size of the list, inrement the correponding element
- * by [value]. Otherwise, if the [index] is smaller than the maximum allowed size [maxSize], add a
- * new elements at the end of the list until we reach the [index] where we a add the [value].
+ * If the [index] is smaller than the current size of the list, inrement the correponding element by
+ * [value]. Otherwise, if the [index] is smaller than the maximum allowed size [maxSize], add a new
+ * elements at the end of the list until we reach the [index] where we a add the [value].
  */
 fun MutableList<Int>.incrementOrAppend(index: Int, value: Int, maxSize: Int): Unit {
     if (index < size) {
