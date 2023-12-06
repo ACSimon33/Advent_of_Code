@@ -7,7 +7,7 @@ import kotlin.test.Test
 import kotlin.test.assertEquals
 
 /** Example input */
-const val INPUT_FILENAME_1: String = "./input/example_input_1.txt"
+const val INPUT_FILENAME_1: String = "./input/example_input.txt"
 const val INPUT_FILENAME_2: String = "./input/example_input_2.txt"
 
 /** Example test framework */

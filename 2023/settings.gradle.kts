@@ -8,6 +8,9 @@
 plugins {
     // Apply the foojay-resolver plugin to allow automatic download of JDKs
     id("org.gradle.toolchains.foojay-resolver-convention") version "0.7.0"
+    id("org.jetbrains.kotlin.jvm") version "1.9.10" apply false
+    id("org.jetbrains.kotlinx.benchmark") version "0.4.9" apply false
+    id("com.ncorti.ktfmt.gradle") version "0.15.1" apply false
 }
 
 rootProject.name = "advent_of_code_2023"
@@ -17,3 +20,4 @@ include("02:cube_conundrum")
 include("03:gear_ratios")
 include("04:scratchcards")
 include("05:if_you_give_a_seed_a_fertilizer")
+include("06:wait_for_it")

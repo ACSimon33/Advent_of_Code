@@ -1,9 +1,9 @@
 import kotlinx.benchmark.gradle.JvmBenchmarkTarget
 
 plugins {
-    id("org.jetbrains.kotlin.jvm") version "1.9.10"
-    id("org.jetbrains.kotlinx.benchmark") version "0.4.9"
-    id("com.ncorti.ktfmt.gradle") version "0.15.1"
+    id("org.jetbrains.kotlin.jvm")
+    id("org.jetbrains.kotlinx.benchmark")
+    id("com.ncorti.ktfmt.gradle")
     application
 }
 
