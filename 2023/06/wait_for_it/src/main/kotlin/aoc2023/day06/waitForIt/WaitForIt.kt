@@ -56,8 +56,9 @@ public class WaitForIt(input: String) {
      * Solves the following quadratic formula with T = [time], d = [distance] and x = buttonTime:
      * x * (T - x) > d <=> x^2 - T * x + d > 0
      *
-     * => 0.5 * (T - sqrt(T^2 - 4 * d)) < x < 0.5 * (T + sqrt(T^2 - 4 * d)) => ⌊0.5 * (T -
-     * sqrt(T^2 - 4 * d))⌋ + 1 < x < ⌈0.5 * (T + sqrt(T^2 - 4 * d))⌉ - 1
+     * => 0.5 * (T - sqrt(T^2 - 4 * d)) < x < 0.5 * (T + sqrt(T^2 - 4 * d))
+     *
+     * Int solution: ⌊0.5 * (T - sqrt(T^2 - 4 * d))⌋ + 1 < x < ⌈0.5 * (T + sqrt(T^2 - 4 * d))⌉ - 1
      */
     private fun amountOfWins(time: Double, distance: Double): Long {
         val minButtonHold: Long = floor(time / 2 - sqrt(time * time / 4 - distance)).toLong() + 1
