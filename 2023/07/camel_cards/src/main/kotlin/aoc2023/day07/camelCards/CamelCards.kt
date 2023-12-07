@@ -22,23 +22,7 @@ public class CamelCards(input: String) {
 }
 
 /** Ranking of card values with '*' as the Joker. */
-private val cardValues: Map<Char, Int> =
-    mapOf(
-        '*' to 0,
-        '2' to 1,
-        '3' to 2,
-        '4' to 3,
-        '5' to 4,
-        '6' to 5,
-        '7' to 6,
-        '8' to 7,
-        '9' to 8,
-        'T' to 9,
-        'J' to 10,
-        'Q' to 11,
-        'K' to 12,
-        'A' to 13
-    )
+private val cardValues: Map<Char, Int> = "*23456789TJQKA".mapIndexed { i, c -> Pair(c, i) }.toMap()
 
 /** All possible hand types, ranked from weakest to strongest. */
 private enum class HandType() {
