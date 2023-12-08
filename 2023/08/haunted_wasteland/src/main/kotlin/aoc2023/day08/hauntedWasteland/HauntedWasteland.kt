@@ -1,9 +1,9 @@
 package aoc2023.day08.hauntedWasteland
 
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.async
 import kotlinx.coroutines.awaitAll
 import kotlinx.coroutines.coroutineScope
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.runBlocking
 
 /** Parallel map of a generic list to [f] using coroutines. */
@@ -21,8 +21,8 @@ public class HauntedWasteland(val input: String) {
             .toMap()
 
     /**
-     * First task: Calculate the distance from 'AAA' to 'ZZZ'. We are assuming here that there is
-     * no other **Z node in the loop.
+     * First task: Calculate the distance from 'AAA' to 'ZZZ'. We are assuming here that there is no
+     * other **Z node in the loop.
      */
     fun stepsOfSinglePath(): Int = detectLoop("AAA")
 
@@ -31,9 +31,10 @@ public class HauntedWasteland(val input: String) {
      * We assume here that the amount of **A to **Z is the same as the loop length **Z to **Z. Also
      * the loop needs to be fixed which means we are reaching **Z always on the same instruction.
      */
-    fun stepsOfAllPaths(): Long = runBlocking(Dispatchers.Default) {
-        lcm(nodes.keys.filter { it.endsWith('A') }.toList().pmap { detectLoop(it).toLong() })
-    }
+    fun stepsOfAllPaths(): Long =
+        runBlocking(Dispatchers.Default) {
+            lcm(nodes.keys.filter { it.endsWith('A') }.toList().pmap { detectLoop(it).toLong() })
+        }
 
     /** Calculate the loop length from the [startNode] to the end node '**Z'. */
     private fun detectLoop(startNode: String): Int {
