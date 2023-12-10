@@ -25,12 +25,9 @@ public class PipeMaze(input: String) {
         val regions: MutableList<Set<Int>> = mutableListOf(loop)
 
         // Identify all regions
-        for (i in 0..<maze.mRows) {
-            for (j in 0..<maze.nCols) {
-                val pos = Position(maze.mRows, maze.nCols, i, j)
-                if (regions.none{ it.contains(pos.id()) }) {
-                    regions.add(identifyRegion(pos, loop))
-                }
+        for (id in 0 ..< maze.mRows * maze.nCols) {
+            if (regions.none{ it.contains(id) }) {
+                regions.add(identifyRegion(Position(maze.mRows, maze.nCols, id), loop))
             }
         }
 
@@ -39,7 +36,7 @@ public class PipeMaze(input: String) {
 
         // Go through the loop from the loop segment with the lowest id
         val lowestID: Int = loop.min()
-        var pos = Position(maze.mRows, maze.nCols, lowestID / maze.nCols, lowestID % maze.nCols)
+        var pos = Position(maze.mRows, maze.nCols, lowestID)
         var normal: Direction = Direction.NORTH
         var travelDirection: Direction = Direction.EAST
         do {
@@ -117,6 +114,8 @@ private enum class Direction {
 }
 
 private data class Position(val mRows: Int, val nCols: Int, var row: Int, var col: Int) {
+
+    constructor(mRows: Int, nCols: Int, id: Int) : this(mRows, nCols, id / nCols, id % nCols)
 
     fun id(): Int = row * nCols + col
 
