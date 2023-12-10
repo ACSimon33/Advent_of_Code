@@ -34,29 +34,30 @@ public class PipeMaze(input: String) {
         val enclosed: MutableList<Boolean> = MutableList(regions.size) { true }
         enclosed[0] = false
 
-        // Go through the loop from the loop segment with the lowest id
+        // Go through the loop from the loop segment with the lowest id. This loop segment is
+        // garuanteed to be an 'F'. If we start a clockwise traversal the outside will always be on
+        // the left.
         val lowestID: Int = loop.min()
         var pos = Position(maze.mRows, maze.nCols, lowestID)
-        var normal: Direction = Direction.NORTH
-        var travelDirection: Direction = Direction.EAST
+        var direction: Direction = Direction.EAST
         do {
             try {
-                val outsidePosition: Position = pos.copy().also { it.travel(normal) }
+                val outsidePosition: Position = pos.copy().also { it.travel(direction.left()) }
                 enclosed[regions.indexOfFirst { it.contains(outsidePosition.id()) }] = false
             } catch (e: Exception) {}
-            pos.travel(travelDirection)
+            pos.travel(direction)
             try {
-                val outsidePosition: Position = pos.copy().also { it.travel(normal) }
+                val outsidePosition: Position = pos.copy().also { it.travel(direction.left()) }
                 enclosed[regions.indexOfFirst { it.contains(outsidePosition.id()) }] = false
             } catch (e: Exception) {}
 
-            normal = maze[pos]!!.outsideNormalDirection(travelDirection, normal)
-            travelDirection = maze[pos]!!.traverse(travelDirection)
+            direction = maze[pos]!!.traverse(direction)
         } while (pos.id() != lowestID)
 
         return regions.filterIndexed { index, _ -> enclosed[index] }.map { it.size }.sum()
     }
 
+    /** Identify the loop by traversing the maze from the starting position. */
     private fun identifyLoop(): Region {
         var pos = maze.startPos.copy()
         var travelDirection: Direction = maze[pos]!!.first
@@ -72,6 +73,7 @@ public class PipeMaze(input: String) {
         return loop
     }
 
+    /** Identify a region from [pos] separated by the [loop] using queue-based floodfill. */
     private fun identifyRegion(pos: Position, loop: Set<Int>): Region {
         var region: Region = mutableSetOf<Int>(pos.id())
 
@@ -91,39 +93,54 @@ public class PipeMaze(input: String) {
     }
 }
 
+/** Class identifying a othogonal direction. The direction knows its opposite and left direction. */
 private enum class Direction {
     NORTH {
+        /** Opposite of NORTH is SOUTH. */
         override fun opposite(): Direction = Direction.SOUTH
 
+        /** Left turn from NORTH is WEST. */
         override fun left(): Direction = Direction.WEST
     },
     EAST {
+        /** Opposite of EAST is SOUTH. */
         override fun opposite(): Direction = Direction.WEST
 
+        /** Left turn from EAST is NORTH. */
         override fun left(): Direction = Direction.NORTH
     },
     SOUTH {
+        /** Opposite of SOUTH is NORTH. */
         override fun opposite(): Direction = Direction.NORTH
 
+        /** Left turn from SOUTH is EAST. */
         override fun left(): Direction = Direction.EAST
     },
     WEST {
+        /** Opposite of WEST is EAST. */
         override fun opposite(): Direction = Direction.EAST
 
+        /** Left turn from WEST is SOUTH. */
         override fun left(): Direction = Direction.SOUTH
     };
 
+    /** Abstract: Opposite direction. */
     abstract fun opposite(): Direction
 
+    /** Abstract: Left turn direction when traveling in the current direction. */
     abstract fun left(): Direction
 }
 
+/** Class identifying a position [row], [col] in a grid of size [mRows] x [nCols]. */
 private data class Position(val mRows: Int, val nCols: Int, var row: Int, var col: Int) {
 
+    /** Create the position with a given [id] for a grid of size [mRows] x [nCols]. */
     constructor(mRows: Int, nCols: Int, id: Int) : this(mRows, nCols, id / nCols, id % nCols)
 
+    /** Index (ID) of the position. */
     fun id(): Int = row * nCols + col
 
+    /** Travel in the given [travelDirection]. Throw an exception if we leave the grid. */
     fun travel(travelDirection: Direction): Unit {
         if (travelDirection == Direction.NORTH && row > 0) {
             row--
@@ -138,6 +155,7 @@ private data class Position(val mRows: Int, val nCols: Int, var row: Int, var co
         }
     }
 
+    /** Create a list of neighbouring positions. */
     fun neighbours(): List<Position> {
         val positions: MutableList<Position> = mutableListOf<Position>()
         if (row > 0) {
@@ -156,8 +174,13 @@ private data class Position(val mRows: Int, val nCols: Int, var row: Int, var co
     }
 }
 
+/** Class representing a pipe connecting a [first] and a [second] direction. */
 private class Pipe(val first: Direction, val second: Direction) {
 
+    /**
+     * Traverse the pipe in the given [travelDirection]. Throw an exception is the direction is not
+     * valid, i.e. the pipe has no connection in the opposite of the travel direction.
+     */
     fun traverse(travelDirection: Direction): Direction =
         if (first == travelDirection.opposite()) {
             second
@@ -167,29 +190,8 @@ private class Pipe(val first: Direction, val second: Direction) {
             throw Exception("Error: Invalid travel direction!")
         }
 
-    fun outsideNormalDirection(travelDirection: Direction, previousNormal: Direction): Direction {
-        if (first == second.opposite()) {
-            return previousNormal
-        }
-
-        return if (first == travelDirection.opposite()) {
-            if (travelDirection.left() == second) {
-                travelDirection.opposite()
-            } else {
-                travelDirection
-            }
-        } else if (second == travelDirection.opposite()) {
-            if (travelDirection.left() == first) {
-                travelDirection.opposite()
-            } else {
-                travelDirection
-            }
-        } else {
-            throw Exception("Error: Invalid travel direction!")
-        }
-    }
-
     companion object {
+        /** Create a pipe from its char [id]. */
         infix fun from(id: Char): Pipe? =
             when (id) {
                 '|' -> Pipe(Direction.NORTH, Direction.SOUTH)
@@ -203,18 +205,26 @@ private class Pipe(val first: Direction, val second: Direction) {
     }
 }
 
+/** Class representing the maze, initialized from the input [initStr]. */
 private class Maze(initStr: String) {
+    /** 2D Grid of pipes. */
     private var grid: MutableList<MutableList<Pipe?>> =
         initStr.lines().map { it.map { c -> Pipe from c }.toMutableList() }.toMutableList()
+
+    /** Number of rows in the grid. */
     val mRows = grid.size
+
+    /** Number of columns in the grid. */
     val nCols = grid[0].size
+
+    /** The starting position . */
     val startPos: Position =
         initStr
             .lines()
             .indexOfFirst { it.contains('S') }
             .let { row -> Position(mRows, nCols, row, initStr.lines()[row].indexOf('S')) }
 
-    // Identify the start pipe
+    // Identify the start pipe and replace it with the correct pipe segment
     init {
         // Try traversing neighbouring pipes
         var pipeDirections: List<Direction> =
@@ -239,9 +249,11 @@ private class Maze(initStr: String) {
         this[startPos] = Pipe(pipeDirections[0], pipeDirections[1])
     }
 
-    operator fun get(pos: Position): Pipe? = grid[pos.row][pos.col]
+    /** Get a pipe in the grid via a given [position]. */
+    operator fun get(position: Position): Pipe? = grid[position.row][position.col]
 
-    operator fun set(pos: Position, pipe: Pipe): Unit {
-        grid[pos.row][pos.col] = pipe
+    /** Set a [pipe] in the grid via a given [position]. */
+    operator fun set(position: Position, pipe: Pipe): Unit {
+        grid[position.row][position.col] = pipe
     }
 }
