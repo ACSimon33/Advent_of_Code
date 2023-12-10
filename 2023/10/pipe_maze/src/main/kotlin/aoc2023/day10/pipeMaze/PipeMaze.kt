@@ -1,7 +1,7 @@
 package aoc2023.day10.pipeMaze
 
-import java.util.Queue
 import java.util.LinkedList
+import java.util.Queue
 
 /** Region of the maze defined by a set of position IDs. */
 typealias Region = MutableSet<Int>
@@ -26,7 +26,7 @@ public class PipeMaze(input: String) {
 
         // Identify all regions
         for (id in 0 ..< maze.mRows * maze.nCols) {
-            if (regions.none{ it.contains(id) }) {
+            if (regions.none { it.contains(id) }) {
                 regions.add(identifyRegion(Position(maze.mRows, maze.nCols, id), loop))
             }
         }
@@ -42,43 +42,43 @@ public class PipeMaze(input: String) {
         do {
             try {
                 val outsidePosition: Position = pos.copy().also { it.travel(normal) }
-                enclosed[regions.indexOfFirst{ it.contains(outsidePosition.id()) }] = false
-            } catch(e: Exception) {}
+                enclosed[regions.indexOfFirst { it.contains(outsidePosition.id()) }] = false
+            } catch (e: Exception) {}
             pos.travel(travelDirection)
             try {
                 val outsidePosition: Position = pos.copy().also { it.travel(normal) }
-                enclosed[regions.indexOfFirst{ it.contains(outsidePosition.id()) }] = false
-            } catch(e: Exception) {}
+                enclosed[regions.indexOfFirst { it.contains(outsidePosition.id()) }] = false
+            } catch (e: Exception) {}
 
             normal = maze[pos]!!.outsideNormalDirection(travelDirection, normal)
             travelDirection = maze[pos]!!.traverse(travelDirection)
-        } while(pos.id() != lowestID)
+        } while (pos.id() != lowestID)
 
-        return regions.filterIndexed{ index, _ -> enclosed[index] }. map{ it.size }. sum()
+        return regions.filterIndexed { index, _ -> enclosed[index] }.map { it.size }.sum()
     }
 
-    private fun identifyLoop():  Region {
+    private fun identifyLoop(): Region {
         var pos = maze.startPos.copy()
         var travelDirection: Direction = maze[pos]!!.first
-        var loop:  Region = mutableSetOf<Int>()
+        var loop: Region = mutableSetOf<Int>()
 
         // Go through the maze until we loop back to the start
         do {
             loop.add(pos.id())
             pos.travel(travelDirection)
             travelDirection = maze[pos]!!.traverse(travelDirection)
-        } while(pos != maze.startPos)
+        } while (pos != maze.startPos)
 
         return loop
     }
 
-    private fun identifyRegion(pos: Position, loop: Set<Int>):  Region {
-        var region:  Region = mutableSetOf<Int>(pos.id())
+    private fun identifyRegion(pos: Position, loop: Set<Int>): Region {
+        var region: Region = mutableSetOf<Int>(pos.id())
 
         val queue: Queue<Position> = LinkedList()
         queue.add(pos)
 
-        while(queue.size > 0) {
+        while (queue.size > 0) {
             for (neighbour in queue.remove().neighbours()) {
                 if (!loop.contains(neighbour.id()) && !region.contains(neighbour.id())) {
                     region.add(neighbour.id())
@@ -94,22 +94,27 @@ public class PipeMaze(input: String) {
 private enum class Direction {
     NORTH {
         override fun opposite(): Direction = Direction.SOUTH
+
         override fun left(): Direction = Direction.WEST
     },
     EAST {
         override fun opposite(): Direction = Direction.WEST
+
         override fun left(): Direction = Direction.NORTH
     },
     SOUTH {
         override fun opposite(): Direction = Direction.NORTH
+
         override fun left(): Direction = Direction.EAST
     },
     WEST {
         override fun opposite(): Direction = Direction.EAST
+
         override fun left(): Direction = Direction.SOUTH
     };
 
     abstract fun opposite(): Direction
+
     abstract fun left(): Direction
 }
 
@@ -185,39 +190,47 @@ private class Pipe(val first: Direction, val second: Direction) {
     }
 
     companion object {
-        infix fun from(id: Char): Pipe? = when (id) {
-            '|' -> Pipe(Direction.NORTH, Direction.SOUTH)
-            'J' -> Pipe(Direction.NORTH, Direction.WEST)
-            'L' -> Pipe(Direction.NORTH, Direction.EAST)
-            '-' -> Pipe(Direction.WEST, Direction.EAST)
-            '7' -> Pipe(Direction.WEST, Direction.SOUTH)
-            'F' -> Pipe(Direction.SOUTH, Direction.EAST)
-            else -> null
-        }
+        infix fun from(id: Char): Pipe? =
+            when (id) {
+                '|' -> Pipe(Direction.NORTH, Direction.SOUTH)
+                'J' -> Pipe(Direction.NORTH, Direction.WEST)
+                'L' -> Pipe(Direction.NORTH, Direction.EAST)
+                '-' -> Pipe(Direction.WEST, Direction.EAST)
+                '7' -> Pipe(Direction.WEST, Direction.SOUTH)
+                'F' -> Pipe(Direction.SOUTH, Direction.EAST)
+                else -> null
+            }
     }
 }
 
 private class Maze(initStr: String) {
-    private var grid: MutableList<MutableList<Pipe?>> = initStr.lines().map{ it.map { c -> Pipe from c }.toMutableList() }.toMutableList()
+    private var grid: MutableList<MutableList<Pipe?>> =
+        initStr.lines().map { it.map { c -> Pipe from c }.toMutableList() }.toMutableList()
     val mRows = grid.size
     val nCols = grid[0].size
-    val startPos: Position = initStr.lines().indexOfFirst { it.contains('S') }.let {
-        row -> Position(mRows, nCols, row, initStr.lines()[row].indexOf('S'))
-    }
+    val startPos: Position =
+        initStr
+            .lines()
+            .indexOfFirst { it.contains('S') }
+            .let { row -> Position(mRows, nCols, row, initStr.lines()[row].indexOf('S')) }
 
     // Identify the start pipe
     init {
         // Try traversing neighbouring pipes
-        var pipeDirections: List<Direction> = Direction.values().filter {
-            var tmpPos = startPos.copy()
+        var pipeDirections: List<Direction> =
+            Direction.values().filter {
+                var tmpPos = startPos.copy()
 
-            try {
-                tmpPos.travel(it)
-                this[tmpPos]?.let { pipe -> pipe.traverse(it); true } ?: false
-            } catch (e: Exception) {
-                false
+                try {
+                    tmpPos.travel(it)
+                    this[tmpPos]?.let { pipe ->
+                        pipe.traverse(it)
+                        true
+                    } ?: false
+                } catch (e: Exception) {
+                    false
+                }
             }
-        }
 
         // Set start pipe if it is valid
         if (pipeDirections.size != 2) {
@@ -228,5 +241,7 @@ private class Maze(initStr: String) {
 
     operator fun get(pos: Position): Pipe? = grid[pos.row][pos.col]
 
-    operator fun set(pos: Position, pipe: Pipe): Unit { grid[pos.row][pos.col] = pipe }
+    operator fun set(pos: Position, pipe: Pipe): Unit {
+        grid[pos.row][pos.col] = pipe
+    }
 }
