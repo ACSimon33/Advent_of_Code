@@ -11,13 +11,13 @@ public class ParabolicReflectorDish(input: String) {
     }
 
     /**
-     * Second task: Rotate the platform to the north, west, south, and each a given amount of
-     * [cycles]. Calculate the beam load after all those cycles. We wuick return as soon as we reach
+     * Second task: Rotate the platform to the north, west, south, and east a given amount of
+     * [cycles]. Calculate the beam load after all those cycles. We quick return as soon as we reach
      * a state which we already encountered before.
      */
     fun beamLoadAfter(cycles: Long): Int {
         val loads = mutableMapOf(Pair(dish.toString(), Pair(0L, dish.load(Direction.NORTH))))
-        for (i in 1L .. cycles) {
+        for (i in 1L..cycles) {
             dish.tilt(Direction.NORTH)
             dish.tilt(Direction.WEST)
             dish.tilt(Direction.SOUTH)
@@ -66,10 +66,10 @@ private enum class Direction {
 /** Class which handles the tilting of the reflector dish and load calculations. */
 private class ReflectorDish(initStr: String) {
     private val controlRocks: List<MutableList<Rock>> =
-        initStr.lines().map { it.map { c -> (Rock from c)!! }.toMutableList()}
+        initStr.lines().map { it.map { c -> (Rock from c)!! }.toMutableList() }
 
     /** Tilt the platform in the given [direction]. All round rocks will roll as far as they can. */
-    fun tilt(direction: Direction) : Unit {
+    fun tilt(direction: Direction): Unit {
         var changed: Boolean
 
         if (direction == Direction.NORTH) {
@@ -77,9 +77,11 @@ private class ReflectorDish(initStr: String) {
                 changed = false
                 for (i in 0 ..< controlRocks.size - 1) {
                     for (j in 0 ..< controlRocks[i].size) {
-                        if (controlRocks[i][j] == Rock.None && controlRocks[i+1][j] == Rock.Round) {
+                        if (
+                            controlRocks[i][j] == Rock.None && controlRocks[i + 1][j] == Rock.Round
+                        ) {
                             controlRocks[i][j] = Rock.Round
-                            controlRocks[i+1][j] = Rock.None
+                            controlRocks[i + 1][j] = Rock.None
                             changed = true
                         }
                     }
@@ -90,9 +92,11 @@ private class ReflectorDish(initStr: String) {
                 changed = false
                 for (i in 0 ..< controlRocks.size) {
                     for (j in (controlRocks[i].size - 1) downTo 1) {
-                        if (controlRocks[i][j] == Rock.None && controlRocks[i][j-1] == Rock.Round) {
+                        if (
+                            controlRocks[i][j] == Rock.None && controlRocks[i][j - 1] == Rock.Round
+                        ) {
                             controlRocks[i][j] = Rock.Round
-                            controlRocks[i][j-1] = Rock.None
+                            controlRocks[i][j - 1] = Rock.None
                             changed = true
                         }
                     }
@@ -103,9 +107,11 @@ private class ReflectorDish(initStr: String) {
                 changed = false
                 for (i in (controlRocks.size - 1) downTo 1) {
                     for (j in 0 ..< controlRocks[i].size) {
-                        if (controlRocks[i][j] == Rock.None && controlRocks[i-1][j] == Rock.Round) {
+                        if (
+                            controlRocks[i][j] == Rock.None && controlRocks[i - 1][j] == Rock.Round
+                        ) {
                             controlRocks[i][j] = Rock.Round
-                            controlRocks[i-1][j] = Rock.None
+                            controlRocks[i - 1][j] = Rock.None
                             changed = true
                         }
                     }
@@ -116,9 +122,11 @@ private class ReflectorDish(initStr: String) {
                 changed = false
                 for (i in 0 ..< controlRocks.size) {
                     for (j in 0 ..< controlRocks[i].size - 1) {
-                        if (controlRocks[i][j] == Rock.None && controlRocks[i][j+1] == Rock.Round) {
+                        if (
+                            controlRocks[i][j] == Rock.None && controlRocks[i][j + 1] == Rock.Round
+                        ) {
                             controlRocks[i][j] = Rock.Round
-                            controlRocks[i][j+1] = Rock.None
+                            controlRocks[i][j + 1] = Rock.None
                             changed = true
                         }
                     }
@@ -152,7 +160,7 @@ private class ReflectorDish(initStr: String) {
     }
 
     /** Create a string regresentation of the platform. */
-    override fun toString() : String {
+    override fun toString(): String {
         var str: String = ""
         for (i in 0 ..< controlRocks.size) {
             for (j in 0 ..< controlRocks[i].size) {
