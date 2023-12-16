@@ -13,7 +13,7 @@ suspend fun <A, B> List<A>.pmap(f: suspend (A) -> B): List<B> = coroutineScope {
 
 /** Haunted Wasteland Solver */
 public class HauntedWasteland(val input: String) {
-    private val lr: String = Regex("([LR]*)\n\n").find(input)!!.groups[1]!!.value
+    private val lr: String = Regex("([LR]*)\r?\n").find(input)!!.groups[1]!!.value
     private val nodes: Map<String, Node> =
         Regex("([A-Z0-9]{3}) = \\(([A-Z0-9]{3}), ([A-Z0-9]{3})\\)")
             .findAll(input)
