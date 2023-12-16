@@ -133,5 +133,4 @@ private class SpringCollection(initStr: List<String>) {
      */
     private fun hash(reportIdx: Int, groupIdx: Int, position: Int): Int =
         reportIdx * (1 shl 20) + groupIdx * (1 shl 10) + position
-
 }
