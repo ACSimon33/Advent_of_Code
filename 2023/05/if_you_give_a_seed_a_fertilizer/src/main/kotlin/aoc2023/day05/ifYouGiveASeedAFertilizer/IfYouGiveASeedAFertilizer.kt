@@ -9,59 +9,78 @@ public class IfYouGiveASeedAFertilizer(val input: String) {
     /** Conversion map between seed and soil values. */
     private val seedToSoil =
         ConversionMap(
-            Regex("seed-to-soil map:\n([0-9 \n]*)\n\n").find(input)!!.groups[1]!!.value.lines()
+            Regex("seed-to-soil map:\r?\n([0-9 \r\n]*)\r?\n")
+                .find(input)!!
+                .groups[1]!!
+                .value
+                .trim()
+                .lines()
         )
 
     /** Conversion map between soil and fertilizer values. */
     private val soilToFertilizer =
         ConversionMap(
-            Regex("soil-to-fertilizer map:\n([0-9 \n]*)\n\n")
+            Regex("soil-to-fertilizer map:\r?\n([0-9 \r\n]*)\r?\n")
                 .find(input)!!
                 .groups[1]!!
                 .value
+                .trim()
                 .lines()
         )
 
     /** Conversion map between fertilizer and water values. */
     private val fertilizerToWater =
         ConversionMap(
-            Regex("fertilizer-to-water map:\n([0-9 \n]*)\n\n")
+            Regex("fertilizer-to-water map:\r?\n([0-9 \r\n]*)\r?\n")
                 .find(input)!!
                 .groups[1]!!
                 .value
+                .trim()
                 .lines()
         )
 
     /** Conversion map between water and light values. */
     private val waterToLight =
         ConversionMap(
-            Regex("water-to-light map:\n([0-9 \n]*)\n\n").find(input)!!.groups[1]!!.value.lines()
+            Regex("water-to-light map:\r?\n([0-9 \r\n]*)\r?\n")
+                .find(input)!!
+                .groups[1]!!
+                .value
+                .trim()
+                .lines()
         )
 
     /** Conversion map between light and temperature values. */
     private val lightToTemperature =
         ConversionMap(
-            Regex("light-to-temperature map:\n([0-9 \n]*)\n\n")
+            Regex("light-to-temperature map:\r?\n([0-9 \r\n]*)\r?\n")
                 .find(input)!!
                 .groups[1]!!
                 .value
+                .trim()
                 .lines()
         )
 
     /** Conversion map between temperature and humidity values. */
     private val temperatureToHumidity =
         ConversionMap(
-            Regex("temperature-to-humidity map:\n([0-9 \n]*)\n\n")
+            Regex("temperature-to-humidity map:\r?\n([0-9 \r\n]*)\r?\n")
                 .find(input)!!
                 .groups[1]!!
                 .value
+                .trim()
                 .lines()
         )
 
     /** Conversion map between humidity and location values. */
     private val humidityToLocation =
         ConversionMap(
-            Regex("humidity-to-location map:\n([0-9 \n]*)$").find(input)!!.groups[1]!!.value.lines()
+            Regex("humidity-to-location map:\r?\n([0-9 \r\n]*)$")
+                .find(input)!!
+                .groups[1]!!
+                .value
+                .trim()
+                .lines()
         )
 
     /**
