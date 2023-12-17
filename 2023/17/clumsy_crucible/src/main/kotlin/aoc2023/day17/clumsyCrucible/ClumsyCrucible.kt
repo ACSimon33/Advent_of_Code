@@ -4,22 +4,46 @@ import java.util.PriorityQueue
 
 /** Clumsy Crucible Solver */
 public class ClumsyCrucible(input: String) {
+
+    /** 2D Grid of vertices. */
     private val vertices: List<List<GridVertex>> =
-        input.lines().mapIndexed { row, it -> it.mapIndexed { col, c -> GridVertex(row, col, c) } }
-    val rows: Int = vertices.size
-    val cols: Int = vertices[0].size
+        input.lines().map { it -> it.map { c -> GridVertex(c.toString().toInt()) } }
 
-    /** First task: Find the shortest path with a step size between 1 and 3. */
-    fun solution1(): Int = restrictedDijkstra(vertices[0][0], vertices[rows - 1][cols - 1], 1, 3)
+    /** Number of rows in the grid. */
+    private val rows: Int = vertices.size
 
-    /** First task: Find the shortest path with a step size between 4 and 10. */
-    fun solution2(): Int = restrictedDijkstra(vertices[0][0], vertices[rows - 1][cols - 1], 4, 10)
+    /** Number of columns in the grid. */
+    private val cols: Int = vertices[0].size
+
+    // Initialize vertex neighbours
+    init {
+        for (i in 0 ..< rows) {
+            for (j in 0 ..< cols) {
+                if (i > 0) {
+                    vertices[i][j].neighbours[Direction.NORTH.ordinal] = vertices[i - 1][j]
+                }
+                if (i < rows - 1) {
+                    vertices[i][j].neighbours[Direction.SOUTH.ordinal] = vertices[i + 1][j]
+                }
+                if (j > 0) {
+                    vertices[i][j].neighbours[Direction.WEST.ordinal] = vertices[i][j - 1]
+                }
+                if (j < cols - 1) {
+                    vertices[i][j].neighbours[Direction.EAST.ordinal] = vertices[i][j + 1]
+                }
+            }
+        }
+    }
+
+    /** Find the least heat loss with a step sizes between [minSteps] and [maxSteps]. */
+    fun leastHeatLoss(minSteps: Int, maxSteps: Int): Int =
+        restrictedDijkstra(vertices[0][0], vertices[rows - 1][cols - 1], minSteps, maxSteps)
 
     /**
      * Run a dijkstra algorithm to find the shortest path between the [start] node and [end] node.
-     * The algorithm is restricted by the amount of steps that we are allowed to go consecutively
-     * in one direction. We need to go at least [minSteps] and maximal [maxSteps] before changing
-     * the direction again.
+     * The algorithm is restricted by the amount of steps that we are allowed to go consecutively in
+     * one direction. We need to go at least [minSteps] and maximal [maxSteps] before changing the
+     * direction again.
      */
     private fun restrictedDijkstra(
         start: GridVertex,
@@ -39,55 +63,58 @@ public class ClumsyCrucible(input: String) {
         start.distances.put(Pair(Direction.NONE, 0), 0)
         vertexQueue.add(start)
 
+        // List of valid directions
+        val directions = listOf(Direction.NORTH, Direction.EAST, Direction.SOUTH, Direction.WEST)
+
         // Continue to update the distances until the queue is empty
         while (!vertexQueue.isEmpty()) {
             val v: GridVertex = vertexQueue.remove()
-            val currentRow: Int = v.pos.row
-            val currentCol: Int = v.pos.col
-
-            // Collect valid neighbours
-            val neighbours = mutableListOf<GridVertex>()
-            if (currentRow > 0) {
-                neighbours.add(vertices[currentRow - 1][currentCol])
-            }
-            if (currentRow < rows - 1) {
-                neighbours.add(vertices[currentRow + 1][currentCol])
-            }
-            if (currentCol > 0) {
-                neighbours.add(vertices[currentRow][currentCol - 1])
-            }
-            if (currentCol < cols - 1) {
-                neighbours.add(vertices[currentRow][currentCol + 1])
-            }
 
             // Update distances of neighbours and add them to the queue if something changed
-            for (neighbour in neighbours) {
-                if (neighbour.travelFrom(v, minSteps, maxSteps)) {
-                    vertexQueue.add(neighbour)
+            for (direction in directions) {
+                v.neighbours[direction.ordinal]?.let {
+                    if (it.travel(direction, minSteps, maxSteps)) {
+                        vertexQueue.add(it)
+                    }
                 }
             }
         }
 
+        // Return minimal valid distance
         return end.mininalDistance(minSteps)
     }
 }
 
-private class GridVertex(row: Int, col: Int, label: Char) {
-    val pos = Position(row, col)
-    val weight: Int = label.toString().toInt()
+/** A vertex in the grid with a given [weight] for incoming edges. */
+private class GridVertex(val weight: Int) {
+
+    /** Map of travel histories to distances. */
     val distances = mutableMapOf<Pair<Direction, Int>, Int>()
 
+    /** List of neighbouring vertices. */
+    val neighbours: MutableList<GridVertex?> = mutableListOf(null, null, null, null)
+
+    /**
+     * Return the minimal distance of the vertex under the condition that we need to travel at
+     * least [minSteps] steps consecutively in one direction before stopping at the current vertex.
+     */
     fun mininalDistance(minSteps: Int = 0): Int =
         distances.filter { it.key.second >= minSteps }.minOf { it.value }
 
-    fun travelFrom(other: GridVertex, minSteps: Int, maxSteps: Int): Boolean {
-        val dir = getTravelDirection(other.pos)!!
+    /**
+     * Travel into the vertex in a given [direction] and update the distances by going through all
+     * travel histories from the previous vertex. If travelling to the current vertex is valid under
+     * the constraints of [minSteps] and [maxSteps] we update the corresponding distance. Returns
+     * true if any distance was updated.
+     */
+    fun travel(direction: Direction, minSteps: Int, maxSteps: Int): Boolean {
         var updated: Boolean = false
+        val previous = neighbours[direction.opposite().ordinal]!!
 
-        for ((otherHistory, otherDistance) in other.distances) {
-            newDirectionHistory(otherHistory, dir, minSteps, maxSteps)?.let {
+        for ((prevHistory, prevDistance) in previous.distances) {
+            newDirectionHistory(prevHistory, direction, minSteps, maxSteps)?.let {
                 val currentDist: Int = distances.getOrPut(it, { Int.MAX_VALUE })
-                val newDist: Int = otherDistance + weight
+                val newDist: Int = prevDistance + weight
                 if (newDist < currentDist) {
                     distances[it] = newDist
                     updated = true
@@ -98,15 +125,20 @@ private class GridVertex(row: Int, col: Int, label: Char) {
         return updated
     }
 
+    /**
+     * Calculate a new direction history given a previous [history] and the current travel
+     * [direction]. If the travel would be invalid under the constraints of [minSteps] and
+     * [maxSteps] we return null.
+     */
     private fun newDirectionHistory(
         history: Pair<Direction, Int>,
-        dir: Direction,
+        direction: Direction,
         minSteps: Int,
         maxSteps: Int
     ): Pair<Direction, Int>? {
 
         // We are not allowed to move more steps in the same direction than maxSteps
-        if (history.first == dir) {
+        if (history.first == direction) {
             if (history.second < maxSteps) {
                 return Pair(history.first, history.second + 1)
             } else {
@@ -115,35 +147,20 @@ private class GridVertex(row: Int, col: Int, label: Char) {
         }
 
         // We are not allowed to go back immediately
-        if (history.first == dir.opposite()) {
+        if (history.first == direction.opposite()) {
             return null
         }
 
         // If there are already minSteps consecutive steps we are allowed every direction
         if (history.second >= minSteps || history.first == Direction.NONE) {
-            return Pair(dir, 1)
+            return Pair(direction, 1)
         }
 
         return null
     }
-
-    private fun getTravelDirection(otherPos: Position): Direction? =
-        if (otherPos.row > pos.row) {
-            Direction.NORTH
-        } else if (otherPos.col < pos.col) {
-            Direction.EAST
-        } else if (otherPos.row < pos.row) {
-            Direction.SOUTH
-        } else if (otherPos.col > pos.col) {
-            Direction.WEST
-        } else {
-            null
-        }
 }
 
-private data class Position(val row: Int, val col: Int)
-
-/** Class identifying a othogonal direction. The direction knows its opposite and left direction. */
+/** Class identifying a othogonal direction. The direction knows its opposite direction. */
 private enum class Direction {
     NORTH {
         /** Opposite of NORTH is SOUTH. */

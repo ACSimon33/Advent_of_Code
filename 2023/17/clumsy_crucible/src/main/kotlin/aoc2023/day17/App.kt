@@ -12,11 +12,11 @@ class App : CliktCommand(help = "Day 17: Clumsy Crucible") {
     override fun run() {
         val app: ClumsyCrucible = ClumsyCrucible(input.readText(Charsets.UTF_8))
 
-        val result_1: Int = app.solution1()
-        println("1. Solution: $result_1")
+        val result_1: Int = app.leastHeatLoss(1, 3)
+        println("Least heat loss with standard crucibles: $result_1")
 
-        val result_2: Int = app.solution2()
-        println("2. Solution: $result_2")
+        val result_2: Int = app.leastHeatLoss(4, 10)
+        println("Least heat loss with ultra crucibles: $result_2")
     }
 }
 

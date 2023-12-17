@@ -16,20 +16,20 @@ class ExampleTest {
     @Test
     fun task1() {
         val app = ClumsyCrucible(File(INPUT_FILENAME).readText(Charsets.UTF_8))
-        assertEquals(app.solution1(), 102, "Example result for task 1 is wrong")
+        assertEquals(app.leastHeatLoss(1, 3), 102, "Example result for task 1 is wrong")
     }
 
     /** Second task test */
     @Test
     fun task2Input1() {
         val app = ClumsyCrucible(File(INPUT_FILENAME).readText(Charsets.UTF_8))
-        assertEquals(app.solution2(), 94, "Example result for task 2 is wrong")
+        assertEquals(app.leastHeatLoss(4, 10), 94, "Example result for task 2 is wrong")
     }
 
     /** Second task test */
     @Test
     fun task2Input2() {
         val app = ClumsyCrucible(File(INPUT_FILENAME_2).readText(Charsets.UTF_8))
-        assertEquals(app.solution2(), 71, "Example result for task 2 is wrong")
+        assertEquals(app.leastHeatLoss(4, 10), 71, "Example result for task 2 is wrong")
     }
 }

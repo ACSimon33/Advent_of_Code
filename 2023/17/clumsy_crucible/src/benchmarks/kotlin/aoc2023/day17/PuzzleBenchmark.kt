@@ -22,12 +22,12 @@ open class PuzzleBenchmarks {
     /** First task benchmark */
     @Benchmark
     fun task1() {
-        app.solution1()
+        app.leastHeatLoss(1, 3)
     }
 
     /** Second task benchmark */
     @Benchmark
     fun task2() {
-        app.solution2()
+        app.leastHeatLoss(4, 10)
     }
 }
