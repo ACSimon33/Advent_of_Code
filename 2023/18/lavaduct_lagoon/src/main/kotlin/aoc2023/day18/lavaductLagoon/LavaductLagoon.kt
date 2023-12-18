@@ -34,7 +34,7 @@ public class LavaductLagoon(val input: String) {
     }
 
     /**
-     * Calculate the number of integer points inside a [polygo], given by its line segments. Uses
+     * Calculate the number of integer points inside a [polygon], given by its line segments. Uses
      * the showlace formula in combination with Pick's theorem to calculate the amount of exterior
      * and interior points and returns their sum.
      */
@@ -46,7 +46,7 @@ public class LavaductLagoon(val input: String) {
             exteriorPoints += segment.length
         }
 
-        // Shoelace formula (2A = sum_1^n (x_i * y_i+1 - x_i+1 * y_i))
+        // Shoelace formula [ 2A = sum_1^n (x_i * y_i+1 - x_i+1 * y_i) ]
         var volumeTwice: Long = 0
         points.reversed().zipWithNext().forEach { (p1, p2) -> volumeTwice += p1 * p2 }
 
