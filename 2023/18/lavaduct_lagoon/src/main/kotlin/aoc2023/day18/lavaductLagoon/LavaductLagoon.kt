@@ -35,7 +35,7 @@ public class LavaductLagoon(val input: String) {
 
     /**
      * Calculate the number of integer points inside a [polygon], given by its line segments. Uses
-     * the showlace formula in combination with Pick's theorem to calculate the amount of exterior
+     * the shoelace formula in combination with Pick's theorem to calculate the amount of exterior
      * and interior points and returns their sum.
      */
     private fun numberOfContainedPoints(polygon: List<LineSegment>): Long {
