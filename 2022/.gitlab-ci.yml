@@ -6,15 +6,12 @@
 .2022-template:
   variables:
     AOC_YEAR: 2022
-  extends:
-    - .setup-template
 
 # Prepare docker for 2022
 docker ~ aoc-2022:
   extends:
     - .2022-template
     - .prepare-docker-template
-    - .run-current-year-template
 
 # 2022 TypeScript build
 build ~ aoc-2022:
@@ -25,9 +22,7 @@ build ~ aoc-2022:
   needs:
     - docker ~ aoc-2022
   script:
-    - >-
-      docker run --rm -v ${DOCKER_VOL}:/${AOC_YEAR} ${DOCKER_CURRENT_IMAGE}
-      sh -c 'npm ci && npm run tsc --workspaces'
+    - npm ci && npm run tsc --workspaces
 
 # 2022 TypeScript test
 test ~ aoc-2022:
@@ -39,9 +34,8 @@ test ~ aoc-2022:
     - build ~ aoc-2022
   script:
     - >-
-      docker run --rm -v ${DOCKER_VOL}:/${AOC_YEAR} ${DOCKER_CURRENT_IMAGE}
-      sh -c 'npm ci && npm test --workspaces -- --maxWorkers 1 --ci
-      --reporters=default --reporters=jest-junit'
+      npm ci && npm test --workspaces -- --maxWorkers 1 --ci
+      --reporters=default --reporters=jest-junit
   artifacts:
     reports:
       junit: 2022/**/junit.xml
@@ -59,9 +53,7 @@ format ~ aoc-2022:
     - job: build ~ aoc-2022
       optional: true
   script:
-    - >-
-      docker run --rm -v ${DOCKER_VOL}:/${AOC_YEAR} ${DOCKER_CURRENT_IMAGE}
-      sh -c 'npm ci && npm run check-format --workspaces'
+    - npm ci && npm run check-format --workspaces
   allow_failure: true
 
 # 2022 TypeScript benchmark (release)
@@ -73,6 +65,4 @@ bench ~ aoc-2022:
   needs:
     - test ~ aoc-2022
   script:
-    - >-
-      docker run --rm -v ${DOCKER_VOL}:/${AOC_YEAR} ${DOCKER_CURRENT_IMAGE}
-      sh -c 'npm ci && npm run tsc --workspaces && npm run benchmark --workspaces'
+    - npm ci && npm run tsc --workspaces && npm run benchmark --workspaces

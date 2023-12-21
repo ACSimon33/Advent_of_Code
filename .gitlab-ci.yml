@@ -5,32 +5,38 @@ stages:
   - Benchmark
   - Deploy
 
-image: docker:20.10.18-git
-services:
-  - docker:20.10.18-dind
-
 # **************************************************************************** #
 #                                 Templates                                    #
 # **************************************************************************** #
 
 # Year rules
 .run-current-year-template:
-  variables:
-    AOC_CURRENT_YEAR: 2023
-  rules:
-    - if: '$AOC_CURRENT_YEAR == $AOC_YEAR'
-    - if: '$CI_PIPELINE_SOURCE == "schedule"'
-
-# General setup
-.setup-template:
   tags:
     - linux
     - docker
-    - dind
   variables:
-    DOCKER_VOL: ${CI_PROJECT_DIR}/${AOC_YEAR}
+    AOC_CURRENT_YEAR: 2023
     DOCKER_CURRENT_IMAGE: ${CI_REGISTRY_IMAGE}:aoc-${AOC_YEAR}-${CI_COMMIT_SHA}
     DOCKER_LATEST_IMAGE: ${CI_REGISTRY_IMAGE}:aoc-${AOC_YEAR}-latest
+  image: ${DOCKER_CURRENT_IMAGE}
+  rules:
+    - if: '$AOC_CURRENT_YEAR == $AOC_YEAR'
+    - if: '$CI_PIPELINE_SOURCE == "schedule"'
+  timeout: 1h
+  before_script:
+    - env
+    - cd ${AOC_YEAR}
+    - pwd
+    - ls
+
+# Prepare docker
+.prepare-docker-template:
+  stage: Prepare
+  extends:
+    .run-current-year-template
+  image: docker:20.10.18-git
+  services:
+    - docker:20.10.18-dind
   before_script:
     - env
     - pwd
@@ -39,11 +45,6 @@ services:
     - docker pull ${DOCKER_CURRENT_IMAGE} || true
     - docker pull ${DOCKER_LATEST_IMAGE} || true
     - docker images
-  timeout: 1h
-
-# Prepare docker
-.prepare-docker-template:
-  stage: Prepare
   script:
     - >-
       docker build --cache-from ${DOCKER_LATEST_IMAGE}

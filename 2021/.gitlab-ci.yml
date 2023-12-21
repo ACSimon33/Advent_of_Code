@@ -6,15 +6,12 @@
 .2021-template:
   variables:
     AOC_YEAR: 2021
-  extends:
-    - .setup-template
 
 # Prepare docker for 2021
 docker ~ aoc-2021:
   extends:
     - .2021-template
     - .prepare-docker-template
-    - .run-current-year-template
 
 # 2021 Rust build (debug + release)
 build ~ aoc-2021:
@@ -25,12 +22,8 @@ build ~ aoc-2021:
   needs:
     - docker ~ aoc-2021
   script:
-    - >-
-      docker run --rm -v ${DOCKER_VOL}:/${AOC_YEAR} ${DOCKER_CURRENT_IMAGE}
-      sh -c 'cargo build --workspace -j2'
-    - >-
-      docker run --rm -v ${DOCKER_VOL}:/${AOC_YEAR} ${DOCKER_CURRENT_IMAGE}
-      sh -c 'cargo build --release --workspace --verbose -j2'
+    - cargo build --workspace -j2
+    - cargo build --release --workspace --verbose -j2
 
 # 2021 Rust test (debug)
 test ~ aoc-2021:
@@ -42,13 +35,11 @@ test ~ aoc-2021:
     - build ~ aoc-2021
   script:
     - >-
-      docker run --rm -v ${DOCKER_VOL}:/${AOC_YEAR} ${DOCKER_CURRENT_IMAGE}
-      sh -c 'cargo test --workspace --no-fail-fast --verbose -j2 --
-      -Z unstable-options --report-time'
+      cargo test --workspace --no-fail-fast --verbose -j2 --
+      -Z unstable-options --report-time
   after_script:
     - >-
-      docker run --rm -v ${DOCKER_VOL}:/${AOC_YEAR} ${DOCKER_CURRENT_IMAGE}
-      sh -c 'cargo test --workspace --no-fail-fast --verbose -j2 --
+      cargo test --workspace --no-fail-fast --verbose -j2 --
       -Z unstable-options --format json --report-time
       | cargo2junit > JUnitReports.xml'
   artifacts:
@@ -68,9 +59,7 @@ format ~ aoc-2021:
     - job: build ~ aoc-2021
       optional: true
   script:
-    - >-
-      docker run --rm -v ${DOCKER_VOL}:/${AOC_YEAR} ${DOCKER_CURRENT_IMAGE}
-      sh -c 'cargo fmt --verbose -- --check'
+    - cargo fmt --verbose -- --check'
   allow_failure: true
 
 # 2021 Rust benchmark (release)
@@ -83,9 +72,9 @@ bench ~ aoc-2021:
     - test ~ aoc-2021
   script:
     - >-
-      docker run --rm -v ${DOCKER_VOL}:/${AOC_YEAR} ${DOCKER_CURRENT_IMAGE}
-      sh -c 'cargo bench --workspace --no-fail-fast --verbose -j2 --
+      cargo bench --workspace --no-fail-fast --verbose -j2 --
       --warm-up-time 1 --measurement-time 2 --sample-size 10'
+    - cd ${CI_PROJECT_DIR}
     - mkdir -p benchmarks_${AOC_YEAR}
     - mv ${AOC_YEAR}/target/criterion/* benchmarks_${AOC_YEAR}
   artifacts:

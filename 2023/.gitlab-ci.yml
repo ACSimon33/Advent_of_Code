@@ -6,15 +6,12 @@
 .2023-template:
   variables:
     AOC_YEAR: 2023
-  extends:
-    - .setup-template
 
 # Prepare docker for 2023
 docker ~ aoc-2023:
   extends:
     - .2023-template
     - .prepare-docker-template
-    - .run-current-year-template
 
 # 2023 Kotlin build
 build ~ aoc-2023:
@@ -25,9 +22,7 @@ build ~ aoc-2023:
   needs:
     - docker ~ aoc-2023
   script:
-    - >-
-      docker run --rm -v ${DOCKER_VOL}:/${AOC_YEAR} ${DOCKER_CURRENT_IMAGE}
-      sh -c 'gradle assemble --console plain'
+    - gradle assemble --console plain
 
 # 2023 Kotlin test
 test ~ aoc-2023:
@@ -38,9 +33,7 @@ test ~ aoc-2023:
   needs:
     - build ~ aoc-2023
   script:
-    - >-
-      docker run --rm -v ${DOCKER_VOL}:/${AOC_YEAR} ${DOCKER_CURRENT_IMAGE}
-      sh -c 'gradle test --console plain --warning-mode none'
+    - gradle test --console plain --warning-mode none
   artifacts:
     reports:
       junit: 2023/**/*ExampleTest.xml
@@ -58,9 +51,7 @@ format ~ aoc-2023:
     - job: build ~ aoc-2023
       optional: true
   script:
-    - >-
-      docker run --rm -v ${DOCKER_VOL}:/${AOC_YEAR} ${DOCKER_CURRENT_IMAGE}
-      sh -c 'gradle ktfmtCheck --console plain --warning-mode none'
+    - gradle ktfmtCheck --console plain --warning-mode none
   allow_failure: true
 
 # 2023 Kotlin benchmark (release)
@@ -72,6 +63,4 @@ bench ~ aoc-2023:
   needs:
     - test ~ aoc-2023
   script:
-    - >-
-      docker run --rm -v ${DOCKER_VOL}:/${AOC_YEAR} ${DOCKER_CURRENT_IMAGE}
-      sh -c 'gradle benchmark --console plain --warning-mode none'
+    - gradle benchmark --console plain --warning-mode none
