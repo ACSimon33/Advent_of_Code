@@ -56,9 +56,10 @@ stages:
 #                           Advent of Code 2021-2023                           #
 # **************************************************************************** #
 
-include: '2021/.gitlab-ci.yml'
-include: '2022/.gitlab-ci.yml'
-include: '2023/.gitlab-ci.yml'
+include:
+  - local: '2021/.gitlab-ci.yml'
+  - local: '2022/.gitlab-ci.yml'
+  - local: '2023/.gitlab-ci.yml'
 
 # **************************************************************************** #
 #                               Pages deployment                               #
