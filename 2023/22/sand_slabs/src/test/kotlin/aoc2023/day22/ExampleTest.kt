@@ -16,12 +16,12 @@ class ExampleTest {
     /** First task test */
     @Test
     fun task1() {
-        assertEquals(app.solution1(), 0, "Example result for task 1 is wrong")
+        assertEquals(app.solution1(), 5, "Example result for task 1 is wrong")
     }
 
     /** Second task test */
     @Test
     fun task2() {
-        assertEquals(app.solution2(), 1, "Example result for task 2 is wrong")
+        assertEquals(app.solution2(), 7, "Example result for task 2 is wrong")
     }
 }
