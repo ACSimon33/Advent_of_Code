@@ -4,6 +4,7 @@ plugins {
     id("org.jetbrains.kotlin.jvm")
     id("org.jetbrains.kotlinx.benchmark")
     id("com.ncorti.ktfmt.gradle")
+    id("io.morethan.jmhreport")
     application
 }
 
@@ -48,7 +49,11 @@ kotlin.sourceSets.getByName("benchmarks") {
 benchmark {
     configurations {
         named("main") {
-            // configure default configuration
+            iterations = 2
+            warmups = 2
+            iterationTime = 1
+            outputTimeUnit = "ms"
+            mode = "avgt"
         }
     }
     targets {

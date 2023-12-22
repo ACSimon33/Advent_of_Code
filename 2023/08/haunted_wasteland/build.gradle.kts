@@ -4,6 +4,7 @@ plugins {
     id("org.jetbrains.kotlin.jvm")
     id("org.jetbrains.kotlinx.benchmark")
     id("com.ncorti.ktfmt.gradle")
+    id("io.morethan.jmhreport")
     application
 }
 
@@ -49,7 +50,11 @@ kotlin.sourceSets.getByName("benchmarks") {
 benchmark {
     configurations {
         named("main") {
-            // configure default configuration
+            iterations = 2
+            warmups = 2
+            iterationTime = 1
+            outputTimeUnit = "ms"
+            mode = "avgt"
         }
     }
     targets {
@@ -62,4 +67,14 @@ benchmark {
 
 ktfmt {
     kotlinLangStyle()
+}
+
+jmhReport {
+    val benchmarkDir = project.file("build/reports/benchmarks/main/")
+    val outputDir = project.file("build/reports/benchmarks/html/")
+    if (benchmarkDir.exists()) {
+        jmhResultPath = benchmarkDir.listFiles().first().absolutePath + "/benchmarks.json"
+        jmhReportOutput = outputDir.absolutePath
+        outputDir.mkdir()
+    }
 }

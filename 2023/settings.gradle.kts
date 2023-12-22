@@ -11,6 +11,7 @@ plugins {
     id("org.jetbrains.kotlin.jvm") version "1.9.10" apply false
     id("org.jetbrains.kotlinx.benchmark") version "0.4.9" apply false
     id("com.ncorti.ktfmt.gradle") version "0.15.1" apply false
+    id("io.morethan.jmhreport") version "0.9.0" apply false
 }
 
 rootProject.name = "advent_of_code_2023"
