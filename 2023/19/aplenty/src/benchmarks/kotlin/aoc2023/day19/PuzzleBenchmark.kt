@@ -18,12 +18,12 @@ open class PuzzleBenchmarks {
     /** First task benchmark */
     @Benchmark
     fun task1() {
-        app.solution1()
+        app.sumOfAcceptedFinalRatings()
     }
 
     /** Second task benchmark */
     @Benchmark
     fun task2() {
-        app.solution2()
+        app.amountOfAcceptedRatings()
     }
 }
