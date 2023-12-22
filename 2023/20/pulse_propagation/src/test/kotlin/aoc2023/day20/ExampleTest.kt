@@ -16,13 +16,13 @@ class ExampleTest {
     @Test
     fun task1Input1() {
         val app = PulsePropagation(File(INPUT_FILENAME_1).readText(Charsets.UTF_8))
-        assertEquals(app.solution1(), 32000000, "Example result for task 1 is wrong")
+        assertEquals(app.amountOfPulses(), 32000000, "Example result for task 1 is wrong")
     }
 
     /** First task test */
     @Test
     fun task1Input2() {
         val app = PulsePropagation(File(INPUT_FILENAME_2).readText(Charsets.UTF_8))
-        assertEquals(app.solution1(), 11687500, "Example result for task 1 is wrong")
+        assertEquals(app.amountOfPulses(), 11687500, "Example result for task 1 is wrong")
     }
 }
