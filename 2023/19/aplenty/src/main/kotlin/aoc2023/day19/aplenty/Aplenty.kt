@@ -3,7 +3,12 @@ package aoc2023.day19.aplenty
 /** Aplenty Solver */
 public class Aplenty(input: String) {
     private val workflows: Map<String, Workflow> =
-        input.split("\r?\n\r?\n".toRegex())[0].lines().map { Workflow(it) }.map { Pair(it.id, it) }.toMap()
+        input
+            .split("\r?\n\r?\n".toRegex())[0]
+            .lines()
+            .map { Workflow(it) }
+            .map { Pair(it.id, it) }
+            .toMap()
     private val parts: List<MachinePart> =
         input.split("\r?\n\r?\n".toRegex())[1].trim().lines().map { MachinePart(it) }
 
@@ -27,7 +32,8 @@ public class Aplenty(input: String) {
         for ((newWorkflow, newPart) in workflows[currentWorkflow]!!.process(part)) {
             when (newWorkflow) {
                 "A" -> {
-                    sumOfCombinations += newPart.combinations()}
+                    sumOfCombinations += newPart.combinations()
+                }
                 "R" -> continue
                 else -> sumOfCombinations += processPart(newPart, newWorkflow)
             }
@@ -60,16 +66,12 @@ private class Workflow(initStr: String) {
         var newParts: Pair<IntervalMachinePart?, IntervalMachinePart?> = Pair(null, null)
 
         for (step in steps) {
-            currentPart?. let { newParts = step.process(it) } ?: break
-            newParts.first?.let {
-                nextWorkflowsAndParts.add(Pair(step.target, it))
-            }
+            currentPart?.let { newParts = step.process(it) } ?: break
+            newParts.first?.let { nextWorkflowsAndParts.add(Pair(step.target, it)) }
             currentPart = newParts.second
         }
 
-        currentPart?. let {
-            nextWorkflowsAndParts.add(Pair(target, it))
-        }
+        currentPart?.let { nextWorkflowsAndParts.add(Pair(target, it)) }
 
         return nextWorkflowsAndParts.toList()
     }
@@ -99,7 +101,7 @@ private enum class Comparison {
                 Pair(a, null)
             } else if (a.start < b && a.end >= b) {
                 // println("$a, $b -> 2")
-                Pair(Interval(a.start, b-1), Interval(b, a.end))
+                Pair(Interval(a.start, b - 1), Interval(b, a.end))
             } else {
                 // println("$a, $b -> 3")
                 Pair(null, a)
@@ -114,7 +116,7 @@ private enum class Comparison {
                 Pair(a, null)
             } else if (a.start <= b && a.end > b) {
                 // println("$a, $b -> 2")
-                Pair(Interval(b+1, a.end), Interval(a.start, b))
+                Pair(Interval(b + 1, a.end), Interval(a.start, b))
             } else {
                 // println("$a, $b -> 3")
                 Pair(null, a)
@@ -172,12 +174,19 @@ private class IntervalMachinePart(val ratings: List<Interval>) {
 
     fun update(rating: Rating, interval: Interval?): IntervalMachinePart? =
         interval?.let {
-            IntervalMachinePart(ratings.toMutableList().let { it[rating.ordinal] = interval; it }.toList())
+            IntervalMachinePart(
+                ratings
+                    .toMutableList()
+                    .let {
+                        it[rating.ordinal] = interval
+                        it
+                    }
+                    .toList()
+            )
         }
 }
 
 private data class Interval(val start: Long, val end: Long) {
 
-  fun length(): Long = end - start + 1
-
+    fun length(): Long = end - start + 1
 }

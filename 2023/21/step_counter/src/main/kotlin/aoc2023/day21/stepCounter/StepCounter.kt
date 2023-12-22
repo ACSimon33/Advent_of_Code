@@ -22,7 +22,7 @@ public class StepCounter(input: String) {
 
     private fun calcDistances(): MutableList<Long> {
 
-        val distances: MutableList<Long> = MutableList(mRows * nCols) {Long.MAX_VALUE}
+        val distances: MutableList<Long> = MutableList(mRows * nCols) { Long.MAX_VALUE }
 
         // Find the start
         val row = garden.indexOfFirst { it.contains(Ground.Start) }
@@ -46,7 +46,6 @@ public class StepCounter(input: String) {
 
         return distances
     }
-
 }
 
 private fun checkParity(a: Long, b: Long): Boolean = (a % 2) == (b % 2)

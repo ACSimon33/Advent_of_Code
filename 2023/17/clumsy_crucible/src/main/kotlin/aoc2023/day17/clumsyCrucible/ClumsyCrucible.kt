@@ -95,8 +95,8 @@ private class GridVertex(val weight: Int) {
     val neighbours: MutableList<GridVertex?> = mutableListOf(null, null, null, null)
 
     /**
-     * Return the minimal distance of the vertex under the condition that we need to travel at
-     * least [minSteps] steps consecutively in one direction before stopping at the current vertex.
+     * Return the minimal distance of the vertex under the condition that we need to travel at least
+     * [minSteps] steps consecutively in one direction before stopping at the current vertex.
      */
     fun mininalDistance(minSteps: Int = 0): Int =
         distances.filter { it.key.second >= minSteps }.minOf { it.value }

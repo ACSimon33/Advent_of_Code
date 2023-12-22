@@ -66,7 +66,7 @@ public class SandSlabs(input: String) {
 
     /** First task: TODO */
     fun solution2(): Int =
-        (0 ..< bricks.size).fold(0) { acc, missingBrick->
+        (0 ..< bricks.size).fold(0) { acc, missingBrick ->
             acc +
                 cumulativeSuccessors(successors, missingBrick).count {
                     !isGroundedWithout(predecessors, it, missingBrick)

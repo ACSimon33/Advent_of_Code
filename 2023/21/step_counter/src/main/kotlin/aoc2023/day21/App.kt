@@ -11,8 +11,7 @@ import com.github.ajalt.clikt.parameters.types.long
 
 class App : CliktCommand(help = "Day 21: Step Counter") {
     val input by argument().file(mustExist = true)
-    val steps: Long by
-        option("-s", "--steps", help = "Amount of steps").long().default(64)
+    val steps: Long by option("-s", "--steps", help = "Amount of steps").long().default(64)
 
     override fun run() {
         val app: StepCounter = StepCounter(input.readText(Charsets.UTF_8))

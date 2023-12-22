@@ -8,12 +8,12 @@ public class PulsePropagation(input: String) {
 
     /** Map of modules and their IDs. */
     private val modules: MutableMap<String, Module> =
-        input.lines().map { (Module from it)!! }. map { Pair(it.id, it) }.toMap().toMutableMap()
+        input.lines().map { (Module from it)!! }.map { Pair(it.id, it) }.toMap().toMutableMap()
 
     /** Output module ID. */
     private var output: String? = null
 
-    // Initialize 
+    // Initialize
     init {
         for (origin in modules) {
             for (destination in origin.value.destinations) {
@@ -58,7 +58,8 @@ public class PulsePropagation(input: String) {
         // Reset
         modules.values.forEach { it.reset() }
 
-        val startPulses: List<Pulse> = modules["broadcaster"]!!.trigger(Pulse("button", "broadcaster", false))
+        val startPulses: List<Pulse> =
+            modules["broadcaster"]!!.trigger(Pulse("button", "broadcaster", false))
         return lcm(startPulses.map { detectLoop(it) })
     }
 
@@ -155,7 +156,7 @@ private abstract class Module(val id: String, val destinations: List<String>) {
     }
 }
 
-private class Broadcaster(id: String, destinations: List<String>): Module(id, destinations) {
+private class Broadcaster(id: String, destinations: List<String>) : Module(id, destinations) {
 
     override fun trigger(pulse: Pulse): List<Pulse> {
         if (pulse.isHigh) highPulses++ else lowPulses++
@@ -169,7 +170,7 @@ private class Broadcaster(id: String, destinations: List<String>): Module(id, de
     override fun setIndex(index: Int): Int = index
 }
 
-private class FlipFlop(id: String, destinations: List<String>): Module(id, destinations) {
+private class FlipFlop(id: String, destinations: List<String>) : Module(id, destinations) {
     private var on: Boolean = false
 
     override fun trigger(pulse: Pulse): List<Pulse> =
@@ -197,7 +198,7 @@ private class FlipFlop(id: String, destinations: List<String>): Module(id, desti
     }
 }
 
-private class Conjunction(id: String, destinations: List<String>): Module(id, destinations) {
+private class Conjunction(id: String, destinations: List<String>) : Module(id, destinations) {
     private val lastPulse: MutableMap<String, Boolean> = mutableMapOf<String, Boolean>()
 
     override fun trigger(pulse: Pulse): List<Pulse> {
@@ -211,7 +212,9 @@ private class Conjunction(id: String, destinations: List<String>): Module(id, de
     }
 
     override fun state(): Int {
-        return lastPulse.values.foldIndexed(0) { i, acc, on -> if (on) acc + (1 shl i) else acc } shl idx
+        return lastPulse.values.foldIndexed(0) { i, acc, on ->
+            if (on) acc + (1 shl i) else acc
+        } shl idx
     }
 
     override fun setIndex(index: Int): Int {
@@ -220,7 +223,7 @@ private class Conjunction(id: String, destinations: List<String>): Module(id, de
     }
 }
 
-private class Output(id: String): Module(id, listOf<String>()) {
+private class Output(id: String) : Module(id, listOf<String>()) {
 
     override fun trigger(pulse: Pulse): List<Pulse> {
         if (pulse.isHigh) highPulses++ else lowPulses++
