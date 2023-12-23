@@ -5,7 +5,9 @@ import kotlin.math.min
 
 /** Sand Slabs Solver */
 public class SandSlabs(input: String) {
+    /** List of all bricks. */
     private val bricks: List<Brick> = input.lines().map { Brick(it) }
+    /** Size of the 3D space in x direction. */
     private val xSize: Int = bricks.maxOf { it.endCubes.maxOf { it.x } } + 1
     /** Size of the 3D space in y direction. */
     private val ySize: Int = bricks.maxOf { it.endCubes.maxOf { it.y } } + 1
@@ -26,9 +28,8 @@ public class SandSlabs(input: String) {
         (0 ..< xSize * ySize).forEach { heap[it] = Int.MAX_VALUE }
         bricks.forEachIndexed { index, brick -> fillHeap(brick, index) }
 
-        // Let the bricks fall until they settle and sort them by height again
+        // Let the bricks fall until they settle
         while (settle()) {}
-        // bricks = bricks.sorted()
 
         // Figure out the predecessors of each brick
         predecessors =
