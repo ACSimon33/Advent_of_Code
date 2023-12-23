@@ -22,6 +22,10 @@ class ExampleTest {
     /** Second task test */
     @Test
     fun task2() {
-        assertEquals(app.amountOfAcceptedRatings(), 167409079868000, "Example result for task 2 is wrong")
+        assertEquals(
+            app.amountOfAcceptedRatings(),
+            167409079868000,
+            "Example result for task 2 is wrong"
+        )
     }
 }
