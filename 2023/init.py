@@ -190,6 +190,9 @@ def init_project(
     destination = get_day_folder(day, name).as_posix()
 
     for dirpath, _, files in os.walk(source):
+        if "build" in dirpath:
+            continue
+
         output_dir = re.sub(source, destination, Path(dirpath).as_posix())
         output_dir = search_and_replace(day, name, output_dir)
         os.makedirs(output_dir)
