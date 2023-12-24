@@ -16,10 +16,10 @@ class App : CliktCommand(help = "Day 21: Step Counter") {
     override fun run() {
         val app: StepCounter = StepCounter(input.readText(Charsets.UTF_8))
 
-        val result_1: Int = app.solution1(steps, infinite=false)
+        val result_1: Int = app.solution1(steps, infinite = false)
         println("1. Solution: $result_1")
 
-        val result_2: Int = app.solution1(steps, infinite=false)
+        val result_2: Int = app.solution1(steps, infinite = false)
         println("2. Solution: $result_2")
     }
 }
