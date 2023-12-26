@@ -1,0 +1,160 @@
+package aoc2023.day24.neverTellMeTheOdds
+
+/** Never Tell Me The Odds Solver */
+public class NeverTellMeTheOdds(input: String) {
+    private val trajectories: List<Line> = input.lines().map { Line from it }
+
+    /** First task: TODO */
+    fun solution1(minVal: Double, maxVal: Double): Int {
+        var intersectionsInside: Int = 0
+        for (i in 0 until trajectories.size) {  
+            for (j in i + 1 until trajectories.size) {
+                val t = trajectories[i].intersect(trajectories[j], 2)
+                if (t == null) {
+                    continue
+                }
+
+                val intersection = trajectories[i].getPoint(t[0])
+                // Check if the intersection is in the future and is inside the range
+                if (t.all{ it > 0.0 } && intersection[0] <= maxVal && intersection[0] >= minVal &&
+                    intersection[1] <= maxVal && intersection[1] >= minVal) {
+                    intersectionsInside++
+                }
+            }
+        }
+
+        return intersectionsInside
+    }
+
+    /** Second task: TODO */
+    fun solution2(): Int {
+        return 1
+    }
+}
+
+private open class Matrix(val rows: Int, val cols: Int) {
+    protected val data: Array<Double> = Array(rows * cols) { 0.0 }
+
+    operator fun set(row: Int, col: Int, value: Double) {
+        data[row * cols + col] = value
+    }
+
+    operator fun get(row: Int, col: Int): Double {
+        return data[row * cols + col]
+    }
+
+    fun getRow(row: Int): Vector {
+        return Vector(data.mapIndexed { index, _ -> data[row * cols + index] })
+    }
+
+    fun getCol(col: Int): Vector {
+        return Vector(data.mapIndexed { index, _ -> data[index * cols + col] })
+    }
+
+    fun setRow(row: Int, vector: Vector) {
+        for (col in 0 until cols) {
+            data[row * cols + col] = vector[col]
+        }
+    }
+
+    fun setCol(col: Int, vector: Vector) {
+        for (row in 0 until rows) {
+            data[row * cols + col] = vector[row]
+        }
+    }
+
+    fun all(predicate: (Double) -> Boolean): Boolean {
+        return data.all(predicate)
+    }
+
+    override fun toString(): String {
+        var str: String = ""
+        for (row in 0 until rows) {
+            for (col in 0 until cols) {
+                str += data[row * cols + col]
+                str += " "
+            }
+            str += "\n"
+        }
+
+        return str
+    }
+}
+
+private class Vector(val size: Int) : Matrix(size, 1) {
+
+    constructor(values: Collection<Double>) : this(values.size) {
+        for (i in 0 until size) {
+            data[i] = values.elementAt(i)
+        }
+    }
+
+    operator fun set(index: Int, value: Double) {
+        data[index] = value
+    }
+
+    operator fun get(index: Int): Double {
+        return data[index]
+    }
+
+    operator fun plus(other: Vector): Vector {
+        val result = Vector(size)
+        for (i in 0 until size) {
+            result[i] = this[i] + other[i]
+        }
+        return result
+    }
+
+    operator fun times(other: Double): Vector {
+        val result = Vector(size)
+        for (i in 0 until size) {
+            result[i] = this[i] * other
+        }
+        return result
+    }
+
+}
+
+private class Line(val support: Vector, val slope: Vector) {
+    val dims = support.size
+
+    init {
+        require(dims == slope.size) { "Support and slope must be the same size" }
+        require(dims >= 2) { "Dimensions must be greater or equal 2" }
+    }
+
+    fun intersect(other: Line, dimensions: Int = dims): Vector? {
+        require(dims == other.dims) { "Lines must have the same number of dimensions" }
+        require(dimensions <= dims) { "Dimensions must be less than or equal to the number of dimensions of the lines" }
+        require(dimensions >= 2) { "Dimensions must be greater or equal 2" }
+
+        if (dimensions == 2) {
+            val t = Vector(2)
+            t[1] = (other.support[1] - support[1]) * slope[0]
+            t[1] = t[1] - (other.support[0] - support[0]) * slope[1]
+
+            val div = slope[1] * other.slope[0] - slope[0] * other.slope[1]
+            if (div == 0.0) {
+                return null
+            }
+
+            t[1] = t[1] / div
+            t[0] = (other.support[0] - support[0] + t[1] * other.slope[0]) / slope[0]
+            return t
+        }
+
+        return null
+    }
+
+    fun getPoint(t: Double): Vector = (support + slope * t)
+
+    companion object {
+        infix fun from(initStr: String): Line {
+            val (supportStr, slopeStr) = initStr.split("@")
+            val support = Vector(supportStr.split(",").map { it.trim().toDouble() })
+            val slope = Vector(slopeStr.split(",").map { it.trim().toDouble() })
+
+            return Line(support, slope)
+        }
+    }
+}
