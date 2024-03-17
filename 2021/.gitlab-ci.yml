@@ -41,7 +41,7 @@ test ~ aoc-2021:
     - >-
       cargo test --workspace --no-fail-fast --verbose -j2 --
       -Z unstable-options --format json --report-time
-      | cargo2junit > JUnitReports.xml'
+      | cargo2junit > JUnitReports.xml
   artifacts:
     reports:
       junit: 2021/JUnitReports.xml
@@ -59,7 +59,7 @@ format ~ aoc-2021:
     - job: build ~ aoc-2021
       optional: true
   script:
-    - cargo fmt --verbose -- --check'
+    - cargo fmt --verbose -- --check
   allow_failure: true
 
 # 2021 Rust benchmark (release)
@@ -73,7 +73,7 @@ bench ~ aoc-2021:
   script:
     - >-
       cargo bench --workspace --no-fail-fast --verbose -j2 --
-      --warm-up-time 1 --measurement-time 2 --sample-size 10'
+      --warm-up-time 1 --measurement-time 2 --sample-size 10
     - cd ${CI_PROJECT_DIR}
     - mkdir -p benchmarks_${AOC_YEAR}
     - mv ${AOC_YEAR}/target/criterion/* benchmarks_${AOC_YEAR}
