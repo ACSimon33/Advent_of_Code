@@ -41,7 +41,9 @@ stages:
     - env
     - pwd
     - ls
-    - docker login -u ${CI_REGISTRY_USER} -p ${CI_REGISTRY_PASSWORD} ${CI_REGISTRY}
+    - >-
+      docker login --username ${CI_REGISTRY_USER}
+      --password ${CI_REGISTRY_PASSWORD} ${CI_REGISTRY}
     - docker pull ${DOCKER_CURRENT_IMAGE} || true
     - docker pull ${DOCKER_LATEST_IMAGE} || true
     - docker images
