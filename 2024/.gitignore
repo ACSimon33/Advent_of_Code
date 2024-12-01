@@ -1,0 +1,5 @@
+# Ignore zig project-specific cache directory
+.zig-cache
+
+# Ignore zig build output directory
+zig-out
