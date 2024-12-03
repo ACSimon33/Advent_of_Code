@@ -10,7 +10,7 @@ pub fn build(b: *std.Build) void {
     });
 
     // -------------------------- Main executable --------------------------- \\
-    const exe = b.addExecutable(.{
+    const red_nosed_reports_exe = b.addExecutable(.{
         .name = "red_nosed_reports",
         .root_source_file = b.path("src/main.zig"),
         .target = target,
@@ -18,38 +18,39 @@ pub fn build(b: *std.Build) void {
     });
 
     const yazap = b.dependency("yazap", .{});
-    exe.root_module.addImport("yazap", yazap.module("yazap"));
-    exe.root_module.addImport("red_nosed_reports", red_nosed_reports);
-    b.installArtifact(exe);
+    red_nosed_reports_exe.root_module.addImport("yazap", yazap.module("yazap"));
+    red_nosed_reports_exe.root_module.addImport("red_nosed_reports", red_nosed_reports);
+    b.installArtifact(red_nosed_reports_exe);
 
-    const run_cmd = b.addRunArtifact(exe);
+    const run_cmd = b.addRunArtifact(red_nosed_reports_exe);
     run_cmd.step.dependOn(b.getInstallStep());
     if (b.args) |args| {
         run_cmd.addArgs(args);
     }
 
-    const run_step = b.step("run", "Run the app");
+    const run_step = b.step("run", "Run the red_nosed_reports (day 02) app");
     run_step.dependOn(&run_cmd.step);
 
     // --------------------------- Example tests ---------------------------- \\
-    const example_tests = b.addTest(.{
+    const red_nosed_reports_tests = b.addTest(.{
+        .name = "red_nosed_reports_tests",
         .root_source_file = b.path("tests/example_tests.zig"),
         .target = target,
         .optimize = optimize,
     });
 
-    example_tests.root_module.addImport("red_nosed_reports", red_nosed_reports);
-    example_tests.root_module.addAnonymousImport("example_input", .{
+    red_nosed_reports_tests.root_module.addImport("red_nosed_reports", red_nosed_reports);
+    red_nosed_reports_tests.root_module.addAnonymousImport("example_input", .{
         .root_source_file = b.path("input/example_input.txt"),
     });
+    b.installArtifact(red_nosed_reports_tests);
 
-    const run_example_tests = b.addRunArtifact(example_tests);
-    const test_step = b.step("test", "Run example tests");
-    test_step.dependOn(&run_example_tests.step);
+    const test_step = b.step("test", "Run red_nosed_reports (day 02) tests");
+    test_step.dependOn(&b.addRunArtifact(red_nosed_reports_tests).step);
 
     // ------------------------- Puzzle benchmarks -------------------------- \\
-    const puzzle_benchmarks = b.addExecutable(.{
-        .name = "red_nosed_reports_benchmark",
+    const red_nosed_reports_benchmarks = b.addExecutable(.{
+        .name = "red_nosed_reports_benchmarks",
         .root_source_file = b.path("benchmarks/puzzle_benchmarks.zig"),
         .target = target,
         .optimize = optimize,
@@ -59,13 +60,13 @@ pub fn build(b: *std.Build) void {
         .target = target,
         .optimize = optimize,
     });
-    puzzle_benchmarks.root_module.addImport("zbench", zbench.module("zbench"));
-    puzzle_benchmarks.root_module.addImport("red_nosed_reports", red_nosed_reports);
-    puzzle_benchmarks.root_module.addAnonymousImport("puzzle_input", .{
+    red_nosed_reports_benchmarks.root_module.addImport("zbench", zbench.module("zbench"));
+    red_nosed_reports_benchmarks.root_module.addImport("red_nosed_reports", red_nosed_reports);
+    red_nosed_reports_benchmarks.root_module.addAnonymousImport("puzzle_input", .{
         .root_source_file = b.path("input/puzzle_input.txt"),
     });
+    b.installArtifact(red_nosed_reports_benchmarks);
 
-    const run_puzzle_benchmarks = b.addRunArtifact(puzzle_benchmarks);
-    const benchmark_step = b.step("benchmark", "Run puzzle benchmarks");
-    benchmark_step.dependOn(&run_puzzle_benchmarks.step);
+    const benchmark_step = b.step("benchmark", "Run red_nosed_reports (day 02) benchmarks");
+    benchmark_step.dependOn(&b.addRunArtifact(red_nosed_reports_benchmarks).step);
 }
