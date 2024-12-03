@@ -10,7 +10,7 @@ pub fn build(b: *std.Build) void {
     });
 
     // -------------------------- Main executable --------------------------- \\
-    const exe = b.addExecutable(.{
+    const zig_template_exe = b.addExecutable(.{
         .name = "zig_template",
         .root_source_file = b.path("src/main.zig"),
         .target = target,
@@ -18,38 +18,39 @@ pub fn build(b: *std.Build) void {
     });
 
     const yazap = b.dependency("yazap", .{});
-    exe.root_module.addImport("yazap", yazap.module("yazap"));
-    exe.root_module.addImport("zig_template", zig_template);
-    b.installArtifact(exe);
+    zig_template_exe.root_module.addImport("yazap", yazap.module("yazap"));
+    zig_template_exe.root_module.addImport("zig_template", zig_template);
+    b.installArtifact(zig_template_exe);
 
-    const run_cmd = b.addRunArtifact(exe);
+    const run_cmd = b.addRunArtifact(zig_template_exe);
     run_cmd.step.dependOn(b.getInstallStep());
     if (b.args) |args| {
         run_cmd.addArgs(args);
     }
 
-    const run_step = b.step("run", "Run the app");
+    const run_step = b.step("run", "Run the zig_template (day 00) app");
     run_step.dependOn(&run_cmd.step);
 
     // --------------------------- Example tests ---------------------------- \\
-    const example_tests = b.addTest(.{
+    const zig_template_tests = b.addTest(.{
+        .name = "zig_template_tests",
         .root_source_file = b.path("tests/example_tests.zig"),
         .target = target,
         .optimize = optimize,
     });
 
-    example_tests.root_module.addImport("zig_template", zig_template);
-    example_tests.root_module.addAnonymousImport("example_input", .{
+    zig_template_tests.root_module.addImport("zig_template", zig_template);
+    zig_template_tests.root_module.addAnonymousImport("example_input", .{
         .root_source_file = b.path("input/example_input.txt"),
     });
+    b.installArtifact(zig_template_tests);
 
-    const run_example_tests = b.addRunArtifact(example_tests);
-    const test_step = b.step("test", "Run example tests");
-    test_step.dependOn(&run_example_tests.step);
+    const test_step = b.step("test", "Run zig_template (day 00) tests");
+    test_step.dependOn(&b.addRunArtifact(zig_template_tests).step);
 
     // ------------------------- Puzzle benchmarks -------------------------- \\
-    const puzzle_benchmarks = b.addExecutable(.{
-        .name = "zig_template_benchmark",
+    const zig_template_benchmarks = b.addExecutable(.{
+        .name = "zig_template_benchmarks",
         .root_source_file = b.path("benchmarks/puzzle_benchmarks.zig"),
         .target = target,
         .optimize = optimize,
@@ -59,13 +60,13 @@ pub fn build(b: *std.Build) void {
         .target = target,
         .optimize = optimize,
     });
-    puzzle_benchmarks.root_module.addImport("zbench", zbench.module("zbench"));
-    puzzle_benchmarks.root_module.addImport("zig_template", zig_template);
-    puzzle_benchmarks.root_module.addAnonymousImport("puzzle_input", .{
+    zig_template_benchmarks.root_module.addImport("zbench", zbench.module("zbench"));
+    zig_template_benchmarks.root_module.addImport("zig_template", zig_template);
+    zig_template_benchmarks.root_module.addAnonymousImport("puzzle_input", .{
         .root_source_file = b.path("input/puzzle_input.txt"),
     });
+    b.installArtifact(zig_template_benchmarks);
 
-    const run_puzzle_benchmarks = b.addRunArtifact(puzzle_benchmarks);
-    const benchmark_step = b.step("benchmark", "Run puzzle benchmarks");
-    benchmark_step.dependOn(&run_puzzle_benchmarks.step);
+    const benchmark_step = b.step("benchmark", "Run zig_template (day 00) benchmarks");
+    benchmark_step.dependOn(&b.addRunArtifact(zig_template_benchmarks).step);
 }

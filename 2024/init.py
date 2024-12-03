@@ -57,7 +57,7 @@ def snake_case(name: str) -> str:
         str: A snake case version of the given string.
     """
     name_parts = name.lower().split(" ")
-    return "_".join(name_parts)
+    return "_".join(name_parts).replace("-", "_")
 
 
 def pascal_case(name: str) -> str:

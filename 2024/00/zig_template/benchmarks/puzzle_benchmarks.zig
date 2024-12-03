@@ -6,12 +6,12 @@ const puzzle_input = @embedFile("puzzle_input");
 
 // Benchmark of part 1
 fn task_1(_: std.mem.Allocator) void {
-    _ = try zig_template.solution_1(puzzle_input);
+    _ = zig_template.solution_1(puzzle_input) catch {};
 }
 
 // Benchmark of part 2
 fn task_2(_: std.mem.Allocator) void {
-    _ = try zig_template.solution_2(puzzle_input);
+    _ = zig_template.solution_2(puzzle_input) catch {};
 }
 
 pub fn main() !void {
@@ -19,8 +19,8 @@ pub fn main() !void {
     var bench = zbench.Benchmark.init(std.heap.page_allocator, .{});
     defer bench.deinit();
 
-    try bench.add("Task 1 - Zig Template", task_1, .{});
-    try bench.add("Task 2 - Zig Template", task_2, .{});
+    try bench.add("Zig Template - Task 1", task_1, .{});
+    try bench.add("Zig Template - Task 2", task_2, .{});
 
     try stdout.writeAll("\n");
     try bench.run(stdout);
