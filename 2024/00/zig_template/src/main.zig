@@ -43,10 +43,10 @@ pub fn main() !void {
     }
 
     const result_1 = zig_template.solution_1(file_content);
-    try stdout.print("1. Solution: {!}.\n", .{result_1});
+    try stdout.print("1. Solution: {!}\n", .{result_1});
     try bw.flush();
 
     const result_2 = zig_template.solution_2(file_content);
-    try stdout.print("2. Solution: {!}.\n", .{result_2});
+    try stdout.print("2. Solution: {!}\n", .{result_2});
     try bw.flush();
 }
