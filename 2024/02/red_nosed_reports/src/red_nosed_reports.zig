@@ -1,6 +1,7 @@
 const std = @import("std");
 const ArrayList = std.ArrayList;
 const Allocator = std.mem.Allocator;
+const string = []const u8;
 
 const Report = struct {
     levels: ArrayList(i32),
@@ -13,7 +14,7 @@ const Report = struct {
 ///
 /// Returns:
 ///   - Number of fully safe reports.
-pub fn number_of_safe_reports(contents: []const u8) !i32 {
+pub fn number_of_safe_reports(contents: string) !i32 {
     var arena = std.heap.ArenaAllocator.init(std.heap.page_allocator);
     defer arena.deinit();
 
@@ -38,7 +39,7 @@ pub fn number_of_safe_reports(contents: []const u8) !i32 {
 ///
 /// Returns:
 ///   - Number of fully safe reports.
-pub fn number_of_partially_safe_reports(contents: []const u8) !i32 {
+pub fn number_of_partially_safe_reports(contents: string) !i32 {
     var arena = std.heap.ArenaAllocator.init(std.heap.page_allocator);
     defer arena.deinit();
 
@@ -67,7 +68,7 @@ pub fn number_of_partially_safe_reports(contents: []const u8) !i32 {
 ///
 /// Returns:
 ///   - Array list of report objects.
-fn parse_reports(contents: []const u8, allocator: Allocator) !ArrayList(Report) {
+fn parse_reports(contents: string, allocator: Allocator) !ArrayList(Report) {
     var reports = ArrayList(Report).init(allocator);
 
     var lines = std.mem.split(u8, contents, "\n");

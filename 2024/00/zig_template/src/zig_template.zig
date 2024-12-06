@@ -1,7 +1,8 @@
 const std = @import("std");
+const string = []const u8;
 
 /// Task 1
-pub fn solution_1(contents: []const u8) !i32 {
+pub fn solution_1(contents: string) !i32 {
     const lines = std.mem.split(u8, contents, "\n");
     _ = lines;
 
@@ -9,7 +10,7 @@ pub fn solution_1(contents: []const u8) !i32 {
 }
 
 /// Task 2
-pub fn solution_2(contents: []const u8) !i32 {
+pub fn solution_2(contents: string) !i32 {
     const lines = std.mem.split(u8, contents, "\n");
     _ = lines;
 

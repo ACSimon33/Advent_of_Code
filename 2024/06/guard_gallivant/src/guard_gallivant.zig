@@ -1,17 +1,17 @@
 const std = @import("std");
 const HashMap = std.AutoArrayHashMap;
 const Allocator = std.mem.Allocator;
+const string = []const u8;
 
 /// Task 1
-pub fn solution_1(contents: []const u8) !usize {
+pub fn solution_1(contents: string) !usize {
     var arena = std.heap.ArenaAllocator.init(std.heap.page_allocator);
     defer arena.deinit();
 
     const allocator = arena.allocator();
-    const setup = try parse_map(contents, allocator);
-    const map = setup[0];
-    var guard = setup[1];
+    const map, var guard = try parse_map(contents, allocator);
 
+    // Move the guard until it is outside the map and record all positions
     var visited = HashMap(Position, void).init(allocator);
     while (is_guard_inside(map, guard)) : (guard = move(map, guard)) {
         try visited.put(guard.pos, {});
@@ -21,36 +21,35 @@ pub fn solution_1(contents: []const u8) !usize {
 }
 
 /// Task 2
-pub fn solution_2(contents: []const u8) !usize {
+pub fn solution_2(contents: string) !usize {
     var arena = std.heap.ArenaAllocator.init(std.heap.page_allocator);
     defer arena.deinit();
 
     const allocator = arena.allocator();
-    const setup = try parse_map(contents, allocator);
-    var map = setup[0];
-    var guard = setup[1];
+    var map, var guard = try parse_map(contents, allocator);
 
+    // Move the guard until it is outside the map and record all states
     var visited = HashMap(Guard, void).init(allocator);
     while (is_guard_inside(map, guard)) : (guard = move(map, guard)) {
         try visited.put(guard, {});
     }
 
-    var tried_obstacle = HashMap(Position, void).init(allocator);
-    try tried_obstacle.put(visited.keys()[0].pos, {});
+    var new_obstacles = HashMap(Position, void).init(allocator);
+    try new_obstacles.put(visited.keys()[0].pos, {});
     var loop_count: usize = 0;
+
+    // Put an obstacle into each unique position in the guards path and check
+    // wether the guard runs in a loop or exits the map
     for (0..visited.count()) |i| {
-        if (tried_obstacle.contains(visited.keys()[i].pos)) {
+        if (new_obstacles.contains(visited.keys()[i].pos)) {
             continue;
         }
-
         try map.obstacles.put(visited.keys()[i].pos, {});
 
+        // Let the guard start right in front of the new obstacle to save time
         guard = visited.keys()[i - 1];
-        var states = HashMap(Guard, void).init(
-            std.heap.page_allocator,
-        );
-        defer states.deinit();
 
+        var states = HashMap(Guard, void).init(allocator);
         while (is_guard_inside(map, guard)) : (guard = move(map, guard)) {
             if (states.contains(guard)) {
                 loop_count += 1;
@@ -60,7 +59,7 @@ pub fn solution_2(contents: []const u8) !usize {
         }
 
         _ = map.obstacles.pop();
-        try tried_obstacle.put(visited.keys()[i].pos, {});
+        try new_obstacles.put(visited.keys()[i].pos, {});
     }
 
     return loop_count;
@@ -131,7 +130,7 @@ pub fn is_guard_inside(map: GuardMap, guard: Guard) bool {
 ///
 /// Returns:
 ///   - Array list of report objects.
-fn parse_map(contents: []const u8, allocator: Allocator) !struct { GuardMap, Guard } {
+fn parse_map(contents: string, allocator: Allocator) !struct { GuardMap, Guard } {
     var obstacles = HashMap(Position, void).init(allocator);
     var dir: ?Direction = null;
     var pos: ?Position = null;

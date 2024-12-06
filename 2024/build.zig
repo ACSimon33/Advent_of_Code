@@ -1,27 +1,37 @@
 const std = @import("std");
+const string = []const u8;
+const ResolvedTarget = std.Build.ResolvedTarget;
+const OptimizeMode = std.builtin.OptimizeMode;
+const Step = std.Build.Step;
+
+/// Add a dependency for each day
+fn add_subproject(
+    b: *std.Build,
+    target: ResolvedTarget,
+    optimize: OptimizeMode,
+    test_step: *Step,
+    benchmark_step: *Step,
+    comptime day: string,
+    comptime name: string,
+) void {
+    const subproject = b.dependency("day_" ++ day ++ "_" ++ name, .{
+        .target = target,
+        .optimize = optimize,
+    });
+
+    test_step.dependOn(&b.addRunArtifact(subproject.artifact(name ++ "_tests")).step);
+    benchmark_step.dependOn(&b.addRunArtifact(subproject.artifact(name ++ "_benchmarks")).step);
+}
 
 pub fn build(b: *std.Build) void {
     const target = b.standardTargetOptions(.{});
     const optimize = b.standardOptimizeOption(.{});
 
-    // ---------------------------- Subprojects ----------------------------- \\
-    const day_00 = b.dependency("day_00_zig_template", .{
-        .target = target,
-        .optimize = optimize,
-    });
-
-    const day_02 = b.dependency("day_02_red_nosed_reports", .{
-        .target = target,
-        .optimize = optimize,
-    });
-
-    // --------------------------- Example tests ---------------------------- \\
     const test_step = b.step("test", "Run example tests");
-    test_step.dependOn(&b.addRunArtifact(day_00.artifact("zig_template_tests")).step);
-    test_step.dependOn(&b.addRunArtifact(day_02.artifact("red_nosed_reports_tests")).step);
-
-    // ------------------------- Puzzle benchmarks -------------------------- \\
     const benchmark_step = b.step("benchmark", "Run puzzle benchmarks");
-    benchmark_step.dependOn(&b.addRunArtifact(day_00.artifact("zig_template_benchmarks")).step);
-    benchmark_step.dependOn(&b.addRunArtifact(day_02.artifact("red_nosed_reports_benchmarks")).step);
+
+    // ---------------------------- Subprojects ----------------------------- \\
+    add_subproject(b, target, optimize, test_step, benchmark_step, "00", "zig_template");
+    add_subproject(b, target, optimize, test_step, benchmark_step, "02", "red_nosed_reports");
+    add_subproject(b, target, optimize, test_step, benchmark_step, "06", "guard_gallivant");
 }

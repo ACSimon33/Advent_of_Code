@@ -6,6 +6,7 @@ const allocator = std.heap.page_allocator;
 const log = std.log;
 const App = yazap.App;
 const Arg = yazap.Arg;
+const string = []const u8;
 
 pub fn main() !void {
     var app = App.init(allocator, "Day 00", "Day 00: Zig Template");
@@ -13,7 +14,11 @@ pub fn main() !void {
 
     var cmd = app.rootCommand();
     cmd.setProperty(.help_on_empty_args);
-    try cmd.addArg(Arg.singleValueOption("filename", 'f', "Input file (e.g. input/puzzle_input.txt)"));
+    try cmd.addArg(Arg.singleValueOption(
+        "filename",
+        'f',
+        "Input file (e.g. input/puzzle_input.txt)",
+    ));
 
     const matches = try app.parseProcess();
 
@@ -21,8 +26,7 @@ pub fn main() !void {
     var bw = std.io.bufferedWriter(stdout_file);
     const stdout = bw.writer();
 
-    var file_content: []u8 = &[_]u8{};
-
+    var file_content: string = undefined;
     if (matches.getSingleValue("filename")) |filename| {
         const file = try std.fs.cwd().openFile(filename, .{});
         defer file.close();

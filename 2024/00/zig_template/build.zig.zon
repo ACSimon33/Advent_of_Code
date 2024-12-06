@@ -1,7 +1,7 @@
 .{
     .name = "zig_template",
     .version = "0.1.0",
-    .minimum_zig_version = "0.11.0",
+    .minimum_zig_version = "0.13.0",
     .dependencies = .{
         .yazap = .{
             .url = "git+https://github.com/prajwalch/yazap#c2e3122d5dd6192513ba590f229dbc535110efb8",
