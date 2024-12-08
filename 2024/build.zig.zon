@@ -6,6 +6,7 @@
         .day_00_zig_template = .{ .path = "00/zig_template" },
         .day_01_historian_hysteria = .{ .path = "01/historian_hysteria" },
         .day_02_red_nosed_reports = .{ .path = "02/red_nosed_reports" },
+        .day_03_mull_it_over = .{ .path = "03/mull_it_over" },
         .day_06_guard_gallivant = .{ .path = "06/guard_gallivant" },
     },
     .paths = .{
@@ -14,6 +15,7 @@
         "00",
         "01",
         "02",
+        "03",
         "06",
     },
 }
