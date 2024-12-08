@@ -136,13 +136,9 @@ fn parse_map(contents: string, allocator: Allocator) !struct { GuardMap, Guard }
     var pos: ?Position = null;
     var size: ?Position = null;
 
-    var lines = std.mem.splitAny(u8, contents, "\n\r");
+    var lines = std.mem.tokenize(u8, contents, "\n\r");
     var y: i32 = 0;
     while (lines.next()) |line| : (y += 1) {
-        if (line.len == 0) {
-            continue;
-        }
-
         for (line, 0..) |c, x| {
             try switch (c) {
                 '#' => obstacles.put(Position{ .x = @intCast(x), .y = y }, {}),

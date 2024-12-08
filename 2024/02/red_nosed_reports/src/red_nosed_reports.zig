@@ -71,11 +71,8 @@ pub fn number_of_partially_safe_reports(contents: string) !i32 {
 fn parse_reports(contents: string, allocator: Allocator) !ArrayList(Report) {
     var reports = ArrayList(Report).init(allocator);
 
-    var lines = std.mem.splitAny(u8, contents, "\r\n");
+    var lines = std.mem.tokenize(u8, contents, "\r\n");
     while (lines.next()) |line| {
-        if (line.len == 0) {
-            continue;
-        }
         var levels = ArrayList(i32).init(allocator);
         var report_str = std.mem.split(u8, line, " ");
         while (report_str.next()) |level_str| {
