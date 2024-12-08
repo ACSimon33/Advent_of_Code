@@ -19,8 +19,8 @@ pub fn main() !void {
     var bench = zbench.Benchmark.init(std.heap.page_allocator, .{});
     defer bench.deinit();
 
-    try bench.add("Guard Gallivant - Task 1", task_1, .{});
-    try bench.add("Guard Gallivant - Task 2", task_2, .{});
+    try bench.add("Day 06 - Task 1", task_1, .{});
+    try bench.add("Day 06 - Task 2", task_2, .{});
 
     try stdout.writeAll("\n");
     try bench.run(stdout);

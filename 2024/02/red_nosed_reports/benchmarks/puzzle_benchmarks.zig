@@ -19,8 +19,8 @@ pub fn main() !void {
     var bench = zbench.Benchmark.init(std.heap.page_allocator, .{});
     defer bench.deinit();
 
-    try bench.add("Red-Nosed Reports - Task 1", task_1, .{});
-    try bench.add("Red-Nosed Reports - Task 2", task_2, .{});
+    try bench.add("Day 02 - Task 1", task_1, .{});
+    try bench.add("Day 02 - Task 2", task_2, .{});
 
     try stdout.writeAll("\n");
     try bench.run(stdout);
