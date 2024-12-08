@@ -58,4 +58,4 @@ bench ~ aoc-2024:
   needs:
     - test ~ aoc-2024
   script:
-    - zig build benchmark -Doptimize=ReleaseFast -j2
+    - zig build benchmark -Doptimize=ReleaseFast -j1
