@@ -1,0 +1,66 @@
+# **************************************************************************** #
+#                            Advent of Code 2024                               #
+# **************************************************************************** #
+
+# 2024 template
+.2024-template:
+  variables:
+    AOC_YEAR: 2024
+
+# Prepare docker for 2024
+docker ~ aoc-2024:
+  extends:
+    - .2024-template
+    - .prepare-docker-template
+
+# 2024 Zig build
+build ~ aoc-2024:
+  stage: build
+  extends:
+    - .2024-template
+    - .run-current-year-template
+  needs:
+    - docker ~ aoc-2024
+  script:
+    - zig build -Doptimize=ReleaseSafe -j2
+
+# 2024 Zig test
+test ~ aoc-2024:
+  stage: test
+  extends:
+    - .2024-template
+    - .run-current-year-template
+  needs:
+    - build ~ aoc-2024
+  script:
+    - zig build -Doptimize=Debug -j2 test
+  artifacts:
+    reports:
+      junit: 2024/**/*ExampleTest.xml
+    when: always
+    expire_in: 1 week
+
+# 2024 Zig fmt check
+format ~ aoc-2024:
+  stage: test
+  extends:
+    - .2024-template
+    - .run-current-year-template
+  needs:
+    - docker ~ aoc-2024
+    - job: build ~ aoc-2024
+      optional: true
+  script:
+    - zig fmt --check ./**/*.zig
+  allow_failure: true
+
+# 2024 Zig benchmark (release)
+bench ~ aoc-2024:
+  stage: benchmark
+  extends:
+    - .2024-template
+    - .run-current-year-template
+  needs:
+    - test ~ aoc-2024
+  script:
+    - zig build -Doptimize=ReleaseFast -j2 benchmark

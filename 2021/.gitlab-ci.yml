@@ -15,7 +15,7 @@ docker ~ aoc-2021:
 
 # 2021 Rust build (debug + release)
 build ~ aoc-2021:
-  stage: Build
+  stage: build
   extends:
     - .2021-template
     - .run-current-year-template
@@ -27,7 +27,7 @@ build ~ aoc-2021:
 
 # 2021 Rust test (debug)
 test ~ aoc-2021:
-  stage: Test
+  stage: test
   extends:
     - .2021-template
     - .run-current-year-template
@@ -50,7 +50,7 @@ test ~ aoc-2021:
 
 # 2021 Rust fmt check
 format ~ aoc-2021:
-  stage: Test
+  stage: test
   extends:
     - .2021-template
     - .run-current-year-template
@@ -64,7 +64,7 @@ format ~ aoc-2021:
 
 # 2021 Rust benchmark (release)
 bench ~ aoc-2021:
-  stage: Benchmark
+  stage: benchmark
   extends:
     - .2021-template
     - .run-current-year-template

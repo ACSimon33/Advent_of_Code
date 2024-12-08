@@ -15,7 +15,7 @@ docker ~ aoc-2022:
 
 # 2022 TypeScript build
 build ~ aoc-2022:
-  stage: Build
+  stage: build
   extends:
     - .2022-template
     - .run-current-year-template
@@ -26,7 +26,7 @@ build ~ aoc-2022:
 
 # 2022 TypeScript test
 test ~ aoc-2022:
-  stage: Test
+  stage: test
   extends:
     - .2022-template
     - .run-current-year-template
@@ -44,7 +44,7 @@ test ~ aoc-2022:
 
 # 2022 TypeScript fmt check
 format ~ aoc-2022:
-  stage: Test
+  stage: test
   extends:
     - .2022-template
     - .run-current-year-template
@@ -58,7 +58,7 @@ format ~ aoc-2022:
 
 # 2022 TypeScript benchmark (release)
 bench ~ aoc-2022:
-  stage: Benchmark
+  stage: benchmark
   extends:
     - .2022-template
     - .run-current-year-template

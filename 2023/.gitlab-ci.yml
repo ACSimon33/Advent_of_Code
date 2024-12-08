@@ -15,7 +15,7 @@ docker ~ aoc-2023:
 
 # 2023 Kotlin build
 build ~ aoc-2023:
-  stage: Build
+  stage: build
   extends:
     - .2023-template
     - .run-current-year-template
@@ -26,7 +26,7 @@ build ~ aoc-2023:
 
 # 2023 Kotlin test
 test ~ aoc-2023:
-  stage: Test
+  stage: test
   extends:
     - .2023-template
     - .run-current-year-template
@@ -42,7 +42,7 @@ test ~ aoc-2023:
 
 # 2023 Kotlin fmt check
 format ~ aoc-2023:
-  stage: Test
+  stage: test
   extends:
     - .2023-template
     - .run-current-year-template
@@ -56,7 +56,7 @@ format ~ aoc-2023:
 
 # 2023 Kotlin benchmark (release)
 bench ~ aoc-2023:
-  stage: Benchmark
+  stage: benchmark
   extends:
     - .2023-template
     - .run-current-year-template

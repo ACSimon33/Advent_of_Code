@@ -1,9 +1,9 @@
 stages:
-  - Prepare
-  - Build
-  - Test
-  - Benchmark
-  - Deploy
+  - prepare
+  - build
+  - test
+  - benchmark
+  - deploy
 
 # **************************************************************************** #
 #                                 Templates                                    #
@@ -15,7 +15,7 @@ stages:
     - linux
     - docker
   variables:
-    AOC_CURRENT_YEAR: 2023
+    AOC_CURRENT_YEAR: 2024
     DOCKER_CURRENT_IMAGE: ${CI_REGISTRY_IMAGE}:aoc-${AOC_YEAR}-${CI_COMMIT_SHA}
     DOCKER_LATEST_IMAGE: ${CI_REGISTRY_IMAGE}:aoc-${AOC_YEAR}-latest
   image: ${DOCKER_CURRENT_IMAGE}
@@ -31,12 +31,12 @@ stages:
 
 # Prepare docker
 .prepare-docker-template:
-  stage: Prepare
+  stage: prepare
   extends:
     .run-current-year-template
-  image: docker:20.10.18-git
+  image: docker:27.3.1
   services:
-    - docker:20.10.18-dind
+    - docker:27.3.1-dind
   before_script:
     - env
     - pwd
@@ -55,13 +55,14 @@ stages:
     - docker push ${DOCKER_LATEST_IMAGE}
 
 # **************************************************************************** #
-#                           Advent of Code 2021-2023                           #
+#                           Advent of Code 2021-2024                           #
 # **************************************************************************** #
 
 include:
   - local: '2021/.gitlab-ci.yml'
   - local: '2022/.gitlab-ci.yml'
   - local: '2023/.gitlab-ci.yml'
+  - local: '2024/.gitlab-ci.yml'
 
 # **************************************************************************** #
 #                               Pages deployment                               #
@@ -69,7 +70,7 @@ include:
 
 # Create pages with benchmark results
 pages:
-  stage: Deploy
+  stage: deploy
   tags:
     - linux
   rules:
@@ -81,6 +82,8 @@ pages:
       optional: true
     - job: bench ~ aoc-2023
       optional: true
+    - job: bench ~ aoc-2024
+      optional: true
   script:
     - mkdir -p public
     - if [ -d "benchmarks_2021" ]; then
@@ -91,6 +94,9 @@ pages:
     - fi
     - if [ -d "benchmarks_2023" ]; then
     -   mv benchmarks_2023 public/2023
+    - fi
+    - if [ -d "benchmarks_2024" ]; then
+    -   mv benchmarks_2024 public/2024
     - fi
   artifacts:
     paths:
