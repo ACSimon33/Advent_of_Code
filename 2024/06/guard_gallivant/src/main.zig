@@ -46,11 +46,11 @@ pub fn main() !void {
         return;
     }
 
-    const result_1 = guard_gallivant.solution_1(file_content);
-    try stdout.print("1. Solution: {!}\n", .{result_1});
+    const result_1 = guard_gallivant.visited_positions(file_content);
+    try stdout.print("Amount of visited positions: {!}\n", .{result_1});
     try bw.flush();
 
-    const result_2 = guard_gallivant.solution_2(file_content);
-    try stdout.print("2. Solution: {!}\n", .{result_2});
+    const result_2 = guard_gallivant.closed_loops(file_content);
+    try stdout.print("Amount of possible loops: {!}\n", .{result_2});
     try bw.flush();
 }

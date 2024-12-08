@@ -3,8 +3,15 @@ const HashMap = std.AutoArrayHashMap;
 const Allocator = std.mem.Allocator;
 const string = []const u8;
 
-/// Task 1
-pub fn solution_1(contents: string) !usize {
+/// Task 1 - Calculate the amount of distinct positions that the guard visits
+///          by simulating the guard until they leave the map.
+///
+/// Arguments:
+///   - `contents`: Input file contents.
+///
+/// Returns:
+///   - Amount of distinct positions.
+pub fn visited_positions(contents: string) !usize {
     var arena = std.heap.ArenaAllocator.init(std.heap.page_allocator);
     defer arena.deinit();
 
@@ -20,8 +27,15 @@ pub fn solution_1(contents: string) !usize {
     return visited.count();
 }
 
-/// Task 2
-pub fn solution_2(contents: string) !usize {
+/// Task 2 - Calculate the amount of closed guard roots we can create by
+///          placing one extra obstacle on the map.
+///
+/// Arguments:
+///   - `contents`: Input file contents.
+///
+/// Returns:
+///   - Amount of closed loops.
+pub fn closed_loops(contents: string) !usize {
     var arena = std.heap.ArenaAllocator.init(std.heap.page_allocator);
     defer arena.deinit();
 
@@ -65,30 +79,52 @@ pub fn solution_2(contents: string) !usize {
     return loop_count;
 }
 
+// -------------------------------------------------------------------------- \\
+
+/// 2D position on the map
 const Position = struct { x: i32, y: i32 };
 
+/// Cardinal direction
 const Direction = enum(u3) {
     north,
     east,
     south,
     west,
 
-    pub fn turn_right(self: Direction) Direction {
+    /// Make a 90 degree turn and calculate the new cardinal direction.
+    ///
+    /// Arguments:
+    ///   - `self`: The current direction.
+    ///
+    /// Returns:
+    ///   - The new direction after turning to the right.
+    fn turn_right(self: Direction) Direction {
         return @enumFromInt((@intFromEnum(self) + 1) % 4);
     }
 };
 
-const GuardMap = struct {
+/// Map which holds (hashed) information about all obstacles.
+const ObstacleMap = struct {
     obstacles: HashMap(Position, void),
     size: Position,
 };
 
+/// Guard state which encodes their current position and the direction.
 const Guard = struct {
     dir: Direction,
     pos: Position,
 };
 
-pub fn move(map: GuardMap, guard: Guard) Guard {
+/// Move the guard one step in its current direction. If the direction is
+/// blocked by an obstacle, turn right and try again.
+///
+/// Arguments:
+///   - `map`: The obstacle map.
+///   - `guard`: The current state of the guard.
+///
+/// Returns:
+///   - The new state of the guard after moving.
+fn move(map: ObstacleMap, guard: Guard) Guard {
     var newPos = guard.pos;
     switch (guard.dir) {
         .north => {
@@ -118,30 +154,45 @@ pub fn move(map: GuardMap, guard: Guard) Guard {
     };
 }
 
-pub fn is_guard_inside(map: GuardMap, guard: Guard) bool {
+/// Check whether the guard position is inside the map.
+///
+/// Arguments:
+///   - `map`: The obstacle map.
+///   - `guard`: The current state of the guard.
+///
+/// Returns:
+///   - Wether the guard is inside the map.
+fn is_guard_inside(map: ObstacleMap, guard: Guard) bool {
     return (guard.pos.x < map.size.x and guard.pos.x >= 0 and guard.pos.y < map.size.y and guard.pos.y >= 0);
 }
 
-/// Parse the file contents into a list of reports.
+/// Parse the file contents into a map of obstacles and the current guard state.
 ///
 /// Arguments:
 ///   - `contents`: Input file contents.
 ///   - `allocator`: Allocator for the containers.
 ///
 /// Returns:
-///   - Array list of report objects.
-fn parse_map(contents: string, allocator: Allocator) !struct { GuardMap, Guard } {
+///   - Obstacle map and guard state.
+fn parse_map(contents: string, allocator: Allocator) !struct { ObstacleMap, Guard } {
     var obstacles = HashMap(Position, void).init(allocator);
     var dir: ?Direction = null;
     var pos: ?Position = null;
     var size: ?Position = null;
 
-    var lines = std.mem.tokenize(u8, contents, "\n\r");
+    var lines = std.mem.tokenize(
+        u8,
+        contents,
+        "\n\r",
+    );
     var y: i32 = 0;
     while (lines.next()) |line| : (y += 1) {
         for (line, 0..) |c, x| {
             try switch (c) {
-                '#' => obstacles.put(Position{ .x = @intCast(x), .y = y }, {}),
+                '#' => obstacles.put(
+                    Position{ .x = @intCast(x), .y = y },
+                    {},
+                ),
                 '^' => {
                     dir = Direction.north;
                     pos = Position{ .x = @intCast(x), .y = y };
@@ -169,7 +220,7 @@ fn parse_map(contents: string, allocator: Allocator) !struct { GuardMap, Guard }
     size.?.y = y;
 
     return .{
-        GuardMap{
+        ObstacleMap{
             .obstacles = obstacles,
             .size = size.?,
         },

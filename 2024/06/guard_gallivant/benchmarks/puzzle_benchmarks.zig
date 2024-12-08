@@ -6,12 +6,12 @@ const puzzle_input = @embedFile("puzzle_input");
 
 // Benchmark of part 1
 fn task_1(_: std.mem.Allocator) void {
-    _ = guard_gallivant.solution_1(puzzle_input) catch {};
+    _ = guard_gallivant.visited_positions(puzzle_input) catch {};
 }
 
 // Benchmark of part 2
 fn task_2(_: std.mem.Allocator) void {
-    _ = guard_gallivant.solution_2(puzzle_input) catch {};
+    _ = guard_gallivant.closed_loops(puzzle_input) catch {};
 }
 
 pub fn main() !void {

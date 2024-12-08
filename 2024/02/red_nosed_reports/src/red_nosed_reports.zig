@@ -3,10 +3,6 @@ const ArrayList = std.ArrayList;
 const Allocator = std.mem.Allocator;
 const string = []const u8;
 
-const Report = struct {
-    levels: ArrayList(i32),
-};
-
 /// Task 1 - Count the number of fully safe reports.
 ///
 /// Arguments:
@@ -32,7 +28,7 @@ pub fn number_of_safe_reports(contents: string) !i32 {
 }
 
 /// Task 2 - Count the number of partially safe reports
-/// (safe when one entry is removed).
+///          (safe when one entry is removed).
 ///
 /// Arguments:
 ///   - `contents`: Input file contents.
@@ -59,6 +55,13 @@ pub fn number_of_partially_safe_reports(contents: string) !i32 {
 
     return safe_reports;
 }
+
+// -------------------------------------------------------------------------- \\
+
+// Report containing a list of levels.
+const Report = struct {
+    levels: ArrayList(i32),
+};
 
 /// Parse the file contents into a list of reports.
 ///

@@ -1,7 +1,6 @@
 const std = @import("std");
-const testing = std.testing;
-
 const zig_template = @import("zig_template");
+const testing = std.testing;
 
 // Test of part 1
 test "task_1" {

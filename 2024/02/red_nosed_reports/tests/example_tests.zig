@@ -1,7 +1,6 @@
 const std = @import("std");
-const testing = std.testing;
-
 const red_nosed_reports = @import("red_nosed_reports");
+const testing = std.testing;
 
 // Test of part 1
 test "task_1" {
