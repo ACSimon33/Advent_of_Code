@@ -3,15 +3,9 @@
     .version = "1.0.0",
     .minimum_zig_version = "0.13.0",
     .dependencies = .{
-        .day_00_zig_template = .{
-            .path = "00/zig_template",
-        },
-        .day_02_red_nosed_reports = .{
-            .path = "02/red_nosed_reports",
-        },
-        .day_06_guard_gallivant = .{
-            .path = "06/guard_gallivant",
-        },
+        .day_00_zig_template = .{ .path = "00/zig_template" },
+        .day_02_red_nosed_reports = .{ .path = "02/red_nosed_reports" },
+        .day_06_guard_gallivant = .{ .path = "06/guard_gallivant" },
     },
     .paths = .{
         "build.zig",

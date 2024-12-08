@@ -206,6 +206,73 @@ def init_project(
                 file.write(search_and_replace(day, name, contents))
 
 
+def subproject_registration(zon: bool) -> str:
+    """Generate a subproject string.
+
+    Generate a subproject string which registers the subproject in the
+    root project (build.zig and build.zig.zon).
+
+    Args:
+        zon (bool): Wether to create the subproject string for
+                    build.zig.zon or build.zig.
+
+    Returns:
+        str: The subproject registration string
+    """
+    subproject = ""
+    if zon:
+        subproject += "        .day_"
+        subproject += get_day(opts.day) + "_" + snake_case(opts.name)
+        subproject += ' = .{ .path = "'
+        subproject += get_day(opts.day) + "/" + snake_case(opts.name) + '" },\n'
+    else:
+        subproject += "    add_subproject("
+        subproject += 'b, target, optimize, test_step, benchmark_step, "'
+        subproject += get_day(opts.day) + '", "'
+        subproject += snake_case(opts.name) + '");\n'
+
+    return subproject
+
+
+def register_subproject(
+    filename: str, subproject_pattern: str, registration_string: str
+) -> None:
+    """Register the subproject in the gven config file.
+
+    Args:
+        filename (str): The config file.
+        subproject_pattern (str): The regex that matches existing subprojects.
+        registration_string (str): New subproject string.
+    """
+    config_file = Path(__file__).parent / filename
+    config: list[str] = []
+    with open(config_file, "r") as file:
+        last_line_matched = False
+        subproject_added = False
+        for line in file.readlines():
+            if not subproject_added:
+                subproject_added = last_line_matched
+
+                m = re.match(subproject_pattern, line)
+                if m and len(m.groups()) == 1:
+                    last_line_matched = True
+                    subproject_added = int(m.group(1)) > opts.day
+
+                # Add subproject if the day of the next entry is larger
+                # or if this is the last entry in the subproject list
+                if subproject_added:
+                    config.append(registration_string)
+
+            config.append(line)
+
+        # Add subproject entry at the end of the file
+        if last_line_matched and not subproject_added:
+            config.append(registration_string)
+
+    with open(config_file, "w") as file:
+        file.writelines(config)
+
+
 # -------------------------------------------------------------------- #
 
 
@@ -230,6 +297,21 @@ def main() -> int:
 
     # Initialize project
     init_project(opts.day, opts.name)
+
+    # Initialize as a subproject
+    register_subproject(
+        "build.zig",
+        r".*add_subproject\(.*([0-9]{2}).*\).*",
+        subproject_registration(zon=False),
+    )
+
+    register_subproject(
+        "build.zig.zon", r".*_([0-9]{2})_.*", subproject_registration(zon=True)
+    )
+
+    register_subproject(
+        "build.zig.zon", r'.*"([0-9]{2})".*', '        "' + get_day(opts.day) + '",\n'
+    )
 
     return 0
 
