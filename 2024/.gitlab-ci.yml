@@ -58,4 +58,9 @@ bench ~ aoc-2024:
   needs:
     - test ~ aoc-2024
   script:
-    - zig build benchmark -Doptimize=ReleaseFast -j1
+    - zig build benchmark -Doptimize=ReleaseFast -j1 | tee bench.log
+    - mkdir -p benchmarks_${AOC_YEAR}
+    - cat bench.log | aha > benchmarks_${AOC_YEAR}/index.html
+  artifacts:
+    paths:
+      - benchmarks_${AOC_YEAR}
