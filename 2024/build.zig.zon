@@ -8,6 +8,7 @@
         .day_02_red_nosed_reports = .{ .path = "02/red_nosed_reports" },
         .day_03_mull_it_over = .{ .path = "03/mull_it_over" },
         .day_06_guard_gallivant = .{ .path = "06/guard_gallivant" },
+        .day_09_disk_fragmenter = .{ .path = "09/disk_fragmenter" },
     },
     .paths = .{
         "build.zig",
@@ -17,5 +18,6 @@
         "02",
         "03",
         "06",
+        "09",
     },
 }
