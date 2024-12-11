@@ -10,6 +10,7 @@
         .day_06_guard_gallivant = .{ .path = "06/guard_gallivant" },
         .day_09_disk_fragmenter = .{ .path = "09/disk_fragmenter" },
         .day_10_hoof_it = .{ .path = "10/hoof_it" },
+        .day_11_plutonian_pebbles = .{ .path = "11/plutonian_pebbles" },
     },
     .paths = .{
         "build.zig",
@@ -21,5 +22,6 @@
         "06",
         "09",
         "10",
+        "11",
     },
 }
