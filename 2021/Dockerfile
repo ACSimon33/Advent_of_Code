@@ -1,5 +1,5 @@
 # syntax=docker/dockerfile:1
-FROM rust:1.67.0
+FROM rustlang/rust:nightly
 
 # Setup rust toolchain
 RUN rustup component add rustfmt
