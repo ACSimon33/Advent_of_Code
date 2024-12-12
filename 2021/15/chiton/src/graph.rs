@@ -11,7 +11,7 @@ pub struct Node {
 impl Node {
   /// Create a new node from a risk
   pub fn new(risk: u32) -> Node {
-    Node {risk: risk, cumulative_risk: u32::MAX }
+    Node { risk: risk, cumulative_risk: u32::MAX }
   }
 }
 
