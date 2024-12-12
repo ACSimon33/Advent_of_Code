@@ -39,4 +39,5 @@ pub fn build(b: *std.Build) void {
     add_subproject(b, target, optimize, test_step, benchmark_step, "09", "disk_fragmenter");
     add_subproject(b, target, optimize, test_step, benchmark_step, "10", "hoof_it");
     add_subproject(b, target, optimize, test_step, benchmark_step, "11", "plutonian_pebbles");
+    add_subproject(b, target, optimize, test_step, benchmark_step, "12", "garden_groups");
 }

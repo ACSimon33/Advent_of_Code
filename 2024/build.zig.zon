@@ -11,6 +11,7 @@
         .day_09_disk_fragmenter = .{ .path = "09/disk_fragmenter" },
         .day_10_hoof_it = .{ .path = "10/hoof_it" },
         .day_11_plutonian_pebbles = .{ .path = "11/plutonian_pebbles" },
+        .day_12_garden_groups = .{ .path = "12/garden_groups" },
     },
     .paths = .{
         "build.zig",
@@ -23,5 +24,6 @@
         "09",
         "10",
         "11",
+        "12",
     },
 }
