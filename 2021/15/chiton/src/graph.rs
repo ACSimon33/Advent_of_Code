@@ -4,15 +4,14 @@ use std::cmp::Reverse;
 /// Simple node
 #[derive(Clone, Debug)]
 pub struct Node {
-  pub index: usize,
   pub risk: u32,
   pub cumulative_risk: u32,
 }
 
 impl Node {
-  /// Create a new node from an index and a risk
-  pub fn new(index: usize, risk: u32) -> Node {
-    Node { index: index, risk: risk, cumulative_risk: u32::MAX }
+  /// Create a new node from a risk
+  pub fn new(risk: u32) -> Node {
+    Node {risk: risk, cumulative_risk: u32::MAX }
   }
 }
 
@@ -33,13 +32,12 @@ impl Graph {
         for kj in 0..*dup {
           for j in 0..*n {
             let idx = i * n + j;
-            let idx_full = (ki * m + i) * dup * n + kj * n + j;
             let mut risk = risks[idx] + (ki as u32) + (kj as u32);
             if risk > 9 {
               risk -= 9;
             }
 
-            nodes.push(Node::new(idx_full, risk));
+            nodes.push(Node::new(risk));
           }
         }
       }
