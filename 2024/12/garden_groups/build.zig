@@ -28,7 +28,7 @@ pub fn build(b: *std.Build) void {
         run_cmd.addArgs(args);
     }
 
-    const run_step = b.step("run", "Run the garden_groups (day 12) app");
+    const run_step = b.step("run", "Run the Garden Groups (day 12) app");
     run_step.dependOn(&run_cmd.step);
 
     // --------------------------- Example tests ---------------------------- \\
@@ -51,7 +51,7 @@ pub fn build(b: *std.Build) void {
     }
     b.installArtifact(garden_groups_tests);
 
-    const test_step = b.step("test", "Run garden_groups (day 12) tests");
+    const test_step = b.step("test", "Run Garden Groups (day 12) tests");
     test_step.dependOn(&b.addRunArtifact(garden_groups_tests).step);
 
     // ------------------------- Puzzle benchmarks -------------------------- \\
@@ -73,6 +73,6 @@ pub fn build(b: *std.Build) void {
     });
     b.installArtifact(garden_groups_benchmarks);
 
-    const benchmark_step = b.step("benchmark", "Run garden_groups (day 12) benchmarks");
+    const benchmark_step = b.step("benchmark", "Run Garden Groups (day 12) benchmarks");
     benchmark_step.dependOn(&b.addRunArtifact(garden_groups_benchmarks).step);
 }

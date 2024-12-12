@@ -28,7 +28,7 @@ pub fn build(b: *std.Build) void {
         run_cmd.addArgs(args);
     }
 
-    const run_step = b.step("run", "Run the mull_it_over (day 03) app");
+    const run_step = b.step("run", "Run the Mull It Over (day 03) app");
     run_step.dependOn(&run_cmd.step);
 
     // --------------------------- Example tests ---------------------------- \\
@@ -48,7 +48,7 @@ pub fn build(b: *std.Build) void {
     });
     b.installArtifact(mull_it_over_tests);
 
-    const test_step = b.step("test", "Run mull_it_over (day 03) tests");
+    const test_step = b.step("test", "Run Mull It Over (day 03) tests");
     test_step.dependOn(&b.addRunArtifact(mull_it_over_tests).step);
 
     // ------------------------- Puzzle benchmarks -------------------------- \\
@@ -70,6 +70,6 @@ pub fn build(b: *std.Build) void {
     });
     b.installArtifact(mull_it_over_benchmarks);
 
-    const benchmark_step = b.step("benchmark", "Run mull_it_over (day 03) benchmarks");
+    const benchmark_step = b.step("benchmark", "Run Mull It Over (day 03) benchmarks");
     benchmark_step.dependOn(&b.addRunArtifact(mull_it_over_benchmarks).step);
 }

@@ -28,7 +28,7 @@ pub fn build(b: *std.Build) void {
         run_cmd.addArgs(args);
     }
 
-    const run_step = b.step("run", "Run the guard_gallivant (day 06) app");
+    const run_step = b.step("run", "Run the Guard Gallivant (day 06) app");
     run_step.dependOn(&run_cmd.step);
 
     // --------------------------- Example tests ---------------------------- \\
@@ -45,7 +45,7 @@ pub fn build(b: *std.Build) void {
     });
     b.installArtifact(guard_gallivant_tests);
 
-    const test_step = b.step("test", "Run guard_gallivant (day 06) tests");
+    const test_step = b.step("test", "Run Guard Gallivant (day 06) tests");
     test_step.dependOn(&b.addRunArtifact(guard_gallivant_tests).step);
 
     // ------------------------- Puzzle benchmarks -------------------------- \\
@@ -67,6 +67,6 @@ pub fn build(b: *std.Build) void {
     });
     b.installArtifact(guard_gallivant_benchmarks);
 
-    const benchmark_step = b.step("benchmark", "Run guard_gallivant (day 06) benchmarks");
+    const benchmark_step = b.step("benchmark", "Run Guard Gallivant (day 06) benchmarks");
     benchmark_step.dependOn(&b.addRunArtifact(guard_gallivant_benchmarks).step);
 }

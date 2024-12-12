@@ -28,7 +28,7 @@ pub fn build(b: *std.Build) void {
         run_cmd.addArgs(args);
     }
 
-    const run_step = b.step("run", "Run the red_nosed_reports (day 02) app");
+    const run_step = b.step("run", "Run the Red Nosed Reports (day 02) app");
     run_step.dependOn(&run_cmd.step);
 
     // --------------------------- Example tests ---------------------------- \\
@@ -45,7 +45,7 @@ pub fn build(b: *std.Build) void {
     });
     b.installArtifact(red_nosed_reports_tests);
 
-    const test_step = b.step("test", "Run red_nosed_reports (day 02) tests");
+    const test_step = b.step("test", "Run Red Nosed Reports (day 02) tests");
     test_step.dependOn(&b.addRunArtifact(red_nosed_reports_tests).step);
 
     // ------------------------- Puzzle benchmarks -------------------------- \\
@@ -67,6 +67,6 @@ pub fn build(b: *std.Build) void {
     });
     b.installArtifact(red_nosed_reports_benchmarks);
 
-    const benchmark_step = b.step("benchmark", "Run red_nosed_reports (day 02) benchmarks");
+    const benchmark_step = b.step("benchmark", "Run Red Nosed Reports (day 02) benchmarks");
     benchmark_step.dependOn(&b.addRunArtifact(red_nosed_reports_benchmarks).step);
 }

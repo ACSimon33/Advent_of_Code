@@ -28,7 +28,7 @@ pub fn build(b: *std.Build) void {
         run_cmd.addArgs(args);
     }
 
-    const run_step = b.step("run", "Run the zig_template (day 00) app");
+    const run_step = b.step("run", "Run the Zig Template (day 00) app");
     run_step.dependOn(&run_cmd.step);
 
     // --------------------------- Example tests ---------------------------- \\
@@ -45,7 +45,7 @@ pub fn build(b: *std.Build) void {
     });
     b.installArtifact(zig_template_tests);
 
-    const test_step = b.step("test", "Run zig_template (day 00) tests");
+    const test_step = b.step("test", "Run Zig Template (day 00) tests");
     test_step.dependOn(&b.addRunArtifact(zig_template_tests).step);
 
     // ------------------------- Puzzle benchmarks -------------------------- \\
@@ -67,6 +67,6 @@ pub fn build(b: *std.Build) void {
     });
     b.installArtifact(zig_template_benchmarks);
 
-    const benchmark_step = b.step("benchmark", "Run zig_template (day 00) benchmarks");
+    const benchmark_step = b.step("benchmark", "Run Zig Template (day 00) benchmarks");
     benchmark_step.dependOn(&b.addRunArtifact(zig_template_benchmarks).step);
 }

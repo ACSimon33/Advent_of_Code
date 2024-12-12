@@ -28,7 +28,7 @@ pub fn build(b: *std.Build) void {
         run_cmd.addArgs(args);
     }
 
-    const run_step = b.step("run", "Run the plutonian_pebbles (day 11) app");
+    const run_step = b.step("run", "Run the Plutonian Pebbles (day 11) app");
     run_step.dependOn(&run_cmd.step);
 
     // --------------------------- Example tests ---------------------------- \\
@@ -45,7 +45,7 @@ pub fn build(b: *std.Build) void {
     });
     b.installArtifact(plutonian_pebbles_tests);
 
-    const test_step = b.step("test", "Run plutonian_pebbles (day 11) tests");
+    const test_step = b.step("test", "Run Plutonian Pebbles (day 11) tests");
     test_step.dependOn(&b.addRunArtifact(plutonian_pebbles_tests).step);
 
     // ------------------------- Puzzle benchmarks -------------------------- \\
@@ -67,6 +67,6 @@ pub fn build(b: *std.Build) void {
     });
     b.installArtifact(plutonian_pebbles_benchmarks);
 
-    const benchmark_step = b.step("benchmark", "Run plutonian_pebbles (day 11) benchmarks");
+    const benchmark_step = b.step("benchmark", "Run Plutonian Pebbles (day 11) benchmarks");
     benchmark_step.dependOn(&b.addRunArtifact(plutonian_pebbles_benchmarks).step);
 }

@@ -28,7 +28,7 @@ pub fn build(b: *std.Build) void {
         run_cmd.addArgs(args);
     }
 
-    const run_step = b.step("run", "Run the historian_hysteria (day 01) app");
+    const run_step = b.step("run", "Run the Historian Hysteria (day 01) app");
     run_step.dependOn(&run_cmd.step);
 
     // --------------------------- Example tests ---------------------------- \\
@@ -45,7 +45,7 @@ pub fn build(b: *std.Build) void {
     });
     b.installArtifact(historian_hysteria_tests);
 
-    const test_step = b.step("test", "Run historian_hysteria (day 01) tests");
+    const test_step = b.step("test", "Run Historian Hysteria (day 01) tests");
     test_step.dependOn(&b.addRunArtifact(historian_hysteria_tests).step);
 
     // ------------------------- Puzzle benchmarks -------------------------- \\
@@ -67,6 +67,6 @@ pub fn build(b: *std.Build) void {
     });
     b.installArtifact(historian_hysteria_benchmarks);
 
-    const benchmark_step = b.step("benchmark", "Run historian_hysteria (day 01) benchmarks");
+    const benchmark_step = b.step("benchmark", "Run Historian Hysteria (day 01) benchmarks");
     benchmark_step.dependOn(&b.addRunArtifact(historian_hysteria_benchmarks).step);
 }

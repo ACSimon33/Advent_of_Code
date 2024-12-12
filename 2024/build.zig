@@ -4,6 +4,9 @@ const ResolvedTarget = std.Build.ResolvedTarget;
 const OptimizeMode = std.builtin.OptimizeMode;
 const Step = std.Build.Step;
 
+var previous_test_step: ?*Step = null;
+var previous_benchmark_step: ?*Step = null;
+
 /// Add a dependency for each day
 fn add_subproject(
     b: *std.Build,
@@ -19,8 +22,19 @@ fn add_subproject(
         .optimize = optimize,
     });
 
-    test_step.dependOn(&b.addRunArtifact(subproject.artifact(name ++ "_tests")).step);
-    benchmark_step.dependOn(&b.addRunArtifact(subproject.artifact(name ++ "_benchmarks")).step);
+    const subproject_test_step = &b.addRunArtifact(subproject.artifact(name ++ "_tests")).step;
+    if (previous_test_step) |prev_subproject_test_step| {
+        subproject_test_step.dependOn(prev_subproject_test_step);
+    }
+    test_step.dependOn(subproject_test_step);
+    previous_test_step = subproject_test_step;
+
+    const subproject_benchmark_step = &b.addRunArtifact(subproject.artifact(name ++ "_benchmarks")).step;
+    if (previous_benchmark_step) |prev_subproject_benchmark_step| {
+        subproject_benchmark_step.dependOn(prev_subproject_benchmark_step);
+    }
+    benchmark_step.dependOn(subproject_benchmark_step);
+    previous_benchmark_step = subproject_benchmark_step;
 }
 
 pub fn build(b: *std.Build) void {

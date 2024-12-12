@@ -28,7 +28,7 @@ pub fn build(b: *std.Build) void {
         run_cmd.addArgs(args);
     }
 
-    const run_step = b.step("run", "Run the disk_fragmenter (day 09) app");
+    const run_step = b.step("run", "Run the Disk Fragmenter (day 09) app");
     run_step.dependOn(&run_cmd.step);
 
     // --------------------------- Example tests ---------------------------- \\
@@ -45,7 +45,7 @@ pub fn build(b: *std.Build) void {
     });
     b.installArtifact(disk_fragmenter_tests);
 
-    const test_step = b.step("test", "Run disk_fragmenter (day 09) tests");
+    const test_step = b.step("test", "Run Disk Fragmenter (day 09) tests");
     test_step.dependOn(&b.addRunArtifact(disk_fragmenter_tests).step);
 
     // ------------------------- Puzzle benchmarks -------------------------- \\
@@ -67,6 +67,6 @@ pub fn build(b: *std.Build) void {
     });
     b.installArtifact(disk_fragmenter_benchmarks);
 
-    const benchmark_step = b.step("benchmark", "Run disk_fragmenter (day 09) benchmarks");
+    const benchmark_step = b.step("benchmark", "Run Disk Fragmenter (day 09) benchmarks");
     benchmark_step.dependOn(&b.addRunArtifact(disk_fragmenter_benchmarks).step);
 }

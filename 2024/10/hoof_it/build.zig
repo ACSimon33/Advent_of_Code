@@ -28,7 +28,7 @@ pub fn build(b: *std.Build) void {
         run_cmd.addArgs(args);
     }
 
-    const run_step = b.step("run", "Run the hoof_it (day 10) app");
+    const run_step = b.step("run", "Run the Hoof It (day 10) app");
     run_step.dependOn(&run_cmd.step);
 
     // --------------------------- Example tests ---------------------------- \\
@@ -51,7 +51,7 @@ pub fn build(b: *std.Build) void {
     }
     b.installArtifact(hoof_it_tests);
 
-    const test_step = b.step("test", "Run hoof_it (day 10) tests");
+    const test_step = b.step("test", "Run Hoof It (day 10) tests");
     test_step.dependOn(&b.addRunArtifact(hoof_it_tests).step);
 
     // ------------------------- Puzzle benchmarks -------------------------- \\
@@ -73,6 +73,6 @@ pub fn build(b: *std.Build) void {
     });
     b.installArtifact(hoof_it_benchmarks);
 
-    const benchmark_step = b.step("benchmark", "Run hoof_it (day 10) benchmarks");
+    const benchmark_step = b.step("benchmark", "Run Hoof It (day 10) benchmarks");
     benchmark_step.dependOn(&b.addRunArtifact(hoof_it_benchmarks).step);
 }
