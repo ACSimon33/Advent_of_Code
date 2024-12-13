@@ -49,6 +49,7 @@ pub fn build(b: *std.Build) void {
     add_subproject(b, target, optimize, test_step, benchmark_step, "01", "historian_hysteria");
     add_subproject(b, target, optimize, test_step, benchmark_step, "02", "red_nosed_reports");
     add_subproject(b, target, optimize, test_step, benchmark_step, "03", "mull_it_over");
+    add_subproject(b, target, optimize, test_step, benchmark_step, "04", "ceres_search");
     add_subproject(b, target, optimize, test_step, benchmark_step, "06", "guard_gallivant");
     add_subproject(b, target, optimize, test_step, benchmark_step, "09", "disk_fragmenter");
     add_subproject(b, target, optimize, test_step, benchmark_step, "10", "hoof_it");
