@@ -9,7 +9,11 @@ const Arg = yazap.Arg;
 const string = []const u8;
 
 pub fn main() !void {
-    var app = App.init(allocator, "Day 00", "Day 00: Zig Template");
+    var app = App.init(
+        allocator,
+        "zig_template",
+        "Day 00: Zig Template",
+    );
     defer app.deinit();
 
     var cmd = app.rootCommand();

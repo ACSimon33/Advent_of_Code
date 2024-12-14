@@ -9,7 +9,11 @@ const Arg = yazap.Arg;
 const string = []const u8;
 
 pub fn main() !void {
-    var app = App.init(allocator, "Day 13", "Day 13: Claw Contraption");
+    var app = App.init(
+        allocator,
+        "claw_contraption",
+        "Day 13: Claw Contraption",
+    );
     defer app.deinit();
 
     var cmd = app.rootCommand();

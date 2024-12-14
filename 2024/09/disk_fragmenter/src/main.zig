@@ -9,7 +9,11 @@ const Arg = yazap.Arg;
 const string = []const u8;
 
 pub fn main() !void {
-    var app = App.init(allocator, "Day 09", "Day 09: Disk Fragmenter");
+    var app = App.init(
+        allocator,
+        "disk_fragmenter",
+        "Day 09: Disk Fragmenter",
+    );
     defer app.deinit();
 
     var cmd = app.rootCommand();
