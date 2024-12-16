@@ -60,4 +60,5 @@ pub fn build(b: *std.Build) void {
     add_subproject(b, target, optimize, test_step, benchmark_step, "13", "claw_contraption");
     add_subproject(b, target, optimize, test_step, benchmark_step, "14", "restroom_redoubt");
     add_subproject(b, target, optimize, test_step, benchmark_step, "15", "warehouse_woes");
+    add_subproject(b, target, optimize, test_step, benchmark_step, "16", "reindeer_maze");
 }
