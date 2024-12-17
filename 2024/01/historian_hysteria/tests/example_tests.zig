@@ -7,7 +7,7 @@ test "task_1" {
     const example_input = @embedFile("example_input");
     try testing.expectEqual(
         11,
-        historian_hysteria.list_distance(example_input),
+        historian_hysteria.list_distance(example_input, std.testing.allocator),
     );
 }
 
@@ -16,6 +16,6 @@ test "task_2" {
     const example_input = @embedFile("example_input");
     try testing.expectEqual(
         31,
-        historian_hysteria.list_similarity(example_input),
+        historian_hysteria.list_similarity(example_input, std.testing.allocator),
     );
 }

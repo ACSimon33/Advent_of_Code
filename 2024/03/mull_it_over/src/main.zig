@@ -50,11 +50,17 @@ pub fn main() !void {
         return;
     }
 
-    const result_1 = mull_it_over.sum_of_multiplication_instructions(file_content);
+    const result_1 = mull_it_over.sum_of_multiplication_instructions(
+        file_content,
+        allocator,
+    );
     try stdout.print("Sum of all multiplication instructions: {!}\n", .{result_1});
     try bw.flush();
 
-    const result_2 = mull_it_over.conditional_sum_of_multiplication_instructions(file_content);
+    const result_2 = mull_it_over.conditional_sum_of_multiplication_instructions(
+        file_content,
+        allocator,
+    );
     try stdout.print("Conditional sum of multiplication instructions: {!}\n", .{result_2});
     try bw.flush();
 }

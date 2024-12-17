@@ -12,11 +12,18 @@ const string = []const u8;
 ///   - `seconds`: The amount of seconds to simulate.
 ///   - `width`: Size of the x dimension.
 ///   - `height`: Size of the y dimension.
+///   - `main_allocator`: Base allocator for everything.
 ///
 /// Returns:
 ///   - The security factor.
-pub fn security_factor(contents: string, seconds: i32, width: i32, height: i32) !i32 {
-    var arena = std.heap.ArenaAllocator.init(std.heap.page_allocator);
+pub fn security_factor(
+    contents: string,
+    seconds: i32,
+    width: i32,
+    height: i32,
+    main_allocator: Allocator,
+) !i32 {
+    var arena = std.heap.ArenaAllocator.init(main_allocator);
     defer arena.deinit();
 
     const allocator = arena.allocator();
@@ -71,11 +78,18 @@ pub fn security_factor(contents: string, seconds: i32, width: i32, height: i32) 
 ///   - `contents`: Input file contents.
 ///   - `width`: Size of the x dimension.
 ///   - `height`: Size of the y dimension.
+///   - `main_allocator`: Base allocator for everything.
 ///
 /// Returns:
 ///   - The amount of seconds until the tree appears.
-pub fn time_until_christmas_tree(contents: string, width: i32, height: i32, print: bool) !i32 {
-    var arena = std.heap.ArenaAllocator.init(std.heap.page_allocator);
+pub fn time_until_christmas_tree(
+    contents: string,
+    width: i32,
+    height: i32,
+    print: bool,
+    main_allocator: Allocator,
+) !i32 {
+    var arena = std.heap.ArenaAllocator.init(main_allocator);
     defer arena.deinit();
 
     const allocator = arena.allocator();

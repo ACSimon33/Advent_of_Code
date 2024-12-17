@@ -101,6 +101,7 @@ pub fn main() !void {
         seconds,
         dim_x,
         dim_y,
+        allocator,
     );
     try stdout.print("Security factor: {!}\n", .{result_1});
     try bw.flush();
@@ -110,6 +111,7 @@ pub fn main() !void {
         dim_x,
         dim_y,
         print,
+        allocator,
     );
     try stdout.print("Seconds until the christmas tree appears: {!}\n", .{result_2});
     try bw.flush();

@@ -10,12 +10,13 @@ const string = []const u8;
 ///
 /// Arguments:
 ///   - `contents`: Input file contents.
+///   - `main_allocator`: Base allocator for everything.
 ///   - `blinks`: Amount of blinks.
 ///
 /// Returns:
 ///   - The amount of stones after all blinks.
-pub fn amount_of_stones(contents: string, blinks: usize) !u64 {
-    var arena = std.heap.ArenaAllocator.init(std.heap.page_allocator);
+pub fn amount_of_stones(contents: string, blinks: usize, main_allocator: Allocator) !u64 {
+    var arena = std.heap.ArenaAllocator.init(main_allocator);
     defer arena.deinit();
 
     const allocator = arena.allocator();
@@ -70,6 +71,7 @@ fn blink(stones: HashMap(u64, u64), new_stones: *HashMap(u64, u64)) !void {
 ///
 /// Arguments:
 ///   - `contents`: Input file contents.
+///   - `main_allocator`: Base allocator for everything.
 ///   - `allocator`: Allocator for the containers.
 ///
 /// Returns:
@@ -90,6 +92,7 @@ fn parse(contents: string, allocator: Allocator) !HashMap(u64, u64) {
 ///
 /// Arguments:
 ///   - `contents`: Input file contents.
+///   - `main_allocator`: Base allocator for everything.
 ///   - `allocator`: Allocator for the containers.
 ///
 /// Returns:

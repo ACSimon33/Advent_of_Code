@@ -50,11 +50,17 @@ pub fn main() !void {
         return;
     }
 
-    const result_1 = hoof_it.sum_of_trailhead_scores(file_content);
+    const result_1 = hoof_it.sum_of_trailhead_scores(
+        file_content,
+        allocator,
+    );
     try stdout.print("Sum of trailhead scores: {!}\n", .{result_1});
     try bw.flush();
 
-    const result_2 = hoof_it.sum_of_trailhead_ratings(file_content);
+    const result_2 = hoof_it.sum_of_trailhead_ratings(
+        file_content,
+        allocator,
+    );
     try stdout.print("Sum of trailhead ratings: {!}\n", .{result_2});
     try bw.flush();
 }

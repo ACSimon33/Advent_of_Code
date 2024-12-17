@@ -50,11 +50,17 @@ pub fn main() !void {
         return;
     }
 
-    const safe_reports = red_nosed_reports.number_of_safe_reports(file_content);
+    const safe_reports = red_nosed_reports.number_of_safe_reports(
+        file_content,
+        allocator,
+    );
     try stdout.print("Number of safe reports: {!}\n", .{safe_reports});
     try bw.flush();
 
-    const partially_safe_reports = red_nosed_reports.number_of_partially_safe_reports(file_content);
+    const partially_safe_reports = red_nosed_reports.number_of_partially_safe_reports(
+        file_content,
+        allocator,
+    );
     try stdout.print("Number of partially safe reports: {!}\n", .{partially_safe_reports});
     try bw.flush();
 }

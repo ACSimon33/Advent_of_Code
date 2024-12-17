@@ -7,11 +7,12 @@ const string = []const u8;
 ///
 /// Arguments:
 ///   - `contents`: Input file contents.
+///   - `main_allocator`: Base allocator for everything.
 ///
 /// Returns:
 ///   - Amount of XMAS strings.
-pub fn xmas_count(contents: string) !u32 {
-    var arena = std.heap.ArenaAllocator.init(std.heap.page_allocator);
+pub fn xmas_count(contents: string, main_allocator: Allocator) !u32 {
+    var arena = std.heap.ArenaAllocator.init(main_allocator);
     defer arena.deinit();
 
     const allocator = arena.allocator();
@@ -29,11 +30,12 @@ pub fn xmas_count(contents: string) !u32 {
 ///
 /// Arguments:
 ///   - `contents`: Input file contents.
+///   - `main_allocator`: Base allocator for everything.
 ///
 /// Returns:
 ///   - Amount of X-MAS patterns.
-pub fn x_mas_count(contents: string) !u32 {
-    var arena = std.heap.ArenaAllocator.init(std.heap.page_allocator);
+pub fn x_mas_count(contents: string, main_allocator: Allocator) !u32 {
+    var arena = std.heap.ArenaAllocator.init(main_allocator);
     defer arena.deinit();
 
     const allocator = arena.allocator();
@@ -174,6 +176,7 @@ const WordSearch = struct {
 ///
 /// Arguments:
 ///   - `contents`: Input file contents.
+///   - `main_allocator`: Base allocator for everything.
 ///   - `allocator`: Allocator for the containers.
 ///
 /// Returns:

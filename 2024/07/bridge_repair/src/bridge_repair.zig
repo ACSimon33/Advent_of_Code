@@ -9,11 +9,12 @@ const OpType = *const fn (a: u64, b: u64) anyerror!u64;
 ///
 /// Arguments:
 ///   - `contents`: Input file contents.
+///   - `main_allocator`: Base allocator for everything.
 ///
 /// Returns:
 ///   - The total calibration results.
-pub fn total_calibration_result(contents: string) !u64 {
-    var arena = std.heap.ArenaAllocator.init(std.heap.page_allocator);
+pub fn total_calibration_result(contents: string, main_allocator: Allocator) !u64 {
+    var arena = std.heap.ArenaAllocator.init(main_allocator);
     defer arena.deinit();
 
     const allocator = arena.allocator();
@@ -39,11 +40,12 @@ pub fn total_calibration_result(contents: string) !u64 {
 ///
 /// Arguments:
 ///   - `contents`: Input file contents.
+///   - `main_allocator`: Base allocator for everything.
 ///
 /// Returns:
 ///   - The total calibration results.
-pub fn total_calibration_result_with_concatenation(contents: string) !u64 {
-    var arena = std.heap.ArenaAllocator.init(std.heap.page_allocator);
+pub fn total_calibration_result_with_concatenation(contents: string, main_allocator: Allocator) !u64 {
+    var arena = std.heap.ArenaAllocator.init(main_allocator);
     defer arena.deinit();
 
     const allocator = arena.allocator();
@@ -166,6 +168,7 @@ fn concat_operator(a: u64, b: u64) !u64 {
 ///
 /// Arguments:
 ///   - `contents`: Input file contents.
+///   - `main_allocator`: Base allocator for everything.
 ///   - `allocator`: Allocator for the containers.
 ///
 /// Returns:

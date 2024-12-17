@@ -50,11 +50,19 @@ pub fn main() !void {
         return;
     }
 
-    const result_1 = claw_contraption.cost_to_win_all_prizes(file_content, 0);
+    const result_1 = claw_contraption.cost_to_win_all_prizes(
+        file_content,
+        0,
+        allocator,
+    );
     try stdout.print("Mininal cost: {!}\n", .{result_1});
     try bw.flush();
 
-    const result_2 = claw_contraption.cost_to_win_all_prizes(file_content, 10000000000000);
+    const result_2 = claw_contraption.cost_to_win_all_prizes(
+        file_content,
+        10000000000000,
+        allocator,
+    );
     try stdout.print("Minimal cost with offset 10000000000000: {!}\n", .{result_2});
     try bw.flush();
 }

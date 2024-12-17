@@ -50,11 +50,17 @@ pub fn main() !void {
         return;
     }
 
-    const result_1 = historian_hysteria.list_distance(file_content);
+    const result_1 = historian_hysteria.list_distance(
+        file_content,
+        allocator,
+    );
     try stdout.print("List distance: {!}\n", .{result_1});
     try bw.flush();
 
-    const result_2 = historian_hysteria.list_similarity(file_content);
+    const result_2 = historian_hysteria.list_similarity(
+        file_content,
+        allocator,
+    );
     try stdout.print("List similarity: {!}\n", .{result_2});
     try bw.flush();
 }

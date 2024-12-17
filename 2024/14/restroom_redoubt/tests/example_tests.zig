@@ -7,6 +7,12 @@ test "task_1" {
     const example_input = @embedFile("example_input");
     try testing.expectEqual(
         12,
-        restroom_redoubt.security_factor(example_input, 100, 11, 7),
+        restroom_redoubt.security_factor(
+            example_input,
+            100,
+            11,
+            7,
+            std.testing.allocator,
+        ),
     );
 }

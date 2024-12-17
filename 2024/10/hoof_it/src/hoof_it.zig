@@ -11,11 +11,12 @@ const assert = std.debug.assert;
 ///
 /// Arguments:
 ///   - `contents`: Input file contents.
+///   - `main_allocator`: Base allocator for everything.
 ///
 /// Returns:
 ///   - Sum of trailhead scores.
-pub fn sum_of_trailhead_scores(contents: string) !usize {
-    var arena = std.heap.ArenaAllocator.init(std.heap.page_allocator);
+pub fn sum_of_trailhead_scores(contents: string, main_allocator: Allocator) !usize {
+    var arena = std.heap.ArenaAllocator.init(main_allocator);
     defer arena.deinit();
 
     const allocator = arena.allocator();
@@ -47,11 +48,12 @@ pub fn sum_of_trailhead_scores(contents: string) !usize {
 ///
 /// Arguments:
 ///   - `contents`: Input file contents.
+///   - `main_allocator`: Base allocator for everything.
 ///
 /// Returns:
 ///   - Sum of trailhead ratings.
-pub fn sum_of_trailhead_ratings(contents: string) !usize {
-    var arena = std.heap.ArenaAllocator.init(std.heap.page_allocator);
+pub fn sum_of_trailhead_ratings(contents: string, main_allocator: Allocator) !usize {
+    var arena = std.heap.ArenaAllocator.init(main_allocator);
     defer arena.deinit();
 
     const allocator = arena.allocator();
@@ -267,6 +269,7 @@ const HikingMap = struct {
 ///
 /// Arguments:
 ///   - `contents`: Input file contents.
+///   - `main_allocator`: Base allocator for everything.
 ///   - `allocator`: Allocator for the containers.
 ///
 /// Returns:

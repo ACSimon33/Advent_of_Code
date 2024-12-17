@@ -50,11 +50,17 @@ pub fn main() !void {
         return;
     }
 
-    const result_1 = guard_gallivant.visited_positions(file_content);
+    const result_1 = guard_gallivant.visited_positions(
+        file_content,
+        allocator,
+    );
     try stdout.print("Amount of visited positions: {!}\n", .{result_1});
     try bw.flush();
 
-    const result_2 = guard_gallivant.closed_loops(file_content);
+    const result_2 = guard_gallivant.closed_loops(
+        file_content,
+        allocator,
+    );
     try stdout.print("Amount of possible loops: {!}\n", .{result_2});
     try bw.flush();
 }

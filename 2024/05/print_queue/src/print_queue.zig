@@ -8,11 +8,12 @@ const string = []const u8;
 ///
 /// Arguments:
 ///   - `contents`: Input file contents.
+///   - `main_allocator`: Base allocator for everything.
 ///
 /// Returns:
 ///   - Sum of the middle page numbers
-pub fn middle_page_sum_of_valid_updates(contents: string) !u32 {
-    var arena = std.heap.ArenaAllocator.init(std.heap.page_allocator);
+pub fn middle_page_sum_of_valid_updates(contents: string, main_allocator: Allocator) !u32 {
+    var arena = std.heap.ArenaAllocator.init(main_allocator);
     defer arena.deinit();
 
     const allocator = arena.allocator();
@@ -39,11 +40,12 @@ pub fn middle_page_sum_of_valid_updates(contents: string) !u32 {
 ///
 /// Arguments:
 ///   - `contents`: Input file contents.
+///   - `main_allocator`: Base allocator for everything.
 ///
 /// Returns:
 ///   - Sum of the middle page numbers
-pub fn middle_page_sum_of_fixed_updates(contents: string) !u32 {
-    var arena = std.heap.ArenaAllocator.init(std.heap.page_allocator);
+pub fn middle_page_sum_of_fixed_updates(contents: string, main_allocator: Allocator) !u32 {
+    var arena = std.heap.ArenaAllocator.init(main_allocator);
     defer arena.deinit();
 
     const allocator = arena.allocator();
@@ -137,6 +139,7 @@ const Update = struct {
 ///
 /// Arguments:
 ///   - `contents`: Input file contents.
+///   - `main_allocator`: Base allocator for everything.
 ///   - `allocator`: Allocator for the containers.
 ///
 /// Returns:

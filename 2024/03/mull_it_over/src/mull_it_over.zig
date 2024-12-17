@@ -6,10 +6,11 @@ const string = []const u8;
 ///
 /// Arguments:
 ///   - `contents`: Input file contents.
+///   - `main_allocator`: Base allocator for everything.
 ///
 /// Returns:
 ///   - Sum of all multiplications.
-pub fn sum_of_multiplication_instructions(contents: string) !u32 {
+pub fn sum_of_multiplication_instructions(contents: string, _: Allocator) !u32 {
     const min_instruction_len: usize = 8;
 
     var product_sum: u32 = 0;
@@ -28,10 +29,11 @@ pub fn sum_of_multiplication_instructions(contents: string) !u32 {
 ///
 /// Arguments:
 ///   - `contents`: Input file contents.
+///   - `main_allocator`: Base allocator for everything.
 ///
 /// Returns:
 ///   - Sum of all active multiplications.
-pub fn conditional_sum_of_multiplication_instructions(contents: string) !u32 {
+pub fn conditional_sum_of_multiplication_instructions(contents: string, _: Allocator) !u32 {
     const min_instruction_len: usize = 8;
 
     var product_sum: u32 = 0;

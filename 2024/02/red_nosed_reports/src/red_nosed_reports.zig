@@ -7,11 +7,12 @@ const string = []const u8;
 ///
 /// Arguments:
 ///   - `contents`: Input file contents.
+///   - `main_allocator`: Base allocator for everything.
 ///
 /// Returns:
 ///   - Number of fully safe reports.
-pub fn number_of_safe_reports(contents: string) !i32 {
-    var arena = std.heap.ArenaAllocator.init(std.heap.page_allocator);
+pub fn number_of_safe_reports(contents: string, main_allocator: Allocator) !i32 {
+    var arena = std.heap.ArenaAllocator.init(main_allocator);
     defer arena.deinit();
 
     const allocator = arena.allocator();
@@ -32,11 +33,12 @@ pub fn number_of_safe_reports(contents: string) !i32 {
 ///
 /// Arguments:
 ///   - `contents`: Input file contents.
+///   - `main_allocator`: Base allocator for everything.
 ///
 /// Returns:
 ///   - Number of fully safe reports.
-pub fn number_of_partially_safe_reports(contents: string) !i32 {
-    var arena = std.heap.ArenaAllocator.init(std.heap.page_allocator);
+pub fn number_of_partially_safe_reports(contents: string, main_allocator: Allocator) !i32 {
+    var arena = std.heap.ArenaAllocator.init(main_allocator);
     defer arena.deinit();
 
     const allocator = arena.allocator();
@@ -67,6 +69,7 @@ const Report = struct {
 ///
 /// Arguments:
 ///   - `contents`: Input file contents.
+///   - `main_allocator`: Base allocator for everything.
 ///   - `allocator`: Allocator for the containers.
 ///
 /// Returns:

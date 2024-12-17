@@ -50,11 +50,17 @@ pub fn main() !void {
         return;
     }
 
-    const result_1 = warehouse_woes.simulate_robot(file_content);
+    const result_1 = warehouse_woes.simulate_robot(
+        file_content,
+        allocator,
+    );
     try stdout.print("Sum of GPS numbers: {!}\n", .{result_1});
     try bw.flush();
 
-    const result_2 = warehouse_woes.simulate_robot_in_expanded_warehouse(file_content);
+    const result_2 = warehouse_woes.simulate_robot_in_expanded_warehouse(
+        file_content,
+        allocator,
+    );
     try stdout.print("Sum of GPS numbers in expanded warehouse: {!}\n", .{result_2});
     try bw.flush();
 }

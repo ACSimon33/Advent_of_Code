@@ -50,11 +50,17 @@ pub fn main() !void {
         return;
     }
 
-    const result_1 = ceres_search.xmas_count(file_content);
+    const result_1 = ceres_search.xmas_count(
+        file_content,
+        allocator,
+    );
     try stdout.print("Amount of XMAS strings: {!}\n", .{result_1});
     try bw.flush();
 
-    const result_2 = ceres_search.x_mas_count(file_content);
+    const result_2 = ceres_search.x_mas_count(
+        file_content,
+        allocator,
+    );
     try stdout.print("Amount of X-MAS patterns: {!}\n", .{result_2});
     try bw.flush();
 }

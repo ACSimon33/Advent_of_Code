@@ -230,6 +230,7 @@ fn program_to_string(program: ArrayList(Instruction), allocator: Allocator) !str
 ///
 /// Arguments:
 ///   - `contents`: Input file contents.
+///   - `main_allocator`: Base allocator for everything.
 ///   - `allocator`: Allocator for the containers.
 ///
 /// Returns:

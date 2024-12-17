@@ -1,16 +1,18 @@
 const std = @import("std");
 const Allocator = std.mem.Allocator;
+const ArrayList = std.ArrayList;
 const string = []const u8;
 
 /// Task 1 -
 ///
 /// Arguments:
 ///   - `contents`: Input file contents.
+///   - `main_allocator`: Base allocator for everything.
 ///
 /// Returns:
 ///   - Solution for task 1.
-pub fn solution_1(contents: string) !i32 {
-    var arena = std.heap.ArenaAllocator.init(std.heap.page_allocator);
+pub fn solution_1(contents: string, main_allocator: Allocator) !i32 {
+    var arena = std.heap.ArenaAllocator.init(main_allocator);
     defer arena.deinit();
 
     const allocator = arena.allocator();
@@ -23,12 +25,16 @@ pub fn solution_1(contents: string) !i32 {
 ///
 /// Arguments:
 ///   - `contents`: Input file contents.
+///   - `main_allocator`: Base allocator for everything.
 ///
 /// Returns:
 ///   - Solution for task 2.
-pub fn solution_2(contents: string) !i32 {
-    const lines = std.mem.split(u8, contents, "\n");
-    _ = lines;
+pub fn solution_2(contents: string, main_allocator: Allocator) !i32 {
+    var arena = std.heap.ArenaAllocator.init(main_allocator);
+    defer arena.deinit();
+
+    const allocator = arena.allocator();
+    _ = try parse(contents, allocator);
 
     return 1;
 }
@@ -39,6 +45,7 @@ pub fn solution_2(contents: string) !i32 {
 ///
 /// Arguments:
 ///   - `contents`: Input file contents.
+///   - `main_allocator`: Base allocator for everything.
 ///   - `allocator`: Allocator for the containers.
 ///
 /// Returns:

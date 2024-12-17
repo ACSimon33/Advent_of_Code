@@ -5,13 +5,13 @@ const historian_hysteria = @import("historian_hysteria");
 const puzzle_input = @embedFile("puzzle_input");
 
 // Benchmark of part 1
-fn task_1(_: std.mem.Allocator) void {
-    _ = historian_hysteria.list_distance(puzzle_input) catch {};
+fn task_1(allocator: std.mem.Allocator) void {
+    _ = historian_hysteria.list_distance(puzzle_input, allocator) catch {};
 }
 
 // Benchmark of part 2
-fn task_2(_: std.mem.Allocator) void {
-    _ = historian_hysteria.list_similarity(puzzle_input) catch {};
+fn task_2(allocator: std.mem.Allocator) void {
+    _ = historian_hysteria.list_similarity(puzzle_input, allocator) catch {};
 }
 
 pub fn main() !void {

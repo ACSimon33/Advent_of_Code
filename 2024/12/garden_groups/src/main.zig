@@ -50,11 +50,17 @@ pub fn main() !void {
         return;
     }
 
-    const result_1 = garden_groups.fence_cost(file_content);
+    const result_1 = garden_groups.fence_cost(
+        file_content,
+        allocator,
+    );
     try stdout.print("Cost of all fences: {!}\n", .{result_1});
     try bw.flush();
 
-    const result_2 = garden_groups.fence_cost_with_bulk_discount(file_content);
+    const result_2 = garden_groups.fence_cost_with_bulk_discount(
+        file_content,
+        allocator,
+    );
     try stdout.print("Fence cost with bulk discount: {!}\n", .{result_2});
     try bw.flush();
 }

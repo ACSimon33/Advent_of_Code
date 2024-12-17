@@ -50,11 +50,17 @@ pub fn main() !void {
         return;
     }
 
-    const result_1 = bridge_repair.total_calibration_result(file_content);
+    const result_1 = bridge_repair.total_calibration_result(
+        file_content,
+        allocator,
+    );
     try stdout.print("Total calibration result (+, *): {!}\n", .{result_1});
     try bw.flush();
 
-    const result_2 = bridge_repair.total_calibration_result_with_concatenation(file_content);
+    const result_2 = bridge_repair.total_calibration_result_with_concatenation(
+        file_content,
+        allocator,
+    );
     try stdout.print("Total calibration result (+, *, ||): {!}\n", .{result_2});
     try bw.flush();
 }

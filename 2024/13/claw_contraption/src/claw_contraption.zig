@@ -14,12 +14,13 @@ const assert = std.debug.assert;
 ///
 /// Arguments:
 ///   - `contents`: Input file contents.
+///   - `main_allocator`: Base allocator for everything.
 ///   - `offset`: An offset for the price coordinates.
 ///
 /// Returns:
 ///   - Cost to win all possible prices.
-pub fn cost_to_win_all_prizes(contents: string, offset: i64) !i64 {
-    var arena = std.heap.ArenaAllocator.init(std.heap.page_allocator);
+pub fn cost_to_win_all_prizes(contents: string, offset: i64, main_allocator: Allocator) !i64 {
+    var arena = std.heap.ArenaAllocator.init(main_allocator);
     defer arena.deinit();
 
     const allocator = arena.allocator();
@@ -58,6 +59,7 @@ const ClawMachine = struct {
 ///
 /// Arguments:
 ///   - `contents`: Input file contents.
+///   - `main_allocator`: Base allocator for everything.
 ///   - `allocator`: Allocator for the containers.
 ///
 /// Returns:

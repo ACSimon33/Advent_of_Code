@@ -13,11 +13,12 @@ const dijkstra = @import("./dijkstra.zig");
 ///
 /// Arguments:
 ///   - `contents`: Input file contents.
+///   - `main_allocator`: Base allocator for everything.
 ///
 /// Returns:
 ///   - Cost of the shortest path.
-pub fn lowest_maze_score(contents: string) !u32 {
-    var arena = std.heap.ArenaAllocator.init(std.heap.page_allocator);
+pub fn lowest_maze_score(contents: string, main_allocator: Allocator) !u32 {
+    var arena = std.heap.ArenaAllocator.init(main_allocator);
     defer arena.deinit();
 
     const allocator = arena.allocator();
@@ -40,11 +41,12 @@ pub fn lowest_maze_score(contents: string) !u32 {
 ///
 /// Arguments:
 ///   - `contents`: Input file contents.
+///   - `main_allocator`: Base allocator for everything.
 ///
 /// Returns:
 ///   - Number of tiles that are part of any shortest path.
-pub fn amount_of_viewing_positions(contents: string) !usize {
-    var arena = std.heap.ArenaAllocator.init(std.heap.page_allocator);
+pub fn amount_of_viewing_positions(contents: string, main_allocator: Allocator) !usize {
+    var arena = std.heap.ArenaAllocator.init(main_allocator);
     defer arena.deinit();
 
     const allocator = arena.allocator();
@@ -222,6 +224,7 @@ const Maze = struct {
 ///
 /// Arguments:
 ///   - `contents`: Input file contents.
+///   - `main_allocator`: Base allocator for everything.
 ///   - `allocator`: Allocator for the containers.
 ///
 /// Returns:

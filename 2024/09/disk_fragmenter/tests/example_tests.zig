@@ -7,7 +7,7 @@ test "task_1" {
     const example_input = @embedFile("example_input");
     try testing.expectEqual(
         1928,
-        disk_fragmenter.checksum_of_fragmented_disk(example_input),
+        disk_fragmenter.checksum_of_fragmented_disk(example_input, std.testing.allocator),
     );
 }
 
@@ -16,6 +16,6 @@ test "task_2" {
     const example_input = @embedFile("example_input");
     try testing.expectEqual(
         2858,
-        disk_fragmenter.checksum_of_defragmented_disk(example_input),
+        disk_fragmenter.checksum_of_defragmented_disk(example_input, std.testing.allocator),
     );
 }

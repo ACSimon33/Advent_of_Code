@@ -8,11 +8,12 @@ const string = []const u8;
 ///
 /// Arguments:
 ///   - `contents`: Input file contents.
+///   - `main_allocator`: Base allocator for everything.
 ///
 /// Returns:
 ///   - Checksum of the compressed (fragmented) disk.
-pub fn checksum_of_fragmented_disk(contents: string) !usize {
-    var arena = std.heap.ArenaAllocator.init(std.heap.page_allocator);
+pub fn checksum_of_fragmented_disk(contents: string, main_allocator: Allocator) !usize {
+    var arena = std.heap.ArenaAllocator.init(main_allocator);
     defer arena.deinit();
 
     const allocator = arena.allocator();
@@ -60,11 +61,12 @@ pub fn checksum_of_fragmented_disk(contents: string) !usize {
 ///
 /// Arguments:
 ///   - `contents`: Input file contents.
+///   - `main_allocator`: Base allocator for everything.
 ///
 /// Returns:
 ///   - Checksum of the compressed (defragmented) disk.
-pub fn checksum_of_defragmented_disk(contents: string) !usize {
-    var arena = std.heap.ArenaAllocator.init(std.heap.page_allocator);
+pub fn checksum_of_defragmented_disk(contents: string, main_allocator: Allocator) !usize {
+    var arena = std.heap.ArenaAllocator.init(main_allocator);
     defer arena.deinit();
 
     const allocator = arena.allocator();
@@ -141,6 +143,7 @@ fn gauss_sum(num: usize) usize {
 ///
 /// Arguments:
 ///   - `contents`: Input file contents.
+///   - `main_allocator`: Base allocator for everything.
 ///   - `allocator`: Allocator for the containers.
 ///
 /// Returns:

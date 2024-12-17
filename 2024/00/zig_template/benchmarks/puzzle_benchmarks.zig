@@ -5,13 +5,13 @@ const zig_template = @import("zig_template");
 const puzzle_input = @embedFile("puzzle_input");
 
 // Benchmark of part 1
-fn task_1(_: std.mem.Allocator) void {
-    _ = zig_template.solution_1(puzzle_input) catch {};
+fn task_1(allocator: std.mem.Allocator) void {
+    _ = zig_template.solution_1(puzzle_input, allocator) catch {};
 }
 
 // Benchmark of part 2
-fn task_2(_: std.mem.Allocator) void {
-    _ = zig_template.solution_2(puzzle_input) catch {};
+fn task_2(allocator: std.mem.Allocator) void {
+    _ = zig_template.solution_2(puzzle_input, allocator) catch {};
 }
 
 pub fn main() !void {

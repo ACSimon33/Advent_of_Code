@@ -50,11 +50,17 @@ pub fn main() !void {
         return;
     }
 
-    const result_1 = disk_fragmenter.checksum_of_fragmented_disk(file_content);
+    const result_1 = disk_fragmenter.checksum_of_fragmented_disk(
+        file_content,
+        allocator,
+    );
     try stdout.print("Checksum of fragmented compressed disk: {!}\n", .{result_1});
     try bw.flush();
 
-    const result_2 = disk_fragmenter.checksum_of_defragmented_disk(file_content);
+    const result_2 = disk_fragmenter.checksum_of_defragmented_disk(
+        file_content,
+        allocator,
+    );
     try stdout.print("Checksum of defragmented compressed disk: {!}\n", .{result_2});
     try bw.flush();
 }

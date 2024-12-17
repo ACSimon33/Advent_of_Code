@@ -9,11 +9,12 @@ const string = []const u8;
 ///
 /// Arguments:
 ///   - `contents`: Input file contents.
+///   - `main_allocator`: Base allocator for everything.
 ///
 /// Returns:
 ///   - Sum of GPS numbers.
-pub fn simulate_robot(contents: string) !usize {
-    var arena = std.heap.ArenaAllocator.init(std.heap.page_allocator);
+pub fn simulate_robot(contents: string, main_allocator: Allocator) !usize {
+    var arena = std.heap.ArenaAllocator.init(main_allocator);
     defer arena.deinit();
 
     const allocator = arena.allocator();
@@ -28,11 +29,12 @@ pub fn simulate_robot(contents: string) !usize {
 ///
 /// Arguments:
 ///   - `contents`: Input file contents.
+///   - `main_allocator`: Base allocator for everything.
 ///
 /// Returns:
 ///   - Sum of GPS numbers in the expanded warehouse.
-pub fn simulate_robot_in_expanded_warehouse(contents: string) !usize {
-    var arena = std.heap.ArenaAllocator.init(std.heap.page_allocator);
+pub fn simulate_robot_in_expanded_warehouse(contents: string, main_allocator: Allocator) !usize {
+    var arena = std.heap.ArenaAllocator.init(main_allocator);
     defer arena.deinit();
 
     const allocator = arena.allocator();
@@ -325,6 +327,7 @@ const Warehouse = struct {
 ///
 /// Arguments:
 ///   - `contents`: Input file contents.
+///   - `main_allocator`: Base allocator for everything.
 ///   - `allocator`: Allocator for the containers.
 ///
 /// Returns:

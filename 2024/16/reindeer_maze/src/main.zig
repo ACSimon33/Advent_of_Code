@@ -50,11 +50,17 @@ pub fn main() !void {
         return;
     }
 
-    const result_1 = reindeer_maze.lowest_maze_score(file_content);
+    const result_1 = reindeer_maze.lowest_maze_score(
+        file_content,
+        allocator,
+    );
     try stdout.print("Lowest maze score: {!}\n", .{result_1});
     try bw.flush();
 
-    const result_2 = reindeer_maze.amount_of_viewing_positions(file_content);
+    const result_2 = reindeer_maze.amount_of_viewing_positions(
+        file_content,
+        allocator,
+    );
     try stdout.print("Amount of nice viewing poisitions: {!}\n", .{result_2});
     try bw.flush();
 }

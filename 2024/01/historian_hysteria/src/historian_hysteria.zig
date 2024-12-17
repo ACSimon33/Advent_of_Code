@@ -7,11 +7,12 @@ const string = []const u8;
 ///
 /// Arguments:
 ///   - `contents`: Input file contents.
+///   - `main_allocator`: Base allocator for everything.
 ///
 /// Returns:
 ///   - Distance of the two lists.
-pub fn list_distance(contents: string) !u32 {
-    var arena = std.heap.ArenaAllocator.init(std.heap.page_allocator);
+pub fn list_distance(contents: string, main_allocator: Allocator) !u32 {
+    var arena = std.heap.ArenaAllocator.init(main_allocator);
     defer arena.deinit();
 
     const allocator = arena.allocator();
@@ -32,11 +33,12 @@ pub fn list_distance(contents: string) !u32 {
 ///
 /// Arguments:
 ///   - `contents`: Input file contents.
+///   - `main_allocator`: Base allocator for everything.
 ///
 /// Returns:
 ///   - Similarity of the two lists.
-pub fn list_similarity(contents: string) !i32 {
-    var arena = std.heap.ArenaAllocator.init(std.heap.page_allocator);
+pub fn list_similarity(contents: string, main_allocator: Allocator) !i32 {
+    var arena = std.heap.ArenaAllocator.init(main_allocator);
     defer arena.deinit();
 
     const allocator = arena.allocator();
@@ -57,6 +59,7 @@ pub fn list_similarity(contents: string) !i32 {
 ///
 /// Arguments:
 ///   - `contents`: Input file contents.
+///   - `main_allocator`: Base allocator for everything.
 ///   - `allocator`: Allocator for the containers.
 ///
 /// Returns:

@@ -50,11 +50,17 @@ pub fn main() !void {
         return;
     }
 
-    const result_1 = print_queue.middle_page_sum_of_valid_updates(file_content);
+    const result_1 = print_queue.middle_page_sum_of_valid_updates(
+        file_content,
+        allocator,
+    );
     try stdout.print("Middle page number sum of valid updates: {!}\n", .{result_1});
     try bw.flush();
 
-    const result_2 = print_queue.middle_page_sum_of_fixed_updates(file_content);
+    const result_2 = print_queue.middle_page_sum_of_fixed_updates(
+        file_content,
+        allocator,
+    );
     try stdout.print("Middle page number sum of fixed updates: {!}\n", .{result_2});
     try bw.flush();
 }

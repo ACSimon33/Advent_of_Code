@@ -7,7 +7,7 @@ test "task_1" {
     const example_input = @embedFile("example_input");
     try testing.expectEqual(
         2,
-        red_nosed_reports.number_of_safe_reports(example_input),
+        red_nosed_reports.number_of_safe_reports(example_input, std.testing.allocator),
     );
 }
 
@@ -16,6 +16,6 @@ test "task_2" {
     const example_input = @embedFile("example_input");
     try testing.expectEqual(
         4,
-        red_nosed_reports.number_of_partially_safe_reports(example_input),
+        red_nosed_reports.number_of_partially_safe_reports(example_input, std.testing.allocator),
     );
 }

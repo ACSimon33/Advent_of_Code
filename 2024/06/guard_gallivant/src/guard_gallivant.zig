@@ -8,11 +8,12 @@ const string = []const u8;
 ///
 /// Arguments:
 ///   - `contents`: Input file contents.
+///   - `main_allocator`: Base allocator for everything.
 ///
 /// Returns:
 ///   - Amount of distinct positions.
-pub fn visited_positions(contents: string) !usize {
-    var arena = std.heap.ArenaAllocator.init(std.heap.page_allocator);
+pub fn visited_positions(contents: string, main_allocator: Allocator) !usize {
+    var arena = std.heap.ArenaAllocator.init(main_allocator);
     defer arena.deinit();
 
     const allocator = arena.allocator();
@@ -32,11 +33,12 @@ pub fn visited_positions(contents: string) !usize {
 ///
 /// Arguments:
 ///   - `contents`: Input file contents.
+///   - `main_allocator`: Base allocator for everything.
 ///
 /// Returns:
 ///   - Amount of closed loops.
-pub fn closed_loops(contents: string) !usize {
-    var arena = std.heap.ArenaAllocator.init(std.heap.page_allocator);
+pub fn closed_loops(contents: string, main_allocator: Allocator) !usize {
+    var arena = std.heap.ArenaAllocator.init(main_allocator);
     defer arena.deinit();
 
     const allocator = arena.allocator();
@@ -170,6 +172,7 @@ fn is_guard_inside(map: ObstacleMap, guard: Guard) bool {
 ///
 /// Arguments:
 ///   - `contents`: Input file contents.
+///   - `main_allocator`: Base allocator for everything.
 ///   - `allocator`: Allocator for the containers.
 ///
 /// Returns:

@@ -5,13 +5,13 @@ const warehouse_woes = @import("warehouse_woes");
 const puzzle_input = @embedFile("puzzle_input");
 
 // Benchmark of part 1
-fn task_1(_: std.mem.Allocator) void {
-    _ = warehouse_woes.simulate_robot(puzzle_input) catch {};
+fn task_1(allocator: std.mem.Allocator) void {
+    _ = warehouse_woes.simulate_robot(puzzle_input, allocator) catch {};
 }
 
 // Benchmark of part 2
-fn task_2(_: std.mem.Allocator) void {
-    _ = warehouse_woes.simulate_robot_in_expanded_warehouse(puzzle_input) catch {};
+fn task_2(allocator: std.mem.Allocator) void {
+    _ = warehouse_woes.simulate_robot_in_expanded_warehouse(puzzle_input, allocator) catch {};
 }
 
 pub fn main() !void {

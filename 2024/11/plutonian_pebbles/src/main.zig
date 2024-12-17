@@ -63,7 +63,11 @@ pub fn main() !void {
         return;
     }
 
-    const result = plutonian_pebbles.amount_of_stones(file_content, blinks);
+    const result = plutonian_pebbles.amount_of_stones(
+        file_content,
+        blinks,
+        allocator,
+    );
     try stdout.print("Amount of stones: {!}\n", .{result});
     try bw.flush();
 }

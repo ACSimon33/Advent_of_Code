@@ -5,13 +5,13 @@ const disk_fragmenter = @import("disk_fragmenter");
 const puzzle_input = @embedFile("puzzle_input");
 
 // Benchmark of part 1
-fn task_1(_: std.mem.Allocator) void {
-    _ = disk_fragmenter.checksum_of_fragmented_disk(puzzle_input) catch {};
+fn task_1(allocator: std.mem.Allocator) void {
+    _ = disk_fragmenter.checksum_of_fragmented_disk(puzzle_input, allocator) catch {};
 }
 
 // Benchmark of part 2
-fn task_2(_: std.mem.Allocator) void {
-    _ = disk_fragmenter.checksum_of_defragmented_disk(puzzle_input) catch {};
+fn task_2(allocator: std.mem.Allocator) void {
+    _ = disk_fragmenter.checksum_of_defragmented_disk(puzzle_input, allocator) catch {};
 }
 
 pub fn main() !void {

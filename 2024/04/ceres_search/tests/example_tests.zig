@@ -7,7 +7,7 @@ test "task_1" {
     const example_input = @embedFile("example_input");
     try testing.expectEqual(
         18,
-        ceres_search.xmas_count(example_input),
+        ceres_search.xmas_count(example_input, std.testing.allocator),
     );
 }
 
@@ -16,6 +16,6 @@ test "task_2" {
     const example_input = @embedFile("example_input");
     try testing.expectEqual(
         9,
-        ceres_search.x_mas_count(example_input),
+        ceres_search.x_mas_count(example_input, std.testing.allocator),
     );
 }

@@ -7,6 +7,10 @@ test "task_1" {
     const example_input = @embedFile("example_input");
     try testing.expectEqual(
         55312,
-        plutonian_pebbles.amount_of_stones(example_input, 25),
+        plutonian_pebbles.amount_of_stones(
+            example_input,
+            25,
+            std.testing.allocator,
+        ),
     );
 }
