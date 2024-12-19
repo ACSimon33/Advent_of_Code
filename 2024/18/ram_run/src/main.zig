@@ -60,19 +60,19 @@ pub fn main() !void {
         bytes = try std.fmt.parseInt(usize, bytes_str, 10);
     }
 
-    const result_1 = ram_run.solution_1(
+    const result_1 = ram_run.steps_to_the_exit(
         file_content,
         bytes,
         allocator,
     );
-    try stdout.print("1. Solution: {!}\n", .{result_1});
+    try stdout.print("Number of steps to the exit: {!}\n", .{result_1});
     try bw.flush();
 
-    const result_2 = try ram_run.solution_2(
+    const result_2 = try ram_run.position_of_blocking_byte(
         file_content,
         allocator,
     );
     defer allocator.free(result_2);
-    try stdout.print("2. Solution: {s}\n", .{result_2});
+    try stdout.print("Position of blocking byte: {s}\n", .{result_2});
     try bw.flush();
 }

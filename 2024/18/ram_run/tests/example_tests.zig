@@ -7,14 +7,14 @@ test "task_1" {
     const example_input = @embedFile("example_input");
     try testing.expectEqual(
         22,
-        ram_run.solution_1(example_input, 12, std.testing.allocator),
+        ram_run.steps_to_the_exit(example_input, 12, std.testing.allocator),
     );
 }
 
 // Test of part 2
 test "task_2" {
     const example_input = @embedFile("example_input");
-    const result = try ram_run.solution_2(example_input, std.testing.allocator);
+    const result = try ram_run.position_of_blocking_byte(example_input, std.testing.allocator);
     defer std.testing.allocator.free(result);
 
     try testing.expectEqualStrings(

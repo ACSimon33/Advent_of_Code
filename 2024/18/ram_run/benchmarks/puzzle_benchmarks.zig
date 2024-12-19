@@ -6,12 +6,12 @@ const puzzle_input = @embedFile("puzzle_input");
 
 // Benchmark of part 1
 fn task_1(allocator: std.mem.Allocator) void {
-    _ = ram_run.solution_1(puzzle_input, 1024, allocator) catch {};
+    _ = ram_run.steps_to_the_exit(puzzle_input, 1024, allocator) catch {};
 }
 
 // Benchmark of part 2
 fn task_2(allocator: std.mem.Allocator) void {
-    const result = ram_run.solution_2(
+    const result = ram_run.position_of_blocking_byte(
         puzzle_input,
         allocator,
     ) catch return;

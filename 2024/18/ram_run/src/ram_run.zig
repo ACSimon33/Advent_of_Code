@@ -6,20 +6,22 @@ const string = []const u8;
 // Dijkstra module
 const dijkstra = @import("./dijkstra.zig");
 
-/// Task 1 -
+/// Task 1 - Simulate the falling bytes and calculate the shortest path from
+///          the top-left corner of the grid to the bottom-right corner.
 ///
 /// Arguments:
 ///   - `contents`: Input file contents.
+///   - `bytes`: Number of fallen bytes.
 ///   - `main_allocator`: Base allocator for everything.
 ///
 /// Returns:
-///   - Solution for task 1.
-pub fn solution_1(contents: string, bytes: usize, main_allocator: Allocator) !u32 {
+///   - Length of the shortest path.
+pub fn steps_to_the_exit(contents: string, bytes: usize, main_allocator: Allocator) !u32 {
     var arena = std.heap.ArenaAllocator.init(main_allocator);
     defer arena.deinit();
 
     const allocator = arena.allocator();
-    const ram = try parse(contents, allocator);
+    const ram = try parse_ram(contents, allocator);
     const end = ram.width * ram.height - 1;
 
     const nodes = try dijkstra.dijkstra(
@@ -34,22 +36,24 @@ pub fn solution_1(contents: string, bytes: usize, main_allocator: Allocator) !u3
     return nodes.items[end].distance;
 }
 
-/// Task 2 -
+/// Task 2 - Find the position of the byte that will ultimately block the path
+///          between the top-left corner of the grid to the bottom-right corner.
 ///
 /// Arguments:
 ///   - `contents`: Input file contents.
 ///   - `main_allocator`: Base allocator for everything.
 ///
 /// Returns:
-///   - Solution for task 2.
-pub fn solution_2(contents: string, main_allocator: Allocator) !string {
+///   - Position of the blocking byte as a string.
+pub fn position_of_blocking_byte(contents: string, main_allocator: Allocator) !string {
     var arena = std.heap.ArenaAllocator.init(main_allocator);
     defer arena.deinit();
 
     const allocator = arena.allocator();
-    const ram = try parse(contents, allocator);
+    const ram = try parse_ram(contents, allocator);
     const end = ram.width * ram.height - 1;
 
+    // Bisection
     var upper_bound = ram.falling_bytes.items.len - 1;
     var lower_bound: usize = 0;
     while (lower_bound + 1 < upper_bound) {
@@ -69,6 +73,7 @@ pub fn solution_2(contents: string, main_allocator: Allocator) !string {
         }
     }
 
+    // Convert position to string (what a pain ...)
     const x_str_size = std.math.log10(@max(ram.falling_bytes.items[lower_bound].x, 1)) + 1;
     const y_str_size = std.math.log10(@max(ram.falling_bytes.items[lower_bound].y, 1)) + 1;
     const str_size = 1 + x_str_size + y_str_size;
@@ -82,13 +87,23 @@ pub fn solution_2(contents: string, main_allocator: Allocator) !string {
 
 // -------------------------------------------------------------------------- \\
 
+/// 2D Position in a grid.
 const Position = struct { x: usize, y: usize };
 
+/// RAM object that represents a quadratic grid of cells and a list of falling
+/// bytes which will block certain cells.
 const RAM = struct {
     falling_bytes: ArrayList(Position),
     width: usize,
     height: usize,
 
+    /// Init the RAM grid of undefined size.
+    ///
+    /// Arguments:
+    ///   - `allocator`: Allocator list of falling bytes.
+    ///
+    /// Returns:
+    ///   - The RAM object.
     fn init(allocator: Allocator) RAM {
         return RAM{
             .falling_bytes = ArrayList(Position).init(allocator),
@@ -97,6 +112,17 @@ const RAM = struct {
         };
     }
 
+    /// Create a graph representation of the RAM grid when the given number of
+    /// bytes have fallen. First create a full graph with all nodes and then
+    /// remove connections for each falling byte.
+    ///
+    /// Arguments:
+    ///   - `self`: The RAM object.
+    ///   - `bytes`: Number of fallen bytes.
+    ///   - `allocator`: Allocator for the adjacency matrix.
+    ///
+    /// Returns:
+    ///   - The adjacency matrix of the graph.
     fn create_adjacency_matrix(self: RAM, bytes: usize, allocator: Allocator) !ArrayList(?u32) {
         const nodes = self.width * self.height;
         var matrix = try self.create_safe_adjacency_matrix(allocator);
@@ -117,6 +143,15 @@ const RAM = struct {
         return matrix;
     }
 
+    /// Create a graph representation of the RAM grid when no bytes have fallen
+    /// yet.
+    ///
+    /// Arguments:
+    ///   - `self`: The RAM object.
+    ///   - `allocator`: Allocator for the adjacency matrix.
+    ///
+    /// Returns:
+    ///   - The adjacency matrix of the graph.
     fn create_safe_adjacency_matrix(self: RAM, allocator: Allocator) !ArrayList(?u32) {
         const nodes = self.width * self.height;
         var matrix = ArrayList(?u32).init(allocator);
@@ -133,6 +168,15 @@ const RAM = struct {
         return matrix;
     }
 
+    /// Check if a certain cell/node is a neighbour of another cell/node
+    ///
+    /// Arguments:
+    ///   - `self`: The RAM object.
+    ///   - `node1`: Position of the first cell/node.
+    ///   - `node2`: Position of the second cell/node.
+    ///
+    /// Returns:
+    ///   - True if the two cells/nodes are neighbours.
     fn is_neighbour_cell(self: RAM, node1: usize, node2: usize) bool {
         const x1 = node1 % self.width;
         const y1 = node1 / self.width;
@@ -141,6 +185,11 @@ const RAM = struct {
         return (y1 == y2 and (x1 == x2 + 1 or x1 + 1 == x2)) or (x1 == x2 and (y1 == y2 + 1 or y1 + 1 == y2));
     }
 
+    /// Print the current RAM grid.
+    ///
+    /// Arguments:
+    ///   - `self`: The RAM object.
+    ///   - `bytes`: Number of bytes that have fallen.
     fn print(self: RAM, bytes: usize) void {
         for (0..self.height) |y| {
             for (0..self.width) |x| {
@@ -162,15 +211,16 @@ const RAM = struct {
     }
 };
 
-/// Parse the file contents into a list of reports.
+/// Parse the file contents into a RAM grid of a crertain size and a list of
+/// positions of falling byte.
 ///
 /// Arguments:
 ///   - `contents`: Input file contents.
 ///   - `allocator`: Allocator for the containers.
 ///
 /// Returns:
-///   - Array list of report objects.
-fn parse(contents: string, allocator: Allocator) !RAM {
+///   - The RAM oject.
+fn parse_ram(contents: string, allocator: Allocator) !RAM {
     var ram = RAM.init(allocator);
 
     var lines = std.mem.tokenize(u8, contents, "\r\n");
