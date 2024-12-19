@@ -20,6 +20,7 @@
         .day_15_warehouse_woes = .{ .path = "15/warehouse_woes" },
         .day_16_reindeer_maze = .{ .path = "16/reindeer_maze" },
         .day_17_chronospatial_computer = .{ .path = "17/chronospatial_computer" },
+        .day_18_ram_run = .{ .path = "18/ram_run" },
     },
     .paths = .{
         "build.zig",
@@ -41,5 +42,6 @@
         "15",
         "16",
         "17",
+        "18",
     },
 }
