@@ -59,7 +59,6 @@ const ClawMachine = struct {
 ///
 /// Arguments:
 ///   - `contents`: Input file contents.
-///   - `main_allocator`: Base allocator for everything.
 ///   - `allocator`: Allocator for the containers.
 ///
 /// Returns:

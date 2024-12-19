@@ -45,7 +45,6 @@ pub fn solution_2(contents: string, main_allocator: Allocator) !i32 {
 ///
 /// Arguments:
 ///   - `contents`: Input file contents.
-///   - `main_allocator`: Base allocator for everything.
 ///   - `allocator`: Allocator for the containers.
 ///
 /// Returns:

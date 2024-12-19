@@ -172,7 +172,6 @@ fn is_guard_inside(map: ObstacleMap, guard: Guard) bool {
 ///
 /// Arguments:
 ///   - `contents`: Input file contents.
-///   - `main_allocator`: Base allocator for everything.
 ///   - `allocator`: Allocator for the containers.
 ///
 /// Returns:

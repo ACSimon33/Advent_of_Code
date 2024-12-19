@@ -71,7 +71,6 @@ fn blink(stones: HashMap(u64, u64), new_stones: *HashMap(u64, u64)) !void {
 ///
 /// Arguments:
 ///   - `contents`: Input file contents.
-///   - `main_allocator`: Base allocator for everything.
 ///   - `allocator`: Allocator for the containers.
 ///
 /// Returns:
@@ -91,9 +90,9 @@ fn parse(contents: string, allocator: Allocator) !HashMap(u64, u64) {
 /// a new entry if the stone didn't exist before.
 ///
 /// Arguments:
-///   - `contents`: Input file contents.
-///   - `main_allocator`: Base allocator for everything.
-///   - `allocator`: Allocator for the containers.
+///   - `stones`: Map of stone numbers to amounts.
+///   - `stone`: The stone number to increment.
+///   - `increment`: The increment to the stone number amount.
 ///
 /// Returns:
 ///   - Map of stone numbers to stone amounts.

@@ -168,7 +168,6 @@ fn concat_operator(a: u64, b: u64) !u64 {
 ///
 /// Arguments:
 ///   - `contents`: Input file contents.
-///   - `main_allocator`: Base allocator for everything.
 ///   - `allocator`: Allocator for the containers.
 ///
 /// Returns:
