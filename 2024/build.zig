@@ -64,4 +64,5 @@ pub fn build(b: *std.Build) void {
     add_subproject(b, target, optimize, test_step, benchmark_step, "17", "chronospatial_computer");
     add_subproject(b, target, optimize, test_step, benchmark_step, "18", "ram_run");
     add_subproject(b, target, optimize, test_step, benchmark_step, "19", "linen_layout");
+    add_subproject(b, target, optimize, test_step, benchmark_step, "20", "race_condition");
 }

@@ -22,6 +22,7 @@
         .day_17_chronospatial_computer = .{ .path = "17/chronospatial_computer" },
         .day_18_ram_run = .{ .path = "18/ram_run" },
         .day_19_linen_layout = .{ .path = "19/linen_layout" },
+        .day_20_race_condition = .{ .path = "20/race_condition" },
     },
     .paths = .{
         "build.zig",
@@ -45,5 +46,6 @@
         "17",
         "18",
         "19",
+        "20",
     },
 }
