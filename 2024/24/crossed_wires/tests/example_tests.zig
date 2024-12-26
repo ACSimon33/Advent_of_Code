@@ -18,13 +18,3 @@ test "task_1_input_2" {
         crossed_wires.simulate_gates(example_input, std.testing.allocator),
     );
 }
-
-// Test of part 2
-//test "task_2" {
-//    const example_input = @embedFile("example_input_2");
-//    crossed_wires.find_wrong_gates(example_input, std.testing.allocator)
-//    try testing.expectEqual(
-//        1,
-//        ,
-//    );
-//}

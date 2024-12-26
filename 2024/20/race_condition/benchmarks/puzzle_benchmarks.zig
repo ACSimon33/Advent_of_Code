@@ -6,12 +6,12 @@ const puzzle_input = @embedFile("puzzle_input");
 
 // Benchmark of part 1
 fn task_1(allocator: std.mem.Allocator) void {
-    _ = race_condition.solution_1(puzzle_input, 100, allocator) catch {};
+    _ = race_condition.amount_of_shortcuts(puzzle_input, 2, 100, allocator) catch {};
 }
 
 // Benchmark of part 2
 fn task_2(allocator: std.mem.Allocator) void {
-    _ = race_condition.solution_2(puzzle_input, 100, allocator) catch {};
+    _ = race_condition.amount_of_shortcuts(puzzle_input, 20, 100, allocator) catch {};
 }
 
 pub fn main() !void {

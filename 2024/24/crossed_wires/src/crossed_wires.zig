@@ -101,12 +101,12 @@ pub fn find_wrong_gates(contents: string, main_allocator: Allocator) !string {
     }
 
     std.sort.insertion([3]u8, wrong_gates.keys(), {}, compareStrings);
-    const result_str = try main_allocator.alloc(u8, 4*wrong_gates.count()-1);
+    const result_str = try main_allocator.alloc(u8, 4 * wrong_gates.count() - 1);
     for (wrong_gates.keys(), 0..) |id, i| {
-        if (i == wrong_gates.count()-1) {
-            _ = try std.fmt.bufPrint(result_str[4*i ..], "{s}", .{id});
+        if (i == wrong_gates.count() - 1) {
+            _ = try std.fmt.bufPrint(result_str[4 * i ..], "{s}", .{id});
         } else {
-            _ = try std.fmt.bufPrint(result_str[4*i ..], "{s},", .{id});
+            _ = try std.fmt.bufPrint(result_str[4 * i ..], "{s},", .{id});
         }
     }
 

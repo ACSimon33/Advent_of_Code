@@ -58,21 +58,26 @@ pub fn main() !void {
     var min_shortcut: usize = undefined;
     if (matches.getSingleValue("shortcut")) |shortcut| {
         min_shortcut = try std.fmt.parseInt(usize, shortcut, 10);
+    } else {
+        try app.displayHelp();
+        return;
     }
 
-    const result_1 = race_condition.solution_1(
+    const result_1 = race_condition.amount_of_shortcuts(
         file_content,
+        2,
         min_shortcut,
         allocator,
     );
-    try stdout.print("1. Solution: {!}\n", .{result_1});
+    try stdout.print("Amount of shortcuts with a range of 2: {!}\n", .{result_1});
     try bw.flush();
 
-    const result_2 = race_condition.solution_2(
+    const result_2 = race_condition.amount_of_shortcuts(
         file_content,
+        20,
         min_shortcut,
         allocator,
     );
-    try stdout.print("2. Solution: {!}\n", .{result_2});
+    try stdout.print("Amount of shortcuts with a range of 20: {!}\n", .{result_2});
     try bw.flush();
 }
