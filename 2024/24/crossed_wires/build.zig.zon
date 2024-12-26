@@ -1,0 +1,23 @@
+.{
+    .name = "crossed_wires",
+    .version = "0.1.0",
+    .minimum_zig_version = "0.13.0",
+    .dependencies = .{
+        .yazap = .{
+            .url = "git+https://github.com/prajwalch/yazap#c2e3122d5dd6192513ba590f229dbc535110efb8",
+            .hash = "122054439ec36ac10987c87ae69f3b041b40b2e451af3fe3ef1fc578b3bad756a800",
+        },
+        .zbench = .{
+            .url = "git+https://github.com/hendriknielaender/zBench#fb3ecae5d035091fd2392a2ec21970c06fc375fa",
+            .hash = "122095b73930ff5d627429295c669905d85bb9b54394ddc185ad2d61295cc65819e5",
+        },
+    },
+    .paths = .{
+        "build.zig",
+        "build.zig.zon",
+        "src",
+        "input",
+        "tests",
+        "benchmarks",
+    },
+}

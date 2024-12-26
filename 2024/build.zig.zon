@@ -24,6 +24,8 @@
         .day_19_linen_layout = .{ .path = "19/linen_layout" },
         .day_20_race_condition = .{ .path = "20/race_condition" },
         .day_22_monkey_market = .{ .path = "22/monkey_market" },
+        .day_24_crossed_wires = .{ .path = "24/crossed_wires" },
+        .day_25_code_chronicle = .{ .path = "25/code_chronicle" },
     },
     .paths = .{
         "build.zig",
@@ -49,5 +51,7 @@
         "19",
         "20",
         "22",
+        "24",
+        "25",
     },
 }
