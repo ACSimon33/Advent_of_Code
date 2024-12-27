@@ -12,6 +12,9 @@ RUN \
   make
 
 FROM alpine:3.21.0
-RUN apk add --no-cache bash zig
+RUN apk add --no-cache git-crypt bash zig
 
 COPY --from=builder /aha-0.5.1/aha /usr/local/bin
+
+ARG GIT_CRYPT_KEY
+COPY ${GIT_CRYPT_KEY} /git-crypt-key.key

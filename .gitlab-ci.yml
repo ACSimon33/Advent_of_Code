@@ -28,6 +28,7 @@ stages:
     - cd ${AOC_YEAR}
     - pwd
     - ls
+    - git-crypt unlock /git-crypt-key.key
 
 # Prepare docker
 .prepare-docker-template:
@@ -38,19 +39,23 @@ stages:
   services:
     - docker:27.3.1-dind
   before_script:
-    - env
-    - pwd
-    - ls
     - >-
       docker login --username ${CI_REGISTRY_USER}
       --password ${CI_REGISTRY_PASSWORD} ${CI_REGISTRY}
     - docker pull ${DOCKER_CURRENT_IMAGE} || true
     - docker pull ${DOCKER_LATEST_IMAGE} || true
     - docker images
+    - apk add bash curl
+    - curl --silent "$GITLAB_SECURE_FILES_URL" | bash
+    - env
+    - pwd
+    - ls -la
   script:
     - >-
       docker build --cache-from ${DOCKER_LATEST_IMAGE}
-      --tag ${DOCKER_CURRENT_IMAGE} --tag ${DOCKER_LATEST_IMAGE} ${AOC_YEAR}
+      --tag ${DOCKER_CURRENT_IMAGE} --tag ${DOCKER_LATEST_IMAGE}
+      --build-arg="GIT_CRYPT_KEY=.secure_files/git-crypt-key.key"
+      --file ${AOC_YEAR}/Dockerfile .
     - docker push ${DOCKER_CURRENT_IMAGE}
     - docker push ${DOCKER_LATEST_IMAGE}
 
