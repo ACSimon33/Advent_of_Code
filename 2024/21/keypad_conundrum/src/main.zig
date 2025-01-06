@@ -63,7 +63,7 @@ pub fn main() !void {
         return;
     }
 
-    const result_1 = keypad_conundrum.number_of_keys(
+    const result_1 = keypad_conundrum.code_complexities(
         file_content,
         robots,
         allocator,

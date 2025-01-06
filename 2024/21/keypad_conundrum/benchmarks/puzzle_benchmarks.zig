@@ -6,12 +6,12 @@ const puzzle_input = @embedFile("puzzle_input");
 
 // Benchmark of part 1
 fn task_1(allocator: std.mem.Allocator) void {
-    _ = keypad_conundrum.number_of_keys(puzzle_input, 3, allocator) catch {};
+    _ = keypad_conundrum.code_complexities(puzzle_input, 3, allocator) catch {};
 }
 
 // Benchmark of part 2
 fn task_2(allocator: std.mem.Allocator) void {
-    _ = keypad_conundrum.number_of_keys(puzzle_input, 26, allocator) catch {};
+    _ = keypad_conundrum.code_complexities(puzzle_input, 26, allocator) catch {};
 }
 
 pub fn main() !void {
