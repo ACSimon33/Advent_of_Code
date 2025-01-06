@@ -91,6 +91,9 @@ pages:
       optional: true
     - job: bench ~ aoc-2024
       optional: true
+  variables:
+    GIT_STRATEGY: clone
+    GIT_DEPTH: 1
   script:
     - mkdir -p public
     - if [ -d "benchmarks_2021" ]; then
