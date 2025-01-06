@@ -63,4 +63,7 @@ bench ~ aoc-2023:
   needs:
     - test ~ aoc-2023
   script:
-    - gradle benchmark --console plain --warning-mode none
+    - gradle benchmark --console plain --warning-mode none | tee bench.log
+    - cd ${CI_PROJECT_DIR}
+    - mkdir -p benchmarks_${AOC_YEAR}
+    - cat ${AOC_YEAR}/bench.log | aha > benchmarks_${AOC_YEAR}/index.html

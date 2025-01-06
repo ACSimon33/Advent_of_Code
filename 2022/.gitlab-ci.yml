@@ -65,4 +65,7 @@ bench ~ aoc-2022:
   needs:
     - test ~ aoc-2022
   script:
-    - npm ci && npm run tsc --workspaces && npm run benchmark --workspaces
+    - npm ci && npm run tsc --workspaces && npm run benchmark --workspaces | tee bench.log
+    - cd ${CI_PROJECT_DIR}
+    - mkdir -p benchmarks_${AOC_YEAR}
+    - cat ${AOC_YEAR}/bench.log | aha > benchmarks_${AOC_YEAR}/index.html
