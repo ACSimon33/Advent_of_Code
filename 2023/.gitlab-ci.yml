@@ -67,3 +67,6 @@ bench ~ aoc-2023:
     - cd ${CI_PROJECT_DIR}
     - mkdir -p benchmarks_${AOC_YEAR}
     - cat ${AOC_YEAR}/bench.log | aha > benchmarks_${AOC_YEAR}/index.html
+  artifacts:
+    paths:
+      - benchmarks_${AOC_YEAR}
