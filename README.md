@@ -9,3 +9,13 @@ Languages:
 - [2023: **Kotlin**](2023) [⭢ *Benchmarks* ⭠](https://acsimon33.gitlab.io/advent_of_code/2023/index.html)
 - [2024: **Zig**](2024) [⭢ *Benchmarks* ⭠](https://acsimon33.gitlab.io/advent_of_code/2024/index.html)
 - 2025: ???
+
+Languages I consider for future years:
+- Powershell
+- Haskell
+- Elixir
+- Lean4
+- Julia
+- Lua
+- Cobol
+- Fortran
