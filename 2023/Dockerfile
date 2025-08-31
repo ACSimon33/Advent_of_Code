@@ -1,5 +1,5 @@
 # syntax=docker/dockerfile:1
-FROM gradle:jdk17-jammy
+FROM gradle:8.14.3-jdk17-jammy
 
 # Install aha (Ansi HTML Adapter), git-crypt and copy symmetric key
 RUN \
