@@ -17,7 +17,7 @@ stages:
   variables:
     GIT_STRATEGY: clone
     GIT_DEPTH: 1
-    AOC_CURRENT_YEAR: 2024
+    AOC_CURRENT_YEAR: 2025
     DOCKER_CURRENT_IMAGE: ${CI_REGISTRY_IMAGE}:aoc-${AOC_YEAR}-${CI_COMMIT_SHA}
     DOCKER_LATEST_IMAGE: ${CI_REGISTRY_IMAGE}:aoc-${AOC_YEAR}-latest
   image: ${DOCKER_CURRENT_IMAGE}
@@ -70,6 +70,7 @@ include:
   - local: '2022/.gitlab-ci.yml'
   - local: '2023/.gitlab-ci.yml'
   - local: '2024/.gitlab-ci.yml'
+  - local: '2025/.gitlab-ci.yml'
 
 # **************************************************************************** #
 #                               Pages deployment                               #

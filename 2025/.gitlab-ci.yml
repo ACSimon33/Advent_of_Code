@@ -1,0 +1,67 @@
+# **************************************************************************** #
+#                            Advent of Code 2025                               #
+# **************************************************************************** #
+
+# 2025 template
+.2025-template:
+  variables:
+    AOC_YEAR: 2025
+
+# Prepare docker for 2025
+docker ~ aoc-2025:
+  extends:
+    - .2025-template
+    - .prepare-docker-template
+
+# # 2025 Elixir build
+# build ~ aoc-2025:
+#   stage: build
+#   extends:
+#     - .2025-template
+#     - .run-current-year-template
+#   needs:
+#     - docker ~ aoc-2025
+#   script:
+#     - zig build -Doptimize=ReleaseSafe -j2 --summary all
+
+# # 2025 Elixir test
+# test ~ aoc-2025:
+#   stage: test
+#   extends:
+#     - .2025-template
+#     - .run-current-year-template
+#   needs:
+#     - build ~ aoc-2025
+#   script:
+#     - zig build test -Doptimize=Debug -j2 --summary all
+
+# # 2025 Elixir fmt check
+# format ~ aoc-2025:
+#   stage: test
+#   extends:
+#     - .2025-template
+#     - .run-current-year-template
+#   needs:
+#     - docker ~ aoc-2025
+#     - job: build ~ aoc-2025
+#       optional: true
+#   script:
+#     - zig fmt --check .
+#   allow_failure: true
+
+# # 2025 Elixir benchmark (release)
+# bench ~ aoc-2025:
+#   stage: benchmark
+#   extends:
+#     - .2025-template
+#     - .run-current-year-template
+#   needs:
+#     - test ~ aoc-2025
+#   script:
+#     - zig build benchmark -Doptimize=ReleaseFast -j1 | tee bench.log
+#     - cd ${CI_PROJECT_DIR}
+#     - mkdir -p benchmarks_${AOC_YEAR}
+#     - cat ${AOC_YEAR}/bench.log | aha > benchmarks_${AOC_YEAR}/index.html
+#   artifacts:
+#     paths:
+#       - benchmarks_${AOC_YEAR}
