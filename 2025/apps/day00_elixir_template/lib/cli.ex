@@ -20,7 +20,7 @@ defmodule ElixirTemplate.CLI do
   end
 
   defp run(input) do
-    IO.puts("Solution 1: #{ElixirTemplate.solution_1(input)}")
-    IO.puts("Solution 2: #{ElixirTemplate.solution_2(input)}")
+    IO.puts("Solution 1: #{ElixirTemplate.task_1(input)}")
+    IO.puts("Solution 2: #{ElixirTemplate.task_2(input)}")
   end
 end

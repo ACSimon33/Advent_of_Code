@@ -3,11 +3,14 @@ defmodule ElixirTemplate.MixProject do
 
   def project do
     [
-      app: :elixir_template,
+      app: :day00_elixir_template,
       version: "0.1.0",
+      build_path: "../../_build",
+      deps_path: "../../deps",
+      lockfile: "../../mix.lock",
       elixir: "~> 1.19",
       start_permanent: Mix.env() == :prod,
-      escript: [main_module: ElixirTemplate.CLI, path: "_build/bin/elixir_template"],
+      escript: [main_module: ElixirTemplate.CLI, path: "../../_build/bin/elixir_template"],
       deps: deps(),
       aliases: aliases()
     ]
@@ -24,18 +27,21 @@ defmodule ElixirTemplate.MixProject do
   defp deps do
     [
       {:benchee, "~> 1.0"},
-      {:benchee_html, "~> 1.0"}
+      {:benchee_html, "~> 1.0"},
+      {:junit_formatter, "~> 3.4", only: [:test]}
     ]
   end
 
   defp aliases do
     [
-      bench: "run benchmarks/puzzle_benchmarks.exs",
+      bench: "run #{__DIR__}/benchmarks/puzzle_benchmarks.exs",
       solve: ["escript.build", &run_escript/1]
     ]
   end
 
   defp run_escript(_) do
-    Mix.shell().cmd("escript _build/bin/elixir_template -f input/puzzle_input.txt")
+    Mix.shell().cmd(
+      "escript ../../_build/bin/elixir_template -f #{__DIR__}/input/puzzle_input.txt"
+    )
   end
 end

@@ -2,13 +2,13 @@ defmodule ElixirTemplateTest do
   use ExUnit.Case
   doctest ElixirTemplate
 
-  test "solution_1 returns length" do
+  test "task_1" do
     input = File.read!("input/example_input.txt")
-    assert ElixirTemplate.solution_1(input) == 16
+    assert ElixirTemplate.task_1(input) == 16
   end
 
-  test "solution_2 returns length" do
+  test "task_2" do
     input = File.read!("input/example_input.txt")
-    assert ElixirTemplate.solution_2(input) == 16
+    assert ElixirTemplate.task_2(input) == 16
   end
 end
