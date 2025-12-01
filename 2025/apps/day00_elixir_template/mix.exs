@@ -35,6 +35,7 @@ defmodule ElixirTemplate.MixProject do
   defp aliases do
     [
       bench: "run #{__DIR__}/benchmarks/puzzle_benchmarks.exs",
+      exec: [&run_escript_with_args/1],
       solve: ["escript.build", &run_escript/1]
     ]
   end
@@ -43,5 +44,10 @@ defmodule ElixirTemplate.MixProject do
     Mix.shell().cmd(
       "escript ../../_build/bin/elixir_template -f #{__DIR__}/input/puzzle_input.txt"
     )
+  end
+
+  defp run_escript_with_args(_) do
+    args = System.argv() |> Enum.join(" ")
+    Mix.shell().cmd("escript ../../_build/bin/elixir_template #{args}")
   end
 end
