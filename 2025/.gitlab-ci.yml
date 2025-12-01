@@ -33,7 +33,7 @@ test ~ aoc-2025:
   needs:
     - build ~ aoc-2025
   script:
-    - mix deps.get && mix test --verbose
+    - mix deps.get && mix test --all-warnings
   artifacts:
     when: always
     reports:

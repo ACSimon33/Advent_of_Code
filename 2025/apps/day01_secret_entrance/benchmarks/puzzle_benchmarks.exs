@@ -1,19 +1,19 @@
-defmodule ElixirTemplate.Benchmark do
+defmodule SecretEntrance.Benchmark do
   def jobs do
     input = File.read!(Path.join(__DIR__, "../input/puzzle_input.txt"))
 
     %{
-      "day00.elixir_template.task_1" => fn -> ElixirTemplate.task_1(input) end,
-      "day00.elixir_template.task_2" => fn -> ElixirTemplate.task_2(input) end
+      "day01.secret_entrance.task_1" => fn -> SecretEntrance.task_1(input) end,
+      "day01.secret_entrance.task_2" => fn -> SecretEntrance.task_2(input) end
     }
   end
 end
 
 if System.get_env("AOC_COMBINED_BENCHMARK") do
-  ElixirTemplate.Benchmark.jobs()
+  SecretEntrance.Benchmark.jobs()
 else
   Benchee.run(
-    ElixirTemplate.Benchmark.jobs(),
+    SecretEntrance.Benchmark.jobs(),
     print: [fast_warning: false],
     formatters: [{Benchee.Formatters.Console, extended_statistics: true}],
     warmup: 1,
