@@ -62,7 +62,7 @@ bench ~ aoc-2025:
   needs:
     - test ~ aoc-2025
   script:
-    - mix deps.get && mix test --verbose
+    - mix deps.get && mix bench
     - cd ${CI_PROJECT_DIR}
     - mkdir -p benchmarks_${AOC_YEAR}
     - mv _build/benchmarks benchmarks_${AOC_YEAR}
