@@ -22,7 +22,8 @@ if map_size(jobs) > 0 do
     warmup: 1,
     time: 2,
     memory_time: 2,
-    reduction_time: 2
+    reduction_time: 2,
+    max_sample_size: 10_000
   )
 else
   IO.puts("No benchmarks found.")
