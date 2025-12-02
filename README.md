@@ -8,7 +8,7 @@ Languages:
 - [2022: **Typescript**](2022) [⭢ *Benchmarks* ⭠](https://acsimon33.gitlab.io/advent_of_code/2022/index.html)
 - [2023: **Kotlin**](2023) [⭢ *Benchmarks* ⭠](https://acsimon33.gitlab.io/advent_of_code/2023/index.html)
 - [2024: **Zig**](2024) [⭢ *Benchmarks* ⭠](https://acsimon33.gitlab.io/advent_of_code/2024/index.html)
-- [2025: **Elixir**](2025) [⭢ *Benchmarks* ⭠](https://acsimon33.gitlab.io/advent_of_code/2025/aoc2025.html)
+- [2025: **Elixir**](2025) [⭢ *Benchmarks* ⭠](https://acsimon33.gitlab.io/advent_of_code/2025/index.html)
 
 Languages I consider for future years:
 - Powershell

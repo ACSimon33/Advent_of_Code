@@ -66,6 +66,7 @@ bench ~ aoc-2025:
     - cd ${CI_PROJECT_DIR}
     - mkdir -p benchmarks_${AOC_YEAR}
     - mv _build/benchmarks benchmarks_${AOC_YEAR}
+    - mv benchmarks_${AOC_YEAR}/aoc2025.html benchmarks_${AOC_YEAR}/index.html
   artifacts:
     paths:
       - benchmarks_${AOC_YEAR}
