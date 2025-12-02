@@ -20,7 +20,7 @@ defmodule SecretEntrance.CLI do
   end
 
   defp run(input) do
-    IO.puts("Solution 1: #{SecretEntrance.task_1(input)}")
-    IO.puts("Solution 2: #{SecretEntrance.task_2(input)}")
+    IO.puts("Dial at zero: #{SecretEntrance.dial_at_zero(input)}")
+    IO.puts("Zero crossings: #{SecretEntrance.zero_crossings(input)}")
   end
 end

@@ -2,13 +2,13 @@ defmodule SecretEntranceTest do
   use ExUnit.Case
   doctest SecretEntrance
 
-  test "task_1" do
+  test "dial_at_zero" do
     input = File.read!("input/example_input.txt")
-    assert SecretEntrance.task_1(input) == 16
+    assert SecretEntrance.dial_at_zero(input) == 3
   end
 
-  test "task_2" do
+  test "zero_crossings" do
     input = File.read!("input/example_input.txt")
-    assert SecretEntrance.task_2(input) == 16
+    assert SecretEntrance.zero_crossings(input) == 6
   end
 end

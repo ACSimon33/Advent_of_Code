@@ -3,8 +3,8 @@ defmodule SecretEntrance.Benchmark do
     input = File.read!(Path.join(__DIR__, "../input/puzzle_input.txt"))
 
     %{
-      "day01.secret_entrance.task_1" => fn -> SecretEntrance.task_1(input) end,
-      "day01.secret_entrance.task_2" => fn -> SecretEntrance.task_2(input) end
+      "day01.secret_entrance.dial_at_zero" => fn -> SecretEntrance.dial_at_zero(input) end,
+      "day01.secret_entrance.zero_crossings" => fn -> SecretEntrance.zero_crossings(input) end
     }
   end
 end
