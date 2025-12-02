@@ -17,7 +17,7 @@ if map_size(jobs) > 0 do
     print: [fast_warning: false],
     formatters: [
       {Benchee.Formatters.Console, extended_statistics: true},
-      {Benchee.Formatters.HTML, file: "_build/benchmarks/aoc2025.html"}
+      {Benchee.Formatters.HTML, file: "_build/benchmarks/aoc2025.html", auto_open: false}
     ],
     warmup: 1,
     time: 2,
