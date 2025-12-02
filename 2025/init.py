@@ -116,8 +116,10 @@ def find_next_day() -> int:
     """
     day = 1
     while True:
-        day_pattern = f"day{get_day_folder(day)}*"
-        if not any(Path(__file__).parent.glob(str(day_pattern))):
+        day_folder = get_day_folder(day)
+        if not day_folder.exists() and not any(
+            day_folder.parent.glob(f"{day_folder.name}*")
+        ):
             break
         day += 1
     return day
