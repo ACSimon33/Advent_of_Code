@@ -90,8 +90,8 @@ defmodule PrintingDepartment do
     start_idx = max(0, -n)
     end_idx = len - max(0, n)
 
-    grid.duplicate(0, max(0, n)) ++
+    List.duplicate(0, max(0, n)) ++
       Enum.slice(grid, start_idx..end_idx) ++
-      grid.duplicate(0, max(0, -n))
+      List.duplicate(0, max(0, -n))
   end
 end
